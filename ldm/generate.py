@@ -444,6 +444,15 @@ class Generate:
 
         return self.model
 
+    def precompute_prompt_latents(self, prompts):
+        """Precompute prompt latents for the given prompts"""
+        assert(self.model is not None)
+        latents = []
+        for prompt in prompts:
+            _, c = get_uc_and_c(prompt, self.model)
+            latents.append(c)
+        self.latents = latents
+
     def upscale_and_reconstruct(self,
                                 image_list,
                                 upscale       = None,

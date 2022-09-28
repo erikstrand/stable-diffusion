@@ -34,10 +34,6 @@ def main():
         print('--weights argument has been deprecated. Please configure ./configs/models.yaml, and call it using --model instead.')
         sys.exit(-1)
 
-    if opt.prompts_file is not None:
-        with open(opt.prompts_file, 'r') as pf:
-            prompts = pf.read().splitlines()
-
     try:
         models = OmegaConf.load(opt.config)
         width = models[opt.model].width
@@ -107,11 +103,11 @@ def main():
 
     # if we're using a prompts file, compute all the prompt latents
     if opt.prompts_file is not None:
-        latents = []
-        for prompt in prompts:
-            _, c = get_uc_and_c(prompt, t2i.model)
-            latents.append(c)
-        print(latents)
+        print("precomputing latents for prompts in prompts file")
+        with open(opt.prompts_file, 'r') as pf:
+            prompts = pf.read().splitlines()
+
+        t2i.precompute_prompt_latents(prompts)
 
     if not infile:
         print(
