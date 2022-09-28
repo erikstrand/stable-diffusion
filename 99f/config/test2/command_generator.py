@@ -42,12 +42,13 @@ class CommandData:
 
 
 class DreamSchedule:
-    __slots__ = ["indir", "outdir", "schedule"]
+    __slots__ = ["indir", "outdir", "schedule", "stride"]
 
-    def __init__(self, indir, outdir, schedule):
+    def __init__(self, indir, outdir, schedule, stride):
         self.indir = Path(indir)
         self.outdir = Path(outdir)
         self.schedule = schedule
+        self.stride = int(stride)
 
         assert(len(self.schedule) >= 1)
         keyframe_frames = [keyframe.frame for keyframe in self.schedule]
@@ -65,7 +66,7 @@ class DreamSchedule:
             next_keyframe_idx += 1
             interp_len = float(next_keyframe.frame - prev_keyframe.frame)
 
-            for frame_idx in range(prev_keyframe.frame, next_keyframe.frame):
+            for frame_idx in range(prev_keyframe.frame, next_keyframe.frame, self.stride):
                 t = float(frame_idx - prev_keyframe.frame) / interp_len
                 strength = (1.0 - t) * prev_keyframe.strength + t * next_keyframe.strength
                 command_data.append(CommandData(
@@ -98,13 +99,15 @@ def load_config(config_path):
 
     indir = data["indir"]
     outdir = data["outdir"]
+    stride = data["stride"]
     schedule = [KeyFrame(**frame) for frame in data["schedule"]]
-    return DreamSchedule(indir, outdir, schedule)
+    return DreamSchedule(indir, outdir, schedule, stride)
 
 
 if __name__ == "__main__":
     dream_configs = []
-    dream_configs.append(load_config("config_00.json"))
+    #dream_configs.append(load_config("config_00.json"))
+    dream_configs.append(load_config("config_01.json"))
 
     commands = []
     for dream_config in dream_configs:
