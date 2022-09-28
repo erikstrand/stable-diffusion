@@ -278,9 +278,15 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                     grid_images[seed] = image
                 else:
                     if upscaled and opt.save_original:
-                        filename = f'{prefix}.{seed}.postprocessed.png'
+                        if opt.exclude_seed_from_filename:
+                            filename = f'{prefix}.postprocessed.png'
+                        else:
+                            filename = f'{prefix}.{seed}.postprocessed.png'
                     else:
-                        filename = f'{prefix}.{seed}.png'
+                        if opt.exclude_seed_from_filename:
+                            filename = f'{prefix}.png'
+                        else:
+                            filename = f'{prefix}.{seed}.png'
                     if opt.variation_amount > 0:
                         iter_opt = argparse.Namespace(**vars(opt))  # copy
                         this_variation = [[seed, opt.variation_amount]]
@@ -714,6 +720,13 @@ def create_cmd_parser():
         default=None,
         type=str,
         help='list of variations to apply, in the format `seed:weight,seed:weight,...'
+    )
+    parser.add_argument(
+        '--exclude_seed_from_filename',
+        '-e',
+        type=bool,
+        default=False,
+        help=f'When True, the seed will not be included in the filename.',
     )
     return parser
 
