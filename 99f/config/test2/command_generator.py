@@ -31,7 +31,8 @@ class CommandData:
         command = f"-I {indir/self.image}"
         command += f" --latent_0 {self.prompt0} --latent_1 {self.prompt1} -u {self.t:.5f}"
         command += f" -S {self.seed0} -V {self.seed1}:{self.t:.5f}"
-        command += f" -f {self.strength}"
+        # when f is literally 0.0, it gets thrown out and I think effectively uses 1.0
+        command += f" -f {max(0.001, self.strength)}"
         command += " -W640 -H320 -e"
         command += f" --outdir {outdir}"
         return command

@@ -284,7 +284,8 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                             filename = f'{prefix}.{seed}.postprocessed.png'
                     else:
                         if opt.exclude_seed_from_filename:
-                            filename = f'{prefix}.png'
+                            # We add the .0 since PngWriter looks for digits, then '.', then anything, then '.png.
+                            filename = f'{prefix}.0.png'
                         else:
                             filename = f'{prefix}.{seed}.png'
                     if opt.variation_amount > 0:
@@ -724,8 +725,7 @@ def create_cmd_parser():
     parser.add_argument(
         '--exclude_seed_from_filename',
         '-e',
-        type=bool,
-        default=False,
+        action='store_true',
         help=f'When True, the seed will not be included in the filename.',
     )
     return parser

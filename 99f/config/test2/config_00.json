@@ -1,6 +1,6 @@
 {
     "indir": "./99f/mermaid_1/frames_1",
-    "outdir": "clip_00",
+    "outdir": "outputs/test2/clip_00",
     "schedule": [
         {
             "frame": 0,
