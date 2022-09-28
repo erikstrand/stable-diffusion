@@ -5,6 +5,9 @@ models/ldm/stable-diffusion-v1/model.ckpt
 # ignore a directory which serves as a place for initial images
 inputs/
 
+# ignore the directory I'm using for input data
+99f
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
