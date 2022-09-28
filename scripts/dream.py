@@ -26,6 +26,13 @@ def main():
     arg_parser = create_argv_parser()
     opt = arg_parser.parse_args()
 
+    if opt.prompts_file is not None:
+        with open(opt.prompts_file, 'r') as pf:
+            prompts = pf.read().splitlines()
+            print(prompts)
+    else:
+        print("no prompts file")
+
     if opt.laion400m:
         print('--laion400m flag has been deprecated. Please use --model laion400m instead.')
         sys.exit(-1)
@@ -535,6 +542,12 @@ def create_argv_parser():
         '--config',
         default='configs/models.yaml',
         help='Path to configuration file for alternate models.',
+    )
+    parser.add_argument(
+        '--prompts_file',
+        type=str,
+        default=None,
+        help='Indicates the path of a text file of prompts that you can interpolate between.',
     )
     return parser
 
