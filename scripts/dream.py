@@ -13,6 +13,7 @@ import ldm.dream.readline
 from ldm.dream.pngwriter import PngWriter, PromptFormatter
 from ldm.dream.server import DreamServer, ThreadingDreamServer
 from ldm.dream.image_util import make_grid
+from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
 
 # Placeholder to be replaced with proper class that tracks the
@@ -26,19 +27,16 @@ def main():
     arg_parser = create_argv_parser()
     opt = arg_parser.parse_args()
 
-    if opt.prompts_file is not None:
-        with open(opt.prompts_file, 'r') as pf:
-            prompts = pf.read().splitlines()
-            print(prompts)
-    else:
-        print("no prompts file")
-
     if opt.laion400m:
         print('--laion400m flag has been deprecated. Please use --model laion400m instead.')
         sys.exit(-1)
     if opt.weights != 'model':
         print('--weights argument has been deprecated. Please configure ./configs/models.yaml, and call it using --model instead.')
         sys.exit(-1)
+
+    if opt.prompts_file is not None:
+        with open(opt.prompts_file, 'r') as pf:
+            prompts = pf.read().splitlines()
 
     try:
         models = OmegaConf.load(opt.config)
@@ -106,6 +104,14 @@ def main():
 
     # preload the model
     t2i.load_model()
+
+    # if we're using a prompts file, compute all the prompt latents
+    if opt.prompts_file is not None:
+        latents = []
+        for prompt in prompts:
+            _, c = get_uc_and_c(prompt, t2i.model)
+            latents.append(c)
+        print(latents)
 
     if not infile:
         print(
