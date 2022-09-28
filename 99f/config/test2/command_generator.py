@@ -1,29 +1,116 @@
-def generate_command(outdir, prompt_index, seed, strength, image):
-    command = f"--latent_0 {prompt_index} -I {image} -f {strength} -W640 -H320 --outdir {outdir}"
-    if seed is not None:
-        command += f" -S {seed}"
-    return command
+import json
+from pathlib import Path
 
-def generate_batch(outdir, prompt_index, seed, strength, images):
-    return [generate_command(outdir, prompt_index, seed, strength, image) for image in images]
 
-def generate_interpolated_command(p0, p1, s0, s1, u, seed, image):
-    f = (1.0 - u) * s0 + u * s1
-    return f"--latent_0 {p0} --latent_1 {p1} -u {u:.5f} -I {image} -f {f} -S {seed}"
+class KeyFrame:
+    __slots__ = ["frame", "prompt", "seed", "strength"]
 
-def generate_interpolated_batch(p0, p1, s0, s1, seed, images):
-    commands = []
-    for idx, img in enumerate(images):
-        u = float(idx) / (len(images) - 1)
-        commands.append(generate_interpolated_command(p0, p1, s0, s1, u, seed, img))
-    return commands
+    def __init__(self, frame, prompt, seed, strength):
+        self.frame = frame
+        self.prompt = prompt
+        self.seed = seed
+        self.strength = strength
+    
+    def __str__(self):
+        return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, strength {self.strength}"
+
+
+class CommandData:
+    __slots__ = ["prompt0", "prompt1", "seed0", "seed1", "t", "strength", "image"]
+
+    def __init__(self, prompt0, prompt1, seed0, seed1, t, strength, image):
+        self.prompt0 = prompt0
+        self.prompt1 = prompt1
+        self.seed0 = seed0
+        self.seed1 = seed1
+        self.t = t
+        self.strength = strength
+        self.image = image
+    
+    def generate_command_string(self, indir, outdir):
+        command = f"-I {indir/self.image}"
+        command += f" --latent_0 {self.prompt0} --latent_1 {self.prompt1} -u {self.t:.5f}"
+        command += f" -S {self.seed0} -V {self.seed1}:{self.t:.5f}"
+        command += f" -f {self.strength}"
+        command += " -W640 -H320 -e"
+        command += f" --outdir {outdir}"
+        return command
+
+    def __str__(self):
+        return f"CommandData: prompt0 {self.prompt0}, prompt1 {self.prompt1}, seed0 {self.seed0}, seed1 {self.seed1}, t {self.t}, strength {self.strength}, image {self.image}"
+
+
+class DreamSchedule:
+    __slots__ = ["indir", "outdir", "schedule"]
+
+    def __init__(self, indir, outdir, schedule):
+        self.indir = Path(indir)
+        self.outdir = Path(outdir)
+        self.schedule = schedule
+
+        assert(len(self.schedule) >= 1)
+        keyframe_frames = [keyframe.frame for keyframe in self.schedule]
+        assert(keyframe_frames == sorted(keyframe_frames))
+
+    def generate_command_data(self):
+        prev_keyframe = None
+        next_keyframe = self.schedule[0]
+        next_keyframe_idx = 1
+
+        command_data = []
+        while next_keyframe_idx < len(self.schedule):
+            prev_keyframe = next_keyframe
+            next_keyframe = self.schedule[next_keyframe_idx]
+            next_keyframe_idx += 1
+            interp_len = float(next_keyframe.frame - prev_keyframe.frame)
+
+            for frame_idx in range(prev_keyframe.frame, next_keyframe.frame):
+                t = float(frame_idx - prev_keyframe.frame) / interp_len
+                strength = (1.0 - t) * prev_keyframe.strength + t * next_keyframe.strength
+                command_data.append(CommandData(
+                    prompt0=prev_keyframe.prompt,
+                    prompt1=next_keyframe.prompt,
+                    seed0=prev_keyframe.seed,
+                    seed1=next_keyframe.seed,
+                    t=t,
+                    strength=strength,
+                    image=f"IM{frame_idx:05d}.jpg"
+                ))
+        
+        # Add the last frame
+        command_data.append(CommandData(
+            prompt0=next_keyframe.prompt,
+            prompt1=next_keyframe.prompt,
+            seed0=next_keyframe.seed,
+            seed1=next_keyframe.seed,
+            t=0.0,
+            strength=next_keyframe.strength,
+            image=f"IM{next_keyframe.frame:05d}.jpg"
+        ))
+        
+        return command_data
+
+
+def load_config(config_path):
+    with open(config_path, "r") as f:
+        data = json.load(f)
+
+    indir = data["indir"]
+    outdir = data["outdir"]
+    schedule = [KeyFrame(**frame) for frame in data["schedule"]]
+    return DreamSchedule(indir, outdir, schedule)
+
 
 if __name__ == "__main__":
-    images_small = [f"./99f/mermaid_1/frames_1/IM{i:05d}.jpg" for i in range(0, 251)]
-    images_large = [f"./99f/mermaid_1/frames_1/IM{i:05d}.jpg" for i in range(0, 751)]
+    dream_configs = []
+    dream_configs.append(load_config("config_00.json"))
 
     commands = []
-    commands = commands + generate_batch(0, 2639741, 0.01, images_small) # clip 0
+    for dream_config in dream_configs:
+        id = dream_config.indir
+        od = dream_config.outdir
+        command_data = dream_config.generate_command_data()
+        commands += [command.generate_command_string(id, od) for command in command_data]
 
     with open("commands.txt", "w") as f:
         f.write("\n".join(commands))
