@@ -6,7 +6,7 @@ models/ldm/stable-diffusion-v1/model.ckpt
 inputs/
 
 # ignore the directory I'm using for input data
-99f
+99f/mermaid_1
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
