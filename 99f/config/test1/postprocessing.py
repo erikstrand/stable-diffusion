@@ -40,8 +40,8 @@ def move_clip(clip_idx, files):
 if __name__ == "__main__":
     files = collect_files()
 
-    #move_clip(0, files)
-    #move_clip(1, files)
+    move_clip(0, files)
+    move_clip(1, files)
     move_clip(2, files)
     move_clip(3, files)
     move_clip(4, files)
@@ -53,3 +53,8 @@ if __name__ == "__main__":
     move_clip(10, files)
     move_clip(11, files)
     move_clip(12, files)
+    move_clip(13, files)
+    move_clip(14, files)
+    move_clip(15, files)
+    move_clip(16, files)
+    move_clip(17, files)
