@@ -190,7 +190,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
         except SystemExit:
             parser.print_help()
             continue
-        if len(opt.prompt) == 0:
+        if len(opt.prompt) == 0 and opt.latent_0 is None:
             print('Try again with a prompt!')
             continue
         # retrieve previous value!
@@ -245,6 +245,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                 os.makedirs(opt.outdir)
             current_outdir = opt.outdir
         elif prompt_as_dir:
+            # this option doesn't make sense if we're using precomputed latents
+            assert(len(opt.prompt) > 0)
+
             # sanitize the prompt to a valid folder name
             subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
 
@@ -559,6 +562,25 @@ def create_cmd_parser():
         description='Example: dream> a fantastic alien landscape -W1024 -H960 -s100 -n12'
     )
     parser.add_argument('prompt')
+    parser.add_argument(
+        '--latent_0',
+        type=int,
+        default=None,
+        help='Use a precomputed prompt latent distribution.',
+    )
+    parser.add_argument(
+        '--latent_1',
+        type=int,
+        default=None,
+        help='Use a second precomputed prompt latent distribution (for interpolation).',
+    )
+    parser.add_argument(
+        '--latent_interpolation',
+        '-u',
+        type=float,
+        default=0.0,
+        help='Linearly interpolate between two precomputed latent distributions.',
+    )
     parser.add_argument('-s', '--steps', type=int, help='Number of steps')
     parser.add_argument(
         '-S',

@@ -185,6 +185,9 @@ class Generate:
             self,
             # these are common
             prompt,
+            latent_0       =    None,
+            latent_1       =    None,
+            latent_interpolation = 0.0,
             iterations     =    None,
             steps          =    None,
             seed           =    None,
@@ -300,11 +303,20 @@ class Generate:
         mask_image       = None
 
         try:
-            uc, c = get_uc_and_c(
-                prompt, model=self.model,
-                skip_normalize=skip_normalize,
-                log_tokens=self.log_tokenization
-            )
+            if latent_0 is not None:
+                if latent_1 is not None:
+                    assert(latent_interpolation is not None)
+                    u = latent_interpolation
+                    c = (1.0 - u) * self.latents[latent_0] + u * self.latents[latent_1]
+                else:
+                    c = self.latents[latent_0]
+                uc = self.uc
+            else:
+                uc, c = get_uc_and_c(
+                    prompt, model=self.model,
+                    skip_normalize=skip_normalize,
+                    log_tokens=self.log_tokenization
+                )
 
             (init_image,mask_image) = self._make_images(init_img,init_mask, width, height, fit)
             
@@ -449,9 +461,11 @@ class Generate:
         assert(self.model is not None)
         latents = []
         for prompt in prompts:
-            _, c = get_uc_and_c(prompt, self.model)
+            uc, c = get_uc_and_c(prompt, self.model)
             latents.append(c)
         self.latents = latents
+        # all uc are the same, so using the last one is fine
+        self.uc = uc
 
     def upscale_and_reconstruct(self,
                                 image_list,
