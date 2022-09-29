@@ -30,7 +30,7 @@ class CommandData:
 
     def generate_command_string(self, indir, maskdir, outdir):
         command = f"-I {indir/self.image}"
-        command = f"-M {maskdir/self.mask}"
+        command += f" -M {maskdir/self.mask}"
         command += f" --latent_0 {self.prompt0} --latent_1 {self.prompt1} -u {self.t:.5f}"
         command += f" -S {self.seed0} -V {self.seed1}:{self.t:.5f}"
         # when f is literally 0.0, it gets thrown out and I think effectively uses 1.0
@@ -40,7 +40,7 @@ class CommandData:
         return command
 
     def __str__(self):
-        return f"CommandData: prompt0 {self.prompt0}, prompt1 {self.prompt1}, seed0 {self.seed0}, seed1 {self.seed1}, t {self.t}, strength {self.strength}, image {self.image}"
+        return f"CommandData: prompt0 {self.prompt0}, prompt1 {self.prompt1}, seed0 {self.seed0}, seed1 {self.seed1}, t {self.t}, strength {self.strength}, image {self.image}, mask {self.mask}"
 
 
 class DreamSchedule:
@@ -79,8 +79,8 @@ class DreamSchedule:
                     seed1=next_keyframe.seed,
                     t=t,
                     strength=strength,
-                    image=f"IM{frame_idx:05d}.jpg",
-                    mask=f"IM{frame_idx:05d}.jpg"
+                    image=f"IM{frame_idx:05d}.png",
+                    mask=f"IM{frame_idx:05d}.png"
                 ))
 
         # Add the last frame
@@ -91,7 +91,8 @@ class DreamSchedule:
             seed1=next_keyframe.seed,
             t=0.0,
             strength=next_keyframe.strength,
-            image=f"IM{next_keyframe.frame:05d}.jpg"
+            image=f"IM{next_keyframe.frame:05d}.jpg",
+            mask=f"IM{next_keyframe.frame:05d}.jpg"
         ))
 
         return command_data
@@ -117,9 +118,10 @@ if __name__ == "__main__":
     commands = []
     for dream_config in dream_configs:
         id = dream_config.indir
+        md = dream_config.maskdir
         od = dream_config.outdir
         command_data = dream_config.generate_command_data()
-        commands += [command.generate_command_string(id, od) for command in command_data]
+        commands += [command.generate_command_string(id, md, od) for command in command_data]
 
     with open("commands.txt", "w") as f:
         f.write("\n".join(commands))
