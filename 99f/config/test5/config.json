@@ -291,14 +291,15 @@
             "strength": 0.2
         },
         {
-            "frame": 1188
+            "frame": 1188,
+            "strength": 0.1
         },
 
         {
             "frame": 1198,
-            "seed": 86797322,
-            "prompt": 2,
-            "strength": 0.2,
+            "seed": 8689759,
+            "prompt": 3,
+            "strength": 0.1,
             "masks": []
         },
         {
@@ -307,7 +308,8 @@
         },
         {
             "frame": 1208,
-            "prompt": 13
+            "prompt": 13,
+            "strength": 0.4
         },
         {
             "frame": 1214
@@ -333,7 +335,7 @@
         },
         {
             "frame": 1258,
-            "strength": 0.3
+            "strength": 0.6
         },
 
         {
