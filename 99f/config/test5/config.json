@@ -297,33 +297,18 @@
 
         {
             "frame": 1198,
-            "seed": 8689759,
-            "prompt": 3,
+            "seed": 58968900,
+            "prompt": 13,
             "strength": 0.1,
             "masks": []
         },
         {
-            "frame": 1206,
-            "strength": 0.3
+            "frame": 1218,
+            "strength": 0.5
         },
         {
-            "frame": 1208,
-            "prompt": 13,
-            "strength": 0.4
-        },
-        {
-            "frame": 1214
-        },
-        {
-            "frame": 1216,
-            "seed": 97623450
-        },
-        {
-            "frame": 1222
-        },
-        {
-            "frame": 1224,
-            "seed": 97623450
+            "frame": 1228,
+            "seed": 1098785
         },
 
         {
@@ -340,15 +325,15 @@
 
         {
             "frame": 1282,
-            "prompt": 15,
-            "strength": 0.7
+            "strength": 0.65
         },
         {
             "frame": 1300,
+            "prompt": 15,
             "strength": 0.95
         },
         {
-            "frame": 1350,
+            "frame": 1364,
             "seed": 45675986,
             "strength": 0.95
         }
