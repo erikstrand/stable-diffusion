@@ -1,0 +1,72 @@
+{
+    "indir": "./99f/mermaid_1/frames_1",
+    "maskdir": "./99f/mermaid_1/masks_1",
+    "outdir": "outputs/test2/clip_01",
+    "stride": 5,
+    "schedule": [
+        {
+            "frame": 0,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 166,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.75
+            }]
+        },
+        {
+        "frame": 200,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.3,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.75
+            }]
+        },
+        {
+        "frame": 220,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.75
+            }]
+        },
+        {
+        "frame": 230,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.75
+            }]
+        },
+        {
+            "frame": 240,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.4, 0.5],
+                "radius": 0.8
+            }]
+        },
+        {
+            "frame": 390,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        }
+    ]
+}
