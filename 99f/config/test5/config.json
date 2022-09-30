@@ -307,8 +307,7 @@
             "strength": 0.5
         },
         {
-            "frame": 1228,
-            "seed": 1098785
+            "frame": 1228
         },
 
         {
@@ -325,11 +324,11 @@
 
         {
             "frame": 1282,
-            "strength": 0.65
+            "prompt": 15,
+            "strength": 0.8
         },
         {
             "frame": 1300,
-            "prompt": 15,
             "strength": 0.95
         },
         {
