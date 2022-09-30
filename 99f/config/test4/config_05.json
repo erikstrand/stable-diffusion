@@ -15,7 +15,6 @@
             "frame": 394,
             "seed": 3438503310,
             "prompt": 7,
-            "strength": 0.0,
             "masks": [{
                 "center": [0.55, 0.6],
                 "radius": 0.5
@@ -23,77 +22,35 @@
         },
         {
             "frame": 406,
-            "seed": 3438503310,
-            "prompt": 7,
-            "strength": 0.8,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "strength": 0.8
         },
         {
-            "frame": 414,
-            "seed": 3438503310,
-            "prompt": 7,
-            "strength": 0.8,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "frame": 414
         },
         {
             "frame": 420,
-            "seed": 3438503310,
-            "prompt": 7,
-            "strength": 0.1,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "strength": 0.1
         },
         {
             "frame": 440,
             "seed": 98658,
-            "prompt": 8,
-            "strength": 0.1,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "prompt": 8
         },
         {
             "frame": 460,
-            "seed": 98658,
-            "prompt": 8,
-            "strength": 0.8,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "strength": 0.8
         },
         {
             "frame": 486,
-            "seed": 98658,
             "prompt": 8,
-            "strength": 0.8,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "strength": 0.8
         },
         {
             "frame": 498,
-            "seed": 98658,
-            "prompt": 8,
-            "strength": 0.1,
-            "masks": [{
-                "center": [0.55, 0.6],
-                "radius": 0.5
-            }]
+            "strength": 0.1
         },
         {
             "frame": 510,
-            "seed": 6890234,
             "prompt": 3,
             "strength": 0.0,
             "masks": []
