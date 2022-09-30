@@ -145,7 +145,7 @@
             "strength": 0.6
         },
         {
-            "frame": 596,
+            "frame": 596
         },
         {
             "frame": 608,
@@ -161,6 +161,6 @@
             "prompt": 3,
             "strength": 0.0,
             "masks": []
-        },
+        }
     ]
 }

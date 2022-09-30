@@ -70,7 +70,7 @@ def generate_command_data(dream_schedule, first_frame, last_frame):
             ))
 
     # Add the last frame if needed.
-    if last_frame is not None and next_keyframe.frame <= last_frame:
+    if last_frame is None or next_keyframe.frame <= last_frame:
         command_data.append(CommandData(
             prompt0=next_keyframe.prompt,
             prompt1=next_keyframe.prompt,
