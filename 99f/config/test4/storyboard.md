@@ -30,7 +30,7 @@ Frame 510
 Frame 566
     - zoom in on arial and sebastian (shoulders and face)
     - no effect?
-        - or cyberpunk eye?
+        - or cyberpunk monocle eye?
 
 Frame 630
     - back to anchor view
