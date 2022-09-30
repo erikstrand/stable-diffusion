@@ -1,0 +1,102 @@
+{
+    "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1",
+    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1",
+    "outdir": "outputs/test4/clip_05c",
+    "stride": 2,
+    "schedule": [
+        {
+            "frame": 390,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 394,
+            "seed": 98658,
+            "prompt": 7,
+            "strength": 0.0,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 406,
+            "seed": 98658,
+            "prompt": 7,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 414,
+            "seed": 98658,
+            "prompt": 7,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 420,
+            "seed": 98658,
+            "prompt": 7,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 440,
+            "seed": 98658,
+            "prompt": 8,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 460,
+            "seed": 98658,
+            "prompt": 8,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 486,
+            "seed": 98658,
+            "prompt": 8,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 498,
+            "seed": 98658,
+            "prompt": 8,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 510,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        }
+    ]
+}

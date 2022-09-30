@@ -76,7 +76,7 @@ def generate_command_data(dream_schedule):
 
 
 if __name__ == "__main__":
-    dream_config = load_config("config_01.json")
+    dream_config = load_config("config_05.json")
 
     id = dream_config.indir
     md = dream_config.maskdir

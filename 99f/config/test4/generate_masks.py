@@ -7,10 +7,11 @@ height = 360
 
 if __name__ == "__main__":
     # load the dream schedule
-    ds = load_config("config_01.json")
+    ds = load_config("config_05.json")
 
     indir = Path(ds.indir)
     maskdir = Path(ds.maskdir)
+    maskdir.mkdir(exist_ok=True)
 
     prev_keyframe = None
     next_keyframe = ds.schedule[0]
