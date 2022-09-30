@@ -8,8 +8,11 @@ def generate_black_rectangle_array(width, height):
 
 
 def generate_mask_array(width, height, center, radius):
-    x = np.arange(0.0, float(width), 1.0)
-    y = np.arange(0.0, float(height), 1.0)
+    width = float(width)
+    height = float(height)
+
+    x = np.arange(0.0, width, 1.0)
+    y = np.arange(0.0, height, 1.0)
     yy, xx = np.meshgrid(y, x)
     # coords[i, j, :] = [i, j]
     coords = np.stack([xx, yy], axis=2)
@@ -17,6 +20,11 @@ def generate_mask_array(width, height, center, radius):
     #    for j in range(5):
     #        print(f"{i}, {j}: {coords[i, j]}")
     # dist[i, j] = distance from (i, j) to center
+
+    # Rescale center and radius
+    center = np.array([width, height]) * center
+    radius = height * radius
+
     dist = np.linalg.norm(coords - center, axis=2)
     # mask as True/False
     mask = dist > radius
@@ -30,29 +38,25 @@ def array_to_image(array):
     return Image.fromarray(array, format)
 
 
+def generate_mask_image(width, height, center, radius):
+    rgb_array = generate_black_rectangle_array(width, height)
+    mask_array = generate_mask_array(width, height, center, radius)
+    mask_array = np.expand_dims(mask_array, axis=2)
+    image_data = np.concatenate((rgb_array, mask_array), axis=2)
+    return array_to_image(image_data)
+
+
+def save_mask_image(width, height, center, radius, filename):
+    image = generate_mask_image(width, height, center, radius)
+    image.save(filename)
+
+
 if __name__ == "__main__":
-    width = 10
-    height = 5
-    center = np.array([3.0, 2.0])
-    radius = 2.0
+    width = 640
+    height = 320
+    # relative to width and height
+    center = np.array([0.5, 0.5])
+    # relative to height
+    radius = 0.25
 
-    pixels = generate_black_rectangle_array(width, height)
-    pixels[0, 0, :] = [255, 0, 0]
-    pixels[3, 0, :] = [0, 255, 0]
-    pixels[0, 3, :] = [0, 0, 255]
-    print(pixels.shape)
-    print(pixels)
-
-    image = array_to_image(pixels)
-    image.save('test_rgb.png')
-
-    mask = generate_mask_array(width, height, center, radius)
-    mask = np.expand_dims(mask, axis=2)
-    print(mask.shape)
-    print(mask)
-
-    rgba_array = np.concatenate([pixels, mask], axis=2)
-    print(rgba_array)
-
-    image = array_to_image(rgba_array)
-    image.save('test_rgba.png')
+    save_mask_image(width, height, center, radius, 'mask.png')
