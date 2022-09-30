@@ -154,6 +154,7 @@
         },
         {
             "frame": 594,
+            "strength": 0.7,
             "masks": [{
                 "center": [0.46, 0.7],
                 "radius": 0.22
@@ -161,7 +162,6 @@
         },
         {
             "frame": 596,
-            "strength": 0.3,
             "masks": [{
                 "center": [0.46, 0.7],
                 "radius": 0.24
@@ -177,14 +177,14 @@
         },
         {
             "frame": 612,
-            "strength": 0.7,
             "masks": [{
                 "center": [0.4, 0.7],
                 "radius": 0.35
             }]
         },
         {
-            "frame": 628
+            "frame": 628,
+            "strength": 0.7
         },
 
         {
@@ -304,7 +304,7 @@
         },
         {
             "frame": 1218,
-            "strength": 0.5
+            "strength": 0.55
         },
         {
             "frame": 1228
