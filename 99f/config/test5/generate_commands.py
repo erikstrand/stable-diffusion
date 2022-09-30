@@ -45,7 +45,15 @@ def generate_command_data(dream_schedule, first_frame, last_frame):
         next_keyframe = dream_schedule.schedule[next_keyframe_idx]
         next_keyframe_idx += 1
         interp_len = float(next_keyframe.frame - prev_keyframe.frame)
-        n_masks = min(len(prev_keyframe.masks), len(next_keyframe.masks))
+
+        # This code doesn't really handle changes in number except when one of the numbers is zero.
+        if len(prev_keyframe.masks) == 0:
+            n_masks = 0
+        else:
+            if len(next_keyframe.masks) == 0:
+                n_masks = len(prev_keyframe.masks)
+            else:
+                n_masks = min(len(prev_keyframe.masks), len(next_keyframe.masks))
 
         # Keep going if the first frame doesn't appear between these keyframes.
         if next_keyframe.frame <= first_frame:
