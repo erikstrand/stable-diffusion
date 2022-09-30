@@ -130,14 +130,13 @@
 
         {
             "frame": 566,
-            "seed": 6890234,
+            "seed": 87957245,
             "prompt": 3,
             "strength": 0.0,
             "masks": []
         },
         {
             "frame": 576,
-            "seed": 87693245,
             "prompt": 8,
             "strength": 0.0,
             "masks": [{
@@ -185,8 +184,7 @@
             }]
         },
         {
-            "frame": 628,
-            "masks": []
+            "frame": 628
         },
 
         {
@@ -228,6 +226,7 @@
             }]
         },
         {
+            "prompt": 11,
             "frame": 946
         },
         {
@@ -247,18 +246,14 @@
         },
         {
             "frame": 986,
-            "prompt": 11,
+            "prompt": 12,
             "masks": [
                 { "center": [-0.7, 0.5], "radius": 1.8 },
                 { "center": [1.7, 0.5], "radius": 1.85 }
             ]
         },
         {
-            "frame": 988,
-            "strength": 0.6
-        },
-        {
-            "frame": 1010,
+            "frame": 1014,
             "strength": 0.8
         },
         {
@@ -271,7 +266,7 @@
 
         {
             "frame": 1054,
-            "seed": 6890234,
+            "seed": 48793245,
             "prompt": 0,
             "strength": 0.0,
             "masks": []
@@ -293,7 +288,7 @@
         },
         {
             "frame": 1178,
-            "strength": 0.3
+            "strength": 0.2
         },
         {
             "frame": 1188
@@ -301,17 +296,18 @@
 
         {
             "frame": 1198,
-            "seed": 6890234,
+            "seed": 86797322,
             "prompt": 2,
-            "strength": 0.3,
+            "strength": 0.2,
             "masks": []
         },
         {
-            "frame": 1206
+            "frame": 1206,
+            "strength": 0.3
         },
         {
             "frame": 1208,
-            "prompt": 12
+            "prompt": 13
         },
         {
             "frame": 1214
