@@ -3,10 +3,6 @@ from PIL import Image
 from PIL.PngImagePlugin import PngImageFile as PILformat1
 
 
-def generate_black_rectangle_array(width, height):
-    return np.zeros((width, height, 3), dtype='uint8')
-
-
 def generate_mask_array(width, height, circles):
     width = float(width)
     height = float(height)
@@ -42,29 +38,41 @@ def generate_mask_array(width, height, circles):
     return result
 
 
+def generate_mask_image(width, height, circles, infile):
+    # Load the RGB data from infile
+    rgb_PIL = Image.open(infile)
+    rgb_array = np.array(rgb_PIL)
+    if rgb_array.shape[2] == 4:
+        rgb_array = rgb_array[:, :, 0:3]
+
+    mask_array = generate_mask_array(width, height, circles)
+    mask_array = np.flip(np.swapaxes(mask_array, 0, 1), 0)
+    mask_array = np.expand_dims(mask_array, axis=2)
+    image_data = np.concatenate((rgb_array, mask_array), axis=2)
+    return Image.fromarray(image_data, 'RGBA')
+
+
+def save_mask_image(width, height, circles, infile, outfile):
+    image = generate_mask_image(width, height, circles, infile)
+    image.save(outfile)
+
+
+# not used now but maybe useful in the future
+def generate_black_rectangle_array(width, height):
+    return np.zeros((width, height, 3), dtype='uint8')
+
+
+# not used now but maybe useful in the future
 def array_to_image(array):
     array = np.flip(np.swapaxes(array, 0, 1), 0)
     format = 'RGB' if array.shape[2] == 3 else 'RGBA'
     return Image.fromarray(array, format)
 
 
-def generate_mask_image(width, height, circles):
-    rgb_array = generate_black_rectangle_array(width, height)
-    mask_array = generate_mask_array(width, height, circles)
-    mask_array = np.expand_dims(mask_array, axis=2)
-    image_data = np.concatenate((rgb_array, mask_array), axis=2)
-    return array_to_image(image_data)
-
-
-def save_mask_image(width, height, circles, filename):
-    image = generate_mask_image(width, height, circles)
-    image.save(filename)
-
-
 if __name__ == "__main__":
     # in pixels
     width = 640
-    height = 320
+    height = 360
 
     # relative to width and height
     center = np.array([0.5, 0.5])
@@ -77,4 +85,4 @@ if __name__ == "__main__":
         (np.array([0.7, 0.8]), 0.2)
     ]
 
-    save_mask_image(width, height, circles, 'mask.png')
+    save_mask_image(width, height, circles, "../../mermaid_1/frames_1/IM00200.jpg", 'mask.png')
