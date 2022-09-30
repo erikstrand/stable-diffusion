@@ -73,8 +73,8 @@ def generate_command_data(dream_schedule, first_frame, last_frame):
                 seed1=next_keyframe.seed,
                 t=t,
                 strength=strength,
-                image=f"IM{frame_idx:05d}.jpg",
-                mask=(f"IM{frame_idx:05d}.png" if n_masks > 0 else None)
+                image=f"{frame_idx:06d}.0.png",
+                mask=(f"{frame_idx:06d}.0.png" if n_masks > 0 else None)
             ))
 
     # Add the last frame if needed.
@@ -111,7 +111,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    dream_config = load_config("config.json")
+    dream_config = load_config("config_merge.json")
     first_frame = args.first_frame if args.first_frame is not None else dream_config.schedule[0].frame
     last_frame = args.last_frame
 

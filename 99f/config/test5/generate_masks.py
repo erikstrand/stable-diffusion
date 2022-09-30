@@ -4,7 +4,7 @@ from masks import save_mask_image
 import argparse
 
 width = 640
-height = 360
+height = 320
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # load the dream schedule
-    ds = load_config("config.json")
+    ds = load_config("config_merge.json")
 
     indir = Path(ds.indir)
     maskdir = Path(ds.maskdir)
@@ -71,7 +71,7 @@ if __name__ == "__main__":
                     interp_masks.append((center, radius))
 
             if len(interp_masks) > 0:
-                image_file = indir / f"IM{frame_idx:05d}.jpg"
-                mask_file = maskdir / f"IM{frame_idx:05d}.png"
+                image_file = indir / f"{frame_idx:06d}.0.png"
+                mask_file = maskdir / f"{frame_idx:06d}.0.png"
                 print(f"generating mask for frame {frame_idx} ({mask_file})")
                 save_mask_image(width, height, interp_masks, image_file, mask_file)
