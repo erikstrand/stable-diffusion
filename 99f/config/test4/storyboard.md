@@ -17,6 +17,8 @@ Frame 294
 Frame 390
     - sebastian sits on rock (center)
     - glitch sebastian
+        - praying mantis
+        - steampunk
     - trash on sides
 
 Frame 510
@@ -29,6 +31,7 @@ Frame 510
 Frame 566
     - zoom in on arial and sebastian (shoulders and face)
     - no effect?
+        - or cyberpunk eye?
 
 Frame 630
     - back to anchor view
