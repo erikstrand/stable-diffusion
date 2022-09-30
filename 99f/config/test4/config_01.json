@@ -1,7 +1,7 @@
 {
     "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1",
     "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1",
-    "outdir": "outputs/test2/clip_01",
+    "outdir": "outputs/test4/clip_01",
     "stride": 2,
     "schedule": [
         {
