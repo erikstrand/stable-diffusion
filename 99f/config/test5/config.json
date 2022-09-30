@@ -87,11 +87,80 @@
             "frame": 498,
             "strength": 0.1
         },
+
         {
             "frame": 510,
+            "seed": 6890234,
             "prompt": 3,
             "strength": 0.0,
             "masks": []
-        }
+        },
+        {
+            "frame": 512,
+            "prompt": 7,
+            "masks": [{
+                "center": [0.25, 0.66],
+                "radius": 0.05
+            }]
+        },
+        {
+            "frame": 526,
+            "strength": 0.6
+        },
+        {
+            "frame": 546,
+            "masks": [{
+                "center": [0.25, 0.66],
+                "radius": 0.25
+            }]
+        },
+        {
+            "frame": 558,
+            "strength": 0.0
+        },
+        {
+            "frame": 564,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+
+        {
+            "frame": 566,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 576,
+            "prompt": 8,
+            "strength": 0.0,
+            "masks": [{
+                "center": [0.5, 0.6],
+                "radius": 0.05
+            }]
+        },
+        {
+            "frame": 586,
+            "strength": 0.6
+        },
+        {
+            "frame": 596,
+        },
+        {
+            "frame": 608,
+            "strength": 0.0
+        },
+        {
+            "frame": 610,
+            "masks": []
+        },
+
+        {
+            "frame": 630,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
     ]
 }
