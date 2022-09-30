@@ -112,7 +112,7 @@
             "strength": 0.7,
             "masks": [{
                 "center": [0.25, 0.66],
-                "radius": 0.6
+                "radius": 0.45
             }]
         },
         {
@@ -121,10 +121,10 @@
         {
             "frame": 564,
             "prompt": 3,
-            "strength": 0.0,
+            "strength": 0.8,
             "masks": [{
                 "center": [0.25, 0.66],
-                "radius": 1.5
+                "radius": 2.0
             }]
         },
 
@@ -139,23 +139,19 @@
             "prompt": 8,
             "strength": 0.0,
             "masks": [{
-                "center": [0.5, 0.6],
-                "radius": 0.1
+                "center": [0.4, 0.6],
+                "radius": 0.2
             }]
         },
         {
             "frame": 586,
-            "strength": 0.6,
-            "masks": [{
-                "center": [0.5, 0.6],
-                "radius": 0.15
-            }]
+            "strength": 0.6
         },
         {
             "frame": 596,
             "masks": [{
-                "center": [0.5, 0.6],
-                "radius": 0.2
+                "center": [0.4, 0.6],
+                "radius": 0.25
             }]
         },
         {
@@ -214,6 +210,40 @@
         },
         {
             "frame": 966,
+            "masks": []
+        },
+
+        {
+            "frame": 978,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 988,
+            "prompt": 10,
+            "strength": 0.7,
+            "masks": [
+                { "center": [-1.0, 0.5], "radius": 1.0 },
+                { "center": [2.0, 0.5], "radius": 1.0 }
+            ]
+        },
+        {
+            "frame": 1010,
+            "masks": [
+                { "center": [-0.3, 0.5], "radius": 1.0 },
+                { "center": [1.7, 0.5], "radius": 1.0 }
+            ]
+        },
+        {
+            "frame": 1052,
+            "strength": 0.0
+        },
+
+        {
+            "frame": 1054,
+            "prompt": 3,
+            "strength": 0.0,
             "masks": []
         }
     ]

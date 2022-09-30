@@ -26,7 +26,6 @@ Frame 510
     - wide shot
     - maybe glitch the left side of the anchor?
         - coral reef
-        - sloths
 
 Frame 566
     - zoom in on arial and sebastian (shoulders and face)
