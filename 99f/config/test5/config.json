@@ -32,10 +32,10 @@
             "strength": 0.8
         },
         {
-            "frame": 230
+            "frame": 246
         },
         {
-            "frame": 240,
+            "frame": 260,
             "strength": 0.1,
             "masks": [{
                 "center": [0.4, 0.5],
@@ -240,7 +240,7 @@
         },
         {
             "frame": 1052,
-            "strength": 0.0
+            "strength": 0.6
         },
 
         {
@@ -252,24 +252,32 @@
         },
         {
             "frame": 1100,
-            "strength": 0.8
+            "strength": 0.7
         },
         {
             "frame": 1120
         },
         {
             "frame": 1146,
-            "prompt": 1
+            "prompt": 1,
+            "strength": 0.9
         },
         {
             "frame": 1168
+        },
+        {
+            "frame": 1178,
+            "strength": 0.3
+        },
+        {
+            "frame": 1188
         },
 
         {
             "frame": 1198,
             "seed": 6890234,
             "prompt": 3,
-            "strength": 0.4,
+            "strength": 0.3,
             "masks": []
         },
         {
