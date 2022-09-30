@@ -1,6 +1,6 @@
 {
     "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1",
-    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1",
+    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_2",
     "outdir": "outputs/test5/clip_00",
     "stride": 2,
     "schedule": [
@@ -53,7 +53,7 @@
         {
             "frame": 394,
             "seed": 8976435,
-            "prompt": 7,
+            "prompt": 5,
             "masks": [{
                 "center": [0.55, 0.6],
                 "radius": 0.5
@@ -73,7 +73,7 @@
         {
             "frame": 440,
             "seed": 98658,
-            "prompt": 8
+            "prompt": 6
         },
         {
             "frame": 460,
@@ -81,7 +81,6 @@
         },
         {
             "frame": 486,
-            "prompt": 8,
             "strength": 0.8
         },
         {
