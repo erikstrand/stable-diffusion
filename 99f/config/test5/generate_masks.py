@@ -56,10 +56,19 @@ if __name__ == "__main__":
 
             t = float(frame_idx - prev_keyframe.frame) / interp_len
             interp_masks = []
-            for prev_mask, next_mask in zip(prev_keyframe.masks, next_keyframe.masks):
-                center = (1.0 - t) * prev_mask.center + t * next_mask.center
-                radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
-                interp_masks.append((center, radius))
+
+            # If the next keyframe removes all masks, just use the current masks.
+            # Note: This code isn't designed to handle changing the number of masks except from or
+            # to zero.
+            if len(prev_keyframe.masks) > 0 and len(next_keyframe.masks) == 0:
+                for mask in prev_keyframe.masks:
+                    interp_masks.append((mask.center, mask.radius))
+            else:
+                # Otherwise, interpolate.
+                for prev_mask, next_mask in zip(prev_keyframe.masks, next_keyframe.masks):
+                    center = (1.0 - t) * prev_mask.center + t * next_mask.center
+                    radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
+                    interp_masks.append((center, radius))
 
             if len(interp_masks) > 0:
                 image_file = indir / f"IM{frame_idx:05d}.jpg"
