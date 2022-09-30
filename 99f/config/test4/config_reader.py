@@ -23,7 +23,14 @@ class KeyFrame:
         self.prompt = prompt
         self.seed = seed
         self.strength = strength
-        self.masks = [Mask(**mask) for mask in masks]
+        if masks is None:
+            self.masks = []
+        else:
+            assert(isinstance(masks, list))
+            if len(masks) == 0 or isinstance(masks[0], Mask):
+                self.masks = masks
+            else:
+                self.masks = [Mask(**mask) for mask in masks]
 
     def __str__(self):
         return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, strength {self.strength}, {len(self.masks)} masks"
@@ -62,7 +69,32 @@ def load_config(config_path):
     maskdir = data["maskdir"]
     outdir = data["outdir"]
     stride = data["stride"]
-    schedule = [KeyFrame(**frame) for frame in data["schedule"]]
+
+    schedule = []
+
+    kwargs = data["schedule"][0]
+    assert("frame" in kwargs)
+    assert("prompt" in kwargs)
+    assert("seed" in kwargs)
+    if not "strenth" in kwargs:
+        kwargs["strength"] = 0.0
+    if "masks" not in kwargs:
+        kwargs["masks"] = []
+    schedule.append(KeyFrame(**kwargs))
+
+    for kwargs in data["schedule"][1:]:
+        __slots__ = ["frame", "prompt", "seed", "strength", "masks"]
+        assert("frame" in kwargs)
+        if "prompt" not in kwargs:
+            kwargs["prompt"] = schedule[-1].prompt
+        if "seed" not in kwargs:
+            kwargs["seed"] = schedule[-1].seed
+        if "strength" not in kwargs:
+            kwargs["strength"] = schedule[-1].strength
+        if "masks" not in kwargs:
+            kwargs["masks"] = schedule[-1].masks
+        schedule.append(KeyFrame(**kwargs))
+
     return DreamSchedule(indir, maskdir, outdir, schedule, stride)
 
 
