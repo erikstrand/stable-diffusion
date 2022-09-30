@@ -99,31 +99,31 @@
             "frame": 512,
             "prompt": 7,
             "masks": [{
-                "center": [0.25, 0.66],
-                "radius": 0.05
+                "center": [0.2, 0.6],
+                "radius": 0.1
             }]
         },
         {
-            "frame": 526,
+            "frame": 518,
             "strength": 0.6
         },
         {
-            "frame": 546,
+            "frame": 538,
             "strength": 0.7,
             "masks": [{
-                "center": [0.25, 0.66],
+                "center": [0.2, 0.6],
                 "radius": 0.45
             }]
         },
         {
-            "frame": 558
+            "frame": 548
         },
         {
             "frame": 564,
             "prompt": 3,
             "strength": 0.8,
             "masks": [{
-                "center": [0.25, 0.66],
+                "center": [0.3, 0.5],
                 "radius": 2.0
             }]
         },
@@ -139,7 +139,7 @@
             "prompt": 8,
             "strength": 0.0,
             "masks": [{
-                "center": [0.4, 0.6],
+                "center": [0.5, 0.6],
                 "radius": 0.2
             }]
         },
@@ -150,7 +150,7 @@
         {
             "frame": 596,
             "masks": [{
-                "center": [0.4, 0.6],
+                "center": [0.45, 0.6],
                 "radius": 0.25
             }]
         },
@@ -220,19 +220,22 @@
             "masks": []
         },
         {
-            "frame": 988,
+            "frame": 986,
             "prompt": 10,
-            "strength": 0.7,
             "masks": [
-                { "center": [-1.0, 0.5], "radius": 1.0 },
-                { "center": [2.0, 0.5], "radius": 1.0 }
+                { "center": [-0.7, 0.5], "radius": 1.3 },
+                { "center": [1.7, 0.5], "radius": 1.3 }
             ]
+        },
+        {
+            "frame": 988,
+            "strength": 0.7
         },
         {
             "frame": 1010,
             "masks": [
-                { "center": [-0.3, 0.5], "radius": 1.0 },
-                { "center": [1.7, 0.5], "radius": 1.0 }
+                { "center": [-0.7, 0.5], "radius": 1.8 },
+                { "center": [1.7, 0.5], "radius": 1.85 }
             ]
         },
         {
@@ -242,6 +245,58 @@
 
         {
             "frame": 1054,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 1100,
+            "strength": 0.8
+        },
+        {
+            "frame": 1120
+        },
+        {
+            "frame": 1146,
+            "prompt": 1
+        },
+        {
+            "frame": 1168
+        },
+
+        {
+            "frame": 1198,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.4,
+            "masks": []
+        },
+        {
+            "frame": 1206
+        },
+        {
+            "frame": 1208,
+            "seed": 768507
+        },
+        {
+            "frame": 1214
+        },
+        {
+            "frame": 1216,
+            "seed": 97623450
+        },
+        {
+            "frame": 1222
+        },
+        {
+            "frame": 1224,
+            "seed": 97623450
+        },
+
+        {
+            "frame": 1230,
+            "seed": 6890234,
             "prompt": 3,
             "strength": 0.0,
             "masks": []
