@@ -1,0 +1,98 @@
+{
+    "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1",
+    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1",
+    "outdir": "outputs/test5/clip_00",
+    "stride": 2,
+    "schedule": [
+        {
+            "frame": 0,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 182,
+            "masks": [{
+                "center": [0.25, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+            "frame": 200,
+            "prompt": 4,
+            "strength": 0.3,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+            "frame": 220,
+            "strength": 0.8
+        },
+        {
+            "frame": 230
+        },
+        {
+            "frame": 240,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.4, 0.5],
+                "radius": 0.5
+            }]
+        },
+
+        {
+            "frame": 390,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 394,
+            "seed": 8976435,
+            "prompt": 7,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 408,
+            "strength": 0.8
+        },
+        {
+            "frame": 420
+        },
+        {
+            "frame": 428,
+            "strength": 0.1
+        },
+        {
+            "frame": 440,
+            "seed": 98658,
+            "prompt": 8
+        },
+        {
+            "frame": 460,
+            "strength": 0.8
+        },
+        {
+            "frame": 486,
+            "prompt": 8,
+            "strength": 0.8
+        },
+        {
+            "frame": 498,
+            "strength": 0.1
+        },
+        {
+            "frame": 510,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        }
+    ]
+}
