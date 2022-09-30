@@ -13,7 +13,7 @@
         },
         {
             "frame": 394,
-            "seed": 98658,
+            "seed": 3438503310,
             "prompt": 7,
             "strength": 0.0,
             "masks": [{
@@ -23,7 +23,7 @@
         },
         {
             "frame": 406,
-            "seed": 98658,
+            "seed": 3438503310,
             "prompt": 7,
             "strength": 0.8,
             "masks": [{
@@ -33,7 +33,7 @@
         },
         {
             "frame": 414,
-            "seed": 98658,
+            "seed": 3438503310,
             "prompt": 7,
             "strength": 0.8,
             "masks": [{
@@ -43,7 +43,7 @@
         },
         {
             "frame": 420,
-            "seed": 98658,
+            "seed": 3438503310,
             "prompt": 7,
             "strength": 0.1,
             "masks": [{
