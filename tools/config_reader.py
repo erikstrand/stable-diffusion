@@ -73,13 +73,15 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["indir", "maskdir", "outdir", "schedule", "stride"]
+    __slots__ = ["indir", "maskdir", "outdir", "schedule", "width", "height", "stride"]
 
-    def __init__(self, indir, maskdir, outdir, schedule, stride):
+    def __init__(self, indir, maskdir, outdir, schedule, width, height, stride):
         self.indir = Path(indir)
         self.maskdir = Path(maskdir)
         self.outdir = Path(outdir)
         self.schedule = schedule
+        self.width = width
+        self.height = height
         self.stride = int(stride)
 
         assert(len(self.schedule) >= 1)
@@ -90,6 +92,8 @@ class DreamSchedule:
         print(f"indir: {self.indir}")
         print(f"outdir: {self.outdir}")
         print(f"maskdir: {self.maskdir}")
+        print(f"width: {self.width}")
+        print(f"height: {self.height}")
         print(f"stride: {self.stride}")
         for keyframe in self.schedule:
             print(keyframe)
@@ -104,6 +108,8 @@ def load_config(config_path):
     indir = data["indir"]
     maskdir = data["maskdir"]
     outdir = data["outdir"]
+    width = data["width"]
+    height = data["height"]
     stride = data["stride"]
 
     schedule = []
@@ -112,7 +118,7 @@ def load_config(config_path):
     for keyframe_dict in data["keyframes"][1:]:
         schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-    return DreamSchedule(indir, maskdir, outdir, schedule, stride)
+    return DreamSchedule(indir, maskdir, outdir, schedule, width, height, stride)
 
 
 if __name__ == "__main__":
