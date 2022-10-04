@@ -110,13 +110,13 @@ def main():
             print(f'{e}. Aborting.')
             sys.exit(-1)
 
-        t2i.precompute_prompt_latents(dream_schedule.prompts)
-
     if opt.seamless:
         print(">> changed to seamless tiling mode")
 
     # preload the model
     t2i.load_model()
+    if dream_schedule:
+        t2i.precompute_prompt_latents(dream_schedule.prompts)
 
     # if we're using a prompts file, compute all the prompt latents
     if opt.prompts_file is not None:
@@ -459,7 +459,7 @@ def create_argv_parser():
         help='If specified, load prompts from this file',
     )
     parser.add_argument(
-        '--from_config_file',
+        '--from_dream_schedule',
         dest='config_file',
         type=str,
         help='If specified, load a dream schedule from this TOML file',
