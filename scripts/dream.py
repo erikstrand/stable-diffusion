@@ -138,10 +138,10 @@ def main():
     if opt.web:
         dream_server_loop(t2i, opt.host, opt.port, opt.outdir)
     else:
-        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile, config_file)
+        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile)
 
 
-def main_loop(t2i, outdir, prompt_as_dir, parser, infile, config_file):
+def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
     """prompt/read/execute loop"""
     done = False
     path_filter = re.compile(r'[<>:"/\\|?*]')
