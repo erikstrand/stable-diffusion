@@ -30,10 +30,9 @@ class KeyFrame:
         self.scale = scale
         self.strength = strength
         assert(isinstance(masks, list))
-        if len(masks) == 0 or isinstance(masks[0], Mask):
-            self.masks = masks
-        else:
-            self.masks = [Mask(**mask) for mask in masks]
+        for mask in masks:
+            assert(isinstance(mask, Mask))
+        self.masks = masks
 
     @classmethod
     def from_dict(cls, dict):
@@ -44,8 +43,11 @@ class KeyFrame:
             dict["scale"] = 7.5
         if not "strenth" in dict:
             dict["strength"] = 0.0
-        if "masks" not in dict:
+        if "masks" not in dict or len(dict["masks"]) == 0:
             dict["masks"] = []
+        else:
+            dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
+
         return KeyFrame(
             dict["frame"],
             dict["prompt"],
@@ -77,6 +79,8 @@ class KeyFrame:
 
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
+        else:
+            dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
 
         return KeyFrame(
             dict["frame"],
