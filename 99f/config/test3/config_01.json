@@ -1,0 +1,74 @@
+{
+    "indir": "./99f/mermaid_1/frames_1",
+    "maskdir": "./99f/mermaid_1/frames_1_masks",
+    "outdir": "outputs/test2/clip_01",
+    "stride": 2,
+    "schedule": [
+        {
+            "frame": 0,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.0
+        },
+        {
+            "frame": 200,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.2
+        },
+        {
+        "frame": 250,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.8
+        },
+        {
+        "frame": 270,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.8
+        },
+        {
+        "frame": 300,
+            "seed": 6890234,
+            "prompt": 0,
+            "strength": 0.2
+        },
+        {
+            "frame": 400,
+            "seed": 6890234,
+            "prompt": 1,
+            "strength": 0.2
+        },
+        {
+            "frame": 450,
+            "seed": 6890234,
+            "prompt": 1,
+            "strength": 0.2
+        },
+        {
+            "frame": 455,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.6
+        },
+        {
+            "frame": 470,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.6
+        },
+        {
+            "frame": 475,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.2
+        },
+        {
+            "frame": 550,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.2
+        }
+    ]
+}

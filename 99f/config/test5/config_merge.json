@@ -1,0 +1,60 @@
+{
+    "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_serge/frames_390_510_stride2/clip_02",
+    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_3",
+    "outdir": "outputs/test5/clip_01",
+    "stride": 1,
+    "schedule": [
+        {
+            "frame": 1,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 3,
+            "seed": 476586,
+            "prompt": 5,
+            "masks": [{
+                "center": [0.55, 0.6],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 10,
+            "strength": 0.8
+        },
+        {
+            "frame": 16
+        },
+        {
+            "frame": 20,
+            "strength": 0.1
+        },
+        {
+            "frame": 26,
+            "seed": 98658,
+            "prompt": 6
+        },
+        {
+            "frame": 36,
+            "strength": 0.8
+        },
+        {
+            "frame": 49,
+            "strength": 0.8
+        },
+        {
+            "frame": 55,
+            "strength": 0.1
+        },
+
+        {
+            "frame": 61,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        }
+    ]
+}
