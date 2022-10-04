@@ -15,6 +15,7 @@ from ldm.dream.server import DreamServer, ThreadingDreamServer
 from ldm.dream.image_util import make_grid
 from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
+from config_reader import load_config
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
@@ -95,6 +96,22 @@ def main():
             print(f'{e}. Aborting.')
             sys.exit(-1)
 
+    dream_schedule = None
+    if opt.config_file:
+        if opt.infile:
+            print('Cannot use --config_file with --infile. Aborting.')
+            sys.exit(-1)
+        try:
+            if os.path.isfile(opt.config_file):
+                dream_schedule = load_config(opt.config_file)
+            else:
+                raise FileNotFoundError(f'{opt.config_file} not found.')
+        except (FileNotFoundError, IOError) as e:
+            print(f'{e}. Aborting.')
+            sys.exit(-1)
+
+        t2i.precompute_prompt_latents(dream_schedule.prompts)
+
     if opt.seamless:
         print(">> changed to seamless tiling mode")
 
@@ -103,13 +120,16 @@ def main():
 
     # if we're using a prompts file, compute all the prompt latents
     if opt.prompts_file is not None:
+        if opt.config_file:
+            print('Cannot use --config_file with --prompts_file. Aborting.')
+            sys.exit(-1)
         print("precomputing latents for prompts in prompts file")
         with open(opt.prompts_file, 'r') as pf:
             prompts = pf.read().splitlines()
 
         t2i.precompute_prompt_latents(prompts)
 
-    if not infile:
+    if not infile and not dream_schedule:
         print(
             "\n* Initialization done! Awaiting your command (-h for help, 'q' to quit)"
         )
@@ -118,10 +138,10 @@ def main():
     if opt.web:
         dream_server_loop(t2i, opt.host, opt.port, opt.outdir)
     else:
-        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile)
+        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile, config_file)
 
 
-def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
+def main_loop(t2i, outdir, prompt_as_dir, parser, infile, config_file):
     """prompt/read/execute loop"""
     done = False
     path_filter = re.compile(r'[<>:"/\\|?*]')
@@ -245,7 +265,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                 os.makedirs(opt.outdir)
             current_outdir = opt.outdir
         elif prompt_as_dir:
-            # this option doesn't make sense if we're using precomputed latents
+            # Note: this option doesn't make sense if we're using precomputed latents.
+            # I should add an assertion for that.
+
             assert(len(opt.prompt) > 0)
 
             # sanitize the prompt to a valid folder name
@@ -415,7 +437,7 @@ SAMPLER_CHOICES = [
 def create_argv_parser():
     parser = argparse.ArgumentParser(
         description="""Generate images using Stable Diffusion.
-        Use --web to launch the web interface. 
+        Use --web to launch the web interface.
         Use --from_file to load prompts from a file path or standard input ("-").
         Otherwise you will be dropped into an interactive command prompt (type -h for help.)
         Other command-line arguments are defaults that can usually be overridden
@@ -435,6 +457,12 @@ def create_argv_parser():
         dest='infile',
         type=str,
         help='If specified, load prompts from this file',
+    )
+    parser.add_argument(
+        '--from_config_file',
+        dest='config_file',
+        type=str,
+        help='If specified, load a dream schedule from this TOML file',
     )
     parser.add_argument(
         '-n',
