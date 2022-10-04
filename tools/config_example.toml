@@ -34,6 +34,7 @@ animation.rotate = 1.0            # degrees per frame
 
 [[keyframes]]
 frame = 246
+prompt = "a giraffe eating ice cream"
 seed = "same"
 seed_variations = [
     { seed = 472569, amount = 0.5 }

@@ -144,155 +144,20 @@ def main():
 def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
     """prompt/read/execute loop"""
     done = False
-    path_filter = re.compile(r'[<>:"/\\|?*]')
     last_results = list()
 
-    # os.pathconf is not available on Windows
-    if hasattr(os, 'pathconf'):
-        path_max = os.pathconf(outdir, 'PC_PATH_MAX')
-        name_max = os.pathconf(outdir, 'PC_NAME_MAX')
-    else:
-        path_max = 260
-        name_max = 255
-
     while not done:
-        try:
-            command = get_next_command(infile)
-        except EOFError:
-            done = True
-            continue
-        except KeyboardInterrupt:
-            done = True
+        opt, current_outdir, done = prepare_command_options(outdir, prompt_as_dir, parser, infile)
+        if opt is None:
             continue
 
-        # skip empty lines
-        if not command.strip():
-            continue
-
-        if command.startswith(('#', '//')):
-            continue
-
-        # before splitting, escape single quotes so as not to mess
-        # up the parser
-        command = command.replace("'", "\\'")
-
-        try:
-            elements = shlex.split(command)
-        except ValueError as e:
-            print(str(e))
-            continue
-
-        if elements[0] == 'q':
-            done = True
-            break
-
-        if elements[0].startswith(
-            '!dream'
-        ):   # in case a stored prompt still contains the !dream command
-            elements.pop(0)
-
-        # rearrange the arguments to mimic how it works in the Dream bot.
-        switches = ['']
-        switches_started = False
-
-        for el in elements:
-            if el[0] == '-' and not switches_started:
-                switches_started = True
-            if switches_started:
-                switches.append(el)
-            else:
-                switches[0] += el
-                switches[0] += ' '
-        switches[0] = switches[0][: len(switches[0]) - 1]
-
-        try:
-            opt = parser.parse_args(switches)
-        except SystemExit:
-            parser.print_help()
-            continue
-        if len(opt.prompt) == 0 and opt.latent_0 is None:
-            print('Try again with a prompt!')
-            continue
-        # retrieve previous value!
-        if opt.init_img is not None and re.match('^-\\d+$', opt.init_img):
-            try:
-                opt.init_img = last_results[int(opt.init_img)][0]
-                print(f'>> Reusing previous image {opt.init_img}')
-            except IndexError:
-                print(
-                    f'>> No previous initial image at position {opt.init_img} found')
-                opt.init_img = None
-                continue
-
-        if opt.seed is not None and opt.seed < 0:   # retrieve previous value!
-            try:
-                opt.seed = last_results[opt.seed][1]
-                print(f'>> Reusing previous seed {opt.seed}')
-            except IndexError:
-                print(f'>> No previous seed at position {opt.seed} found')
-                opt.seed = None
-                continue
-
-        do_grid = opt.grid or t2i.grid
-
-        if opt.with_variations is not None:
-            # shotgun parsing, woo
-            parts = []
-            broken = False  # python doesn't have labeled loops...
-            for part in opt.with_variations.split(','):
-                seed_and_weight = part.split(':')
-                if len(seed_and_weight) != 2:
-                    print(f'could not parse with_variation part "{part}"')
-                    broken = True
-                    break
-                try:
-                    seed = int(seed_and_weight[0])
-                    weight = float(seed_and_weight[1])
-                except ValueError:
-                    print(f'could not parse with_variation part "{part}"')
-                    broken = True
-                    break
-                parts.append([seed, weight])
-            if broken:
-                continue
-            if len(parts) > 0:
-                opt.with_variations = parts
-            else:
-                opt.with_variations = None
-
-        if opt.outdir:
-            if not os.path.exists(opt.outdir):
-                os.makedirs(opt.outdir)
-            current_outdir = opt.outdir
-        elif prompt_as_dir:
-            # Note: this option doesn't make sense if we're using precomputed latents.
-            # I should add an assertion for that.
-
-            assert(len(opt.prompt) > 0)
-
-            # sanitize the prompt to a valid folder name
-            subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
-
-            # truncate path to maximum allowed length
-            # 27 is the length of '######.##########.##.png', plus two separators and a NUL
-            subdir = subdir[:(path_max - 27 - len(os.path.abspath(outdir)))]
-            current_outdir = os.path.join(outdir, subdir)
-
-            print('Writing files to directory: "' + current_outdir + '"')
-
-            # make sure the output directory exists
-            if not os.path.exists(current_outdir):
-                os.makedirs(current_outdir)
-        else:
-            current_outdir = outdir
-
-        # Here is where the images are actually generated!
         last_results = []
         try:
             file_writer = PngWriter(current_outdir)
             prefix = file_writer.unique_prefix()
             results = []  # list of filename, prompt pairs
             grid_images = dict()  # seed -> Image, only used if `do_grid`
+            do_grid = opt.grid or t2i.grid
 
             def image_writer(image, seed, upscaled=False):
                 path = None
@@ -367,6 +232,144 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
         print()
 
     print('goodbye!')
+
+
+def prepare_command_options(outdir, prompt_as_dir, parser, infile):
+    path_filter = re.compile(r'[<>:"/\\|?*]')
+    # os.pathconf is not available on Windows
+    if hasattr(os, 'pathconf'):
+        path_max = os.pathconf(outdir, 'PC_PATH_MAX')
+        name_max = os.pathconf(outdir, 'PC_NAME_MAX')
+    else:
+        path_max = 260
+        name_max = 255
+
+    try:
+        command = get_next_command(infile)
+    except EOFError:
+        return None, None, True
+    except KeyboardInterrupt:
+        return None, None, True
+
+    # skip empty lines
+    if not command.strip():
+        return None, None, False
+
+    if command.startswith(('#', '//')):
+        return None, None, False
+
+    # before splitting, escape single quotes so as not to mess
+    # up the parser
+    command = command.replace("'", "\\'")
+
+    try:
+        elements = shlex.split(command)
+    except ValueError as e:
+        print(str(e))
+        return None, None, False
+
+    if elements[0] == 'q':
+        return None, None, True
+
+    if elements[0].startswith(
+        '!dream'
+    ):   # in case a stored prompt still contains the !dream command
+        elements.pop(0)
+
+    # rearrange the arguments to mimic how it works in the Dream bot.
+    switches = ['']
+    switches_started = False
+
+    for el in elements:
+        if el[0] == '-' and not switches_started:
+            switches_started = True
+        if switches_started:
+            switches.append(el)
+        else:
+            switches[0] += el
+            switches[0] += ' '
+    switches[0] = switches[0][: len(switches[0]) - 1]
+
+    try:
+        opt = parser.parse_args(switches)
+    except SystemExit:
+        parser.print_help()
+        return None, None, False
+    if len(opt.prompt) == 0 and opt.latent_0 is None:
+        print('Try again with a prompt!')
+        return None, None, False
+    # retrieve previous value!
+    if opt.init_img is not None and re.match('^-\\d+$', opt.init_img):
+        try:
+            opt.init_img = last_results[int(opt.init_img)][0]
+            print(f'>> Reusing previous image {opt.init_img}')
+        except IndexError:
+            print(
+                f'>> No previous initial image at position {opt.init_img} found')
+            opt.init_img = None
+            return None, None, False
+
+    if opt.seed is not None and opt.seed < 0:   # retrieve previous value!
+        try:
+            opt.seed = last_results[opt.seed][1]
+            print(f'>> Reusing previous seed {opt.seed}')
+        except IndexError:
+            print(f'>> No previous seed at position {opt.seed} found')
+            opt.seed = None
+            return None, None, False
+
+    if opt.with_variations is not None:
+        # shotgun parsing, woo
+        parts = []
+        broken = False  # python doesn't have labeled loops...
+        for part in opt.with_variations.split(','):
+            seed_and_weight = part.split(':')
+            if len(seed_and_weight) != 2:
+                print(f'could not parse with_variation part "{part}"')
+                broken = True
+                break
+            try:
+                seed = int(seed_and_weight[0])
+                weight = float(seed_and_weight[1])
+            except ValueError:
+                print(f'could not parse with_variation part "{part}"')
+                broken = True
+                break
+            parts.append([seed, weight])
+        if broken:
+            return None, None, False
+        if len(parts) > 0:
+            opt.with_variations = parts
+        else:
+            opt.with_variations = None
+
+    if opt.outdir:
+        if not os.path.exists(opt.outdir):
+            os.makedirs(opt.outdir)
+        current_outdir = opt.outdir
+    elif prompt_as_dir:
+        # Note: this option doesn't make sense if we're using precomputed latents.
+        # I should add an assertion for that.
+
+        assert(len(opt.prompt) > 0)
+
+        # sanitize the prompt to a valid folder name
+        subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
+
+        # truncate path to maximum allowed length
+        # 27 is the length of '######.##########.##.png', plus two separators and a NUL
+        subdir = subdir[:(path_max - 27 - len(os.path.abspath(outdir)))]
+        current_outdir = os.path.join(outdir, subdir)
+
+        print('Writing files to directory: "' + current_outdir + '"')
+
+        # make sure the output directory exists
+        if not os.path.exists(current_outdir):
+            os.makedirs(current_outdir)
+    else:
+        current_outdir = outdir
+
+    return opt, current_outdir, False
 
 
 def get_next_command(infile=None) -> str:  # command string
