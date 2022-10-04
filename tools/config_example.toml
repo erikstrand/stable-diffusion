@@ -8,29 +8,28 @@ stride = 1
 [[keyframes]]
 frame = 0
 seed = 6890234
-prompt = 3
+prompt = "something something greg rutkoski alphonse mucha"
 scale = 7.5
 strength = 0.0
 masks = []
 
 [[keyframes]]
-frame = 182
+frame = 100
 masks = [
     { center = [0.25, 0.5], radius = 0.6 }
 ]
 
 [[keyframes]]
-frame = 200
-prompt = 4
+duration = 20
 strength = 0.3
-masks = [
-    { center = [0.3, 0.5], radius = 0.6 }
-]
+masks = []
 
 [[keyframes]]
-duration = 20
-prompt = "same"
+duration = 50
 strength = 0.8
+animation.zoom = 1.1              # multiplicative factor per frame
+animation.translate = [1.0, 0.0]  # pixels per frame for X and Y
+animation.rotate = 1.0            # degrees per frame
 
 [[keyframes]]
 frame = 246
