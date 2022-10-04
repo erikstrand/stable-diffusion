@@ -1,4 +1,4 @@
-import json
+import toml
 import numpy as np
 from pathlib import Path
 
@@ -63,7 +63,7 @@ class DreamSchedule:
 
 def load_config(config_path):
     with open(config_path, "r") as f:
-        data = json.load(f)
+        data = toml.load(f)
 
     indir = data["indir"]
     maskdir = data["maskdir"]
@@ -72,7 +72,7 @@ def load_config(config_path):
 
     schedule = []
 
-    kwargs = data["schedule"][0]
+    kwargs = data["keyframes"][0]
     assert("frame" in kwargs)
     assert("prompt" in kwargs)
     assert("seed" in kwargs)
@@ -82,7 +82,7 @@ def load_config(config_path):
         kwargs["masks"] = []
     schedule.append(KeyFrame(**kwargs))
 
-    for kwargs in data["schedule"][1:]:
+    for kwargs in data["keyframes"][1:]:
         __slots__ = ["frame", "prompt", "seed", "strength", "masks"]
         assert("frame" in kwargs)
         if "prompt" not in kwargs:
@@ -96,3 +96,8 @@ def load_config(config_path):
         schedule.append(KeyFrame(**kwargs))
 
     return DreamSchedule(indir, maskdir, outdir, schedule, stride)
+
+
+if __name__ == "__main__":
+    schedule = load_config("config_example.toml")
+    schedule.print()

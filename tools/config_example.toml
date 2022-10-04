@@ -1,0 +1,46 @@
+indir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+maskdir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_2"
+outdir = "outputs/test5/clip_00"
+stride = 1
+
+[[keyframes]]
+frame = 0
+seed = 6890234
+prompt = 3
+strength = 0.0
+masks = []
+
+[[keyframes]]
+frame = 182
+masks = [
+    { center = [0.25, 0.5], radius = 0.6 }
+]
+
+[[keyframes]]
+frame = 200
+prompt = 4
+strength = 0.3
+masks = [
+    { center = [0.3, 0.5], radius = 0.6 }
+]
+
+[[keyframes]]
+frame = 220
+strength = 0.8
+
+[[keyframes]]
+frame = 246
+
+[[keyframes]]
+frame = 260
+strength = 0.1
+masks = [
+    { center = [0.4, 0.5], radius = 0.5 }
+]
+
+[[keyframes]]
+frame = 390
+seed = 6890234
+prompt = 3
+strength = 0.0
+masks = []
