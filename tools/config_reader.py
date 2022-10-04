@@ -172,20 +172,30 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["indir", "maskdir", "outdir", "schedule", "width", "height", "stride"]
+    __slots__ = ["indir", "maskdir", "outdir", "keyframes", "width", "height", "stride", "prompts"]
 
-    def __init__(self, indir, maskdir, outdir, schedule, width, height, stride):
+    def __init__(self, indir, maskdir, outdir, keyframes, width, height, stride):
         self.indir = Path(indir)
         self.maskdir = Path(maskdir)
         self.outdir = Path(outdir)
-        self.schedule = schedule
+        self.keyframes = keyframes
         self.width = width
         self.height = height
         self.stride = int(stride)
 
-        assert(len(self.schedule) >= 1)
-        keyframe_frames = [keyframe.frame for keyframe in self.schedule]
+        # Check that the keyframes are in order.
+        assert(len(self.keyframes) >= 1)
+        keyframe_frames = [keyframe.frame for keyframe in self.keyframes]
         assert(keyframe_frames == sorted(keyframe_frames))
+
+        # Collect all the prompts.
+        prompts_set = {keyframe.prompt for keyframe in self.keyframes}
+        self.prompts = [*prompts_set]
+
+        # Convert prompt strings to indices.
+        for keyframe in self.keyframes:
+            keyframe.prompt = self.prompts.index(keyframe.prompt)
+            assert(0 <= keyframe.prompt < len(self.prompts))
 
     def print(self):
         print(f"indir: {self.indir}")
@@ -194,7 +204,7 @@ class DreamSchedule:
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         print(f"stride: {self.stride}")
-        for keyframe in self.schedule:
+        for keyframe in self.keyframes:
             print(keyframe)
             for mask in keyframe.masks:
                 print(f"  {mask}")
