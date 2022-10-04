@@ -8,6 +8,17 @@ from pathlib import Path
 # - implement 2D movement (zoom, translation, rotation)
 
 
+class SeedVariation:
+    __slots__ = ["seed", "amount"]
+
+    def __init__(self, seed, amount):
+        self.seed = int(seed)
+        self.amount = float(amount)
+
+    def __str__(self):
+        return f"Variation: seed {self.seed}, amount {self.amount:.5f}"
+
+
 class Mask:
     __slots__ = ["center", "radius"]
 
@@ -30,12 +41,18 @@ class Animation2D:
 
 
 class KeyFrame:
-    __slots__ = ["frame", "prompt", "seed", "scale", "strength", "masks", "animation"]
+    __slots__ = ["frame", "prompt", "seed", "seed_variations", "scale", "strength", "masks", "animation"]
 
-    def __init__(self, frame, prompt, seed, scale, strength, masks, animation):
+    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
+
+        assert(isinstance(variations, list))
+        for sv in variations:
+            assert(isinstance(sv, SeedVariation))
+        self.seed_variations = variations
+
         self.scale = scale
         self.strength = strength
 
@@ -52,31 +69,38 @@ class KeyFrame:
         assert("frame" in dict)
         assert("prompt" in dict)
         assert("seed" in dict)
-        if not "scale" in dict:
-            dict["scale"] = 7.5
-        if not "strenth" in dict:
-            dict["strength"] = 0.0
+
+        if not "seed_variations" in dict or len(dict["seed_variations"]) == 0:
+            variations = []
+        else:
+            variations = [SeedVariation(**sv) for sv in dict["seed_variations"]]
+
+        scale = float(dict["scale"]) if "scale" in dict else 7.5
+        strength = float(dict["strength"]) if "strength" in dict else 0.0
+
         if "masks" not in dict or len(dict["masks"]) == 0:
-            dict["masks"] = []
+            masks = []
         else:
-            dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
+            masks = [Mask(**mask) for mask in dict["masks"]]
+
         if "animation" not in dict or dict["animation"] == "none":
-            dict["animation"] = None
+            animation = None
         else:
-            dict["animation"] = Animation2D(
+            animation = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],
                 dict["animation"]["rotate"],
             )
 
         return KeyFrame(
-            dict["frame"],
+            int(dict["frame"]),
             dict["prompt"],
-            dict["seed"],
-            dict["scale"],
-            dict["strength"],
-            dict["masks"],
-            dict["animation"],
+            int(dict["seed"]),
+            variations,
+            scale,
+            strength,
+            masks,
+            animation,
         )
 
     @classmethod
@@ -91,7 +115,22 @@ class KeyFrame:
             dict["prompt"] = prev_keyframe.prompt
 
         if "seed" not in dict or dict["seed"] == "same":
-            dict["seed"] = prev_keyframe.seed
+            seed = prev_keyframe.seed
+            reset_variations = False
+        else:
+            seed = int(dict["seed"])
+            reset_variations = True
+
+        if "seed_variations" in dict:
+            if dict["seed_variations"] == "same":
+                variations = prev_keyframe.seed_variations
+            else:
+                variations = [SeedVariation(**sv) for sv in dict["seed_variations"]]
+        else:
+            if reset_variations:
+                variations = []
+            else:
+                variations = prev_keyframe.seed_variations
 
         if "scale" not in dict or dict["scale"] == "same":
             dict["scale"] = prev_keyframe.scale
@@ -120,7 +159,8 @@ class KeyFrame:
         return KeyFrame(
             dict["frame"],
             dict["prompt"],
-            dict["seed"],
+            seed,
+            variations,
             dict["scale"],
             dict["strength"],
             dict["masks"],

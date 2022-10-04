@@ -33,9 +33,17 @@ animation.rotate = 1.0            # degrees per frame
 
 [[keyframes]]
 frame = 246
+seed = "same"
+seed_variations = [
+    { seed = 472569, amount = 0.5 }
+]
 
 [[keyframes]]
 frame = 260
+seed = 1234
+# Note that setting a seed implicitly resets the seed variations ("same" doesn't count).
+# If you want to keep them, do this.
+#seed_variations = "same"
 strength = 0.1
 
 [[keyframes]]
