@@ -1,0 +1,4 @@
+I tried to use Google's FILM, but it didn't work well.
+
+python3 -m frame_interpolation.eval.interpolator_test --frame1 frame_interpolation/photos/one.png --frame2 frame_interpolation/photos/two.png --model_path ~/Code/extern/pretrained_models/film_net/Style/saved_model --output_frame frame_interpolation/photos/middle.png
+python3 -m eval.interpolator_test --frame1 photos/one.png --frame2 photos/two.png --model_path ~/Code/extern/pretrained_models/film_net/Style/saved_model --output_frame photos/middle.png
