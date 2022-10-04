@@ -172,12 +172,13 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["indir", "maskdir", "outdir", "keyframes", "width", "height", "stride", "prompts"]
+    __slots__ = ["in_dir", "mask_dir", "out_dir", "scratch_dir", "keyframes", "width", "height", "stride", "prompts"]
 
-    def __init__(self, indir, maskdir, outdir, keyframes, width, height, stride):
-        self.indir = Path(indir)
-        self.maskdir = Path(maskdir)
-        self.outdir = Path(outdir)
+    def __init__(self, in_dir, mask_dir, out_dir, scratch_dir, keyframes, width, height, stride):
+        self.in_dir = Path(in_dir)
+        self.mask_dir = Path(mask_dir)
+        self.out_dir = Path(out_dir)
+        self.scratch_dir = Path(scratch_dir)
         self.keyframes = keyframes
         self.width = width
         self.height = height
@@ -198,9 +199,10 @@ class DreamSchedule:
             assert(0 <= keyframe.prompt < len(self.prompts))
 
     def print(self):
-        print(f"indir: {self.indir}")
-        print(f"outdir: {self.outdir}")
-        print(f"maskdir: {self.maskdir}")
+        print(f"in_dir: {self.in_dir}")
+        print(f"out_dir: {self.out_dir}")
+        print(f"mask_dir: {self.mask_dir}")
+        print(f"scratch_dir: {self.scratch_dir}")
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         print(f"stride: {self.stride}")
@@ -214,9 +216,10 @@ def load_config(config_path):
     with open(config_path, "r") as f:
         data = toml.load(f)
 
-    indir = data["indir"]
-    maskdir = data["maskdir"]
-    outdir = data["outdir"]
+    in_dir = data["in_dir"]
+    mask_dir = data["mask_dir"]
+    out_dir = data["out_dir"]
+    scratch_dir = data["scratch_dir"]
     width = data["width"]
     height = data["height"]
     stride = data["stride"]
@@ -227,7 +230,7 @@ def load_config(config_path):
     for keyframe_dict in data["keyframes"][1:]:
         schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-    return DreamSchedule(indir, maskdir, outdir, schedule, width, height, stride)
+    return DreamSchedule(in_dir, mask_dir, out_dir, scratch_dir, schedule, width, height, stride)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
-indir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
-maskdir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_2"
-outdir = "outputs/test5/clip_00"
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/test5/clip_00"
 width = 512
 height = 512
 stride = 1
