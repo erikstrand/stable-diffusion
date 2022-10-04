@@ -1,0 +1,72 @@
+{
+    "indir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1",
+    "maskdir": "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1",
+    "outdir": "outputs/test4/clip_03",
+    "stride": 2,
+    "schedule": [
+        {
+            "frame": 0,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        },
+        {
+            "frame": 182,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": [{
+                "center": [0.25, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+        "frame": 200,
+            "seed": 862352,
+            "prompt": 4,
+            "strength": 0.3,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+        "frame": 220,
+            "seed": 862352,
+            "prompt": 4,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+        "frame": 230,
+            "seed": 862352,
+            "prompt": 4,
+            "strength": 0.8,
+            "masks": [{
+                "center": [0.3, 0.5],
+                "radius": 0.6
+            }]
+        },
+        {
+            "frame": 240,
+            "seed": 862352,
+            "prompt": 3,
+            "strength": 0.1,
+            "masks": [{
+                "center": [0.4, 0.5],
+                "radius": 0.5
+            }]
+        },
+        {
+            "frame": 390,
+            "seed": 6890234,
+            "prompt": 3,
+            "strength": 0.0,
+            "masks": []
+        }
+    ]
+}
