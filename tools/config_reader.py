@@ -2,6 +2,13 @@ import toml
 import numpy as np
 from pathlib import Path
 
+# TODO
+# - implement "pass" and "same" (don't include this for interpolation; use the last frame's value)
+#   - should not mentioning something mean "pass" or "same"?
+# - implement "duration" (as an alternative to "frame")
+# - implement scale or cfs or whatever it's called
+# - implement a way to shift between image inputs and pure txt2img
+# - implement 2D movement (zoom, translation, rotation)
 
 class Mask:
     __slots__ = ["center", "radius"]

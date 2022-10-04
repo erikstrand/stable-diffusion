@@ -8,6 +8,8 @@ frame = 0
 seed = 6890234
 prompt = 3
 strength = 0.0
+image = "IM{frame:05d}.png"
+image_frame = 0
 masks = []
 
 [[keyframes]]
@@ -25,7 +27,7 @@ masks = [
 ]
 
 [[keyframes]]
-frame = 220
+duration = 20
 strength = 0.8
 
 [[keyframes]]
@@ -34,9 +36,7 @@ frame = 246
 [[keyframes]]
 frame = 260
 strength = 0.1
-masks = [
-    { center = [0.4, 0.5], radius = 0.5 }
-]
+image = false
 
 [[keyframes]]
 frame = 390
