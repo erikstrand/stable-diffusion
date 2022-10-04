@@ -4,7 +4,6 @@ from pathlib import Path
 
 # TODO
 # - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
-# - implement scale or cfs or whatever it's called
 # - implement a way to shift between image inputs and pure txt2img
 # - implement 2D movement (zoom, translation, rotation)
 
@@ -22,12 +21,13 @@ class Mask:
 
 
 class KeyFrame:
-    __slots__ = ["frame", "prompt", "seed", "strength", "masks"]
+    __slots__ = ["frame", "prompt", "seed", "scale", "strength", "masks"]
 
-    def __init__(self, frame, prompt, seed, strength, masks):
+    def __init__(self, frame, prompt, seed, scale, strength, masks):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
+        self.scale = scale
         self.strength = strength
         assert(isinstance(masks, list))
         if len(masks) == 0 or isinstance(masks[0], Mask):
@@ -40,11 +40,20 @@ class KeyFrame:
         assert("frame" in dict)
         assert("prompt" in dict)
         assert("seed" in dict)
+        if not "scale" in dict:
+            dict["scale"] = 7.5
         if not "strenth" in dict:
             dict["strength"] = 0.0
         if "masks" not in dict:
             dict["masks"] = []
-        return KeyFrame(dict["frame"], dict["prompt"], dict["seed"], dict["strength"], dict["masks"])
+        return KeyFrame(
+            dict["frame"],
+            dict["prompt"],
+            dict["seed"],
+            dict["scale"],
+            dict["strength"],
+            dict["masks"],
+        )
 
     @classmethod
     def from_dict_and_previous_keyframe(cls, dict, prev_keyframe):
@@ -60,16 +69,26 @@ class KeyFrame:
         if "seed" not in dict or dict["seed"] == "same":
             dict["seed"] = prev_keyframe.seed
 
+        if "scale" not in dict or dict["scale"] == "same":
+            dict["scale"] = prev_keyframe.scale
+
         if "strength" not in dict or dict["strength"] == "same":
             dict["strength"] = prev_keyframe.strength
 
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
 
-        return KeyFrame(dict["frame"], dict["prompt"], dict["seed"], dict["strength"], dict["masks"])
+        return KeyFrame(
+            dict["frame"],
+            dict["prompt"],
+            dict["seed"],
+            dict["scale"],
+            dict["strength"],
+            dict["masks"],
+        )
 
     def __str__(self):
-        return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, strength {self.strength}, {len(self.masks)} masks"
+        return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, scale {self.scale}, strength {self.strength}, {len(self.masks)} masks"
 
 
 class DreamSchedule:
