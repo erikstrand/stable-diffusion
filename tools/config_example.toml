@@ -8,8 +8,6 @@ frame = 0
 seed = 6890234
 prompt = 3
 strength = 0.0
-image = "IM{frame:05d}.png"
-image_frame = 0
 masks = []
 
 [[keyframes]]
@@ -28,6 +26,7 @@ masks = [
 
 [[keyframes]]
 duration = 20
+prompt = "same"
 strength = 0.8
 
 [[keyframes]]
@@ -36,7 +35,6 @@ frame = 246
 [[keyframes]]
 frame = 260
 strength = 0.1
-image = false
 
 [[keyframes]]
 frame = 390

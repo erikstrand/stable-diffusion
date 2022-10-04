@@ -3,12 +3,11 @@ import numpy as np
 from pathlib import Path
 
 # TODO
-# - implement "pass" and "same" (don't include this for interpolation; use the last frame's value)
-#   - should not mentioning something mean "pass" or "same"?
-# - implement "duration" (as an alternative to "frame")
+# - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
 # - implement scale or cfs or whatever it's called
 # - implement a way to shift between image inputs and pure txt2img
 # - implement 2D movement (zoom, translation, rotation)
+
 
 class Mask:
     __slots__ = ["center", "radius"]
@@ -30,14 +29,44 @@ class KeyFrame:
         self.prompt = prompt
         self.seed = seed
         self.strength = strength
-        if masks is None:
-            self.masks = []
+        assert(isinstance(masks, list))
+        if len(masks) == 0 or isinstance(masks[0], Mask):
+            self.masks = masks
         else:
-            assert(isinstance(masks, list))
-            if len(masks) == 0 or isinstance(masks[0], Mask):
-                self.masks = masks
+            self.masks = [Mask(**mask) for mask in masks]
+
+    @classmethod
+    def from_dict(cls, dict):
+        assert("frame" in dict)
+        assert("prompt" in dict)
+        assert("seed" in dict)
+        if not "strenth" in dict:
+            dict["strength"] = 0.0
+        if "masks" not in dict:
+            dict["masks"] = []
+        return KeyFrame(dict["frame"], dict["prompt"], dict["seed"], dict["strength"], dict["masks"])
+
+    @classmethod
+    def from_dict_and_previous_keyframe(cls, dict, prev_keyframe):
+        if "frame" not in dict:
+            if "duration" in dict:
+                dict["frame"] = prev_keyframe.frame + dict["duration"]
             else:
-                self.masks = [Mask(**mask) for mask in masks]
+                raise ValueError("Keyframe must have either a frame or duration")
+
+        if "prompt" not in dict or dict["prompt"] == "same":
+            dict["prompt"] = prev_keyframe.prompt
+
+        if "seed" not in dict or dict["seed"] == "same":
+            dict["seed"] = prev_keyframe.seed
+
+        if "strength" not in dict or dict["strength"] == "same":
+            dict["strength"] = prev_keyframe.strength
+
+        if "masks" not in dict or dict["masks"] == "same":
+            dict["masks"] = prev_keyframe.masks
+
+        return KeyFrame(dict["frame"], dict["prompt"], dict["seed"], dict["strength"], dict["masks"])
 
     def __str__(self):
         return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, strength {self.strength}, {len(self.masks)} masks"
@@ -78,29 +107,10 @@ def load_config(config_path):
     stride = data["stride"]
 
     schedule = []
+    schedule.append(KeyFrame.from_dict(data["keyframes"][0]))
 
-    kwargs = data["keyframes"][0]
-    assert("frame" in kwargs)
-    assert("prompt" in kwargs)
-    assert("seed" in kwargs)
-    if not "strenth" in kwargs:
-        kwargs["strength"] = 0.0
-    if "masks" not in kwargs:
-        kwargs["masks"] = []
-    schedule.append(KeyFrame(**kwargs))
-
-    for kwargs in data["keyframes"][1:]:
-        __slots__ = ["frame", "prompt", "seed", "strength", "masks"]
-        assert("frame" in kwargs)
-        if "prompt" not in kwargs:
-            kwargs["prompt"] = schedule[-1].prompt
-        if "seed" not in kwargs:
-            kwargs["seed"] = schedule[-1].seed
-        if "strength" not in kwargs:
-            kwargs["strength"] = schedule[-1].strength
-        if "masks" not in kwargs:
-            kwargs["masks"] = schedule[-1].masks
-        schedule.append(KeyFrame(**kwargs))
+    for keyframe_dict in data["keyframes"][1:]:
+        schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
     return DreamSchedule(indir, maskdir, outdir, schedule, stride)
 
