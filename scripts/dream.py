@@ -73,7 +73,7 @@ def main():
         seamless=opt.seamless,
         embedding_path=opt.embedding_path,
         device_type=opt.device,
-        ignore_ctrl_c=opt.infile is None,
+        ignore_ctrl_c=opt.infile is None and opt.config_file is None,
     )
 
     # make sure the output directory exists
