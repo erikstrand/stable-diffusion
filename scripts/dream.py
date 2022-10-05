@@ -17,6 +17,7 @@ from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
 from config_reader import load_config
 from dream_state import DreamState
+from transform_image import transform_image_file
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
@@ -160,6 +161,18 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             dream_state.advance_frame()
 
             current_outdir = opt.outdir
+
+            if opt.animation:
+                last_image = last_results[-1][0],
+                print(f"animating... last generated image: {last_image}")
+                #transform_image_file(
+                #    last_results[-1][0],
+                #    str(dream_state.schedule.scratch_dir / ),
+                #    opt.animation.zoom,
+                #    opt.animation.rotation,
+                #    opt.animation.translation,
+                #)
+
         else:
             opt, current_outdir, done = prepare_command_options(
                 outdir,

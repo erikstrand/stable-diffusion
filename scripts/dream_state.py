@@ -10,7 +10,8 @@ class Prompt:
         cfg_scale,
         width,
         height,
-        outdir
+        outdir,
+        animation = None
     ):
         self.prompt = prompt
         self.latent_0 = latent_0
@@ -22,6 +23,7 @@ class Prompt:
         self.width = width
         self.height = height
         self.outdir = outdir
+        self.animation = animation
 
         self.strength = 0.0
         self.steps = 50
@@ -91,8 +93,7 @@ class DreamState:
                 self.next_keyframe.seed_variations[-1].seed,
                 self.next_keyframe.seed_variations[-1].amount * t,
             ])
-        # Otherwise, we're keeping the seed/variations constant.
-
+        # Otherwise, we keep the seed/variations constant.
         if len(variations) == 0:
             variations = None
 
@@ -108,6 +109,7 @@ class DreamState:
             "width": self.schedule.width,
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),
+            "animation": self.prev_keyframe.animation,
         }
 
     def get_prompt(self):

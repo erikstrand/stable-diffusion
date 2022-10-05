@@ -2,16 +2,19 @@ import numpy as np
 import cv2 as cv
 from PIL import Image
 
+
 def image_to_array(image):
     array = np.array(image)
     return np.swapaxes(np.flip(array, 0), 0, 1)
+
 
 def array_to_image(array):
     array = np.flip(np.swapaxes(array, 0, 1), 0)
     format = 'RGB' if array.shape[2] == 3 else 'RGBA'
     return Image.fromarray(array, format)
 
-def transform(image_array, zoom=1.0, angle=0.0, translation=(0.0, 0.0)):
+
+def transform_image_array(image_array, zoom=1.0, angle=0.0, translation=(0.0, 0.0)):
     center = (0.5 * (image_array.shape[1] - 1), 0.5 * (image_array.shape[0] - 1))
     trans_mat = np.float32([
         [1.0, 0.0, translation[1]],
@@ -27,6 +30,15 @@ def transform(image_array, zoom=1.0, angle=0.0, translation=(0.0, 0.0)):
         (image_array.shape[1], image_array.shape[0]),
         borderMode=cv.BORDER_REPLICATE
     )
+
+
+def transform_image_file(infile, outfile, zoom=1.0, angle=0.0, translation=(0.0, 0.0)):
+    image = Image.open(infile)
+    image_array = image_to_array(image)
+    image_array = transform_image_array(image_array, zoom, angle, translation)
+    image = array_to_image(image_array)
+    image.save(outfile)
+
 
 if __name__ == "__main__":
     # Any image will do.
