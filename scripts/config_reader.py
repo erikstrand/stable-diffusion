@@ -1,6 +1,7 @@
 import toml
 import numpy as np
 from pathlib import Path
+from dream_state import DreamState
 
 # TODO
 # - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
@@ -233,5 +234,11 @@ def load_config(config_path):
 
 
 if __name__ == "__main__":
-    schedule = load_config("config_example.toml")
+    schedule = load_config("aversion/liquid_chrome_dreams/config.toml")
     schedule.print()
+
+    dream_state = DreamState(schedule)
+    while not dream_state.done():
+        command = dream_state.get_command()
+        print(command)
+        dream_state.advance_frame()
