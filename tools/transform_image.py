@@ -25,12 +25,13 @@ def transform(image_array):
     #rot_mat = np.vstack([rot_mat, [0,0,1]])
     #xform = np.matmul(rot_mat, trans_mat)
 
-    return cv.warpPerspective(
-        image_array,
-        rot_mat,
-        (image_array.shape[1], image_array.shape[0]),
-        borderMode=cv.BORDER_REPLICATE
-    )
+    return cv.warpAffine(image_array, rot_mat, (image_array.shape[1], image_array.shape[0]))
+    #return cv.warpPerspective(
+    #    image_array,
+    #    rot_mat,
+    #    (image_array.shape[1], image_array.shape[0]),
+    #    borderMode=cv.BORDER_REPLICATE
+    #)
 
 if __name__ == "__main__":
     img = cv.imread("niku_1.jpeg")
@@ -45,7 +46,6 @@ if __name__ == "__main__":
     dst = cv.warpAffine(img,M,(cols,rows))
     cv.imwrite("niku_1_cv.png", dst)
 
-    exit(0)
 
     # Any image will do.
     image = Image.open("niku_1.jpeg")
