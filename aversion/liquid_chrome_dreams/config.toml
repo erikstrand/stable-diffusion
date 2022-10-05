@@ -1,9 +1,9 @@
 in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
 mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
 scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
-out_dir = "outputs/test6"
-width = 512
-height = 512
+out_dir = "outputs/liquid_chrome_dreams"
+width = 1024
+height = 768
 stride = 1
 
 [[keyframes]]
@@ -13,6 +13,5 @@ prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept 
 scale = 10.0
 
 [[keyframes]]
-duration = 100
+duration = 250
 seed = 234590987
-seed_weight = 0.5
