@@ -22,9 +22,13 @@ def transform(image_array):
     rot_mat = cv.getRotationMatrix2D(center, angle, zoom)
     print(trans_mat.shape)
     print(rot_mat.shape)
+    trans_mat = np.vstack([trans_mat, [0,0,1]])
+    rot_mat = np.vstack([rot_mat, [0,0,1]])
+    print(trans_mat.shape)
+    print(rot_mat.shape)
     xform = np.matmul(rot_mat, trans_mat)
 
-    return cv.warpAffine(image_array, xform, (image_array.shape[1], image_array.shape[0]))
+    return cv.warpPerspective(image_array, xform, (image_array.shape[1], image_array.shape[0]))
     #return cv.warpPerspective(
     #    image_array,
     #    rot_mat,
