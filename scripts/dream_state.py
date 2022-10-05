@@ -8,6 +8,7 @@ class Prompt:
         seed,
         with_variations,
         cfg_scale,
+        strength,
         width,
         height,
         outdir,
@@ -20,12 +21,12 @@ class Prompt:
         self.seed = seed
         self.with_variations = with_variations
         self.cfg_scale = cfg_scale
+        self.strength = strength
         self.width = width
         self.height = height
         self.outdir = outdir
         self.animation = animation
 
-        self.strength = 0.0
         self.steps = 50
         self.sampler_name = "k_lms"
         self.grid = False
@@ -105,7 +106,7 @@ class DreamState:
             "seed": self.prev_keyframe.seed,
             "with_variations": variations,
             "cfg_scale": scale,
-            #"strength": strength, # only need this for img2img
+            "strength": strength,
             "width": self.schedule.width,
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),

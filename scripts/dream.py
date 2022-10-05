@@ -10,6 +10,7 @@ import copy
 import warnings
 import time
 import ldm.dream.readline
+from pathlib import Path
 from ldm.dream.pngwriter import PngWriter, PromptFormatter
 from ldm.dream.server import DreamServer, ThreadingDreamServer
 from ldm.dream.image_util import make_grid
@@ -163,15 +164,20 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             current_outdir = opt.outdir
 
             if opt.animation:
-                last_image = last_results[-1][0],
-                print(f"animating... last generated image: {last_image}")
-                #transform_image_file(
-                #    last_results[-1][0],
-                #    str(dream_state.schedule.scratch_dir / ),
-                #    opt.animation.zoom,
-                #    opt.animation.rotation,
-                #    opt.animation.translation,
-                #)
+                last_image = last_results[-1][0]
+                out_dir = dream_state.schedule.out_dir
+                last_image_rel_path = Path(last_image).relative_to(out_dir)
+                transformed_image_path = dream_state.schedule.scratch_dir / last_image_rel_path
+                transformed_image_path.parent.mkdir(parents=True, exist_ok=True)
+                print(f"animating... last generated image: {last_image}, transformed image: {transformed_image_path}")
+                transform_image_file(
+                    last_results[-1][0],
+                    transformed_image_path,
+                    opt.animation.zoom,
+                    opt.animation.rotation,
+                    opt.animation.translation,
+                )
+                opt.init_img = transformed_image_path
 
         else:
             opt, current_outdir, done = prepare_command_options(
