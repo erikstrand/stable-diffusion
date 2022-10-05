@@ -13,6 +13,7 @@ prompt = "a lush redwood forest with glowing orange mushrooms, verdant ferns, fo
 scale = 7.5
 strength = 0.5
 masks = []
+color_coherence = "LAB"
 
 [[keyframes]]
 duration = 1

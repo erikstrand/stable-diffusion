@@ -14,7 +14,8 @@ class Prompt:
         width,
         height,
         outdir,
-        animation = None
+        animation = None,
+        color_coherence = None,
     ):
         self.prompt = prompt
         self.latent_0 = latent_0
@@ -28,6 +29,7 @@ class Prompt:
         self.height = height
         self.outdir = outdir
         self.animation = animation
+        self.color_coherence = color_coherence
 
         self.steps = 50
         self.sampler_name = "k_lms"

@@ -42,9 +42,9 @@ class Animation2D:
 
 
 class KeyFrame:
-    __slots__ = ["frame", "prompt", "seed", "seed_variations", "scale", "strength", "masks", "animation"]
+    __slots__ = ["frame", "prompt", "seed", "seed_variations", "scale", "strength", "masks", "animation", "color_coherence"]
 
-    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation):
+    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation, color_coherence):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
@@ -64,6 +64,9 @@ class KeyFrame:
 
         assert(animation is None or isinstance(animation, Animation2D))
         self.animation = animation
+
+        assert(color_coherence is None or color_coherence in ["RGB", "HSV", "LAB"])
+        self.color_coherence = color_coherence
 
     @classmethod
     def from_dict(cls, dict):
@@ -97,6 +100,11 @@ class KeyFrame:
                 dict["animation"]["rotate"],
             )
 
+        if "color_coherence" not in dict:
+            color_coherence = None
+        else:
+            color_coherence = dict["color_coherence"]
+
         return KeyFrame(
             int(dict["frame"]),
             dict["prompt"],
@@ -106,6 +114,7 @@ class KeyFrame:
             strength,
             masks,
             animation,
+            color_coherence
         )
 
     @classmethod
@@ -153,15 +162,22 @@ class KeyFrame:
             dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
 
         if "animation" not in dict or dict["animation"] == "same":
-            dict["animation"] = prev_keyframe.animation
+            animation = prev_keyframe.animation
         elif dict["animation"] == "none":
-            dict["animation"] = None
+            animation = None
         else:
-            dict["animation"] = Animation2D(
+            animation = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],
                 dict["animation"]["rotate"],
             )
+
+        if "color_coherence" not in dict or dict["color_coherence"] == "same":
+            color_coherence = prev_keyframe.color_coherence
+        elif dict["color_coherence"] == "none":
+            color_coherence = None
+        else:
+            color_coherence = dict["color_coherence"]
 
         return KeyFrame(
             dict["frame"],
@@ -171,7 +187,8 @@ class KeyFrame:
             dict["scale"],
             dict["strength"],
             dict["masks"],
-            dict["animation"],
+            animation,
+            color_coherence,
         )
 
     def __str__(self):
