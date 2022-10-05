@@ -161,7 +161,13 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
 
             current_outdir = opt.outdir
         else:
-            opt, current_outdir, done = prepare_command_options(outdir, prompt_as_dir, parser, infile)
+            opt, current_outdir, done = prepare_command_options(
+                outdir,
+                prompt_as_dir,
+                parser,
+                infile,
+                last_results
+            )
             if opt is None:
                 continue
 
@@ -244,7 +250,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     print('goodbye!')
 
 
-def prepare_command_options(outdir, prompt_as_dir, parser, infile):
+def prepare_command_options(outdir, prompt_as_dir, parser, infile, last_results):
     path_filter = re.compile(r'[<>:"/\\|?*]')
     # os.pathconf is not available on Windows
     if hasattr(os, 'pathconf'):
