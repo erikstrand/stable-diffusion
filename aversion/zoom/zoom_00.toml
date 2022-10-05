@@ -1,7 +1,6 @@
 in_dir = "n/a"
 mask_dir = "n/a"
-scratch_dir = "/home/erik/Code/extern/InvokeAI/outputs/zoom/00/scratch"
-out_dir = "outputs/zoom/00/out"
+out_dir = "outputs/zoom/00/frames"
 width = 512
 height = 512
 stride = 1

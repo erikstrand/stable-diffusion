@@ -137,7 +137,7 @@ class KeyFrame:
                 seed = int(dict["seed"])
 
         if "seed_weight" in dict:
-            assert(seed is not None, "Random seeds cannot have a seed_weight")
+            assert seed is not None, "Random seeds cannot have a seed_weight"
             seed_weight = float(dict["seed_weight"])
             assert(0.0 <= seed_weight <= 1.0)
         else:
@@ -196,13 +196,12 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "mask_dir", "out_dir", "scratch_dir", "keyframes", "width", "height", "stride", "prompts"]
+    __slots__ = ["in_dir", "mask_dir", "out_dir", "keyframes", "width", "height", "stride", "prompts"]
 
-    def __init__(self, in_dir, mask_dir, out_dir, scratch_dir, keyframes, width, height, stride):
+    def __init__(self, in_dir, mask_dir, out_dir, keyframes, width, height, stride):
         self.in_dir = Path(in_dir)
         self.mask_dir = Path(mask_dir)
         self.out_dir = Path(out_dir)
-        self.scratch_dir = Path(scratch_dir)
         self.keyframes = keyframes
         self.width = width
         self.height = height
@@ -226,7 +225,6 @@ class DreamSchedule:
         print(f"in_dir: {self.in_dir}")
         print(f"out_dir: {self.out_dir}")
         print(f"mask_dir: {self.mask_dir}")
-        print(f"scratch_dir: {self.scratch_dir}")
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         print(f"stride: {self.stride}")
@@ -245,7 +243,6 @@ def load_config(config_path):
     in_dir = data["in_dir"]
     mask_dir = data["mask_dir"]
     out_dir = data["out_dir"]
-    scratch_dir = data["scratch_dir"]
     width = data["width"]
     height = data["height"]
     stride = data["stride"]
@@ -256,7 +253,7 @@ def load_config(config_path):
     for keyframe_dict in data["keyframes"][1:]:
         schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-    return DreamSchedule(in_dir, mask_dir, out_dir, scratch_dir, schedule, width, height, stride)
+    return DreamSchedule(in_dir, mask_dir, out_dir, schedule, width, height, stride)
 
 
 if __name__ == "__main__":

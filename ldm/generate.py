@@ -28,6 +28,13 @@ from ldm.dream.image_util          import InitImageResizer
 from ldm.dream.devices             import choose_torch_device
 from ldm.dream.conditioning        import get_uc_and_c
 
+
+def array_to_image(array):
+    array = np.flip(np.swapaxes(array, 0, 1), 0)
+    format = 'RGB' if array.shape[2] == 3 else 'RGBA'
+    return Image.fromarray(array, format)
+
+
 """Simplified text to image API for stable diffusion/latent diffusion
 
 Example Usage:
@@ -205,6 +212,7 @@ class Generate:
             variation_amount =  0.0,
             # these are specific to img2img and inpaint
             init_img       =    None,
+            init_img_array =    None,
             init_mask      =    None,
             fit            =    False,
             strength       =    None,
@@ -269,7 +277,7 @@ class Generate:
         for m in model.modules():
             if isinstance(m, (nn.Conv2d, nn.ConvTranspose2d)):
                 m.padding_mode = 'circular' if seamless else m._orig_padding_mode
-        
+
         assert cfg_scale > 1.0, 'CFG_Scale (-C) must be >1.0'
         assert (
             0.0 < strength < 1.0
@@ -318,8 +326,8 @@ class Generate:
                     log_tokens=self.log_tokenization
                 )
 
-            (init_image,mask_image) = self._make_images(init_img,init_mask, width, height, fit)
-            
+            (init_image, mask_image) = self._make_images(init_img, init_img_array, init_mask, width, height, fit)
+
             if (init_image is not None) and (mask_image is not None):
                 generator = self._make_inpaint()
             elif init_image is not None:
@@ -386,9 +394,15 @@ class Generate:
             )
         return results
 
-    def _make_images(self, img_path, mask_path, width, height, fit=False):
+    def _make_images(self, img_path, img_array, mask_path, width, height, fit=False):
         init_image      = None
         init_mask       = None
+
+        if img_array is not None:
+            image = array_to_image(img_array)           # this returns an Image
+            init_image = self._create_init_image(image) # this returns a torch tensor
+            return init_image, init_mask
+
         if not img_path:
             return None,None
 
@@ -482,7 +496,7 @@ class Generate:
             print(traceback.format_exc(), file=sys.stderr)
             print('>> You may need to install the ESRGAN and/or GFPGAN modules')
             return
-            
+
         for r in image_list:
             image, seed = r
             try:
@@ -553,7 +567,7 @@ class Generate:
         # for usage statistics
         device_type = choose_torch_device()
         if device_type == 'cuda':
-            torch.cuda.reset_peak_memory_stats() 
+            torch.cuda.reset_peak_memory_stats()
         tic = time.time()
 
         # this does the work
@@ -561,7 +575,7 @@ class Generate:
         sd = pl_sd['state_dict']
         model = instantiate_from_config(config.model)
         m, u = model.load_state_dict(sd, strict=False)
-        
+
         if self.full_precision:
             print(
                 '>> Using slower but more accurate full-precision math (--full_precision)'
@@ -613,7 +627,7 @@ class Generate:
         image = np.array(image).astype(np.float32) / 255.0
         image = image[None].transpose(0, 3, 1, 2)
         image = torch.from_numpy(image)
-        image = 2.0 * image - 1.0 
+        image = 2.0 * image - 1.0
         return image.to(self.device)
 
     def _create_init_mask(self, image):
@@ -658,7 +672,7 @@ class Generate:
                 return True
         return False
 
-    
+
     def _check_for_erasure(self,image):
         width, height = image.size
         pixdata       = image.load()
@@ -714,5 +728,3 @@ class Generate:
             print(">> This input is larger than your defaults. If you run out of memory, please use a smaller image.")
 
         return width, height, resize_needed
-
-

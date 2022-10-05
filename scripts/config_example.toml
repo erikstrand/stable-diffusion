@@ -1,6 +1,5 @@
 in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
 mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
-scratch_dir = "/home/erik/Code/extern/InvokeAI/outputs/test/scratch_00"
 out_dir = "outputs/test/clip_00"
 width = 512
 height = 512
