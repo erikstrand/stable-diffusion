@@ -13,6 +13,6 @@ prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept 
 scale = 10.0
 
 [[keyframes]]
-frame = 20
+duration = 100
 seed = 234590987
 seed_weight = 0.5
