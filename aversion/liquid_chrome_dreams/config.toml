@@ -8,10 +8,10 @@ stride = 1
 
 [[keyframes]]
 frame = 0
-seed = 1653761536
-prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept art, 3D object, octane render, unreal engine, album art, by Alberto Seveso"
+seed = 8593426
+prompt = "abstract impossible chrome drippy sculpture fine art jewelry with inlaid gold circuitry, concept art, infrared colors, 3D object, octane render, unreal engine, 8k, album art, by Alberto Seveso"
 scale = 10.0
 
 [[keyframes]]
 duration = 250
-seed = 234590987
+seed = 92835467
