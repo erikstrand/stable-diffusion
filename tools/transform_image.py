@@ -12,20 +12,19 @@ def array_to_image(array):
     return Image.fromarray(array, format)
 
 def transform(image_array):
-    angle = 45.0
-    zoom = 1.0
-    #translation_x = keys.translation_x_series[frame_idx]
-    #translation_y = keys.translation_y_series[frame_idx]
+    angle = 10.0
+    zoom = 1.2
+    translation = (-10.0, 50.0)
 
     center = (0.5 * (image_array.shape[1] - 1), 0.5 * (image_array.shape[0] - 1))
 
-    #trans_mat = np.float32([[1, 0, translation_x], [0, 1, translation_y]])
+    trans_mat = np.float32([[1, 0, translation[1]], [0, 1, translation[0]]])
     rot_mat = cv.getRotationMatrix2D(center, angle, zoom)
-    #trans_mat = np.vstack([trans_mat, [0,0,1]])
-    #rot_mat = np.vstack([rot_mat, [0,0,1]])
-    #xform = np.matmul(rot_mat, trans_mat)
+    print(trans_mat.shape)
+    print(rot_mat.shape)
+    xform = np.matmul(rot_mat, trans_mat)
 
-    return cv.warpAffine(image_array, rot_mat, (image_array.shape[1], image_array.shape[0]))
+    return cv.warpAffine(image_array, xform, (image_array.shape[1], image_array.shape[0]))
     #return cv.warpPerspective(
     #    image_array,
     #    rot_mat,
@@ -34,6 +33,7 @@ def transform(image_array):
     #)
 
 if __name__ == "__main__":
+    """
     img = cv.imread("niku_1.jpeg")
     print(type(img))
     print(img.shape)
@@ -45,6 +45,7 @@ if __name__ == "__main__":
     M = cv.getRotationMatrix2D(((cols-1)/2.0, (rows-1)/2.0), 45.0, 1)
     dst = cv.warpAffine(img,M,(cols,rows))
     cv.imwrite("niku_1_cv.png", dst)
+    """
 
 
     # Any image will do.
