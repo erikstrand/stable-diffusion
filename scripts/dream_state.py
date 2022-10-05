@@ -111,7 +111,7 @@ class DreamState:
             variations = None
 
         color_coherence = self.prev_keyframe.color_coherence
-        is_color_reference = (self.frame_idx == self.prev_keyframe.frame + 1 and self.prev_keyframe.is_color_reference)
+        is_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.is_color_reference)
 
         return {
             "prompt": "",

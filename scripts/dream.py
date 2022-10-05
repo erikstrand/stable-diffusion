@@ -30,19 +30,21 @@ output_cntr = 0
 
 
 # This method comes from deforum's notebook.
-def maintain_colors(prev_img, color_match_sample, mode):
+def maintain_colors(prev_img, ref_img, mode):
+    print(prev_img.shape)
+    print(ref_img.shape)
     if mode == 'RGB':
-        return match_histograms(prev_img, color_match_sample, multichannel=True)
+        return match_histograms(prev_img, ref_img, multichannel=True)
     elif mode == 'HSV':
         prev_img_hsv = cv2.cvtColor(prev_img, cv2.COLOR_RGB2HSV)
-        color_match_hsv = cv2.cvtColor(color_match_sample, cv2.COLOR_RGB2HSV)
-        matched_hsv = match_histograms(prev_img_hsv, color_match_hsv, multichannel=True)
+        reg_img_hsv = cv2.cvtColor(ref_img, cv2.COLOR_RGB2HSV)
+        matched_hsv = match_histograms(prev_img_hsv, ref_img_hsv, multichannel=True)
         return cv2.cvtColor(matched_hsv, cv2.COLOR_HSV2RGB)
     else: # Match Frame 0 LAB
         print(type(prev_img))
         prev_img_lab = cv2.cvtColor(prev_img, cv2.COLOR_RGB2LAB)
-        color_match_lab = cv2.cvtColor(color_match_sample, cv2.COLOR_RGB2LAB)
-        matched_lab = match_histograms(prev_img_lab, color_match_lab, multichannel=True)
+        ref_img_lab = cv2.cvtColor(ref_img, cv2.COLOR_RGB2LAB)
+        matched_lab = match_histograms(prev_img_lab, ref_img_lab, multichannel=True)
         return cv2.cvtColor(matched_lab, cv2.COLOR_LAB2RGB)
 
 
@@ -173,7 +175,8 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     if dream_schedule:
         dream_state = DreamState(dream_schedule)
 
-    color_reference_image = None
+    # This will be set by the image callback (when opt.is_reference_image is true).
+    color_reference_array = None
 
     while not done:
         if dream_state:
@@ -184,10 +187,6 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             dream_state.advance_frame()
 
             current_outdir = opt.outdir
-
-            if opt.is_color_reference:
-                print("Storing image as color reference.")
-                color_reference_array = image_to_array(Image.open(last_results[-1][0]))
 
             if opt.animation:
                 # Don't load any file as an init image
@@ -225,6 +224,10 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             do_grid = opt.grid or t2i.grid
 
             def image_writer(image, seed, upscaled=False):
+                if opt.is_color_reference:
+                    nonlocal color_reference_array
+                    color_reference_array = image_to_array(image)
+
                 path = None
                 if do_grid:
                     grid_images[seed] = image
