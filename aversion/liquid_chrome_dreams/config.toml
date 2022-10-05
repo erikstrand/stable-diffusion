@@ -14,4 +14,12 @@ scale = 10.0
 
 [[keyframes]]
 duration = 250
-seed = 92835467
+seed = 9238456
+
+[[keyframes]]
+duration = 250
+seed = 3547768
+
+[[keyframes]]
+duration = 250
+seed = 4395603
