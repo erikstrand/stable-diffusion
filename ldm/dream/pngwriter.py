@@ -53,6 +53,12 @@ class PromptFormatter:
         opt = self.opt
 
         switches = list()
+        if opt.latent_0:
+            switches.append(f'--latent_0 {opt.latent_0}')
+        if opt.latent_1:
+            switches.append(f'--latent_1 {opt.latent_1}')
+        if opt.latent_interpolation:
+            switches.append(f'--u {opt.latent_interpolation}')
         switches.append(f'"{opt.prompt}"')
         switches.append(f'-s{opt.steps        or t2i.steps}')
         switches.append(f'-W{opt.width        or t2i.width}')
@@ -75,6 +81,9 @@ class PromptFormatter:
             switches.append(f'-U {" ".join([str(u) for u in opt.upscale])}')
         if opt.variation_amount > 0:
             switches.append(f'-v{opt.variation_amount}')
+        # seed gets added as metadata
+        #if opt.seed:
+        #    switches.append(f'--S {opt.seed}')
         if opt.with_variations:
             formatted_variations = ','.join(f'{seed}:{weight}' for seed, weight in opt.with_variations)
             switches.append(f'-V{formatted_variations}')

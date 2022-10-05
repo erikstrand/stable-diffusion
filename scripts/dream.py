@@ -197,17 +197,14 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                         else:
                             iter_opt.with_variations = opt.with_variations + this_variation
                         iter_opt.variation_amount = 0
-                        normalized_prompt = PromptFormatter(
-                            t2i, iter_opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, iter_opt).normalize_prompt()
                         metadata_prompt = f'{normalized_prompt} -S{iter_opt.seed}'
                     elif opt.with_variations is not None:
-                        normalized_prompt = PromptFormatter(
-                            t2i, opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                         # use the original seed - the per-iteration value is the last variation-seed
                         metadata_prompt = f'{normalized_prompt} -S{opt.seed}'
                     else:
-                        normalized_prompt = PromptFormatter(
-                            t2i, opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                         metadata_prompt = f'{normalized_prompt} -S{seed}'
                     path = file_writer.save_image_and_prompt_to_png(
                         image, metadata_prompt, filename)
@@ -224,8 +221,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                 first_seed = last_results[0][1]
                 filename = f'{prefix}.{first_seed}.png'
                 # TODO better metadata for grid images
-                normalized_prompt = PromptFormatter(
-                    t2i, opt).normalize_prompt()
+                normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                 metadata_prompt = f'{normalized_prompt} -S{first_seed} --grid -n{len(grid_images)} # {grid_seeds}'
                 path = file_writer.save_image_and_prompt_to_png(
                     grid_img, metadata_prompt, filename
