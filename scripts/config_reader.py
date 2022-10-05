@@ -69,11 +69,8 @@ class KeyFrame:
         assert("frame" in dict)
         assert("prompt" in dict)
         assert("seed" in dict)
-
-        if not "seed_variations" in dict or len(dict["seed_variations"]) == 0:
-            variations = []
-        else:
-            variations = [SeedVariation(**sv) for sv in dict["seed_variations"]]
+        if "seed_weight" in dict:
+            assert(dict["seed_weight"] == 1.0)
 
         scale = float(dict["scale"]) if "scale" in dict else 7.5
         strength = float(dict["strength"]) if "strength" in dict else 0.0
@@ -96,7 +93,7 @@ class KeyFrame:
             int(dict["frame"]),
             dict["prompt"],
             int(dict["seed"]),
-            variations,
+            [],
             scale,
             strength,
             masks,
@@ -116,21 +113,21 @@ class KeyFrame:
 
         if "seed" not in dict or dict["seed"] == "same":
             seed = prev_keyframe.seed
-            reset_variations = False
         else:
             seed = int(dict["seed"])
-            reset_variations = True
 
-        if "seed_variations" in dict:
-            if dict["seed_variations"] == "same":
-                variations = prev_keyframe.seed_variations
-            else:
-                variations = [SeedVariation(**sv) for sv in dict["seed_variations"]]
+        if "seed_weight" in dict:
+            seed_weight = float(dict["seed_weight"])
+            assert(0.0 <= seed_weight <= 1.0)
         else:
-            if reset_variations:
-                variations = []
-            else:
-                variations = prev_keyframe.seed_variations
+            seed_weight = 1.0
+
+        if seed_weight == 1.0:
+            variations = []
+        else:
+            variations = [variation for variation in prev_keyframe.seed_variations]
+            if seed != prev_keyframe.seed:
+                variations.append(SeedVariation(seed, seed_weight))
 
         if "scale" not in dict or dict["scale"] == "same":
             dict["scale"] = prev_keyframe.scale
@@ -168,7 +165,7 @@ class KeyFrame:
         )
 
     def __str__(self):
-        return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, scale {self.scale}, strength {self.strength}, {len(self.masks)} masks"
+        return f"KeyFrame {self.frame}: prompt {self.prompt}, seed {self.seed}, {len(self.seed_variations)} variations, scale {self.scale}, strength {self.strength}, {len(self.masks)} masks"
 
 
 class DreamSchedule:
@@ -208,6 +205,8 @@ class DreamSchedule:
         print(f"stride: {self.stride}")
         for keyframe in self.keyframes:
             print(keyframe)
+            for sv in keyframe.seed_variations:
+                print(f"  {sv}")
             for mask in keyframe.masks:
                 print(f"  {mask}")
 
