@@ -69,7 +69,14 @@ class KeyFrame:
     def from_dict(cls, dict):
         assert("frame" in dict)
         assert("prompt" in dict)
-        assert("seed" in dict)
+
+        seed = dict["seed"]
+        # This means we want a new seed every frame.
+        if seed == "random":
+            seed = None
+        else:
+            seed = int(seed)
+
         if "seed_weight" in dict:
             assert(dict["seed_weight"] == 1.0)
 
@@ -93,7 +100,7 @@ class KeyFrame:
         return KeyFrame(
             int(dict["frame"]),
             dict["prompt"],
-            int(dict["seed"]),
+            seed,
             [],
             scale,
             strength,
@@ -115,9 +122,13 @@ class KeyFrame:
         if "seed" not in dict or dict["seed"] == "same":
             seed = prev_keyframe.seed
         else:
-            seed = int(dict["seed"])
+            if dict["seed"] == "random":
+                seed = None
+            else:
+                seed = int(dict["seed"])
 
         if "seed_weight" in dict:
+            assert(seed is not None, "Random seeds cannot have a seed_weight")
             seed_weight = float(dict["seed_weight"])
             assert(0.0 <= seed_weight <= 1.0)
         else:
@@ -144,10 +155,8 @@ class KeyFrame:
         if "animation" not in dict or dict["animation"] == "same":
             dict["animation"] = prev_keyframe.animation
         elif dict["animation"] == "none":
-            print(dict["animation"])
             dict["animation"] = None
         else:
-            print(dict["animation"])
             dict["animation"] = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],

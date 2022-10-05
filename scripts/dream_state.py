@@ -1,3 +1,5 @@
+import random
+
 class Prompt:
     def __init__(
         self,
@@ -54,6 +56,7 @@ class DreamState:
         self.interp_duration = None
         self.frame_idx = 0
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
+        self.random = random.Random(self.prev_keyframe.seed)
 
     def advance_keyframe(self):
         self.next_keyframe_idx += 1
@@ -79,6 +82,11 @@ class DreamState:
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
 
+        if self.prev_keyframe.seed == None:
+            seed = self.random.getrandbits(32)
+        else:
+            seed = self.prev_keyframe.seed
+
         n_prev_variations = len(self.prev_keyframe.seed_variations)
         n_next_variations = len(self.next_keyframe.seed_variations)
         variations = [[var.seed, var.amount] for var in self.prev_keyframe.seed_variations]
@@ -103,7 +111,7 @@ class DreamState:
             "latent_0": self.prev_keyframe.prompt,
             "latent_1": self.next_keyframe.prompt,
             "latent_interpolation": t,
-            "seed": self.prev_keyframe.seed,
+            "seed": seed,
             "with_variations": variations,
             "cfg_scale": scale,
             "strength": strength,

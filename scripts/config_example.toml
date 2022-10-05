@@ -16,51 +16,10 @@ masks = []
 
 [[keyframes]]
 duration = 1
+seed = "random"
 animation.zoom = 1.02             # multiplicative factor per frame
 animation.translate = [0.0, 0.0]  # pixels per frame for X and Y
 animation.rotate = 0.0            # degrees per frame
 
 [[keyframes]]
-duration = 1
-masks = []
-seed = 9837623
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 8769
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 70678956
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 666424
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 290387
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 836520
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 309478
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 297853
-
-[[keyframes]]
-duration = 1
-masks = []
-seed = 1239487
+duration = 100
