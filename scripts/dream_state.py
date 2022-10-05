@@ -79,20 +79,18 @@ class DreamState:
         n_prev_variations = len(self.prev_keyframe.seed_variations)
         n_next_variations = len(self.next_keyframe.seed_variations)
         variations = [[var.seed, var.amount] for var in self.prev_keyframe.seed_variations]
-        if n_next_variations == n_prev_variations or self.frame_idx == self.prev_keyframe.frame:
-            # If the next keyframe has the same number of variations, we aren't changing anything now.
-            pass
-        elif n_next_variations < n_prev_variations:
-            # If the next keyframe has fewer variations, we interpolate to its seed.
-            assert(n_next_variations == 0)
+        if n_next_variations == 0:
+            # If the next keyframe is a new seed at full strength, interpolate to it.
             variations.append([self.next_keyframe.seed, t])
-        else:
+        elif n_next_variations > n_prev_variations:
             # If the next keyframe has more variations, interpolate the strength of the new one.
             assert(n_next_variations == n_prev_variations + 1)
             variations.append([
                 self.next_keyframe.seed_variations[-1].seed,
                 self.next_keyframe.seed_variations[-1].amount * t,
             ])
+        # Otherwise, we're keeping the seed/variations constant.
+
         if len(variations) == 0:
             variations = None
 
