@@ -3,15 +3,15 @@ class DreamState:
         self.schedule = schedule
         self.prev_keyframe = schedule.keyframes[0]
         self.next_keyframe = schedule.keyframes[1]
-        self.next_keyframe_idx = 2
+        self.next_keyframe_idx = 1
         self.interp_duration = None
         self.frame_idx = 0
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
 
     def advance_keyframe(self):
+        self.next_keyframe_idx += 1
         self.prev_keyframe = self.next_keyframe
         self.next_keyframe = self.schedule.keyframes[self.next_keyframe_idx]
-        self.next_keyframe_idx += 1
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
 
     def advance_frame(self):
@@ -60,5 +60,5 @@ class DreamState:
             #"strength": strength, # only need this for img2img
             "width": self.schedule.width,
             "height": self.schedule.height,
-            "outdir": self.schedule.out_dir,
+            "outdir": str(self.schedule.out_dir),
         }
