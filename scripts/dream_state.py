@@ -1,11 +1,12 @@
 class DreamState:
     def __init__(self, schedule):
         self.schedule = schedule
-        self.prev_keyframe = None
-        self.next_keyframe = schedule.keyframes[0]
-        self.next_keyframe_idx = 1
+        self.prev_keyframe = schedule.keyframes[0]
+        self.next_keyframe = schedule.keyframes[1]
+        self.next_keyframe_idx = 2
         self.interp_duration = None
         self.frame_idx = 0
+        self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
 
     def advance_keyframe(self):
         self.prev_keyframe = self.next_keyframe
@@ -54,9 +55,10 @@ class DreamState:
             "latent_1": self.next_keyframe.prompt,
             "latent_interpolation": t,
             "seed": self.prev_keyframe.seed,
+            "with_variations": variations,
             "cfg_scale": scale,
-            "strength": strength,
+            #"strength": strength, # only need this for img2img
             "width": self.schedule.width,
             "height": self.schedule.height,
-            "with_variations": variations,
+            "outdir": self.schedule.out_dir,
         }

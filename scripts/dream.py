@@ -16,6 +16,7 @@ from ldm.dream.image_util import make_grid
 from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
 from config_reader import load_config
+from dream_state import DreamState
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
@@ -138,18 +139,33 @@ def main():
     if opt.web:
         dream_server_loop(t2i, opt.host, opt.port, opt.outdir)
     else:
-        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile)
+        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile, dream_schedule)
 
 
-def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
+def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     """prompt/read/execute loop"""
     done = False
     last_results = list()
 
+    dream_state = None
+    if dream_schedule:
+        dream_state = DreamState(dream_schedule)
+
     while not done:
-        opt, current_outdir, done = prepare_command_options(outdir, prompt_as_dir, parser, infile)
-        if opt is None:
-            continue
+        if dream_state:
+            done = dream_state.done()
+            if done:
+                break
+            opt = dream_state.get_opts()
+            dream_state.advance_frame()
+
+            if not os.path.exists(opt.outdir):
+                os.makedirs(opt.outdir)
+            current_outdir = opt.outdir
+        else:
+            opt, current_outdir, done = prepare_command_options(outdir, prompt_as_dir, parser, infile)
+            if opt is None:
+                continue
 
         last_results = []
         try:
