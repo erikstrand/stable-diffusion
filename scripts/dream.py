@@ -156,13 +156,10 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             done = dream_state.done()
             if done:
                 break
-            opt = dream_state.get_opts()
+            opt = dream_state.get_prompt()
             dream_state.advance_frame()
-            print(opt)
 
-            if not os.path.exists(opt["outdir"]):
-                os.makedirs(opt["outdir"])
-            current_outdir = opt["outdir"]
+            current_outdir = opt.outdir
         else:
             opt, current_outdir, done = prepare_command_options(outdir, prompt_as_dir, parser, infile)
             if opt is None:

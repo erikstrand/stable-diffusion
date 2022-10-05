@@ -8,11 +8,11 @@ stride = 1
 
 [[keyframes]]
 frame = 0
-seed = 12345678
-prompt = "close-up macro portrait of the face of a beautiful princess, epic angle and pose, symmetrical artwork, 3d with depth of field, blurred background, cybernetic jellyfish female face skull phoenix bird, translucent, nautilus, energy flows of water and fire. a highly detailed epic cinematic concept art CG render. made in Maya, Blender and Photoshop, octane render, excellent composition, cinematic dystopian brutalist atmosphere, dynamic dramatic cinematic lighting, aesthetic, very inspirational, arthouse. y Greg Rutkowski, Ilya Kuvshinov, WLOP, Stanley Artgerm Lau, Ruan Jia and Fenghua Zhong"
-scale = 7.5
+seed = 1653761536
+prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept art, 3D object, octane render, unreal engine, album art, by Alberto Seveso"
+scale = 10.0
 
 [[keyframes]]
 frame = 20
-seed = 234597
-seed_weight = 0.1
+seed = 234590987
+seed_weight = 0.5

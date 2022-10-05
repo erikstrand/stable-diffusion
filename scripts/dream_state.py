@@ -1,3 +1,47 @@
+class Prompt:
+    def __init__(
+        self,
+        prompt,
+        latent_0,
+        latent_1,
+        latent_interpolation,
+        seed,
+        with_variations,
+        cfg_scale,
+        width,
+        height,
+        outdir
+    ):
+        self.prompt = prompt
+        self.latent_0 = latent_0
+        self.latent_1 = latent_1
+        self.latent_interpolation = latent_interpolation
+        self.seed = seed
+        self.with_variations = with_variations
+        self.cfg_scale = cfg_scale
+        self.width = width
+        self.height = height
+        self.outdir = outdir
+
+        self.strength = 0.0
+        self.steps = 50
+        self.sampler_name = "k_lms"
+        self.grid = False
+        self.individual = True
+        self.save_original = False
+        self.exclude_seed_from_filename = True
+        self.variation_amount = 0.0
+        self.init_img = None
+        self.init_mask = None
+        self.seamless = False
+        self.fit = False
+        self.gfpgan_strength=0.0
+        self.upscale = None
+        self.skip_normalize = False
+        self.log_tokenization = False
+        self.iterations = 1
+
+
 class DreamState:
     def __init__(self, schedule):
         self.schedule = schedule
@@ -22,7 +66,10 @@ class DreamState:
     def done(self):
         # Note that we don't actually output the final keyframe. I should fix this eventually.
         # For now I'm just going to add a sentinel keyframe at the end.
-        return self.next_keyframe_idx >= len(self.schedule.keyframes)
+        return (
+            self.frame_idx + 1 == self.next_keyframe.frame and
+            self.next_keyframe_idx + 1 == len(self.schedule.keyframes)
+        )
 
     def get_opts(self):
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
@@ -42,10 +89,10 @@ class DreamState:
         else:
             # If the next keyframe has more variations, interpolate the strength of the new one.
             assert(n_next_variations == n_prev_variations + 1)
-            variations.append({
-                self.next_keyframe.variations[-1].seed,
-                self.next_keyframe.variations[-1].amount * t,
-            })
+            variations.append([
+                self.next_keyframe.seed_variations[-1].seed,
+                self.next_keyframe.seed_variations[-1].amount * t,
+            ])
         if len(variations) == 0:
             variations = None
 
@@ -62,3 +109,11 @@ class DreamState:
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),
         }
+
+    def get_prompt(self):
+        return Prompt(**self.get_opts())
+
+    def get_command(self):
+        opts = self.get_opts()
+        pairs = [(k, v) for k, v in opts.items() if k != "prompt" and v is not None]
+        return opts["prompt"] + ' ' + ' '.join(f"--{k} {v}" for k, v in pairs)
