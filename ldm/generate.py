@@ -212,7 +212,7 @@ class Generate:
             variation_amount =  0.0,
             # these are specific to img2img and inpaint
             init_img       =    None,
-            init_img_array =    None,
+            init_Image     =    None,
             init_mask      =    None,
             fit            =    False,
             strength       =    None,
@@ -326,7 +326,7 @@ class Generate:
                     log_tokens=self.log_tokenization
                 )
 
-            (init_image, mask_image) = self._make_images(init_img, init_img_array, init_mask, width, height, fit)
+            (init_image, mask_image) = self._make_images(init_img, init_Image, init_mask, width, height, fit)
 
             if (init_image is not None) and (mask_image is not None):
                 generator = self._make_inpaint()
@@ -394,13 +394,13 @@ class Generate:
             )
         return results
 
-    def _make_images(self, img_path, img_array, mask_path, width, height, fit=False):
+    def _make_images(self, img_path, img_data, mask_path, width, height, fit=False):
+        #img_data should be None, or a PIL Image
         init_image      = None
         init_mask       = None
 
-        if img_array is not None:
-            image = array_to_image(img_array)           # this returns an Image
-            init_image = self._create_init_image(image) # this returns a torch tensor
+        if img_data is not None:
+            init_image = self._create_init_image(img_data) # this returns a torch tensor
             return init_image, init_mask
 
         if not img_path:
