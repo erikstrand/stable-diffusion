@@ -16,6 +16,7 @@ class Prompt:
         outdir,
         animation = None,
         color_coherence = None,
+        is_color_reference = False,
     ):
         self.prompt = prompt
         self.latent_0 = latent_0
@@ -30,6 +31,7 @@ class Prompt:
         self.outdir = outdir
         self.animation = animation
         self.color_coherence = color_coherence
+        self.is_color_reference = is_color_reference
 
         self.steps = 50
         self.sampler_name = "k_lms"
@@ -108,6 +110,9 @@ class DreamState:
         if len(variations) == 0:
             variations = None
 
+        color_coherence = self.prev_keyframe.color_coherence
+        is_color_reference = (self.frame_idx == self.prev_keyframe.frame + 1 and self.prev_keyframe.is_color_reference)
+
         return {
             "prompt": "",
             "latent_0": self.prev_keyframe.prompt,
@@ -121,6 +126,8 @@ class DreamState:
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),
             "animation": self.prev_keyframe.animation,
+            "color_coherence": color_coherence,
+            "is_color_reference": is_color_reference,
         }
 
     def get_prompt(self):

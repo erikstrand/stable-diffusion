@@ -39,6 +39,7 @@ def maintain_colors(prev_img, color_match_sample, mode):
         matched_hsv = match_histograms(prev_img_hsv, color_match_hsv, multichannel=True)
         return cv2.cvtColor(matched_hsv, cv2.COLOR_HSV2RGB)
     else: # Match Frame 0 LAB
+        print(type(prev_img))
         prev_img_lab = cv2.cvtColor(prev_img, cv2.COLOR_RGB2LAB)
         color_match_lab = cv2.cvtColor(color_match_sample, cv2.COLOR_RGB2LAB)
         matched_lab = match_histograms(prev_img_lab, color_match_lab, multichannel=True)
@@ -184,9 +185,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
 
             current_outdir = opt.outdir
 
-            if len(last_results) == 1:
-                print("storing first image as color reference")
-                color_reference_image = Image.open(last_results[0][0])
+            if opt.is_color_reference:
+                print("Storing image as color reference.")
+                color_reference_image = Image.open(last_results[-1][0])
 
             if opt.animation:
                 # Don't load any file as an init image

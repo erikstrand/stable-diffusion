@@ -42,9 +42,20 @@ class Animation2D:
 
 
 class KeyFrame:
-    __slots__ = ["frame", "prompt", "seed", "seed_variations", "scale", "strength", "masks", "animation", "color_coherence"]
+    __slots__ = [
+        "frame",
+        "prompt",
+        "seed",
+        "seed_variations",
+        "scale",
+        "strength",
+        "masks",
+        "animation",
+        "color_coherence",
+        "is_color_reference"
+    ]
 
-    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation, color_coherence):
+    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation, color_coherence, is_color_reference):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
@@ -67,6 +78,9 @@ class KeyFrame:
 
         assert(color_coherence is None or color_coherence in ["RGB", "HSV", "LAB"])
         self.color_coherence = color_coherence
+
+        assert(is_color_reference in [True, False])
+        self.is_color_reference = is_color_reference
 
     @classmethod
     def from_dict(cls, dict):
@@ -102,8 +116,10 @@ class KeyFrame:
 
         if "color_coherence" not in dict:
             color_coherence = None
+            is_color_reference = False
         else:
             color_coherence = dict["color_coherence"]
+            is_color_reference = True
 
         return KeyFrame(
             int(dict["frame"]),
@@ -114,7 +130,8 @@ class KeyFrame:
             strength,
             masks,
             animation,
-            color_coherence
+            color_coherence,
+            is_color_reference
         )
 
     @classmethod
@@ -174,10 +191,13 @@ class KeyFrame:
 
         if "color_coherence" not in dict or dict["color_coherence"] == "same":
             color_coherence = prev_keyframe.color_coherence
+            is_color_reference = False
         elif dict["color_coherence"] == "none":
             color_coherence = None
+            is_color_reference = False
         else:
             color_coherence = dict["color_coherence"]
+            is_color_reference = True
 
         return KeyFrame(
             dict["frame"],
@@ -189,6 +209,7 @@ class KeyFrame:
             dict["masks"],
             animation,
             color_coherence,
+            is_color_reference,
         )
 
     def __str__(self):
