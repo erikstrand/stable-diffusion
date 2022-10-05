@@ -21,7 +21,7 @@ from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
 from config_reader import load_config
 from dream_state import DreamState
-from transform_image import transform_image_file
+from transform_image import transform_image_file, array_to_image, image_to_array
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
@@ -187,13 +187,13 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
 
             if opt.is_color_reference:
                 print("Storing image as color reference.")
-                color_reference_image = Image.open(last_results[-1][0])
+                color_reference_array = image_to_array(Image.open(last_results[-1][0]))
 
             if opt.animation:
                 # Don't load any file as an init image
                 opt.init_img = None
 
-                opt.init_Image = transform_image_file(
+                init_array = transform_image_file(
                     last_results[-1][0],
                     opt.animation.zoom,
                     opt.animation.rotation,
@@ -201,7 +201,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                 )
 
                 if opt.color_coherence:
-                    opt.init_Image = maintain_colors(opt.init_Image, color_reference_image, opt.color_coherence)
+                    init_array = maintain_colors(init_array, color_reference_array, opt.color_coherence)
+
+                opt.init_Image = array_to_image(init_array)
 
         else:
             opt, current_outdir, done = prepare_command_options(

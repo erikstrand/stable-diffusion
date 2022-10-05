@@ -35,9 +35,7 @@ def transform_image_array(image_array, zoom=1.0, angle=0.0, translation=(0.0, 0.
 def transform_image_file(infile, zoom=1.0, angle=0.0, translation=(0.0, 0.0)):
     image = Image.open(infile)
     image_array = image_to_array(image)
-    image_array = transform_image_array(image_array, zoom, angle, translation)
-    return array_to_image(image_array)
-    #image.save(outfile)
+    return transform_image_array(image_array, zoom, angle, translation)
 
 
 if __name__ == "__main__":
