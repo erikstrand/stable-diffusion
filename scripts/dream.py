@@ -41,7 +41,6 @@ def maintain_colors(prev_img, ref_img, mode):
         matched_hsv = match_histograms(prev_img_hsv, ref_img_hsv, multichannel=True)
         return cv2.cvtColor(matched_hsv, cv2.COLOR_HSV2RGB)
     else: # Match Frame 0 LAB
-        print(type(prev_img))
         prev_img_lab = cv2.cvtColor(prev_img, cv2.COLOR_RGB2LAB)
         ref_img_lab = cv2.cvtColor(ref_img, cv2.COLOR_RGB2LAB)
         matched_lab = match_histograms(prev_img_lab, ref_img_lab, multichannel=True)
