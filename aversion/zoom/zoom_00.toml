@@ -10,8 +10,8 @@ frame = 0
 seed = 6890234
 prompt = "a lush redwood forest with glowing orange mushrooms, verdant ferns, fog, heavenly light rays filtering through leaves, highly detailed digitial painting, cinematic lighting, by artgerm, loish, greg rutkoski, and alphonse mucha"
 scale = 7.5
-strength = 0.5
-steps = 100
+strength = 0.3
+steps = 50
 masks = []
 color_coherence = "LAB"
 
