@@ -6,7 +6,7 @@ height = 768
 stride = 1
 
 [[keyframes]]
-frame = 0
+frame = 1
 seed = 1291772199
 prompt = "neon hieroglyphics intertwined with shiny metal sculpture, onyx, pink, highly detailed, ultra realistic, octane render 8k, by guerrino boatto"
 scale = 10.0
@@ -29,3 +29,17 @@ animation.rotate = -0.1
 
 [[keyframes]]
 duration = 100
+animation.zoom = 1.0
+animation.translate = [-5.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 120
+prompt = "neon sculptures in the martian desert, shiny metal statues, background of rugged onyx rocks, pink, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
+animation.zoom = 1.02
+animation.translate = [-2.0, -1.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+prompt = "neon sculptures in the martian desert, shiny metal statues, background of rugged onyx rocks, pink, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
