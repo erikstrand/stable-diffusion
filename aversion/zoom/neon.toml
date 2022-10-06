@@ -35,11 +35,11 @@ animation.rotate = 0.0
 
 [[keyframes]]
 duration = 80
-prompt = "neon sculptures, shiny metal statues, background of rugged onyx rocks, martian desert aesthetic, pink, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
+prompt = "neon sculptures, shiny metal statues, background of rugged onyx rocks, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
 animation.zoom = 1.02
 animation.translate = [0.0, -2.0]
 animation.rotate = 1.0
 
 [[keyframes]]
 duration = 100
-prompt = "obsidian fractals, cubic crystals, neon emeralds, pink, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
+prompt = "shiny obsidian cubic crystals with small embedded glowing emeralds rubies and sapphires, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
