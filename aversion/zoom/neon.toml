@@ -1,0 +1,21 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+out_dir = "outputs/neon/frames"
+width = 1024
+height = 768
+stride = 1
+
+[[keyframes]]
+frame = 0
+seed = 6890234
+prompt = "pink neon hieroglyphics against brushed aluminum, alien design, highly detailed, ultra realistic, octane render 8k"
+scale = 7.5
+strength = 0.5
+steps = 50
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+duration = 100
