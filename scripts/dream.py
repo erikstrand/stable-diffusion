@@ -223,7 +223,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             do_grid = opt.grid or t2i.grid
 
             def image_writer(image, seed, upscaled=False):
-                if opt.is_color_reference:
+                if dream_state and opt.is_color_reference:
                     nonlocal color_reference_array
                     color_reference_array = image_to_array(image)
 
