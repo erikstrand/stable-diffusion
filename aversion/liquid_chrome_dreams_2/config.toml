@@ -1,0 +1,18 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/test6"
+width = 512
+height = 512
+stride = 1
+
+[[keyframes]]
+frame = 0
+seed = 1653761536
+prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept art, 3D object, octane render, unreal engine, album art, by Alberto Seveso"
+scale = 10.0
+
+[[keyframes]]
+duration = 100
+seed = 234590987
+seed_weight = 0.5

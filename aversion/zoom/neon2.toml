@@ -1,0 +1,28 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+out_dir = "outputs/e1_36"
+width = 1024
+height = 768
+stride = 1
+
+[[keyframes]]
+frame = 0
+seed = 2644993744
+prompt = "neon hieroglyphics intertwined with shiny metal sculpture, onyx, pink, highly detailed, ultra realistic, octane render 8k, by guerrino boatto"
+scale = 10.0
+strength = 0.5
+steps = 50
+color_coherence = "LAB"
+
+[[keyframes]]
+duration = 1
+seed = "random"
+animation.zoom = 1.05             # multiplicative factor per frame
+animation.translate = [3.0, 0.0]  # pixels per frame for X and Y
+animation.rotate = -2.0           # degrees per frame (positive is CCW)
+
+[[keyframes]]
+duration = 500
+animation.zoom = 0.90
+animation.translate = [0.0, -3.0]
+animation.rotate = -0.2

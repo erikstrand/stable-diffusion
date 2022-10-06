@@ -194,5 +194,11 @@ checkpoints
 
 # Custom 
 99f 
-aversion 
+#aversion 
 models/ldm/stable-diffusion-v1/
+*.png 
+*.jpg
+*.mp4
+*.gif
+*.jpeg
+img-samples

@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/e1_6"
+width = 1024
+height = 768
+stride = 1
+restart_from = 29
+
+[[keyframes]]
+frame = 0
+seed = 3018030189
+prompt = "beautiful mannequin sculpted out of amethyst by billelis + lit with 3 d geometric neon + facing a doorway opening with neon pink geometric fractal light + city of los angeles + moon in background!, rule of thirds, clean linework, dramatic, award winning, 4 k, trending on artstation, photorealistic, volumetric lighting, octane render"
+scale = 20
+
+[[keyframes]]
+duration = 300
+seed = 234590987
+
+[[keyframes]]
+duration = 300
+seed = 564590987
+
+[[keyframes]]
+duration = 300
+seed = 784590987

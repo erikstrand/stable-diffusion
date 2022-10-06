@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/e1_4"
+width = 1024
+height = 768
+stride = 1
+restart_from = 179
+
+[[keyframes]]
+frame = 0
+seed = 627119063
+prompt = "a beautiful mannequin made of marble printed in 3 d geometric neon + kintsugi!!, facing a giant doorway opening with a neon pink light, flowering iridescent pineapples + orchids, transcendent, vibrant color, clean linework, finely detailed, 4 k, trending on artstation, photorealistic, volumetric lighting, octane render"
+scale = 19.0
+
+[[keyframes]]
+duration = 300
+seed = 234590987
+
+[[keyframes]]
+duration = 300
+seed = 564590987
+
+[[keyframes]]
+duration = 300
+seed = 784590987
