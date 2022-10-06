@@ -10,6 +10,10 @@ import copy
 import warnings
 import time
 import ldm.dream.readline
+import cv2
+from pathlib import Path
+from PIL import Image
+from skimage.exposure import match_histograms
 from ldm.dream.pngwriter import PngWriter, PromptFormatter
 from ldm.dream.server import DreamServer, ThreadingDreamServer
 from ldm.dream.image_util import make_grid
@@ -17,11 +21,30 @@ from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
 from config_reader import load_config
 from dream_state import DreamState
+from transform_image import transform_image_file, array_to_image, image_to_array
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
 # Just want to get the formatting look right for now.
 output_cntr = 0
+
+
+# This method comes from deforum's notebook.
+def maintain_colors(prev_img, ref_img, mode):
+    print(prev_img.shape)
+    print(ref_img.shape)
+    if mode == 'RGB':
+        return match_histograms(prev_img, ref_img, multichannel=True)
+    elif mode == 'HSV':
+        prev_img_hsv = cv2.cvtColor(prev_img, cv2.COLOR_RGB2HSV)
+        reg_img_hsv = cv2.cvtColor(ref_img, cv2.COLOR_RGB2HSV)
+        matched_hsv = match_histograms(prev_img_hsv, ref_img_hsv, multichannel=True)
+        return cv2.cvtColor(matched_hsv, cv2.COLOR_HSV2RGB)
+    else: # Match Frame 0 LAB
+        prev_img_lab = cv2.cvtColor(prev_img, cv2.COLOR_RGB2LAB)
+        ref_img_lab = cv2.cvtColor(ref_img, cv2.COLOR_RGB2LAB)
+        matched_lab = match_histograms(prev_img_lab, ref_img_lab, multichannel=True)
+        return cv2.cvtColor(matched_lab, cv2.COLOR_LAB2RGB)
 
 
 def main():
@@ -151,6 +174,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     if dream_schedule:
         dream_state = DreamState(dream_schedule)
 
+
         if dream_schedule.restart_from is not None: 
             skip_counter = 0    
             while skip_counter != int(dream_schedule.restart_from):
@@ -158,6 +182,10 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                 skip_counter = skip_counter +1
             print(f"Skipped: {skip_counter} frames. Proceed?")
     
+
+    # This will be set by the image callback (when opt.is_reference_image is true).
+    color_reference_array = None
+
     while not done:
         if dream_state:
             done = dream_state.done()
@@ -167,6 +195,23 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             dream_state.advance_frame()
 
             current_outdir = opt.outdir
+
+            if opt.animation:
+                # Don't load any file as an init image
+                opt.init_img = None
+
+                init_array = transform_image_file(
+                    last_results[-1][0],
+                    opt.animation.zoom,
+                    opt.animation.rotation,
+                    opt.animation.translation,
+                )
+
+                if opt.color_coherence:
+                    init_array = maintain_colors(init_array, color_reference_array, opt.color_coherence)
+
+                opt.init_Image = array_to_image(init_array)
+
         else:
             opt, current_outdir, done = prepare_command_options(
                 outdir,
@@ -187,6 +232,10 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             do_grid = opt.grid or t2i.grid
 
             def image_writer(image, seed, upscaled=False):
+                if dream_state and opt.is_color_reference:
+                    nonlocal color_reference_array
+                    color_reference_array = image_to_array(image)
+
                 path = None
                 if do_grid:
                     grid_images[seed] = image

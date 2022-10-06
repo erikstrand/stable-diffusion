@@ -42,9 +42,34 @@ class Animation2D:
 
 
 class KeyFrame:
-    __slots__ = ["frame", "prompt", "seed", "seed_variations", "scale", "strength", "masks", "animation"]
+    __slots__ = [
+        "frame",
+        "prompt",
+        "seed",
+        "seed_variations",
+        "scale",
+        "strength",
+        "steps",
+        "masks",
+        "animation",
+        "color_coherence",
+        "is_color_reference"
+    ]
 
-    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation):
+    def __init__(
+        self,
+        frame,
+        prompt,
+        seed,
+        variations,
+        scale,
+        strength,
+        steps,
+        masks,
+        animation,
+        color_coherence,
+        is_color_reference
+    ):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
@@ -56,6 +81,7 @@ class KeyFrame:
 
         self.scale = scale
         self.strength = strength
+        self.steps = steps
 
         assert(isinstance(masks, list))
         for mask in masks:
@@ -65,16 +91,30 @@ class KeyFrame:
         assert(animation is None or isinstance(animation, Animation2D))
         self.animation = animation
 
+        assert(color_coherence is None or color_coherence in ["RGB", "HSV", "LAB"])
+        self.color_coherence = color_coherence
+
+        assert(is_color_reference in [True, False])
+        self.is_color_reference = is_color_reference
+
     @classmethod
     def from_dict(cls, dict):
         assert("frame" in dict)
         assert("prompt" in dict)
-        assert("seed" in dict)
+
+        seed = dict["seed"]
+        # This means we want a new seed every frame.
+        if seed == "random":
+            seed = None
+        else:
+            seed = int(seed)
+
         if "seed_weight" in dict:
             assert(dict["seed_weight"] == 1.0)
 
         scale = float(dict["scale"]) if "scale" in dict else 7.5
         strength = float(dict["strength"]) if "strength" in dict else 0.0
+        steps = int(dict["steps"]) if "steps" in dict else 50
 
         if "masks" not in dict or len(dict["masks"]) == 0:
             masks = []
@@ -90,15 +130,25 @@ class KeyFrame:
                 dict["animation"]["rotate"],
             )
 
+        if "color_coherence" not in dict:
+            color_coherence = None
+            is_color_reference = False
+        else:
+            color_coherence = dict["color_coherence"]
+            is_color_reference = True
+
         return KeyFrame(
             int(dict["frame"]),
             dict["prompt"],
-            int(dict["seed"]),
+            seed,
             [],
             scale,
             strength,
+            steps,
             masks,
             animation,
+            color_coherence,
+            is_color_reference
         )
 
     @classmethod
@@ -115,9 +165,13 @@ class KeyFrame:
         if "seed" not in dict or dict["seed"] == "same":
             seed = prev_keyframe.seed
         else:
-            seed = int(dict["seed"])
+            if dict["seed"] == "random":
+                seed = None
+            else:
+                seed = int(dict["seed"])
 
         if "seed_weight" in dict:
+            assert seed is not None, "Random seeds cannot have a seed_weight"
             seed_weight = float(dict["seed_weight"])
             assert(0.0 <= seed_weight <= 1.0)
         else:
@@ -136,23 +190,34 @@ class KeyFrame:
         if "strength" not in dict or dict["strength"] == "same":
             dict["strength"] = prev_keyframe.strength
 
+        if "steps" not in dict or dict["steps"] == "same":
+            dict["steps"] = prev_keyframe.steps
+
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
         else:
             dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
 
         if "animation" not in dict or dict["animation"] == "same":
-            dict["animation"] = prev_keyframe.animation
+            animation = prev_keyframe.animation
         elif dict["animation"] == "none":
-            print(dict["animation"])
-            dict["animation"] = None
+            animation = None
         else:
-            print(dict["animation"])
-            dict["animation"] = Animation2D(
+            animation = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],
                 dict["animation"]["rotate"],
             )
+
+        if "color_coherence" not in dict or dict["color_coherence"] == "same":
+            color_coherence = prev_keyframe.color_coherence
+            is_color_reference = False
+        elif dict["color_coherence"] == "none":
+            color_coherence = None
+            is_color_reference = False
+        else:
+            color_coherence = dict["color_coherence"]
+            is_color_reference = True
 
         return KeyFrame(
             dict["frame"],
@@ -161,8 +226,11 @@ class KeyFrame:
             variations,
             dict["scale"],
             dict["strength"],
+            dict["steps"],
             dict["masks"],
-            dict["animation"],
+            animation,
+            color_coherence,
+            is_color_reference,
         )
 
     def __str__(self):
@@ -170,13 +238,14 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "mask_dir", "out_dir", "scratch_dir", "keyframes", "width", "height", "stride","restart_from", "prompts"]
 
-    def __init__(self, in_dir, mask_dir, out_dir, scratch_dir, keyframes, width, height, stride,restart_from):
+    __slots__ = ["in_dir", "mask_dir", "out_dir", "keyframes", "width", "height", "stride","restart_from", "prompts"]
+
+    def __init__(self, in_dir, mask_dir, out_dir, keyframes, width, height, stride,restart_from):
+
         self.in_dir = Path(in_dir)
         self.mask_dir = Path(mask_dir)
         self.out_dir = Path(out_dir)
-        self.scratch_dir = Path(scratch_dir)
         self.keyframes = keyframes
         self.width = width
         self.height = height
@@ -201,7 +270,6 @@ class DreamSchedule:
         print(f"in_dir: {self.in_dir}")
         print(f"out_dir: {self.out_dir}")
         print(f"mask_dir: {self.mask_dir}")
-        print(f"scratch_dir: {self.scratch_dir}")
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         print(f"stride: {self.stride}")
@@ -221,7 +289,6 @@ def load_config(config_path):
     in_dir = data["in_dir"]
     mask_dir = data["mask_dir"]
     out_dir = data["out_dir"]
-    scratch_dir = data["scratch_dir"]
     width = data["width"]
     height = data["height"]
     stride = data["stride"]
@@ -236,7 +303,8 @@ def load_config(config_path):
     for keyframe_dict in data["keyframes"][1:]:
         schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-    return DreamSchedule(in_dir, mask_dir, out_dir, scratch_dir, schedule, width, height, stride, restart_from)
+
+    return DreamSchedule(in_dir, mask_dir, out_dir, schedule, width, height, stride, restart_from)
 
 
 if __name__ == "__main__":

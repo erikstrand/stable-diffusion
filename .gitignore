@@ -189,3 +189,10 @@ testtube
 checkpoints
 # If it's a Mac
 .DS_Store
+
+
+
+# Custom 
+99f 
+aversion 
+models/ldm/stable-diffusion-v1/

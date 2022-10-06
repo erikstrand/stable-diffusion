@@ -1,3 +1,5 @@
+import random
+
 class Prompt:
     def __init__(
         self,
@@ -8,9 +10,14 @@ class Prompt:
         seed,
         with_variations,
         cfg_scale,
+        strength,
+        steps,
         width,
         height,
-        outdir
+        outdir,
+        animation = None,
+        color_coherence = None,
+        is_color_reference = False,
     ):
         self.prompt = prompt
         self.latent_0 = latent_0
@@ -19,12 +26,15 @@ class Prompt:
         self.seed = seed
         self.with_variations = with_variations
         self.cfg_scale = cfg_scale
+        self.strength = strength
+        self.steps = steps
         self.width = width
         self.height = height
         self.outdir = outdir
+        self.animation = animation
+        self.color_coherence = color_coherence
+        self.is_color_reference = is_color_reference
 
-        self.strength = 0.0
-        self.steps = 50
         self.sampler_name = "k_lms"
         self.grid = False
         self.individual = True
@@ -51,6 +61,7 @@ class DreamState:
         self.interp_duration = None
         self.frame_idx = 0
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
+        self.random = random.Random(self.prev_keyframe.seed)
 
     def advance_keyframe(self):
         self.next_keyframe_idx += 1
@@ -75,6 +86,12 @@ class DreamState:
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
+        steps = self.prev_keyframe.steps
+
+        if self.prev_keyframe.seed == None:
+            seed = self.random.getrandbits(32)
+        else:
+            seed = self.prev_keyframe.seed
 
         n_prev_variations = len(self.prev_keyframe.seed_variations)
         n_next_variations = len(self.next_keyframe.seed_variations)
@@ -91,23 +108,29 @@ class DreamState:
                 self.next_keyframe.seed_variations[-1].seed,
                 self.next_keyframe.seed_variations[-1].amount * t,
             ])
-        # Otherwise, we're keeping the seed/variations constant.
-
+        # Otherwise, we keep the seed/variations constant.
         if len(variations) == 0:
             variations = None
+
+        color_coherence = self.prev_keyframe.color_coherence
+        is_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.is_color_reference)
 
         return {
             "prompt": "",
             "latent_0": self.prev_keyframe.prompt,
             "latent_1": self.next_keyframe.prompt,
             "latent_interpolation": t,
-            "seed": self.prev_keyframe.seed,
+            "seed": seed,
             "with_variations": variations,
             "cfg_scale": scale,
-            #"strength": strength, # only need this for img2img
+            "strength": strength,
+            "steps": steps,
             "width": self.schedule.width,
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),
+            "animation": self.prev_keyframe.animation,
+            "color_coherence": color_coherence,
+            "is_color_reference": is_color_reference,
         }
 
     def get_prompt(self):
