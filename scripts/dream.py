@@ -151,6 +151,13 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     if dream_schedule:
         dream_state = DreamState(dream_schedule)
 
+        if dream_schedule.restart_from is not None: 
+            skip_counter = 0    
+            while skip_counter != int(dream_schedule.restart_from):
+                dream_state.advance_frame()    
+                skip_counter = skip_counter +1
+            print(f"Skipped: {skip_counter} frames. Proceed?")
+    
     while not done:
         if dream_state:
             done = dream_state.done()
