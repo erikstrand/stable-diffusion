@@ -170,9 +170,9 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "mask_dir", "out_dir", "scratch_dir", "keyframes", "width", "height", "stride", "prompts"]
+    __slots__ = ["in_dir", "mask_dir", "out_dir", "scratch_dir", "keyframes", "width", "height", "stride","restart_from", "prompts"]
 
-    def __init__(self, in_dir, mask_dir, out_dir, scratch_dir, keyframes, width, height, stride):
+    def __init__(self, in_dir, mask_dir, out_dir, scratch_dir, keyframes, width, height, stride,restart_from):
         self.in_dir = Path(in_dir)
         self.mask_dir = Path(mask_dir)
         self.out_dir = Path(out_dir)
@@ -181,6 +181,7 @@ class DreamSchedule:
         self.width = width
         self.height = height
         self.stride = int(stride)
+        self.restart_from = restart_from
 
         # Check that the keyframes are in order.
         assert(len(self.keyframes) >= 1)
@@ -204,6 +205,7 @@ class DreamSchedule:
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         print(f"stride: {self.stride}")
+        print(f"restart_from: {self.restart_from}")
         for keyframe in self.keyframes:
             print(keyframe)
             for sv in keyframe.seed_variations:
@@ -223,6 +225,10 @@ def load_config(config_path):
     width = data["width"]
     height = data["height"]
     stride = data["stride"]
+    if 'restart_from' in data:
+        restart_from = data["restart_from"]
+    else:
+        restart_from = None
 
     schedule = []
     schedule.append(KeyFrame.from_dict(data["keyframes"][0]))
@@ -230,7 +236,7 @@ def load_config(config_path):
     for keyframe_dict in data["keyframes"][1:]:
         schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-    return DreamSchedule(in_dir, mask_dir, out_dir, scratch_dir, schedule, width, height, stride)
+    return DreamSchedule(in_dir, mask_dir, out_dir, scratch_dir, schedule, width, height, stride, restart_from)
 
 
 if __name__ == "__main__":
