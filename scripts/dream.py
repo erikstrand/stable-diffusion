@@ -170,18 +170,43 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     done = False
     last_results = list()
 
+    # This will be set by the image callback (when opt.is_reference_image is true).
+    color_reference_array = None
+
     dream_state = None
     if dream_schedule:
         dream_state = DreamState(dream_schedule)
 
-    # This will be set by the image callback (when opt.is_reference_image is true).
-    color_reference_array = None
+        # Figure out if we already rendered some frames.
+        existing_frames = dream_state.schedule.out_dir.glob('*.png')
+        frame_regex = re.compile(r'(\d+).0.png')
+        extract_number = lambda f: int(frame_regex.match(f.name).group(1))
+        frame_numbers = [extract_number(f) for f in existing_frames]
+        frame_numbers = sorted(frame_numbers)
+        last_frame = None
+        if len(frame_numbers) > 0:
+            last_frame = frame_numbers[-1]
+            print(f"Continuing after frame {last_frame}")
+
+            # Load the first frame as the color reference.
+            first_file = dream_state.schedule.out_dir / f'{1:06d}.0.png'
+            reg_img = Image.open(first_file)
+            color_reference_array = image_to_array(reg_img)
+
+            # the last frame in last_results so that we can load it as an input.
+            last_results = [[str(dream_state.schedule.out_dir / f"{last_frame:06d}.0.png"), None]]
 
     while not done:
         if dream_state:
             done = dream_state.done()
             if done:
                 break
+
+            if last_frame is not None and dream_state.frame_idx <= last_frame:
+                print(f"Already rendered frame {dream_state.frame_idx}")
+                dream_state.advance_frame()
+                continue
+
             opt = dream_state.get_prompt()
             dream_state.advance_frame()
 
