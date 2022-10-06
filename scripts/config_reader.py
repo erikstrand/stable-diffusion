@@ -49,13 +49,27 @@ class KeyFrame:
         "seed_variations",
         "scale",
         "strength",
+        "steps",
         "masks",
         "animation",
         "color_coherence",
         "is_color_reference"
     ]
 
-    def __init__(self, frame, prompt, seed, variations, scale, strength, masks, animation, color_coherence, is_color_reference):
+    def __init__(
+        self,
+        frame,
+        prompt,
+        seed,
+        variations,
+        scale,
+        strength,
+        steps,
+        masks,
+        animation,
+        color_coherence,
+        is_color_reference
+    ):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
@@ -67,6 +81,7 @@ class KeyFrame:
 
         self.scale = scale
         self.strength = strength
+        self.steps = steps
 
         assert(isinstance(masks, list))
         for mask in masks:
@@ -99,6 +114,7 @@ class KeyFrame:
 
         scale = float(dict["scale"]) if "scale" in dict else 7.5
         strength = float(dict["strength"]) if "strength" in dict else 0.0
+        steps = int(dict["steps"]) if "steps" in dict else 50
 
         if "masks" not in dict or len(dict["masks"]) == 0:
             masks = []
@@ -128,6 +144,7 @@ class KeyFrame:
             [],
             scale,
             strength,
+            steps,
             masks,
             animation,
             color_coherence,
@@ -173,6 +190,9 @@ class KeyFrame:
         if "strength" not in dict or dict["strength"] == "same":
             dict["strength"] = prev_keyframe.strength
 
+        if "steps" not in dict or dict["steps"] == "same":
+            dict["steps"] = prev_keyframe.steps
+
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
         else:
@@ -206,6 +226,7 @@ class KeyFrame:
             variations,
             dict["scale"],
             dict["strength"],
+            dict["steps"],
             dict["masks"],
             animation,
             color_coherence,

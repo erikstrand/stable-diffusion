@@ -11,6 +11,7 @@ class Prompt:
         with_variations,
         cfg_scale,
         strength,
+        steps,
         width,
         height,
         outdir,
@@ -26,6 +27,7 @@ class Prompt:
         self.with_variations = with_variations
         self.cfg_scale = cfg_scale
         self.strength = strength
+        self.steps = steps
         self.width = width
         self.height = height
         self.outdir = outdir
@@ -33,7 +35,6 @@ class Prompt:
         self.color_coherence = color_coherence
         self.is_color_reference = is_color_reference
 
-        self.steps = 50
         self.sampler_name = "k_lms"
         self.grid = False
         self.individual = True
@@ -85,6 +86,7 @@ class DreamState:
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
+        steps = self.prev_keyframe.steps
 
         if self.prev_keyframe.seed == None:
             seed = self.random.getrandbits(32)
@@ -122,6 +124,7 @@ class DreamState:
             "with_variations": variations,
             "cfg_scale": scale,
             "strength": strength,
+            "steps": steps,
             "width": self.schedule.width,
             "height": self.schedule.height,
             "outdir": str(self.schedule.out_dir),
