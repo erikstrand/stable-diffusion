@@ -1,14 +1,14 @@
 in_dir = "n/a"
 mask_dir = "n/a"
 out_dir = "outputs/lava/frames"
-width = 512
-height = 512
+width = 1024
+height = 768
 stride = 1
 
 [[keyframes]]
 frame = 0
 seed = 6890234
-prompt = "primordial lava landscape, obsidian, abstract, flowing, acrilic paint, brush strokes, heavenly atmosphere, ultra detailed, high resolution, trending on artstation"
+prompt = "a primordial landscape, lava ocean meets obsidian mountains, night sky with bright stars, steam, sparks, wide field of view, acrylic paint, brush strokes, godrays, ultra detailed, high resolution, art by inessa garmash, trending on artstation"
 scale = 7.5
 strength = 0.5
 steps = 50
