@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/e1_15"
+width = 1024
+height = 768
+stride = 1
+restart_from = 0
+
+[[keyframes]]
+frame = 0
+seed = 497799135
+prompt = "angular shards of sunshine pierce the melody warping it into strange directions spreading through the rhythm as it floats through the core of your body and shudders joyful curves around your brain, 8 k, octane render"
+scale = 7
+
+[[keyframes]]
+duration = 300
+seed = 234590987
+
+[[keyframes]]
+duration = 300
+seed = 564590987
+
+[[keyframes]]
+duration = 300
+seed = 784590987

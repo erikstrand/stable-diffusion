@@ -1,6 +1,6 @@
 in_dir = "n/a"
 mask_dir = "n/a"
-out_dir = "outputs/lava/frames"
+out_dir = "outputs/e1_39"
 width = 1024
 height = 768
 stride = 1

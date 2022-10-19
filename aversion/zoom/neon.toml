@@ -1,6 +1,6 @@
 in_dir = "n/a"
 mask_dir = "n/a"
-out_dir = "outputs/neon/frames"
+out_dir = "outputs/e1_35"
 width = 1024
 height = 768
 stride = 1

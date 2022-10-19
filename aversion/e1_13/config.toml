@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/scratch_1"
+out_dir = "outputs/e1_13"
+width = 1024
+height = 768
+stride = 1
+restart_from = 296
+
+[[keyframes]]
+frame = 0
+seed = 1668925207
+prompt = "emissary space by arthur haas and bruce pennington and john schoenherr, cinematic matte painting, zaha hadid building, photo realism, dark color palate, blue hour,"
+scale = 13
+
+[[keyframes]]
+duration = 300
+seed = 234590987
+
+[[keyframes]]
+duration = 300
+seed = 564590987
+
+[[keyframes]]
+duration = 300
+seed = 784590987
