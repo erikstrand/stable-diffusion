@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "copy_of_12"
+out_dir = "outputs/e1_22"
+width = 1024
+height = 768
+stride = 1
+restart_from = 710
+
+[[keyframes]]
+frame = 0
+seed = 5675392109
+prompt = "cinema 4D render, A24!film cinematography, humanoid inside an hourglass, falling sand inside, futuristic 1990s contemporary art, sci-fi, trapped inside an hourglass, sand, time, deserted sand, glass, inside view, humanoid pov, intricate artwork by Tooth Wu and wlop and beeple. octane render, trending on artstation, greg rutkowski very coherent symmetrical artwork, depth field, unreal engine, cinematic, hyper realism, high detail, octane render, 8k"
+scale = 7
+
+[[keyframes]]
+duration = 300
+seed = 954590987
+
+[[keyframes]]
+duration = 300
+seed = 754590987
+
+[[keyframes]]
+duration = 300
+seed = 194590987

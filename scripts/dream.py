@@ -10,16 +10,41 @@ import copy
 import warnings
 import time
 import ldm.dream.readline
+import cv2
+from pathlib import Path
+from PIL import Image
+from skimage.exposure import match_histograms
 from ldm.dream.pngwriter import PngWriter, PromptFormatter
 from ldm.dream.server import DreamServer, ThreadingDreamServer
 from ldm.dream.image_util import make_grid
 from ldm.dream.conditioning import get_uc_and_c
 from omegaconf import OmegaConf
+from config_reader import load_config
+from dream_state import DreamState
+from transform_image import transform_image_file, array_to_image, image_to_array
 
 # Placeholder to be replaced with proper class that tracks the
 # outputs and associates with the prompt that generated them.
 # Just want to get the formatting look right for now.
 output_cntr = 0
+
+
+# This method comes from deforum's notebook.
+def maintain_colors(prev_img, ref_img, mode):
+    print(prev_img.shape)
+    print(ref_img.shape)
+    if mode == 'RGB':
+        return match_histograms(prev_img, ref_img, multichannel=True)
+    elif mode == 'HSV':
+        prev_img_hsv = cv2.cvtColor(prev_img, cv2.COLOR_RGB2HSV)
+        reg_img_hsv = cv2.cvtColor(ref_img, cv2.COLOR_RGB2HSV)
+        matched_hsv = match_histograms(prev_img_hsv, ref_img_hsv, multichannel=True)
+        return cv2.cvtColor(matched_hsv, cv2.COLOR_HSV2RGB)
+    else: # Match Frame 0 LAB
+        prev_img_lab = cv2.cvtColor(prev_img, cv2.COLOR_RGB2LAB)
+        ref_img_lab = cv2.cvtColor(ref_img, cv2.COLOR_RGB2LAB)
+        matched_lab = match_histograms(prev_img_lab, ref_img_lab, multichannel=True)
+        return cv2.cvtColor(matched_lab, cv2.COLOR_LAB2RGB)
 
 
 def main():
@@ -71,7 +96,7 @@ def main():
         seamless=opt.seamless,
         embedding_path=opt.embedding_path,
         device_type=opt.device,
-        ignore_ctrl_c=opt.infile is None,
+        ignore_ctrl_c=opt.infile is None and opt.config_file is None,
     )
 
     # make sure the output directory exists
@@ -95,21 +120,40 @@ def main():
             print(f'{e}. Aborting.')
             sys.exit(-1)
 
+    dream_schedule = None
+    if opt.config_file:
+        if opt.infile:
+            print('Cannot use --config_file with --infile. Aborting.')
+            sys.exit(-1)
+        try:
+            if os.path.isfile(opt.config_file):
+                dream_schedule = load_config(opt.config_file)
+            else:
+                raise FileNotFoundError(f'{opt.config_file} not found.')
+        except (FileNotFoundError, IOError) as e:
+            print(f'{e}. Aborting.')
+            sys.exit(-1)
+
     if opt.seamless:
         print(">> changed to seamless tiling mode")
 
     # preload the model
     t2i.load_model()
+    if dream_schedule:
+        t2i.precompute_prompt_latents(dream_schedule.prompts)
 
     # if we're using a prompts file, compute all the prompt latents
     if opt.prompts_file is not None:
+        if opt.config_file:
+            print('Cannot use --config_file with --prompts_file. Aborting.')
+            sys.exit(-1)
         print("precomputing latents for prompts in prompts file")
         with open(opt.prompts_file, 'r') as pf:
             prompts = pf.read().splitlines()
 
         t2i.precompute_prompt_latents(prompts)
 
-    if not infile:
+    if not infile and not dream_schedule:
         print(
             "\n* Initialization done! Awaiting your command (-h for help, 'q' to quit)"
         )
@@ -118,161 +162,96 @@ def main():
     if opt.web:
         dream_server_loop(t2i, opt.host, opt.port, opt.outdir)
     else:
-        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile)
+        main_loop(t2i, opt.outdir, opt.prompt_as_dir, cmd_parser, infile, dream_schedule)
 
 
-def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
+def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     """prompt/read/execute loop"""
     done = False
-    path_filter = re.compile(r'[<>:"/\\|?*]')
     last_results = list()
 
-    # os.pathconf is not available on Windows
-    if hasattr(os, 'pathconf'):
-        path_max = os.pathconf(outdir, 'PC_PATH_MAX')
-        name_max = os.pathconf(outdir, 'PC_NAME_MAX')
-    else:
-        path_max = 260
-        name_max = 255
+    # This will be set by the image callback (when opt.is_reference_image is true).
+    color_reference_array = None
+
+    dream_state = None
+    if dream_schedule:
+        dream_state = DreamState(dream_schedule)
+
+        # Figure out if we already rendered some frames.
+        existing_frames = dream_state.schedule.out_dir.glob('*.png')
+        frame_regex = re.compile(r'(\d+).0.png')
+        extract_number = lambda f: int(frame_regex.match(f.name).group(1))
+        frame_numbers = [extract_number(f) for f in existing_frames]
+        frame_numbers = sorted(frame_numbers)
+        last_frame = None
+        if len(frame_numbers) > 0:
+            last_frame = frame_numbers[-1]
+            print(f"Continuing after frame {last_frame}")
+
+            # Load the first frame as the color reference.
+            first_file = dream_state.schedule.out_dir / f'{1:06d}.0.png'
+            reg_img = Image.open(first_file)
+            color_reference_array = image_to_array(reg_img)
+
+            # the last frame in last_results so that we can load it as an input.
+            last_results = [[str(dream_state.schedule.out_dir / f"{last_frame:06d}.0.png"), None]]
 
     while not done:
-        try:
-            command = get_next_command(infile)
-        except EOFError:
-            done = True
-            continue
-        except KeyboardInterrupt:
-            done = True
-            continue
+        if dream_state:
+            done = dream_state.done()
+            if done:
+                break
 
-        # skip empty lines
-        if not command.strip():
-            continue
-
-        if command.startswith(('#', '//')):
-            continue
-
-        # before splitting, escape single quotes so as not to mess
-        # up the parser
-        command = command.replace("'", "\\'")
-
-        try:
-            elements = shlex.split(command)
-        except ValueError as e:
-            print(str(e))
-            continue
-
-        if elements[0] == 'q':
-            done = True
-            break
-
-        if elements[0].startswith(
-            '!dream'
-        ):   # in case a stored prompt still contains the !dream command
-            elements.pop(0)
-
-        # rearrange the arguments to mimic how it works in the Dream bot.
-        switches = ['']
-        switches_started = False
-
-        for el in elements:
-            if el[0] == '-' and not switches_started:
-                switches_started = True
-            if switches_started:
-                switches.append(el)
-            else:
-                switches[0] += el
-                switches[0] += ' '
-        switches[0] = switches[0][: len(switches[0]) - 1]
-
-        try:
-            opt = parser.parse_args(switches)
-        except SystemExit:
-            parser.print_help()
-            continue
-        if len(opt.prompt) == 0 and opt.latent_0 is None:
-            print('Try again with a prompt!')
-            continue
-        # retrieve previous value!
-        if opt.init_img is not None and re.match('^-\\d+$', opt.init_img):
-            try:
-                opt.init_img = last_results[int(opt.init_img)][0]
-                print(f'>> Reusing previous image {opt.init_img}')
-            except IndexError:
-                print(
-                    f'>> No previous initial image at position {opt.init_img} found')
-                opt.init_img = None
+            if last_frame is not None and dream_state.frame_idx <= last_frame:
+                print(f"Already rendered frame {dream_state.frame_idx}")
+                dream_state.advance_frame()
                 continue
 
-        if opt.seed is not None and opt.seed < 0:   # retrieve previous value!
-            try:
-                opt.seed = last_results[opt.seed][1]
-                print(f'>> Reusing previous seed {opt.seed}')
-            except IndexError:
-                print(f'>> No previous seed at position {opt.seed} found')
-                opt.seed = None
-                continue
+            opt = dream_state.get_prompt()
+            dream_state.advance_frame()
 
-        do_grid = opt.grid or t2i.grid
-
-        if opt.with_variations is not None:
-            # shotgun parsing, woo
-            parts = []
-            broken = False  # python doesn't have labeled loops...
-            for part in opt.with_variations.split(','):
-                seed_and_weight = part.split(':')
-                if len(seed_and_weight) != 2:
-                    print(f'could not parse with_variation part "{part}"')
-                    broken = True
-                    break
-                try:
-                    seed = int(seed_and_weight[0])
-                    weight = float(seed_and_weight[1])
-                except ValueError:
-                    print(f'could not parse with_variation part "{part}"')
-                    broken = True
-                    break
-                parts.append([seed, weight])
-            if broken:
-                continue
-            if len(parts) > 0:
-                opt.with_variations = parts
-            else:
-                opt.with_variations = None
-
-        if opt.outdir:
-            if not os.path.exists(opt.outdir):
-                os.makedirs(opt.outdir)
             current_outdir = opt.outdir
-        elif prompt_as_dir:
-            # this option doesn't make sense if we're using precomputed latents
-            assert(len(opt.prompt) > 0)
 
-            # sanitize the prompt to a valid folder name
-            subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
+            if opt.animation:
+                # Don't load any file as an init image
+                opt.init_img = None
 
-            # truncate path to maximum allowed length
-            # 27 is the length of '######.##########.##.png', plus two separators and a NUL
-            subdir = subdir[:(path_max - 27 - len(os.path.abspath(outdir)))]
-            current_outdir = os.path.join(outdir, subdir)
+                init_array = transform_image_file(
+                    last_results[-1][0],
+                    opt.animation.zoom,
+                    opt.animation.rotation,
+                    opt.animation.translation,
+                )
 
-            print('Writing files to directory: "' + current_outdir + '"')
+                if opt.color_coherence:
+                    init_array = maintain_colors(init_array, color_reference_array, opt.color_coherence)
 
-            # make sure the output directory exists
-            if not os.path.exists(current_outdir):
-                os.makedirs(current_outdir)
+                opt.init_Image = array_to_image(init_array)
+
         else:
-            current_outdir = outdir
+            opt, current_outdir, done = prepare_command_options(
+                outdir,
+                prompt_as_dir,
+                parser,
+                infile,
+                last_results
+            )
+            if opt is None:
+                continue
 
-        # Here is where the images are actually generated!
         last_results = []
         try:
             file_writer = PngWriter(current_outdir)
             prefix = file_writer.unique_prefix()
             results = []  # list of filename, prompt pairs
             grid_images = dict()  # seed -> Image, only used if `do_grid`
+            do_grid = opt.grid or t2i.grid
 
             def image_writer(image, seed, upscaled=False):
+                if dream_state and opt.is_color_reference:
+                    nonlocal color_reference_array
+                    color_reference_array = image_to_array(image)
+
                 path = None
                 if do_grid:
                     grid_images[seed] = image
@@ -296,17 +275,14 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                         else:
                             iter_opt.with_variations = opt.with_variations + this_variation
                         iter_opt.variation_amount = 0
-                        normalized_prompt = PromptFormatter(
-                            t2i, iter_opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, iter_opt).normalize_prompt()
                         metadata_prompt = f'{normalized_prompt} -S{iter_opt.seed}'
                     elif opt.with_variations is not None:
-                        normalized_prompt = PromptFormatter(
-                            t2i, opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                         # use the original seed - the per-iteration value is the last variation-seed
                         metadata_prompt = f'{normalized_prompt} -S{opt.seed}'
                     else:
-                        normalized_prompt = PromptFormatter(
-                            t2i, opt).normalize_prompt()
+                        normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                         metadata_prompt = f'{normalized_prompt} -S{seed}'
                     path = file_writer.save_image_and_prompt_to_png(
                         image, metadata_prompt, filename)
@@ -323,8 +299,7 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
                 first_seed = last_results[0][1]
                 filename = f'{prefix}.{first_seed}.png'
                 # TODO better metadata for grid images
-                normalized_prompt = PromptFormatter(
-                    t2i, opt).normalize_prompt()
+                normalized_prompt = PromptFormatter(t2i, opt).normalize_prompt()
                 metadata_prompt = f'{normalized_prompt} -S{first_seed} --grid -n{len(grid_images)} # {grid_seeds}'
                 path = file_writer.save_image_and_prompt_to_png(
                     grid_img, metadata_prompt, filename
@@ -345,6 +320,144 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile):
         print()
 
     print('goodbye!')
+
+
+def prepare_command_options(outdir, prompt_as_dir, parser, infile, last_results):
+    path_filter = re.compile(r'[<>:"/\\|?*]')
+    # os.pathconf is not available on Windows
+    if hasattr(os, 'pathconf'):
+        path_max = os.pathconf(outdir, 'PC_PATH_MAX')
+        name_max = os.pathconf(outdir, 'PC_NAME_MAX')
+    else:
+        path_max = 260
+        name_max = 255
+
+    try:
+        command = get_next_command(infile)
+    except EOFError:
+        return None, None, True
+    except KeyboardInterrupt:
+        return None, None, True
+
+    # skip empty lines
+    if not command.strip():
+        return None, None, False
+
+    if command.startswith(('#', '//')):
+        return None, None, False
+
+    # before splitting, escape single quotes so as not to mess
+    # up the parser
+    command = command.replace("'", "\\'")
+
+    try:
+        elements = shlex.split(command)
+    except ValueError as e:
+        print(str(e))
+        return None, None, False
+
+    if elements[0] == 'q':
+        return None, None, True
+
+    if elements[0].startswith(
+        '!dream'
+    ):   # in case a stored prompt still contains the !dream command
+        elements.pop(0)
+
+    # rearrange the arguments to mimic how it works in the Dream bot.
+    switches = ['']
+    switches_started = False
+
+    for el in elements:
+        if el[0] == '-' and not switches_started:
+            switches_started = True
+        if switches_started:
+            switches.append(el)
+        else:
+            switches[0] += el
+            switches[0] += ' '
+    switches[0] = switches[0][: len(switches[0]) - 1]
+
+    try:
+        opt = parser.parse_args(switches)
+    except SystemExit:
+        parser.print_help()
+        return None, None, False
+    if len(opt.prompt) == 0 and opt.latent_0 is None:
+        print('Try again with a prompt!')
+        return None, None, False
+    # retrieve previous value!
+    if opt.init_img is not None and re.match('^-\\d+$', opt.init_img):
+        try:
+            opt.init_img = last_results[int(opt.init_img)][0]
+            print(f'>> Reusing previous image {opt.init_img}')
+        except IndexError:
+            print(
+                f'>> No previous initial image at position {opt.init_img} found')
+            opt.init_img = None
+            return None, None, False
+
+    if opt.seed is not None and opt.seed < 0:   # retrieve previous value!
+        try:
+            opt.seed = last_results[opt.seed][1]
+            print(f'>> Reusing previous seed {opt.seed}')
+        except IndexError:
+            print(f'>> No previous seed at position {opt.seed} found')
+            opt.seed = None
+            return None, None, False
+
+    if opt.with_variations is not None:
+        # shotgun parsing, woo
+        parts = []
+        broken = False  # python doesn't have labeled loops...
+        for part in opt.with_variations.split(','):
+            seed_and_weight = part.split(':')
+            if len(seed_and_weight) != 2:
+                print(f'could not parse with_variation part "{part}"')
+                broken = True
+                break
+            try:
+                seed = int(seed_and_weight[0])
+                weight = float(seed_and_weight[1])
+            except ValueError:
+                print(f'could not parse with_variation part "{part}"')
+                broken = True
+                break
+            parts.append([seed, weight])
+        if broken:
+            return None, None, False
+        if len(parts) > 0:
+            opt.with_variations = parts
+        else:
+            opt.with_variations = None
+
+    if opt.outdir:
+        if not os.path.exists(opt.outdir):
+            os.makedirs(opt.outdir)
+        current_outdir = opt.outdir
+    elif prompt_as_dir:
+        # Note: this option doesn't make sense if we're using precomputed latents.
+        # I should add an assertion for that.
+
+        assert(len(opt.prompt) > 0)
+
+        # sanitize the prompt to a valid folder name
+        subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
+
+        # truncate path to maximum allowed length
+        # 27 is the length of '######.##########.##.png', plus two separators and a NUL
+        subdir = subdir[:(path_max - 27 - len(os.path.abspath(outdir)))]
+        current_outdir = os.path.join(outdir, subdir)
+
+        print('Writing files to directory: "' + current_outdir + '"')
+
+        # make sure the output directory exists
+        if not os.path.exists(current_outdir):
+            os.makedirs(current_outdir)
+    else:
+        current_outdir = outdir
+
+    return opt, current_outdir, False
 
 
 def get_next_command(infile=None) -> str:  # command string
@@ -415,7 +528,7 @@ SAMPLER_CHOICES = [
 def create_argv_parser():
     parser = argparse.ArgumentParser(
         description="""Generate images using Stable Diffusion.
-        Use --web to launch the web interface. 
+        Use --web to launch the web interface.
         Use --from_file to load prompts from a file path or standard input ("-").
         Otherwise you will be dropped into an interactive command prompt (type -h for help.)
         Other command-line arguments are defaults that can usually be overridden
@@ -435,6 +548,12 @@ def create_argv_parser():
         dest='infile',
         type=str,
         help='If specified, load prompts from this file',
+    )
+    parser.add_argument(
+        '--from_dream_schedule',
+        dest='config_file',
+        type=str,
+        help='If specified, load a dream schedule from this TOML file',
     )
     parser.add_argument(
         '-n',

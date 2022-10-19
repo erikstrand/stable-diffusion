@@ -1,0 +1,30 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+scratch_dir = "copy of 7 without motion - v1 - short"
+out_dir = "outputs/e1_32"
+width = 1024
+height = 768
+stride = 1
+restart_from = 0
+
+[[keyframes]]
+frame = 0
+seed = 2408416340
+prompt = "abstract impossible chrome drippy sculpture fine art jewelry, concept art, 3D object, octane render, unreal engine, album art, by Alberto Seveso"
+scale = 10
+
+[[keyframes]]
+duration = 300
+seed = 2641992039
+
+[[keyframes]]
+duration = 300
+seed = 3646477555
+
+[[keyframes]]
+duration = 300
+seed = 1172696231
+
+[[keyframes]]
+duration = 300
+seed = 1075723117

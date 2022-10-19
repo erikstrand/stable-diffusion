@@ -1,0 +1,27 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "copy_of_5"
+out_dir = "outputs/e1_23"
+width = 1024
+height = 768
+stride = 1
+restart_from = 715
+
+
+[[keyframes]]
+frame = 0
+seed = 8729013236
+prompt = "beautiful mannequin sculpted out of black glass by billelis + lit with geometric neon dripping gold + forest in background!!!, facing a doorway opening with neon pink geometric fractal light + flowering bonsai trees, transcendent, clean linework, dramatic, finely detailed, award winning, 4 k, trending on artstation, photorealistic, volumetric lighting, octane render"
+scale = 15
+
+[[keyframes]]
+duration = 300
+seed = 234390987
+
+[[keyframes]]
+duration = 300
+seed = 564592987
+
+[[keyframes]]
+duration = 300
+seed = 7845987

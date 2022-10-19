@@ -1,0 +1,26 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+scratch_dir = "copy_of_2"
+out_dir = "outputs/e1_26"
+width = 1024
+height = 768
+stride = 1
+restart_from = 111
+
+[[keyframes]]
+frame = 0
+seed = 49899780822
+prompt = "( isometric view, 3 d printed extruded filiment, beautiful woman queen chess piece, bioluminescence, beautiful face, reflection of led lights, intricate detail, futuristic, very detailed, highly detailed background, sharpfocus, photorealism, soft diffuse autumn lights, some sun light ray, dark room wall, canon 5 d 5 0 mm lens"
+scale = 17.0
+
+[[keyframes]]
+duration = 300
+seed = 234623987
+
+[[keyframes]]
+duration = 300
+seed = 564482987
+
+[[keyframes]]
+duration = 300
+seed = 7847521987

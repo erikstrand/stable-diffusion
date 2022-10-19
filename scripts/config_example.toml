@@ -1,0 +1,24 @@
+in_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/frames_1"
+mask_dir = "/home/erik/Code/extern/InvokeAI/99f/mermaid_1/masks_1"
+out_dir = "outputs/test/clip_00"
+width = 512
+height = 512
+stride = 1
+
+[[keyframes]]
+frame = 0
+seed = 6890234
+prompt = "a lush redwood forest with glowing orange mushrooms and verdant ferns, highly detailed digitial painting, cinematic lighting, fog and heavenly light rays, by artgerm, loish, greg rutkoski, and alphonse mucha"
+scale = 7.5
+strength = 0.5
+masks = []
+
+[[keyframes]]
+duration = 1
+seed = "random"
+animation.zoom = 1.02             # multiplicative factor per frame
+animation.translate = [0.0, 0.0]  # pixels per frame for X and Y
+animation.rotate = 0.0            # degrees per frame
+
+[[keyframes]]
+duration = 100
