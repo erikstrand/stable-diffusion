@@ -573,7 +573,11 @@ def prepare_image_metadata(
     if postprocessed and opt.save_original:
         filename = choose_postprocess_name(opt,prefix,seed)
     else:
-        filename = f'{prefix}.{seed}.png'
+        if opt.exclude_seed_from_filename:
+            # We add the .0 so that we still match the regex for filenames in PngWriter.
+            filename = f'{prefix}.0.png'
+        else:
+            filename = f'{prefix}.{seed}.png'
 
     if opt.variation_amount > 0:
         first_seed             = first_seed or seed
@@ -600,9 +604,17 @@ def choose_postprocess_name(opt,prefix,seed) -> str:
     available = False
     while not available:
         if counter == 0:
-            filename = f'{prefix}.{seed}.{modifier}.png'
+            if opt.exclude_seed_from_filename:
+                # We add the .0 so that we still match the regex for filenames in PngWriter.
+                filename = f'{prefix}.0.{modifier}.png'
+            else:
+                filename = f'{prefix}.{seed}.{modifier}.png'
         else:
-            filename = f'{prefix}.{seed}.{modifier}-{counter:02d}.png'
+            if opt.exclude_seed_from_filename:
+                # We add the .0 so that we still match the regex for filenames in PngWriter.
+                filename = f'{prefix}.0.{modifier}-{counter:02d}.png'
+            else:
+                filename = f'{prefix}.{seed}.{modifier}-{counter:02d}.png'
         available = not os.path.exists(os.path.join(opt.outdir,filename))
         counter += 1
     return filename

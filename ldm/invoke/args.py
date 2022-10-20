@@ -687,6 +687,12 @@ class Args(object):
             type=str,
             help='Directory to save generated images and a log of prompts and seeds',
         )
+        parser.add_argument(
+            '--exclude_seed_from_filename',
+            '-e',
+            action='store_true',
+            help=f'When True, the seed will appear as "0" in the filename.',
+        )
         render_group.add_argument(
             '--hires_fix',
             action='store_true',
