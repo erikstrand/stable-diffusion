@@ -190,8 +190,8 @@ class Generate:
         self.size_matters = True  # used to warn once about large image sizes and VRAM
 
         # Added parameters (by @erikstrand)
-        # This stores (uc, c) pairs for a set of prompts that can be referred to by name.
-        self.precomputed_latents = []
+        # This stores a list of prompts that can be referred to by index.
+        self.prompts = []
 
         # Note that in previous versions, there was an option to pass the
         # device to Generate(). However the device was then ignored, so
@@ -218,13 +218,12 @@ class Generate:
         # gets rid of annoying messages about random seed
         logging.getLogger('pytorch_lightning').setLevel(logging.ERROR)
 
-    def set_precomputed_latents(self, prompts):
-        """Accepts a list of prompts (as strings) and computes their latents.
+    def set_prompts(self, prompts):
+        """Accepts a list of prompts (as strings).
 
-        These latents can be referred to by index later. This makes commands for prompt interpolation more manageable.
+        These prompts can be referred to by index later. This makes commands for prompt interpolation more manageable.
         """
-        assert(self.model is not None)
-        self.precomputed_latents = [get_uc_and_c(prompt, self.model) for prompt in prompts]
+        self.prompts = prompts
 
     def prompt2png(self, prompt, outdir, **kwargs):
         """
@@ -258,6 +257,7 @@ class Generate:
             self,
             # these are common
             prompt,
+            prompt_idx       = None,
             iterations       = None,
             steps            = None,
             seed             = None,
@@ -301,6 +301,7 @@ class Generate:
         ldm.generate.prompt2image() is the common entry point for txt2img() and img2img()
         It takes the following arguments:
            prompt                          // prompt string (no default)
+           prompt_idx                      // index of prompt (in list of prompts set with !set_prompts command)
            iterations                      // iterations (1); image count=iterations
            steps                           // refinement steps per iteration
            seed                            // seed for random number generator
@@ -337,6 +338,10 @@ class Generate:
         It contains code to create the requested output directory, select a unique informative
         name for each image, and write the prompt into the PNG metadata.
         """
+        if prompt_idx is not None:
+            assert(not prompt)
+            assert(0 <= prompt_idx < len(self.prompts))
+            prompt = self.prompts[prompt_idx]
         # TODO: convert this into a getattr() loop
         steps = steps or self.steps
         width = width or self.width

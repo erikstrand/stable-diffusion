@@ -210,7 +210,10 @@ class Args(object):
         a = vars(self)
         a.update(kwargs)
         switches = list()
-        switches.append(f'"{a["prompt"]}"')
+        if a['prompt_idx'] is None:
+            switches.append(f'"{a["prompt"]}"')
+        else:
+            switches.append(f'--prompt_idx {a["prompt_idx"]}')
         switches.append(f'-s {a["steps"]}')
         switches.append(f'-S {a["seed"]}')
         switches.append(f'-W {a["width"]}')
@@ -552,6 +555,12 @@ class Args(object):
         postprocessing_group   = parser.add_argument_group('Post-processing')
         special_effects_group  = parser.add_argument_group('Special effects')
         render_group.add_argument('prompt')
+        render_group.add_argument(
+            '--prompt_idx',
+            type=int,
+            default=None,
+            help='Specify the zero-based index of a precomputed prompt latent (set with !set_prompts "prompt 0" "prompt 1" ...).'
+        )
         render_group.add_argument(
             '-s',
             '--steps',

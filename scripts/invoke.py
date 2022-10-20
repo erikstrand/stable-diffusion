@@ -155,14 +155,14 @@ def main_loop(gen, opt, infile):
 
         if opt.init_img:
             try:
-                if not opt.prompt:
+                if not opt.prompt and opt.prompt_idx is None:
                     oldargs    = metadata_from_png(opt.init_img)
                     opt.prompt = oldargs.prompt
                     print(f'>> Retrieved old prompt "{opt.prompt}" from {opt.init_img}')
             except (OSError, AttributeError, KeyError):
                 pass
 
-        if len(opt.prompt) == 0:
+        if len(opt.prompt) == 0 and opt.prompt_idx is None:
             print('\nTry again with a prompt!')
             continue
 
@@ -405,9 +405,7 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
 
     elif command.startswith('!set_prompts'):
         prompts = re.findall(r'"(.*?)"', command)
-        print(prompts)
-        gen.set_precomputed_latents(prompts)
-        print(gen.precomputed_latents)
+        gen.set_prompts(prompts)
         operation = None
 
     elif re.match('^!(\d+)',command):
