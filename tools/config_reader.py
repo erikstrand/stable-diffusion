@@ -51,8 +51,8 @@ class KeyFrame:
         "steps",
         "masks",
         "animation",
-        "color_coherence",
-        "is_color_reference"
+        "correct_colors",
+        "set_color_reference"
     ]
 
     def __init__(
@@ -60,23 +60,23 @@ class KeyFrame:
         frame,
         prompt,
         seed,
-        variations,
+        seed_variations,
         scale,
         strength,
         steps,
         masks,
         animation,
-        color_coherence,
-        is_color_reference
+        correct_colors,
+        set_color_reference
     ):
         self.frame = frame
         self.prompt = prompt
         self.seed = seed
 
-        assert(isinstance(variations, list))
-        for sv in variations:
+        assert(isinstance(seed_variations, list))
+        for sv in seed_variations:
             assert(isinstance(sv, SeedVariation))
-        self.seed_variations = variations
+        self.seed_variations = seed_variations
 
         self.scale = scale
         self.strength = strength
@@ -90,11 +90,11 @@ class KeyFrame:
         assert(animation is None or isinstance(animation, Animation2D))
         self.animation = animation
 
-        assert(color_coherence is None or color_coherence in ["RGB", "HSV", "LAB"])
-        self.color_coherence = color_coherence
+        assert(correct_colors in [True, False])
+        self.correct_colors = correct_colors
 
-        assert(is_color_reference in [True, False])
-        self.is_color_reference = is_color_reference
+        assert(set_color_reference in [True, False])
+        self.set_color_reference = set_color_reference
 
     @classmethod
     def from_dict(cls, dict):
@@ -129,12 +129,15 @@ class KeyFrame:
                 dict["animation"]["rotate"],
             )
 
-        if "color_coherence" not in dict:
-            color_coherence = None
-            is_color_reference = False
+        if "correct_colors" not in dict:
+            correct_colors = False
         else:
-            color_coherence = dict["color_coherence"]
-            is_color_reference = True
+            correct_colors = True
+
+        if "set_color_reference" not in dict:
+            set_color_reference = False
+        else:
+            set_color_reference = True
 
         return KeyFrame(
             int(dict["frame"]),
@@ -146,8 +149,8 @@ class KeyFrame:
             steps,
             masks,
             animation,
-            color_coherence,
-            is_color_reference
+            correct_colors,
+            set_color_reference
         )
 
     @classmethod
@@ -177,11 +180,11 @@ class KeyFrame:
             seed_weight = 1.0
 
         if seed_weight == 1.0:
-            variations = []
+            seed_variations = []
         else:
-            variations = [variation for variation in prev_keyframe.seed_variations]
+            seed_variations = [variation for variation in prev_keyframe.seed_variations]
             if seed != prev_keyframe.seed:
-                variations.append(SeedVariation(seed, seed_weight))
+                seed_variations.append(SeedVariation(seed, seed_weight))
 
         if "scale" not in dict or dict["scale"] == "same":
             dict["scale"] = prev_keyframe.scale
@@ -208,28 +211,30 @@ class KeyFrame:
                 dict["animation"]["rotate"],
             )
 
-        if "color_coherence" not in dict or dict["color_coherence"] == "same":
-            color_coherence = prev_keyframe.color_coherence
-            is_color_reference = False
-        elif dict["color_coherence"] == "none":
-            color_coherence = None
-            is_color_reference = False
+        # correct_colors defaults to the same value as the last keyframe
+        if "correct_colors" not in dict or dict["correct_colors"] == "same":
+            correct_colors = prev_keyframe.correct_colors
         else:
-            color_coherence = dict["color_coherence"]
-            is_color_reference = True
+            correct_colors = True
+
+        # set_color_reference is never interpolated
+        if "set_color_reference" not in dict:
+            set_color_reference = False
+        else:
+            set_color_reference = True
 
         return KeyFrame(
             dict["frame"],
             dict["prompt"],
             seed,
-            variations,
+            seed_variations,
             dict["scale"],
             dict["strength"],
             dict["steps"],
             dict["masks"],
             animation,
-            color_coherence,
-            is_color_reference,
+            correct_colors,
+            set_color_reference,
         )
 
     def __str__(self):
