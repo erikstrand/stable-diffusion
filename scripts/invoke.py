@@ -209,6 +209,9 @@ def main_loop(gen, opt, infile):
         if opt.prompt_variations is not None:
             opt.prompt_variations = split_prompt_variations(opt.prompt_variations)
 
+        if opt.init_img_transform is not None:
+            opt.init_img_transform = split_transform(opt.init_img_transform)
+
         if opt.prompt_as_dir and operation == 'generate':
             # sanitize the prompt to a valid folder name
             subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
@@ -681,6 +684,21 @@ def split_prompt_variations(variations_string) -> list:
         return None
     else:
         return parts
+
+def split_transform(transform_string) -> list:
+    components = transform_string.split(':')
+    if len(components) != 4:
+        print(f'** Could not parse transform string "{transform_string}": expected 4 components separated by colons')
+        return None
+    try:
+        angle = float(components[0])
+        zoom = float(components[1])
+        t_x = float(components[2])
+        t_y = float(components[3])
+    except ValueError:
+        print(f'** Could not parse transform string "{transform_string}": error parsing floats')
+        return None
+    return (angle, zoom, t_x, t_y)
 
 def load_face_restoration(opt):
     try:

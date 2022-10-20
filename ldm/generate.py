@@ -282,6 +282,7 @@ class Generate:
             fit              = False,
             strength         = None,
             init_color       = None,
+            init_img_transform = None,
             # these are specific to embiggen (which also relies on img2img args)
             embiggen       =    None,
             embiggen_tiles =    None,
@@ -431,6 +432,7 @@ class Generate:
                 width,
                 height,
                 fit=fit,
+                transform=init_img_transform,
             )
 
             # TODO: Hacky selection of operation to perform. Needs to be refactored.
@@ -658,6 +660,7 @@ class Generate:
             width,
             height,
             fit=False,
+            transform=None,
     ):
         init_image      = None
         init_mask       = None
@@ -683,7 +686,17 @@ class Generate:
             print(">> This input is larger than your defaults. If you run out of memory, please use a smaller image.")
             self.size_matters = False
 
-        init_image   = self._create_init_image(image,width,height,fit=fit)                   # this returns a torch tensor
+        if transform is not None:
+            image = self._transform_init_image(
+                image,
+                angle = transform[0],
+                zoom = transform[1],
+                t_x = transform[2],
+                t_y = transform[3],
+            )
+
+        # this converts the PIL image to a torch tensor
+        init_image = self._create_init_image(image,width,height,fit=fit)
 
         if mask:
             mask_image = self._load_img(
@@ -888,6 +901,40 @@ class Generate:
             )
         image = ImageOps.exif_transpose(image)
         return image
+
+    def _transform_init_image(self, image, angle, zoom, t_x, t_y):
+        """Transforms the initial image.
+
+        The angle should be in revolutions. The zoom is a unitless scale factor.
+        The translation parameters are in pixels.
+
+        This method is useful for making disco diffusion or deforum diffusion style animations.
+        """
+        # convert the PIL image to a numpy array
+        image_array = np.array(image)
+        image_array = np.swapaxes(np.flip(image_array, 0), 0, 1)
+
+        # transform the image
+        center = (0.5 * (image_array.shape[1] - 1), 0.5 * (image_array.shape[0] - 1))
+        trans_mat = np.float32([
+            [1.0, 0.0, t_y],
+            [0.0, 1.0, t_x],
+            [0.0, 0.0, 1.0]
+        ])
+        rot_mat = cv2.getRotationMatrix2D(center, 360.0 * angle, zoom)
+        rot_mat = np.vstack([rot_mat, [0.0, 0.0, 1.0]])
+        xform = np.matmul(rot_mat, trans_mat)
+        image_array = cv2.warpPerspective(
+            image_array,
+            xform,
+            (image_array.shape[1], image_array.shape[0]),
+            borderMode=cv2.BORDER_REPLICATE
+        )
+
+        # convert back to a PIL image
+        image_array = np.flip(np.swapaxes(image_array, 0, 1), 0)
+        format = 'RGB' if image_array.shape[2] == 3 else 'RGBA'
+        return Image.fromarray(image_array, format)
 
     def _create_init_image(self, image, width, height, fit=True):
         image = image.convert('RGB')

@@ -258,6 +258,19 @@ class Args(object):
                 switches.append(f'-f {a["strength"]}')
             if a['inpaint_replace']:
                 switches.append(f'--inpaint_replace')
+            if a['init_img_transform'] is not None:
+                # Image transforms start as strings but get parsed into tuples in invoke.py.
+                # This handles either case.
+                if isinstance(a['init_img_transform'], str):
+                    switches.append(f'-tf {a["init_img_transform"]}')
+                elif isinstance(a['init_img_transform'], tuple):
+                    angle = a['init_img_transform'][0]
+                    zoom = a['init_img_transform'][1]
+                    tx = a['init_img_transform'][2]
+                    ty = a['init_img_transform'][3]
+                    switches.append(f'-tf {angle}:{zoom}:{tx}:{ty}')
+                else:
+                    raise ValueError(f'Invalid image transform (should be a string or list): {a["init_img_transform"]}')
         else:
             switches.append(f'-A {a["sampler_name"]}')
 
@@ -748,6 +761,13 @@ class Args(object):
             type=float,
             default=0.0,
             help='when inpainting, adjust how aggressively to replace the part of the picture under the mask, from 0.0 (a gentle merge) to 1.0 (replace entirely)',
+        )
+        img2img_group.add_argument(
+            '-tf',
+            '--init_img_transform',
+            default=None,
+            type=str,
+            help='a transformation applied to the init image, in the form `rotation_degrees:zoom_scale:translate_x:translate_y'
         )
         postprocessing_group.add_argument(
             '-ft',
