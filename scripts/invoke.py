@@ -403,6 +403,13 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
         completer.clear_history()
         operation = None
 
+    elif command.startswith('!set_prompts'):
+        prompts = re.findall(r'"(.*?)"', command)
+        print(prompts)
+        gen.set_precomputed_latents(prompts)
+        print(gen.precomputed_latents)
+        operation = None
+
     elif re.match('^!(\d+)',command):
         command_no = re.match('^!(\d+)',command).groups()[0]
         command    = completer.get_line(int(command_no))

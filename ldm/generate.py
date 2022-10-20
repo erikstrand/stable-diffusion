@@ -189,6 +189,10 @@ class Generate:
         self.free_gpu_mem = free_gpu_mem
         self.size_matters = True  # used to warn once about large image sizes and VRAM
 
+        # Added parameters (by @erikstrand)
+        # This stores (uc, c) pairs for a set of prompts that can be referred to by name.
+        self.precomputed_latents = []
+
         # Note that in previous versions, there was an option to pass the
         # device to Generate(). However the device was then ignored, so
         # it wasn't actually doing anything. This logic could be reinstated.
@@ -213,6 +217,14 @@ class Generate:
 
         # gets rid of annoying messages about random seed
         logging.getLogger('pytorch_lightning').setLevel(logging.ERROR)
+
+    def set_precomputed_latents(self, prompts):
+        """Accepts a list of prompts (as strings) and computes their latents.
+
+        These latents can be referred to by index later. This makes commands for prompt interpolation more manageable.
+        """
+        assert(self.model is not None)
+        self.precomputed_latents = [get_uc_and_c(prompt, self.model) for prompt in prompts]
 
     def prompt2png(self, prompt, outdir, **kwargs):
         """
