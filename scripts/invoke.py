@@ -206,6 +206,9 @@ def main_loop(gen, opt, infile):
         if opt.with_variations is not None:
             opt.with_variations = split_variations(opt.with_variations)
 
+        if opt.prompt_variations is not None:
+            opt.prompt_variations = split_prompt_variations(opt.prompt_variations)
+
         if opt.prompt_as_dir and operation == 'generate':
             # sanitize the prompt to a valid folder name
             subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
@@ -648,6 +651,30 @@ def split_variations(variations_string) -> list:
             broken = True
             break
         parts.append([seed, weight])
+    if broken:
+        return None
+    elif len(parts) == 0:
+        return None
+    else:
+        return parts
+
+def split_prompt_variations(variations_string) -> list:
+    parts = []
+    broken = False  # python doesn't have labeled loops...
+    for part in variations_string.split(','):
+        prompt_idx_and_weight = part.split(':')
+        if len(prompt_idx_and_weight) != 2:
+            print(f'** Could not parse prompt_variation part "{part}"')
+            broken = True
+            break
+        try:
+            prompt_idx = int(prompt_idx_and_weight[0])
+            weight = float(prompt_idx_and_weight[1])
+        except ValueError:
+            print(f'** Could not parse promp_variation part "{part}"')
+            broken = True
+            break
+        parts.append([prompt_idx, weight])
     if broken:
         return None
     elif len(parts) == 0:

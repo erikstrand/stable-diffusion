@@ -214,6 +214,20 @@ class Args(object):
             switches.append(f'"{a["prompt"]}"')
         else:
             switches.append(f'--prompt_idx {a["prompt_idx"]}')
+
+        if a['prompt_variations'] is not None:
+            # Prompt variations start as strings (e.g. "0:0.5,1:0.75") but get parsed into lists in
+            # invoke.py (e.g. [[0, 0.5], [1, 0.75]]). This handles either case.
+            if isinstance(a['prompt_variations'], str):
+                switches.append(f'-P {a["prompt_variations"]}')
+            elif isinstance(a['prompt_variations'], list):
+                formatted_variations = ','.join([
+                    f'{prompt_idx}:{weight}' for prompt_idx, weight in a["prompt_variations"]
+                ])
+                switches.append(f'-P {formatted_variations}')
+            else:
+                raise ValueError(f'Invalid prompt_variations (should be a string or list): {a["prompt_variations"]}')
+
         switches.append(f'-s {a["steps"]}')
         switches.append(f'-S {a["seed"]}')
         switches.append(f'-W {a["width"]}')
@@ -560,6 +574,13 @@ class Args(object):
             type=int,
             default=None,
             help='Specify the zero-based index of a precomputed prompt latent (set with !set_prompts "prompt 0" "prompt 1" ...).'
+        )
+        render_group.add_argument(
+            '-P',
+            '--prompt_variations',
+            default=None,
+            type=str,
+            help='list of prompt variations to apply, in the format `prompt_idx:weight,prompt_idx:weight,...'
         )
         render_group.add_argument(
             '-s',

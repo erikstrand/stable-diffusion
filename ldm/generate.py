@@ -258,6 +258,7 @@ class Generate:
             # these are common
             prompt,
             prompt_idx       = None,
+            prompt_variations = None,
             iterations       = None,
             steps            = None,
             seed             = None,
@@ -302,6 +303,7 @@ class Generate:
         It takes the following arguments:
            prompt                          // prompt string (no default)
            prompt_idx                      // index of prompt (in list of prompts set with !set_prompts command)
+           prompt_variations               // a weighted list [(prompt_idx_1, weight_1), (prompt_idx_2, weight_2), ...] used for interpolating between prompts
            iterations                      // iterations (1); image count=iterations
            steps                           // refinement steps per iteration
            seed                            // seed for random number generator
@@ -342,6 +344,11 @@ class Generate:
             assert(not prompt)
             assert(0 <= prompt_idx < len(self.prompts))
             prompt = self.prompts[prompt_idx]
+        prompt_variations = [] if prompt_variations is None else prompt_variations
+        if len(prompt_variations) > 0:
+            assert all(0 <= weight <= 1 for _, weight in prompt_variations),\
+                f"prompt variation weights must be in [0.0, 1.0]: got {[weight for _, weight in prompt_variations]}"
+
         # TODO: convert this into a getattr() loop
         steps = steps or self.steps
         width = width or self.width
@@ -410,10 +417,12 @@ class Generate:
         mask_image = None
 
         try:
+            # Compute latents for the base prompt.
             uc, c = get_uc_and_c(
-                prompt, model =self.model,
-                skip_normalize=skip_normalize,
-                log_tokens    =self.log_tokenization
+                prompt,
+                model = self.model,
+                skip_normalize = skip_normalize,
+                log_tokens = self.log_tokenization
             )
 
             init_image,mask_image = self._make_images(
@@ -439,6 +448,18 @@ class Generate:
             generator.set_variation(
                 self.seed, variation_amount, with_variations
             )
+
+            # Apply prompt variations.
+            for prompt_idx, weight in prompt_variations:
+                prompt = self.prompts[prompt_idx]
+                uc_variation, c_variation = get_uc_and_c(
+                    prompt,
+                    model = self.model,
+                    skip_normalize = skip_normalize,
+                    log_tokens = self.log_tokenization
+                )
+                uc = generator.slerp(weight, uc, uc_variation)
+                c = generator.slerp(weight, c, c_variation)
 
             results = generator.generate(
                 prompt,
