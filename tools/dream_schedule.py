@@ -3,7 +3,6 @@ import re
 import numpy as np
 from pathlib import Path
 from dataclasses import dataclass
-#from dream_state import DreamState
 
 # TODO
 # - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
@@ -11,9 +10,14 @@ from dataclasses import dataclass
 
 @dataclass
 class PromptVariation:
-    __slots__ = ["prompt", "amount"]
+    __slots__ = ["prompt", "prompt_idx", "amount"]
     prompt: str
+    prompt_idx: int
     amount: float
+
+    @property
+    def base(self):
+        return self.prompt_idx
 
 
 @dataclass
@@ -21,6 +25,10 @@ class SeedVariation:
     __slots__ = ["seed", "amount"]
     seed: int
     amount: float
+
+    @property
+    def base(self):
+        return self.seed
 
 
 @dataclass
@@ -69,7 +77,7 @@ class InputImage:
 
     @classmethod
     def from_string(cls, string, frame):
-        if string == "prev":
+        if string == "previous":
             return cls.from_prev()
         else:
             return cls.from_path(string, frame)
@@ -106,6 +114,9 @@ class Transform2D:
         self.rotation = float(rotation) # in degrees
         self.zoom = float(zoom) # in unitless scale factor
         self.translation = (float(translation[0]), float(translation[1])) # in pixels
+
+    def arg_string(self):
+        return f"{self.rotation}:{self.zoom}:{self.translation[0]}:{self.translation[1]}"
 
 
 class KeyFrame:
@@ -185,6 +196,7 @@ class KeyFrame:
 
     @classmethod
     def from_dict(cls, dict):
+        # This method is only used to process the first keyframe.
         assert("frame" in dict)
         frame = int(dict["frame"])
 
@@ -242,23 +254,25 @@ class KeyFrame:
             set_color_reference = True
 
         return KeyFrame(
-            frame,
-            input_image,
-            prompt,
-            [],
-            seed,
-            [],
-            scale,
-            strength,
-            steps,
-            masks,
-            transform,
-            correct_colors,
-            set_color_reference
+            frame=frame,
+            input_image=input_image,
+            prompt=prompt,
+            prompt_variations=[],
+            seed=seed,
+            seed_variations=[],
+            scale=scale,
+            strength=strength,
+            steps=steps,
+            masks=masks,
+            transform=transform,
+            correct_colors=correct_colors,
+            set_color_reference=set_color_reference
         )
 
     @classmethod
     def from_dict_and_previous_keyframe(cls, dict, prev_keyframe):
+        # This method is used to process all but the first keyframe.
+
         # Every keyframe must have an absolute frame number or a duration.
         if "frame" in dict:
             frame = int(dict["frame"])
@@ -298,8 +312,17 @@ class KeyFrame:
             prompt_variations = []
         else:
             prompt_variations = [variation for variation in prev_keyframe.prompt_variations]
-            if prompt != prev_keyframe.prompt:
-                prompt_variations.append(PromptVariation(prompt, prompt_weight))
+            # If we've haven't added a new prompt, we may need to update the weight of the previous one.
+            # TODO check this logic and compare with seed logic
+            if len(prompt_variations) > 0 and prompt == prompt_variations[-1].prompt:
+                last_variation = prompt_variations.pop()
+            prompt_variations.append(PromptVariation(prompt, None, prompt_weight))
+
+        # The base prompt only updates if the prompt weight is 1.0.
+        if prompt_weight == 1.0:
+            base_prompt = prompt
+        else:
+            base_prompt = prev_keyframe.prompt
 
         # The seed defaults to that of the previous keyframe.
         # The special value "random" means to generate a new (deterministic) seed for each frame.
@@ -327,8 +350,16 @@ class KeyFrame:
             seed_variations = []
         else:
             seed_variations = [variation for variation in prev_keyframe.seed_variations]
-            if seed != prev_keyframe.seed:
-                seed_variations.append(SeedVariation(seed, seed_weight))
+            # If we've haven't added a new seed, we may need to update the weight of the previous one.
+            if seed == prev_keyframe.seed:
+                last_variation = seed_variations.pop()
+            seed_variations.append(SeedVariation(seed, seed_weight))
+
+        # The base seed only updates if the seed weight is 1.0.
+        if seed_weight == 1.0:
+            base_seed = seed
+        else:
+            base_seed = prev_keyframe.seed
 
         # Scale, strength, and steps default to the values from the previous keyframe.
         if "scale" not in dict or dict["scale"] == "same":
@@ -370,25 +401,26 @@ class KeyFrame:
             set_color_reference = True
 
         return KeyFrame(
-            frame,
-            input_image,
-            prompt,
-            prompt_variations,
-            seed,
-            seed_variations,
-            dict["scale"],
-            dict["strength"],
-            dict["steps"],
-            dict["masks"],
-            transform,
-            correct_colors,
-            set_color_reference,
+            frame=frame,
+            input_image=input_image,
+            prompt=base_prompt,
+            prompt_variations=prompt_variations,
+            seed=base_seed,
+            seed_variations=seed_variations,
+            scale=dict["scale"],
+            strength=dict["strength"],
+            steps=dict["steps"],
+            masks=dict["masks"],
+            transform=transform,
+            correct_colors=correct_colors,
+            set_color_reference=set_color_reference,
         )
 
     def __str__(self):
         result = f"KeyFrame {self.frame}: ({self.input_image}) \"{self.prompt}\""
         if self.prompt_idx is not None:
             result += f" (idx {self.prompt_idx})"
+        result +=f" with {len(self.prompt_variations)} variations"
         result +=f", seed {self.seed}, {len(self.seed_variations)} variations, scale {self.scale}, strength {self.strength}, {len(self.masks)} masks"
         return result
 
@@ -434,6 +466,9 @@ class DreamSchedule:
         for keyframe in self.keyframes:
             assert keyframe.prompt in prompt_to_idx
             keyframe.prompt_idx = prompt_to_idx[keyframe.prompt]
+            for variation in keyframe.prompt_variations:
+                assert variation.prompt in prompt_to_idx
+                variation.prompt_idx = prompt_to_idx[variation.prompt]
 
     @classmethod
     def from_dict(cls, data):
@@ -457,6 +492,10 @@ class DreamSchedule:
             data = toml.load(f)
         return cls.from_dict(data)
 
+    def prompt_command(self):
+        quoted_prompts = '"' + '" "'.join(self.prompts) + '"'
+        return f"!set_prompts {quoted_prompts}"
+
     def print(self):
         print(f"in_dir: {self.in_dir}")
         print(f"out_dir: {self.out_dir}")
@@ -472,11 +511,5 @@ class DreamSchedule:
 
 
 if __name__ == "__main__":
-    schedule = load_config("example_config.toml")
+    schedule = DreamSchedule.from_file("example_animation.toml")
     schedule.print()
-
-    #dream_state = DreamState(schedule)
-    #while not dream_state.done():
-    #    command = dream_state.get_command()
-    #    print(command)
-    #    dream_state.advance_frame()

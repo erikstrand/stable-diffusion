@@ -1,0 +1,56 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+out_dir = "outputs/example_animation"
+width = 512
+height = 512
+
+[prompts]
+owl = "a warrior owl, art nouveau, steampunk, symmetry, full frame, cinematic light, unreal engine"
+eagle = "a warrior eagle, art nouveau, steampunk, symmetry, full frame, cinematic light, unreal engine"
+
+[[keyframes]]
+frame = 1                   # the first keyframe should always be frame 1
+input_image = "none"        # the first frame is pure txt2img
+seed = 1291772199
+prompt = "owl"              # this refers to the first named prompt defined above
+scale = 10.0
+strength = 0.5
+steps = 50
+set_color_reference = true  # this means we will use the resulting frame as a color reference
+
+[[keyframes]]
+duration = 1                      # this keyframe occurs 1 frame after the previous keyframe
+input_image = "previous"          # use the previous frame as the input image
+seed = "random"                   # generate a new seed for every frame (deterministically)
+# These transform parameters control how we modify the input image.
+transform.zoom = 1.02             # unitless scale factor (1.0 means no change, >1.0 means zoom in)
+transform.translate = [2.0, 0.0]  # pixels in the X and Y directions
+transform.rotate = -1.0           # rotations per frame in degrees (positive is CCW)
+correct_colors = true             # adjust this frame's histograms to match the current reference frame
+
+[[keyframes]]
+duration = 100         # this keyframe occurs 100 frames after the previous keyframe
+transform.zoom = 0.98  # now we start zooming out
+transform.translate = [0.0, -2.0]
+transform.rotate = -0.1
+# The parameters we didn't set here will be inherited from the previous keyframe.
+
+[[keyframes]]
+duration = 50
+# move halfway to the eagle prompt by slerping in latent space
+prompt = "eagle"
+prompt_weight = 0.5
+transform.zoom = 1.0
+transform.translate = [-5.0, 0.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 25
+prompt = "eagle"
+prompt_weight = 1.0
+transform.zoom = 1.01
+transform.translate = [0.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
