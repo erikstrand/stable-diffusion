@@ -32,45 +32,92 @@ class DreamState:
         )
 
     def get_opts(self):
+        # Determine our position between prev_keyframe and next_keyframe.
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
+
+        # Create the final list of prompt variations. The weight of the last variation may be interpolated.
+        n_prev_variations = len(self.prev_keyframe.prompt_variations)
+        n_next_variations = len(self.next_keyframe.prompt_variations)
+        prompt_variations = [[var.prompt, var.amount] for var in self.prev_keyframe.prompt_variations]
+        if n_next_variations == 0:
+            # If the next keyframe is a new prompt at full strength, and we're strictly between
+            # keyframes, interpolate to it.
+            if self.frame_idx > self.prev_keyframe.frame:
+                prompt_variations.append([self.next_keyframe.prompt, t])
+        elif n_next_variations > n_prev_variations:
+            # If the next keyframe has more variations, interpolate the strength of the new one.
+            assert(n_next_variations == n_prev_variations + 1)
+            prompt_variations.append([
+                self.next_keyframe.prompt_variations[-1].prompt,
+                self.next_keyframe.prompt_variations[-1].amount * t,
+            ])
+        elif n_next_variations == n_prev_variations:
+            # Otherwise, interpolate the weight of the last variation.
+            prev_prompt = self.prev_keyframe.prompt_variations[-1].prompt
+            prev_weight = self.prev_keyframe.prompt_variations[-1].amount
+            next_prompt = self.next_keyframe.prompt_variations[-1].prompt
+            next_weight = self.next_keyframe.prompt_variations[-1].amount
+            assert(prev_prompt == next_prompt)
+            prompt_variations[-1][1] = (1.0 - t) * prev_weight + t * next_weight
+        else:
+            # We shouldn't ever reach here, since there's no way to remove some but not all variations.
+            assert(False)
+        if len(prompt_variations) == 0:
+            prompt_variations = None
+
+
+        # Scale and strength are interpolated linearly.
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
+
+        # We use the same number of steps as the previous keyframe.
         steps = self.prev_keyframe.steps
 
+        # If we're using random seeds, generate one for this frame.
+        # Otherwise use the base seed from the previous keyframe.
         if self.prev_keyframe.seed == None:
             seed = self.random.getrandbits(32)
         else:
             seed = self.prev_keyframe.seed
 
+        # Create the final list of seed variations. The weight of the last variation may be interpolated.
         n_prev_variations = len(self.prev_keyframe.seed_variations)
         n_next_variations = len(self.next_keyframe.seed_variations)
-        variations = [[var.seed, var.amount] for var in self.prev_keyframe.seed_variations]
+        seed_variations = [[var.seed, var.amount] for var in self.prev_keyframe.seed_variations]
         if n_next_variations == 0:
             # If the next keyframe is a new seed at full strength, and we're strictly between
             # keyframes, interpolate to it.
             if self.frame_idx > self.prev_keyframe.frame:
-                variations.append([self.next_keyframe.seed, t])
+                seed_variations.append([self.next_keyframe.seed, t])
         elif n_next_variations > n_prev_variations:
             # If the next keyframe has more variations, interpolate the strength of the new one.
             assert(n_next_variations == n_prev_variations + 1)
-            variations.append([
+            seed_variations.append([
                 self.next_keyframe.seed_variations[-1].seed,
                 self.next_keyframe.seed_variations[-1].amount * t,
             ])
-        # Otherwise, we keep the seed/variations constant.
-        if len(variations) == 0:
-            variations = None
+        elif n_next_variations == n_prev_variations:
+            # Otherwise, interpolate the weight of the last variation.
+            prev_seed = self.prev_keyframe.seed_variations[-1].seed
+            prev_weight = self.prev_keyframe.seed_variations[-1].amount
+            next_seed = self.next_keyframe.seed_variations[-1].seed
+            next_weight = self.next_keyframe.seed_variations[-1].amount
+            assert(prev_seed == next_seed)
+            seed_variations[-1][1] = (1.0 - t) * prev_weight + t * next_weight
+        else:
+            # We shouldn't ever reach here, since there's no way to remove some but not all variations.
+            assert(False)
+        if len(seed_variations) == 0:
+            seed_variations = None
 
         color_coherence = self.prev_keyframe.color_coherence
         is_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.is_color_reference)
 
         return {
-            "prompt": "",
             "prompt_index": self.prev_keyframe.prompt,
-            "latent_1": self.next_keyframe.prompt,
-            "latent_interpolation": t,
+            "prompt_variations": prompt_variations,
             "seed": seed,
-            "with_variations": variations,
+            "with_variations": seed_variations,
             "cfg_scale": scale,
             "strength": strength,
             "steps": steps,
@@ -84,5 +131,5 @@ class DreamState:
 
     def get_command(self):
         opts = self.get_opts()
-        pairs = [(k, v) for k, v in opts.items() if k != "prompt" and v is not None]
-        return opts["prompt"] + ' ' + ' '.join(f"--{k} {v}" for k, v in pairs)
+        pairs = [(k, v) for k, v in opts.items() if v is not None]
+        return ' '.join(f"--{k} {v}" for k, v in pairs)
