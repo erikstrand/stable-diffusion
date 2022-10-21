@@ -9,8 +9,10 @@ class DreamState:
         self.next_keyframe_idx = 1
         self.interp_duration = None
         self.frame_idx = 0
+        self.frame_idx = 1
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
         self.random = random.Random(self.prev_keyframe.seed)
+        self.color_reference = None
 
     def advance_keyframe(self):
         self.next_keyframe_idx += 1
@@ -30,6 +32,9 @@ class DreamState:
             self.frame_idx + 1 == self.next_keyframe.frame and
             self.next_keyframe_idx + 1 == len(self.schedule.keyframes)
         )
+
+    def output_file(self):
+        return self.schedule.out_dir / f"{self.frame_idx:06d}.0.png"
 
     def get_opts(self):
         # Determine our position between prev_keyframe and next_keyframe.
@@ -70,8 +75,6 @@ class DreamState:
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
 
-        # We use the same number of steps as the previous keyframe.
-        steps = self.prev_keyframe.steps
 
         # If we're using random seeds, generate one for this frame.
         # Otherwise use the base seed from the previous keyframe.
@@ -110,26 +113,31 @@ class DreamState:
         if len(seed_variations) == 0:
             seed_variations = None
 
-        color_coherence = self.prev_keyframe.color_coherence
-        is_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.is_color_reference)
+        # We use the same number of steps and color correction as the previous keyframe.
+        steps = self.prev_keyframe.steps
+        correct_colors = self.prev_keyframe.correct_colors
+        init_color = self.color_reference if correct_colors else None
+
+        # Record the current output file as a color reference, if requested.
+        set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
+        if set_color_reference:
+            self.color_reference = self.output_file()
 
         return {
-            "prompt_index": self.prev_keyframe.prompt,
-            "prompt_variations": prompt_variations,
-            "seed": seed,
-            "with_variations": seed_variations,
-            "cfg_scale": scale,
-            "strength": strength,
-            "steps": steps,
-            "width": self.schedule.width,
-            "height": self.schedule.height,
-            "outdir": str(self.schedule.out_dir),
-            "animation": self.prev_keyframe.animation,
-            "color_coherence": color_coherence,
-            "is_color_reference": is_color_reference,
+            "--prompt_index": self.prev_keyframe.prompt_idx,
+            "-P": prompt_variations,
+            "-S": seed,
+            "-V": seed_variations,
+            "-C": scale,
+            "-f": strength,
+            "-s": steps,
+            "--init_color": init_color,
+            "-W": self.schedule.width,
+            "-H": self.schedule.height,
+            "-o": str(self.schedule.out_dir),
         }
 
     def get_command(self):
         opts = self.get_opts()
         pairs = [(k, v) for k, v in opts.items() if v is not None]
-        return ' '.join(f"--{k} {v}" for k, v in pairs)
+        return ' '.join(f"{k} {v}" for k, v in pairs)
