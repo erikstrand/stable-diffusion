@@ -116,7 +116,7 @@ class Transform2D:
         self.translation = (float(translation[0]), float(translation[1])) # in pixels
 
     def arg_string(self):
-        return f"{self.rotation}:{self.zoom}:{self.translation[0]}:{self.translation[1]}"
+        return f"{self.rotation:.3f}:{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}"
 
 
 class KeyFrame:
@@ -313,7 +313,6 @@ class KeyFrame:
         else:
             prompt_variations = [variation for variation in prev_keyframe.prompt_variations]
             # If we've haven't added a new prompt, we may need to update the weight of the previous one.
-            # TODO check this logic and compare with seed logic
             if len(prompt_variations) > 0 and prompt == prompt_variations[-1].prompt:
                 last_variation = prompt_variations.pop()
             prompt_variations.append(PromptVariation(prompt, None, prompt_weight))
@@ -351,7 +350,7 @@ class KeyFrame:
         else:
             seed_variations = [variation for variation in prev_keyframe.seed_variations]
             # If we've haven't added a new seed, we may need to update the weight of the previous one.
-            if seed == prev_keyframe.seed:
+            if len(seed_variations) > 0 and seed == seed_variations[-1].seed:
                 last_variation = seed_variations.pop()
             seed_variations.append(SeedVariation(seed, seed_weight))
 
