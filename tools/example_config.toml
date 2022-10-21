@@ -3,43 +3,60 @@ mask_dir = "n/a"
 out_dir = "outputs/e1_35"
 width = 512
 height = 512
-stride = 1
+
+
+[[prompts]]
+name = "owl"
+prompt = "a warrior owl, art nouveau, steampunk, symmetry, full frame, cinematic light, unreal engine"
+
+[[prompts]]
+name = "crystals"
+prompt = "shiny obsidian cubic crystals with small embedded glowing emeralds rubies and sapphires, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
+
 
 [[keyframes]]
-frame = 1
+frame = 1                # the first keyframe should always be frame 1
+input_mode = "txt2img"   # possible input modes are "txt2img", "video", and "recursive"
 seed = 1291772199
-prompt = "neon hieroglyphics intertwined with shiny metal sculpture, onyx, pink, highly detailed, ultra realistic, octane render 8k, by guerrino boatto"
+prompt = "owl"           # this refers to the first named prompt defined above
 scale = 10.0
 strength = 0.5
 steps = 50
-set_color_reference = true
+set_color_reference = true # this means we will use the resulting frame as a color reference
 
 [[keyframes]]
-duration = 1
-seed = "random"
-animation.zoom = 1.02             # multiplicative factor per frame
-animation.translate = [2.0, 0.0]  # pixels per frame for X and Y
-animation.rotate = -1.0           # rotations per frame in revolutions (positive is CCW)
-correct_colors = true
+duration = 1                      # this keyframe occurs 1 frame after the previous keyframe
+input_mode = "recursive"          # use the previous frame as the input image
+seed = "random"                   # generate a new seed for every frame (deterministically)
+# The remaining parameters are commonly used in recursive input mode.
+# (They can also be used in video mode, but not txt2img mode.)
+transform.zoom = 1.02             # unitless scale factor (1.0 means no change, >1.0 means zoom in)
+transform.translate = [2.0, 0.0]  # pixels in the X and Y directions
+transform.rotate = -1.0           # rotations per frame in degrees (positive is CCW)
+correct_colors = true             # adjust this frame's histograms to match the current reference frame
+
+[[keyframes]]
+duration = 100         # this keyframe occurs 100 frames after the previous keyframe
+transform.zoom = 0.98  # now we start zooming out
+transform.translate = [0.0, -2.0]
+transform.rotate = -0.1
 
 [[keyframes]]
 duration = 100
-animation.zoom = 0.98
-animation.translate = [0.0, -2.0]
-animation.rotate = -0.1
-
-[[keyframes]]
-duration = 100
-animation.zoom = 1.0
-animation.translate = [-5.0, 0.0]
-animation.rotate = 0.0
+# move halfway to the crystals prompt by slerping in latent space
+prompt_variations = [["crystals", 0.5]]
+transform.zoom = 1.0
+transform.translate = [-5.0, 0.0]
+transform.rotate = 0.0
 
 [[keyframes]]
 duration = 80
+# you can also write out new prompts explicitly
 prompt = "neon sculptures, shiny metal statues, background of rugged onyx rocks, highly detailed, ultra realistic, octane render 8k by kilian eng and guerrino boatto"
-animation.zoom = 1.02
-animation.translate = [0.0, -2.0]
-animation.rotate = 1.0
+prompt_variations = []
+transform.zoom = 1.02
+transform.translate = [0.0, -2.0]
+transform.rotate = 1.0
 
 [[keyframes]]
 duration = 100
