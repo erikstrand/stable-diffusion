@@ -49,6 +49,12 @@ class InputImage:
     frame_delta: int
     n_digits: int
 
+    def in_prev_mode(self):
+        return self.path_start is None
+
+    def in_video_mode(self):
+        return self.path_start is not None
+
     @classmethod
     def from_prev(cls):
         return cls(path_start=None, path_end=None, keyframe=None, frame_delta=None, n_digits=None)
@@ -183,6 +189,9 @@ class KeyFrame:
         assert(isinstance(masks, list))
         for mask in masks:
             assert(isinstance(mask, Mask))
+        # For now you can only mask pre-existing frames.
+        if (len(masks) > 0):
+            assert(input_image.in_video_mode())
         self.masks = masks
 
         assert(transform is None or isinstance(transform, Transform2D))

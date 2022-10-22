@@ -1,4 +1,5 @@
 import random
+from dream_schedule import Mask
 
 
 class DreamState:
@@ -162,3 +163,32 @@ class DreamState:
         opts = self.get_opts()
         pairs = [(k, v) for k, v in opts.items() if v is not None]
         return ' '.join(f"{k} {v}" for k, v in pairs) + " -e"
+
+    def get_masks(self):
+        # Determine our position between prev_keyframe and next_keyframe.
+        t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
+        prev_masks = self.prev_keyframe.masks
+        next_masks = self.next_keyframe.masks
+        n_prev_masks = len(prev_masks)
+        n_next_masks = len(next_masks)
+
+        # If the masks are added in the next keyframe, there are no masks now.
+        if n_prev_masks == 0:
+            return []
+
+        # If the masks are removed in the next keyframe, use the current masks.
+        if n_next_masks == 0:
+            return prev_keyframe.masks
+
+        # If there are the same number of masks, interpolate.
+        if n_prev_masks == n_next_masks:
+            masks = []
+            for prev_mask, next_mask in zip(prev_keyframe.masks, next_keyframe.masks):
+                center = (1.0 - t) * prev_mask.center + t * next_mask.center
+                radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
+                masks.append(Mask(center, radius))
+            return masks
+
+        # Currently the case where n_prev_masks != n_next_masks and both are greater than zero is
+        # not supported.
+        assert(False), "Currently you have to create or remove all masks at once."

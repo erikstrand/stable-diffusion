@@ -52,6 +52,17 @@ if __name__ == "__main__":
         while not dream_state.done() and dream_state.frame_idx <= args.end_at:
             # We generate the command so that random seeds are the same no matter where we start.
             command = dream_state.get_command()
+            masks = dream_state.get_masks()
+            #print(masks)
             if args.start_at <= dream_state.frame_idx:
                 outfile.write(command + '\n')
             dream_state.advance_frame()
+
+
+        """
+        if len(interp_masks) > 0:
+            image_file = indir / f"{frame_idx:06d}.0.png"
+            mask_file = maskdir / f"{frame_idx:06d}.0.png"
+            print(f"generating mask for frame {frame_idx} ({mask_file})")
+            save_mask_image(width, height, interp_masks, image_file, mask_file)
+        """
