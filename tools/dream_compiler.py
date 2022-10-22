@@ -50,7 +50,8 @@ if __name__ == "__main__":
 
         # Render the frames.
         while not dream_state.done() and dream_state.frame_idx <= args.end_at:
+            # We generate the command so that random seeds are the same no matter where we start.
+            command = dream_state.get_command()
             if args.start_at <= dream_state.frame_idx:
-                command = dream_state.get_command()
                 outfile.write(command + '\n')
             dream_state.advance_frame()
