@@ -1,5 +1,6 @@
 import numpy as np
 from PIL import Image
+from pathlib import Path
 
 
 def generate_mask_array(width, height, circles):
@@ -20,10 +21,9 @@ def generate_mask_array(width, height, circles):
 
     for circle in circles:
         # Rescale center and radius.
-        center = circle[0]
+        center = circle.center
         center = np.array([width, height]) * center
-        radius = circle[1]
-        radius = height * radius
+        radius = height * circle.radius
 
         # Generate the mask.
         dist = np.linalg.norm(coords - center, axis=2)
@@ -53,6 +53,7 @@ def generate_mask_image(width, height, circles, infile):
 
 def save_mask_image(width, height, circles, infile, outfile):
     image = generate_mask_image(width, height, circles, infile)
+    Path(outfile).parent.mkdir(parents=True, exist_ok=True)
     image.save(outfile)
 
 

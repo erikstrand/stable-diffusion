@@ -33,6 +33,20 @@ class DreamState:
             self.next_keyframe_idx + 1 == len(self.schedule.keyframes)
         )
 
+    def input_image_path(self):
+        if self.prev_keyframe.input_image is None:
+            return None
+        else:
+            tmp = self.prev_keyframe.input_image.get_path(self.frame_idx)
+            return str(self.schedule.in_dir / tmp)
+
+    def mask_path(self):
+        if self.prev_keyframe.input_image is None:
+            return None
+        else:
+            tmp = self.prev_keyframe.input_image.get_path(self.frame_idx)
+            return str(self.schedule.mask_dir / tmp)
+
     def output_file(self):
         return self.schedule.out_dir / f"{self.frame_idx:06d}.0.png"
 
@@ -83,11 +97,7 @@ class DreamState:
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
 
         # Determine the input image (if any).
-        if self.prev_keyframe.input_image is None:
-            init_img = None
-        else:
-            init_img = self.prev_keyframe.input_image.get_path(self.frame_idx)
-            init_img = str(self.schedule.in_dir / init_img)
+        init_img = self.input_image_path()
 
         # Determine if we need to transform the input image.
         if init_img is None or self.prev_keyframe.transform is None:
@@ -95,7 +105,11 @@ class DreamState:
         else:
             init_img_transform = self.prev_keyframe.transform.arg_string()
 
-        # TODO Determine the mask (if any).
+        # Set the mask path (if any).
+        if self.has_mask():
+            mask = self.mask_path()
+        else:
+            mask = None
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
         prompt_variations = self.interpolate_variations(
@@ -148,6 +162,7 @@ class DreamState:
 
         return {
             "-I": init_img,
+            "-M": mask,
             "--prompt_idx": self.prev_keyframe.prompt_idx,
             "-P": prompt_variations,
             "-S": seed,
@@ -167,6 +182,9 @@ class DreamState:
         pairs = [(k, v) for k, v in opts.items() if v is not None]
         return ' '.join(f"{k} {v}" for k, v in pairs) + " -e"
 
+    def has_mask(self):
+        return len(self.prev_keyframe.masks) > 0
+
     def get_masks(self):
         # Determine our position between prev_keyframe and next_keyframe.
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
@@ -181,12 +199,12 @@ class DreamState:
 
         # If the masks are removed in the next keyframe, use the current masks.
         if n_next_masks == 0:
-            return prev_keyframe.masks
+            return prev_masks
 
         # If there are the same number of masks, interpolate.
         if n_prev_masks == n_next_masks:
             masks = []
-            for prev_mask, next_mask in zip(prev_keyframe.masks, next_keyframe.masks):
+            for prev_mask, next_mask in zip(prev_masks, next_masks):
                 center = (1.0 - t) * prev_mask.center + t * next_mask.center
                 radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
                 masks.append(Mask(center, radius))

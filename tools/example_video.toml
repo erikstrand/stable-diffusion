@@ -10,18 +10,25 @@ ghost = "a ghostly apparition, fog, art by greg rutkowski"
 [[keyframes]]
 frame = 1                   # the first keyframe should always be frame 1
 # Input images are named cheshire/IM0001.png, cheshire/IM0002.png, etc.
-# We want to start at IM0278 and increment from there.
-input_image = "cheshire/IM{0278}.png"
+# We want to start at IM0617.png and increment from there.
+input_image = "cheshire/IM{0617}.png"
 seed = 89075690
 prompt = "ghost"
 scale = 8.0
 strength = 0.0
 steps = 50
+masks = [
+    { center = [0.5, 0.6], radius = 0.2 }
+]
 
 [[keyframes]]
 duration = 50
-strength = 0.7
+strength = 0.5
+masks = [
+    { center = [0.5, 0.55], radius = 0.25 }
+]
 
 [[keyframes]]
 duration = 50
 strength = 0.0
+masks = []
