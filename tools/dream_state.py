@@ -161,4 +161,4 @@ class DreamState:
     def get_command(self):
         opts = self.get_opts()
         pairs = [(k, v) for k, v in opts.items() if v is not None]
-        return ' '.join(f"{k} {v}" for k, v in pairs)
+        return ' '.join(f"{k} {v}" for k, v in pairs) + " -e"
