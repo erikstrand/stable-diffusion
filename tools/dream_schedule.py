@@ -196,9 +196,12 @@ class KeyFrame:
 
     @classmethod
     def from_dict(cls, dict):
-        # This method is only used to process the first keyframe.
+        """This method is only used to process the first keyframe."""
+
+        # The first frame must be 1.
         assert("frame" in dict)
-        frame = int(dict["frame"])
+        assert(dict["frame"] == 1)
+        frame = 1
 
         if "input_image" not in dict or dict["input_image"] == "none":
             input_image = None
