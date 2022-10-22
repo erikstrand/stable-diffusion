@@ -133,6 +133,8 @@ class DreamState:
         # Scale and strength are interpolated linearly.
         scale = (1.0 - t) * self.prev_keyframe.scale + t * self.next_keyframe.scale
         strength = (1.0 - t) * self.prev_keyframe.strength + t * self.next_keyframe.strength
+        # strength == 0 doesn't seem to work, so we cap it
+        strength = max(strength, 0.001)
 
         # We use the same number of steps and color correction as the previous keyframe.
         steps = self.prev_keyframe.steps
