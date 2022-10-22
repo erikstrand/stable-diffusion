@@ -74,7 +74,7 @@ class InputImage:
             start_frame = int(re_res.group(1))
             span = re_res.span()
             return cls(
-                path_start  = path[span[0]],
+                path_start  = path[:span[0]],
                 path_end    = path[span[1]:],
                 keyframe    = keyframe_idx,
                 frame_delta = start_frame - keyframe_idx,

@@ -87,6 +87,7 @@ class DreamState:
             init_img = None
         else:
             init_img = self.prev_keyframe.input_image.get_path(self.frame_idx)
+            init_img = str(self.schedule.in_dir / init_img)
 
         # Determine if we need to transform the input image.
         if init_img is None or self.prev_keyframe.transform is None:
