@@ -56,6 +56,12 @@ if __name__ == "__main__":
         help="The last frame to render (1-indexed).",
         default=None
     )
+    parser.add_argument(
+        "--stride",
+        type=int,
+        help="Allows skipping frames to more quickly render rough versions (render frames 1 + n * stride).",
+        default=1
+    )
 
     # Video Options
     parser.add_argument(
@@ -110,9 +116,11 @@ if __name__ == "__main__":
         # We generate the command even if we're not writing it anywhere so that random seeds are the
         # same no matter where we start.
         command = dream_state.get_command()
-        frames.append(dream_state.output_path())
 
-        if args.start_at <= dream_state.frame_idx:
+        if args.start_at <= dream_state.frame_idx and (dream_state.frame_idx - 1) % args.stride == 0:
+            # Record this frame's filename (used for video generation).
+            frames.append(dream_state.output_path())
+
             # Write the command if requested.
             if args.commands:
                 outfile.write(command + '\n')
