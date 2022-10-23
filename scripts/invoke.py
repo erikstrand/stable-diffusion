@@ -270,6 +270,9 @@ def main_loop(gen, opt, infile):
                         postprocessed,
                         first_seed
                     )
+                    if opt.name:
+                        assert(opt.name.endswith('.png')), "Only .png files are supported"
+                        filename = opt.name
                     path = file_writer.save_image_and_prompt_to_png(
                         image           = image,
                         dream_prompt    = formatted_dream_prompt,
