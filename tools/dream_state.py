@@ -48,7 +48,10 @@ class DreamState:
             return str(self.schedule.mask_dir / tmp)
 
     def output_file(self):
-        return self.schedule.out_dir / f"{self.frame_idx:06d}.0.png"
+        return f"frame_{self.frame_idx:06d}.png"
+
+    def output_path(self):
+        return self.schedule.out_dir / self.output_file()
 
     @staticmethod
     def interpolate_variations(prev_variations, next_base, next_variations, t):
@@ -95,6 +98,9 @@ class DreamState:
     def get_opts(self):
         # Determine our position between prev_keyframe and next_keyframe.
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
+
+        # Determine the output filename.
+        filename = self.output_file()
 
         # Determine the input image (if any).
         init_img = self.input_image_path()
@@ -158,7 +164,7 @@ class DreamState:
         # Record the current output file as a color reference, if requested.
         set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
         if set_color_reference:
-            self.color_reference = self.output_file()
+            self.color_reference = self.output_path()
 
         return {
             "-I": init_img,
@@ -175,12 +181,13 @@ class DreamState:
             "-W": self.schedule.width,
             "-H": self.schedule.height,
             "-o": str(self.schedule.out_dir),
+            "-N": filename,
         }
 
     def get_command(self):
         opts = self.get_opts()
         pairs = [(k, v) for k, v in opts.items() if v is not None]
-        return ' '.join(f"{k} {v}" for k, v in pairs) + " -e"
+        return ' '.join(f"{k} {v}" for k, v in pairs)
 
     def has_mask(self):
         return len(self.prev_keyframe.masks) > 0
