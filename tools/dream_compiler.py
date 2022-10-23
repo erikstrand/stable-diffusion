@@ -1,4 +1,6 @@
 import argparse
+import subprocess
+from pathlib import Path
 from dream_schedule import DreamSchedule
 from dream_state import DreamState
 from masks import save_mask_image
@@ -38,7 +40,7 @@ if __name__ == "__main__":
         "-o",
         "--outfile",
         type=str,
-        help="The path of the output file. Defaults to the input file but .txt instead of .toml."
+        help="The path of the output file. Defaults to the input file with a different extension (.txt for commands, .mp4 for videos)."
     )
     parser.add_argument(
         "-s",
@@ -73,12 +75,18 @@ if __name__ == "__main__":
 
     # Parse args.
     args = parser.parse_args()
-    if args.outfile is None:
-        assert(args.config_file.endswith(".toml"))
-        args.outfile = args.config_file[:-4] + "txt"
     if args.commands is False and args.masks is False and args.video is False:
         print("No commands specified! Use -c to generate commands, -m to generate masks, or -v to generate a video.")
         exit(0)
+    if args.video and (args.commands or args.masks):
+        print("The video option must be used on its own.")
+        exit(0)
+    if args.outfile is None:
+        assert(args.config_file.endswith(".toml"))
+        if args.commands:
+            args.outfile = args.config_file[:-4] + "txt"
+        else:
+            args.outfile = args.config_file[:-4] + "mp4"
 
     # Build the dream schedule.
     schedule = DreamSchedule.from_file(args.config_file)
@@ -135,9 +143,32 @@ if __name__ == "__main__":
         # Write the list of frames to a file.
         assert(args.config_file.endswith(".toml"))
         frame_file = args.config_file[:-5] + "_frames.txt"
+        config_dir = Path(args.config_file).resolve().parent
+        config_delta = config_dir.relative_to(Path.cwd())
+        n_dirs = len(config_delta.parts)
+        prefix = Path("../" * n_dirs)
         with open(frame_file, 'w') as outfile:
             for frame in frames:
-                outfile.write(f"file '{frame}'\n")
+                outfile.write(f"file '{prefix / frame}'\n")
 
-    #ffmpeg -r 12.5 -f image2 -s 640x320 -i ../../../outputs/test5/clip_01/%06d.0.png -vcodec libx264 -crf 10 -pix_fmt yuv420p ../../../outputs/test5/videos/clip_01.mp4
-    #ffmpeg -r 12.5 -s 640x320 -f concat -i ../../../outputs/test5/clip_01/%06d.0.png -vcodec libx264 -crf 10 -pix_fmt yuv420p ../../../outputs/test5/videos/clip_01.mp4
+        # Generate the video. We run an ffmpeg command like the following.
+        # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
+        args = [
+            "ffmpeg",
+            "-r",
+            str(args.framerate),
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            frame_file,
+            "-vcodec",
+            "libx264",
+            "-crf",
+            str(args.constant_rate_factor),
+            "-pix_fmt",
+            "yuv420p",
+            args.outfile
+        ]
+        subprocess.run(args)
