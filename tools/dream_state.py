@@ -51,7 +51,7 @@ class DreamState:
         return f"frame_{self.frame_idx:06d}.png"
 
     def output_path(self):
-        return self.schedule.out_dir / self.output_file()
+        return str(self.schedule.out_dir / self.output_file())
 
     @staticmethod
     def interpolate_variations(prev_variations, next_base, next_variations, t):

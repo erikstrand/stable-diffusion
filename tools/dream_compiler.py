@@ -5,11 +5,35 @@ from masks import save_mask_image
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+
+    # You always have to specify a .toml config file.
     parser.add_argument(
         "config_file",
         type=str,
         help="The path of a .toml file containing the dream schedule."
     )
+
+    # Commands
+    parser.add_argument(
+        "-c",
+        "--commands",
+        action="store_true",
+        help="Store InvokeAI commands in a text file"
+    )
+    parser.add_argument(
+        "-m",
+        "--masks",
+        action="store_true",
+        help="Generate masks"
+    )
+    parser.add_argument(
+        "-v",
+        "--video",
+        action="store_true",
+        help="Combine generated frames into an mp4 video"
+    )
+
+    # General Options
     parser.add_argument(
         "-o",
         "--outfile",
@@ -30,17 +54,21 @@ if __name__ == "__main__":
         help="The last frame to render (1-indexed).",
         default=None
     )
+
+    # Video Options
     parser.add_argument(
-        "-c",
-        "--commands",
-        action="store_true",
-        help="Store InvokeAI commands in a text file"
+        "-r",
+        "--framerate",
+        type=float,
+        help="The framerate of the output video (only used with -v).",
+        default=10.0
     )
     parser.add_argument(
-        "-m",
-        "--masks",
-        action="store_true",
-        help="Generate masks"
+        "-crf",
+        "--constant_rate_factor",
+        type=int,
+        help="The constant rate factor of the output video (0-51, lower is higher quality but larger file) (only used with -v).",
+        default=23
     )
 
     # Parse args.
@@ -48,8 +76,8 @@ if __name__ == "__main__":
     if args.outfile is None:
         assert(args.config_file.endswith(".toml"))
         args.outfile = args.config_file[:-4] + "txt"
-    if args.commands is False and args.masks is False:
-        print("No commands specified! Use -c to generate commands, and/or -m to generate masks.")
+    if args.commands is False and args.masks is False and args.video is False:
+        print("No commands specified! Use -c to generate commands, -m to generate masks, or -v to generate a video.")
         exit(0)
 
     # Build the dream schedule.
@@ -59,6 +87,7 @@ if __name__ == "__main__":
     if args.end_at is None:
         args.end_at = schedule.keyframes[-1].frame
     dream_state = DreamState(schedule)
+    frames = []
     with open(args.outfile, "w") as outfile:
         if args.commands:
             # We have to set our prompts regardless of start and end frames.
@@ -69,6 +98,7 @@ if __name__ == "__main__":
         while not dream_state.done() and dream_state.frame_idx <= args.end_at:
             # We always generate the command so that random seeds are the same no matter where we start.
             command = dream_state.get_command()
+            frames.append(dream_state.output_path())
 
             if args.start_at <= dream_state.frame_idx:
                 if args.commands:
@@ -88,3 +118,14 @@ if __name__ == "__main__":
                         )
 
             dream_state.advance_frame()
+
+    if args.video:
+        # Write the list of frames to a file.
+        assert(args.config_file.endswith(".toml"))
+        frame_file = args.config_file[:-5] + "_frames.txt"
+        with open(frame_file, 'w') as outfile:
+            for frame in frames:
+                outfile.write(f"file '{frame}'\n")
+
+    #ffmpeg -r 12.5 -f image2 -s 640x320 -i ../../../outputs/test5/clip_01/%06d.0.png -vcodec libx264 -crf 10 -pix_fmt yuv420p ../../../outputs/test5/videos/clip_01.mp4
+    #ffmpeg -r 12.5 -s 640x320 -f concat -i ../../../outputs/test5/clip_01/%06d.0.png -vcodec libx264 -crf 10 -pix_fmt yuv420p ../../../outputs/test5/videos/clip_01.mp4
