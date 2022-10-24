@@ -57,21 +57,20 @@ class DreamState:
         if self.prev_keyframe.input_image is None:
             return None
         else:
-            tmp = self.prev_keyframe.input_image.get_path(self.frame_idx)
-            return str(self.schedule.in_dir / tmp)
+            print(f"prev kf: {self.prev_keyframe.input_image}")
+            return self.prev_keyframe.input_image.get_path(self.schedule.in_dir, self.frame_idx)
+
+    def output_file(self):
+        return f"frame_{self.frame_idx:06d}.png"
 
     def mask_path(self):
         if self.prev_keyframe.input_image is None:
             return None
         else:
-            tmp = self.prev_keyframe.input_image.get_path(self.frame_idx)
-            return str(self.schedule.mask_dir / tmp)
-
-    def output_file(self):
-        return f"frame_{self.frame_idx:06d}.png"
+            return str(self.schedule.out_dir / "masks" / self.output_file())
 
     def output_path(self):
-        return str(self.schedule.out_dir / self.output_file())
+        return self.schedule.out_dir / "frames" / self.output_file()
 
     @staticmethod
     def interpolate_variations(prev_variations, next_base, next_variations, t):
@@ -125,7 +124,7 @@ class DreamState:
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
 
         # Determine the output filename.
-        filename = self.output_file()
+        outpath = self.output_path()
 
         # Determine the input image (if any).
         init_img = self.input_image_path()
@@ -189,7 +188,7 @@ class DreamState:
         # Record the current output file as a color reference, if requested.
         set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
         if set_color_reference:
-            self.color_reference = self.output_path()
+            self.color_reference = str(self.output_path())
 
         return {
             "-I": init_img,
@@ -205,8 +204,8 @@ class DreamState:
             "--init_color": init_color,
             "-W": self.schedule.width,
             "-H": self.schedule.height,
-            "-o": str(self.schedule.out_dir),
-            "-N": filename,
+            "-o": str(outpath.parent),
+            "-N": str(outpath.name),
         }
 
     def get_command(self):

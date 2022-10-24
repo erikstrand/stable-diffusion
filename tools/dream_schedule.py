@@ -90,17 +90,16 @@ class InputImage:
         else:
             return cls.from_path(string, frame)
 
-    def get_path(self, frame):
+    def get_path(self, in_dir, frame):
         if self.path_start is None:
             return "-1"
         elif self.path_end is None:
-            assert(frame == self.keyframe), "This InputImage doesn't range over frames (did you want to use e.g. IM{0001}.png?)"
-            return self.path_start
+            return in_dir / self.path_start
         else:
             assert(frame >= self.keyframe)
             input_frame = frame + self.frame_delta
             input_frame = str(input_frame).zfill(self.n_digits)
-            return f"{self.path_start}{input_frame}{self.path_end}"
+            return in_dir / f"{self.path_start}{input_frame}{self.path_end}"
 
 
 class Transform2D:
@@ -428,11 +427,10 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "mask_dir", "out_dir", "width", "height", "prompts", "keyframes"]
+    __slots__ = ["in_dir", "out_dir", "width", "height", "prompts", "keyframes"]
 
-    def __init__(self, in_dir, mask_dir, out_dir, width, height, named_prompts, keyframes):
+    def __init__(self, in_dir, out_dir, width, height, named_prompts, keyframes):
         self.in_dir = Path(in_dir)
-        self.mask_dir = Path(mask_dir)
         self.out_dir = Path(out_dir)
         self.keyframes = keyframes
         self.width = width
@@ -473,7 +471,6 @@ class DreamSchedule:
     @classmethod
     def from_dict(cls, data):
         in_dir = data["in_dir"]
-        mask_dir = data["mask_dir"]
         out_dir = data["out_dir"]
         width = data["width"]
         height = data["height"]
@@ -488,7 +485,7 @@ class DreamSchedule:
         for keyframe_dict in data["keyframes"][1:]:
             schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-        return DreamSchedule(in_dir, mask_dir, out_dir, width, height, named_prompts, schedule)
+        return DreamSchedule(in_dir, out_dir, width, height, named_prompts, schedule)
 
     @classmethod
     def from_file(cls, config_path):
@@ -506,7 +503,6 @@ class DreamSchedule:
     def print(self):
         print(f"in_dir: {self.in_dir}")
         print(f"out_dir: {self.out_dir}")
-        print(f"mask_dir: {self.mask_dir}")
         print(f"width: {self.width}")
         print(f"height: {self.height}")
         for keyframe in self.keyframes:

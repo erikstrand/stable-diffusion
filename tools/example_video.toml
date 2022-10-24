@@ -1,6 +1,5 @@
 in_dir = "alice/frames"
-mask_dir = "alice/masks"
-out_dir = "outputs/example_video"
+out_dir = "alice/outputs/example_video"
 width = 960
 height = 720
 

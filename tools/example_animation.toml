@@ -1,5 +1,4 @@
 in_dir = "n/a"
-mask_dir = "n/a"
 out_dir = "outputs/example_animation"
 width = 512
 height = 512
