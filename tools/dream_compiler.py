@@ -47,7 +47,7 @@ if __name__ == "__main__":
         "--start_at",
         type=int,
         help="The first frame to render (1-indexed).",
-        default=1
+        default=None
     )
     parser.add_argument(
         "-e",
@@ -98,6 +98,8 @@ if __name__ == "__main__":
     schedule = DreamSchedule.from_file(args.config_file)
 
     # Initialize the dream state.
+    if args.start_at is None:
+        args.start_at = schedule.keyframes[0].frame
     if args.end_at is None:
         # Minus two since we don't output the last keyframe, and we're 1-indexed.
         args.end_at = schedule.keyframes[-1].frame - 2
@@ -145,7 +147,7 @@ if __name__ == "__main__":
 
     # Print a summary if we wrote commands.
     if args.commands:
-        print(f"Wrote {n_commands} commands to {args.outfile} (frames {args.start_at} to {args.end_at}).")
+        print(f"Wrote {n_commands} commands to {args.outfile} (frames {args.start_at} through {args.end_at}).")
 
     if args.video:
         # Write the list of frames to a file.

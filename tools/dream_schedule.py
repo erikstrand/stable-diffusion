@@ -207,10 +207,11 @@ class KeyFrame:
     def from_dict(cls, dict):
         """This method is only used to process the first keyframe."""
 
-        # The first frame must be 1.
-        assert("frame" in dict)
-        assert(dict["frame"] == 1)
-        frame = 1
+        # By default we start at frame 1.
+        if "frame" in dict:
+            frame = int(dict["frame"])
+        else:
+            frame = None
 
         if "input_image" not in dict or dict["input_image"] == "none":
             input_image = None
@@ -437,11 +438,9 @@ class KeyFrame:
 
 
 class DreamSchedule:
+    __slots__ = ["in_dir", "mask_dir", "out_dir", "width", "height", "prompts", "keyframes"]
 
-    __slots__ = ["in_dir", "mask_dir", "out_dir", "keyframes", "width", "height", "prompts"]
-
-    def __init__(self, in_dir, mask_dir, out_dir, named_prompts, keyframes, width, height):
-
+    def __init__(self, in_dir, mask_dir, out_dir, width, height, named_prompts, keyframes):
         self.in_dir = Path(in_dir)
         self.mask_dir = Path(mask_dir)
         self.out_dir = Path(out_dir)
@@ -491,11 +490,15 @@ class DreamSchedule:
         named_prompts = data["prompts"]
 
         schedule = []
+
+        # Parse the first keyframe. This keyframe only depends on its TOML data.
         schedule.append(KeyFrame.from_dict(data["keyframes"][0]))
+
+        # Parse all other keyframes. Each depends on its TOML data and the previous keyframe.
         for keyframe_dict in data["keyframes"][1:]:
             schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-        return DreamSchedule(in_dir, mask_dir, out_dir, named_prompts, schedule, width, height)
+        return DreamSchedule(in_dir, mask_dir, out_dir, width, height, named_prompts, schedule)
 
     @classmethod
     def from_file(cls, config_path):

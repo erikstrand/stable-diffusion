@@ -9,7 +9,7 @@ class DreamState:
         self.next_keyframe = schedule.keyframes[1]
         self.next_keyframe_idx = 1
         self.interp_duration = None
-        self.frame_idx = 1
+        self.frame_idx = schedule.keyframes[0].frame
         self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
         self.random = random.Random(self.prev_keyframe.seed)
         self.color_reference = None

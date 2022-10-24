@@ -8,7 +8,7 @@ height = 360
 ghost = "a ghostly apparition, fog, art by greg rutkowski"
 
 [[keyframes]]
-frame = 1                   # the first keyframe should always be frame 1
+frame = 617
 # Input images are named cheshire/IM0001.png, cheshire/IM0002.png, etc.
 # We want to start at IM0617.png and increment from there.
 input_image = "cheshire/IM{0617}.png"
