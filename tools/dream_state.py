@@ -1,37 +1,57 @@
+import copy
 import random
-from dream_schedule import Mask
+from masks import Mask
 
 
 class DreamState:
     def __init__(self, schedule):
+        # Initialize constant data.
         self.schedule = schedule
-        self.prev_keyframe = schedule.keyframes[0]
-        self.next_keyframe = schedule.keyframes[1]
-        self.next_keyframe_idx = 1
+        self.keyframes = [kf for kf in schedule.keyframes]
+        # We duplicate the last keyframe so that it doesn't require a special case.
+        # (Specifically, there is always a next keyframe and we are always interpolating.)
+        self.keyframes.append(copy.copy(self.keyframes[-1]))
+        self.keyframes[-1].frame = schedule.keyframes[-1].frame + 1
+
+        # Initialize mutable iteration state.
+        self.__iter__()
+
+    def __iter__(self):
+        """Sets the iteration state to one before the first frame.
+
+        So note that you can't call get_command() or anything until you've called __next__.
+        """
+
+        self.frame_idx = self.keyframes[0].frame - 1
+        self.prev_keyframe = None
+        self.next_keyframe = self.keyframes[0]
+        self.next_keyframe_idx = 0
         self.interp_duration = None
-        self.frame_idx = schedule.keyframes[0].frame
-        self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
-        self.random = random.Random(self.prev_keyframe.seed)
+        self.random = random.Random(self.next_keyframe.seed)
         self.color_reference = None
+        self.seed = None
+        return self
 
-    def advance_keyframe(self):
-        self.next_keyframe_idx += 1
-        self.prev_keyframe = self.next_keyframe
-        self.next_keyframe = self.schedule.keyframes[self.next_keyframe_idx]
-        self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
-
-    def advance_frame(self):
+    def __next__(self):
         self.frame_idx += 1
-        if self.frame_idx == self.next_keyframe.frame:
-            self.advance_keyframe()
 
-    def done(self):
-        # Note that we don't actually output the final keyframe. I should fix this eventually.
-        # For now I'm just going to add a sentinel keyframe at the end.
-        return (
-            self.frame_idx + 1 == self.next_keyframe.frame and
-            self.next_keyframe_idx + 1 == len(self.schedule.keyframes)
-        )
+        # If we've hit the next frame, update the keyframe state.
+        if self.frame_idx == self.next_keyframe.frame:
+            self.next_keyframe_idx += 1
+            if self.next_keyframe_idx == len(self.keyframes):
+                raise StopIteration
+            self.prev_keyframe = self.next_keyframe
+            self.next_keyframe = self.keyframes[self.next_keyframe_idx]
+            self.interp_duration = float(self.next_keyframe.frame - self.prev_keyframe.frame)
+
+        # If we're using random seeds, generate one for this frame.
+        # Otherwise use the base seed from the previous keyframe.
+        if self.prev_keyframe.seed == None:
+            self.seed = self.random.getrandbits(32)
+        else:
+            self.seed = self.prev_keyframe.seed
+
+        return self
 
     def input_image_path(self):
         if self.prev_keyframe.input_image is None:
@@ -96,6 +116,11 @@ class DreamState:
         return variations
 
     def get_opts(self):
+        """Generates the arguments needed to build an InvokeAI command.
+
+        This method is pure -- no state is mutated.
+        """
+
         # Determine our position between prev_keyframe and next_keyframe.
         t = float(self.frame_idx - self.prev_keyframe.frame) / self.interp_duration
 

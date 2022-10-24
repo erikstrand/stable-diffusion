@@ -2,7 +2,6 @@ import argparse
 import subprocess
 from pathlib import Path
 from dream_schedule import DreamSchedule
-from dream_state import DreamState
 from masks import save_mask_image
 
 if __name__ == "__main__":
@@ -97,57 +96,54 @@ if __name__ == "__main__":
     # Build the dream schedule.
     schedule = DreamSchedule.from_file(args.config_file)
 
-    # Initialize the dream state.
+    # Determine the range of frames to render.
     if args.start_at is None:
         args.start_at = schedule.keyframes[0].frame
     if args.end_at is None:
-        # Minus two since we don't output the last keyframe, and we're 1-indexed.
-        args.end_at = schedule.keyframes[-1].frame - 2
-    dream_state = DreamState(schedule)
-    frames = []
+        args.end_at = schedule.keyframes[-1].frame
+
+    # Initialize state.
+    frame_names = [] # records the filenames of all generated frames
     outfile = open(args.outfile, "w") if args.commands else None
 
-    # If we're writing commands, we always write the prompts.
+    # We write the !set_prompts command regardless of start_at and end_at.
     if args.commands:
         prompt_command = schedule.prompt_command()
         outfile.write(prompt_command + '\n')
 
     # Iterate over all frames.
-    n_commands = 0
-    while not dream_state.done() and dream_state.frame_idx <= args.end_at:
-        # We generate the command even if we're not writing it anywhere so that random seeds are the
-        # same no matter where we start.
-        command = dream_state.get_command()
+    for frame in schedule.frames():
+        if frame.frame_idx < args.start_at or (frame.frame_idx - 1) % args.stride != 0:
+            continue
 
-        if args.start_at <= dream_state.frame_idx and (dream_state.frame_idx - 1) % args.stride == 0:
-            # Record this frame's filename (used for video generation).
-            frames.append(dream_state.output_path())
+        if frame.frame_idx > args.end_at:
+            break
 
-            # Write the command if requested.
-            if args.commands:
-                outfile.write(command + '\n')
-                n_commands += 1
+        # Record this frame's filename (used for video generation).
+        frame_names.append(frame.output_path())
 
-            # Generate the mask if requested.
-            if args.masks:
-                masks = dream_state.get_masks()
-                if len(masks) > 0:
-                    image_file = dream_state.input_image_path()
-                    mask_file = dream_state.mask_path()
-                    print(f"generating mask for frame {dream_state.frame_idx} ({mask_file})")
-                    save_mask_image(
-                        schedule.width,
-                        schedule.height,
-                        masks,
-                        image_file,
-                        mask_file
-                    )
+        # Write the command if requested.
+        if args.commands:
+            outfile.write(frame.get_command() + '\n')
 
-        dream_state.advance_frame()
+        # Generate the mask if requested.
+        if args.masks:
+            masks = frame.get_masks()
+            if len(masks) > 0:
+                image_file = frame.input_image_path()
+                mask_file = frame.mask_path()
+                print(f"generating mask for frame {frame.frame_idx} ({mask_file})")
+                save_mask_image(
+                    schedule.width,
+                    schedule.height,
+                    masks,
+                    image_file,
+                    mask_file
+                )
 
     # Print a summary if we wrote commands.
     if args.commands:
-        print(f"Wrote {n_commands} commands to {args.outfile} (frames {args.start_at} through {args.end_at}).")
+        print(f"Wrote commands for {len(frame_names)} frames ({args.start_at} through {args.end_at}) to {args.outfile}.")
 
     if args.video:
         # Write the list of frames to a file.
@@ -158,7 +154,7 @@ if __name__ == "__main__":
         n_dirs = len(config_delta.parts)
         prefix = Path("../" * n_dirs)
         with open(frame_file, 'w') as outfile:
-            for frame in frames:
+            for frame in frame_names:
                 outfile.write(f"file '{prefix / frame}'\n")
 
         # Generate the video. We run an ffmpeg command like the following.

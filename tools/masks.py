@@ -3,6 +3,18 @@ from PIL import Image
 from pathlib import Path
 
 
+class Mask:
+    __slots__ = ["center", "radius"]
+
+    def __init__(self, center, radius):
+        self.center = np.array(center)
+        assert(self.center.shape == (2,))
+        self.radius = float(radius)
+
+    def __str__(self):
+        return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}"
+
+
 def generate_mask_array(width, height, circles):
     width = float(width)
     height = float(height)

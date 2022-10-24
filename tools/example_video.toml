@@ -1,17 +1,19 @@
 in_dir = "alice/frames"
 mask_dir = "alice/masks"
 out_dir = "outputs/example_video"
-width = 476
-height = 360
+width = 960
+height = 720
 
 [prompts]
 ghost = "a ghostly apparition, fog, art by greg rutkowski"
 
 [[keyframes]]
-frame = 617
-# Input images are named cheshire/IM0001.png, cheshire/IM0002.png, etc.
-# We want to start at IM0617.png and increment from there.
-input_image = "cheshire/IM{0617}.png"
+# You choose what frame number you want to start at.
+# It defaults to 1 if you don't specify anything.
+frame = 100
+# Input images are named cheshire/IM0000.png, cheshire/IM0001.png, etc.
+# Note that you don't have to start at frame 0; you can write e.g. "cheshire/IM{0617}.png".
+input_image = "cheshire/IM{0000}.png"
 seed = 89075690
 prompt = "ghost"
 scale = 8.0
@@ -31,4 +33,3 @@ masks = [
 [[keyframes]]
 duration = 50
 strength = 0.0
-masks = []

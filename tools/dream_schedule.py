@@ -3,6 +3,8 @@ import re
 import numpy as np
 from pathlib import Path
 from dataclasses import dataclass
+from dream_state import DreamState
+from masks import Mask
 
 # TODO
 # - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
@@ -99,18 +101,6 @@ class InputImage:
             input_frame = frame + self.frame_delta
             input_frame = str(input_frame).zfill(self.n_digits)
             return f"{self.path_start}{input_frame}{self.path_end}"
-
-
-class Mask:
-    __slots__ = ["center", "radius"]
-
-    def __init__(self, center, radius):
-        self.center = np.array(center)
-        assert(self.center.shape == (2,))
-        self.radius = float(radius)
-
-    def __str__(self):
-        return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}"
 
 
 class Transform2D:
@@ -509,6 +499,9 @@ class DreamSchedule:
     def prompt_command(self):
         quoted_prompts = '"' + '" "'.join(self.prompts) + '"'
         return f"!set_prompts {quoted_prompts}"
+
+    def frames(self):
+        return DreamState(self)
 
     def print(self):
         print(f"in_dir: {self.in_dir}")
