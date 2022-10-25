@@ -51,22 +51,22 @@ def generate_mask_array(width, height, masks):
     return result
 
 
-def generate_mask_image(width, height, circles, infile):
+def generate_mask_image(width, height, masks, infile):
     # Load the RGB data from infile
     rgb_PIL = Image.open(infile)
     rgb_array = np.array(rgb_PIL)
     if rgb_array.shape[2] == 4:
         rgb_array = rgb_array[:, :, 0:3]
 
-    mask_array = generate_mask_array(width, height, circles)
+    mask_array = generate_mask_array(width, height, masks)
     mask_array = np.flip(np.swapaxes(mask_array, 0, 1), 0)
     mask_array = np.expand_dims(mask_array, axis=2)
     image_data = np.concatenate((rgb_array, mask_array), axis=2)
     return Image.fromarray(image_data, 'RGBA')
 
 
-def save_mask_image(width, height, circles, infile, outfile):
-    image = generate_mask_image(width, height, circles, infile)
+def save_mask_image(width, height, masks, infile, outfile):
+    image = generate_mask_image(width, height, masks, infile)
     Path(outfile).parent.mkdir(parents=True, exist_ok=True)
     image.save(outfile)
 
@@ -74,6 +74,13 @@ def save_mask_image(width, height, circles, infile, outfile):
 # not used now but maybe useful in the future
 def generate_black_rectangle_array(width, height):
     return np.zeros((width, height, 3), dtype='uint8')
+
+
+# not used now but maybe useful in the future
+def image_to_array(image):
+    # convert the PIL image to a numpy array
+    image_array = np.array(image)
+    return np.swapaxes(np.flip(image_array, 0), 0, 1)
 
 
 # not used now but maybe useful in the future
@@ -85,18 +92,20 @@ def array_to_image(array):
 
 if __name__ == "__main__":
     # in pixels
-    width = 640
-    height = 360
+    width = 960
+    height = 720
 
-    # relative to width and height
-    center = np.array([0.5, 0.5])
-
-    # relative to height
-    radius = 0.25
-
-    circles = [
-        (center, radius),
-        (np.array([0.7, 0.8]), 0.2)
+    masks = [
+        Mask([0.92, 0.4], 0.25),
+        Mask([0.92, 0.5], 0.25),
+        Mask([0.92, 0.6], 0.25),
     ]
 
-    save_mask_image(width, height, circles, "../99fmermaid_1/frames_1/IM00200.jpg", 'mask.png')
+    image_file = "../alice/frames/rabbit_hole/IM0138.png"
+
+    original = Image.open(image_file)
+    original.crop((650, 30, 960, 690)).save("frame.png")
+
+    image = generate_mask_image(width, height, masks, image_file)
+    image.save('mask.png')
+    image.crop((650, 30, 960, 690)).save('mask_crop.png')
