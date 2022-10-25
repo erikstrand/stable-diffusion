@@ -36,6 +36,12 @@ if __name__ == "__main__":
 
     # General Options
     parser.add_argument(
+        "--version",
+        type=str,
+        help="When specified, this string will be appended to the output directory and command file.",
+        default=None
+    )
+    parser.add_argument(
         "-o",
         "--outfile",
         type=str,
@@ -78,7 +84,7 @@ if __name__ == "__main__":
         default=23
     )
 
-    # Parse args.
+    # Parse args and do sanity checks.
     args = parser.parse_args()
     if args.commands is False and args.masks is False and args.video is False:
         print("No commands specified! Use -c to generate commands, -m to generate masks, or -v to generate a video.")
@@ -86,15 +92,22 @@ if __name__ == "__main__":
     if args.video and (args.commands or args.masks):
         print("The video option must be used on its own.")
         exit(0)
+
+    # Construct some paths.
+    version_string = ""
+    if args.version:
+        version_string = "_" + args.version
     if args.outfile is None:
         assert(args.config_file.endswith(".toml"))
         if args.commands:
-            args.outfile = args.config_file[:-4] + "txt"
+            args.outfile = args.config_file[:-5] + version_string + ".txt"
         else:
-            args.outfile = args.config_file[:-4] + "mp4"
+            args.outfile = args.config_file[:-5] + version_string + ".mp4"
 
     # Build the dream schedule.
     schedule = DreamSchedule.from_file(args.config_file)
+    if args.version:
+        schedule.out_dir = schedule.out_dir.parent / (schedule.out_dir.name + version_string)
 
     # Determine the range of frames to render.
     if args.start_at is None:
