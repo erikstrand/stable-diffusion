@@ -28,7 +28,7 @@ class DreamState:
         self.next_keyframe_idx = 0
         self.interp_duration = None
         if self.next_keyframe.seed is not None:
-            random.seed(self.next_keyframe.seed)
+            self.random = random.Random(self.next_keyframe.seed)
         else:
             self.random = random.Random(42)
         self.color_reference = None
