@@ -5,7 +5,7 @@ height = 720
 
 [prompts]
 tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
-rabbit = "a portrait of a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
+jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 
 # ==================================================
 # alice and cat relaxing on grass
@@ -43,7 +43,7 @@ frame = 242
 # rabbit checks pocketwatch
 [[keyframes]]
 frame = 257
-prompt = "rabbit"
+prompt = "jackrabbit"
 strength = 0.0
 masks = [
     { center = [0.5, 0.55], radius = 0.3 }
@@ -70,14 +70,19 @@ masks = [
 
 [[keyframes]]
 frame = 276
-strength = 0.8
+input_image = "rabbit_hole/IM0276.png"
+seed = "random"
+strength = 0.6
 
 [[keyframes]]
-frame = 281
+duration = 50
 
-[[keyframes]]
-frame = 287
-strength = 0.0
+#[[keyframes]]
+#frame = 281
+#
+#[[keyframes]]
+#frame = 287
+#strength = 0.0
 
 
 # ==================================================
