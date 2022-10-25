@@ -1,0 +1,83 @@
+in_dir = "alice/frames"
+out_dir = "alice/outputs/rabbit_hole"
+width = 960
+height = 720
+
+[prompts]
+tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
+rabbit = "a portrait of a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
+
+# ==================================================
+# alice and cat relaxing on grass
+[[keyframes]]
+frame = 138
+input_image = "rabbit_hole/IM{0138}.png"
+# interesting seeds: 438989805 1136108454
+seed = 1136108454
+prompt = "tombstone"
+scale = 8.0
+strength = 0.8
+steps = 50
+masks = [
+    { center = [0.92, 0.4], radius = 0.25 }
+    { center = [0.92, 0.5], radius = 0.25 }
+    { center = [0.92, 0.6], radius = 0.25 }
+]
+
+# zoom in on alice
+[[keyframes]]
+frame = 190
+seed = 438989805
+masks = [
+    { center = [0.95, 0.4], radius = 0.25 }
+    { center = [0.95, 0.5], radius = 0.25 }
+    { center = [0.95, 0.6], radius = 0.25 }
+]
+
+# ==================================================
+# rabbit checks pocketwatch then starts running
+[[keyframes]]
+frame = 242
+# nothing planned
+
+# rabbit checks pocketwatch
+[[keyframes]]
+frame = 257
+prompt = "rabbit"
+strength = 0.0
+masks = [
+    { center = [0.5, 0.55], radius = 0.3 }
+]
+
+[[keyframes]]
+frame = 259
+masks = [
+    { center = [0.4, 0.5], radius = 0.3 }
+]
+
+[[keyframes]]
+frame = 260
+masks = [
+    { center = [0.38, 0.68], radius = 0.35 }
+]
+
+[[keyframes]]
+frame = 266
+strength = 0.2
+masks = [
+    { center = [0.35, 0.68], radius = 0.4 }
+]
+
+[[keyframes]]
+frame = 276
+strength = 0.8
+
+[[keyframes]]
+frame = 281
+
+[[keyframes]]
+frame = 287
+strength = 0.0
+
+
+# ==================================================
