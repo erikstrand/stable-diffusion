@@ -62,6 +62,13 @@ if __name__ == "__main__":
         default=None
     )
     parser.add_argument(
+        "-n",
+        "--n_frames",
+        type=int,
+        help="The number of frames to render (ignoring stride).",
+        default=None
+    )
+    parser.add_argument(
         "--stride",
         type=int,
         help="Allows skipping frames to more quickly render rough versions (render frames 1 + n * stride).",
@@ -113,7 +120,13 @@ if __name__ == "__main__":
     if args.start_at is None:
         args.start_at = schedule.keyframes[0].frame
     if args.end_at is None:
-        args.end_at = schedule.keyframes[-1].frame
+        if args.n_frames is None:
+            args.end_at = schedule.keyframes[-1].frame
+        else:
+            # Minus one since we include args.end_at in the range.
+            args.end_at = args.start_at + args.n_frames - 1
+    elif args.n_frames is not None:
+        print("Warning: both end_at and n_frames were specified. Ignoring n_frames.")
 
     # Initialize state.
     frame_names = [] # records the filenames of all generated frames
