@@ -57,7 +57,6 @@ class DreamState:
         if self.prev_keyframe.input_image is None:
             return None
         else:
-            print(f"prev kf: {self.prev_keyframe.input_image}")
             return self.prev_keyframe.input_image.get_path(self.schedule.in_dir, self.frame_idx)
 
     def output_file(self):
