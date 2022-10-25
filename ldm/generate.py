@@ -296,6 +296,7 @@ class Generate:
             inpaint_replace  = 0.0,
             # Set this True to handle KeyboardInterrupt internally
             catch_interrupts = False,
+            interrupt_callback = None,
             hires_fix        = False,
             **args,
     ):   # eat up additional cruft
@@ -507,6 +508,8 @@ class Generate:
         except KeyboardInterrupt:
             if catch_interrupts:
                 print('**Interrupted** Partial results will be returned.')
+                if interrupt_callback is not None:
+                    interrupt_callback()
             else:
                 raise KeyboardInterrupt
 

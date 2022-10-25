@@ -123,15 +123,28 @@ def main_loop(gen, opt, infile):
         path_max = 260
         name_max = 255
 
+    # this variable is just like infile except we use it for the !from_file command
+    dynamic_infile = None
+    def clear_dynamic_infile():
+        nonlocal dynamic_infile
+        dynamic_infile = None
+
     while not done:
 
         operation = 'generate'
 
-        try:
-            command = get_next_command(infile)
-        except EOFError:
-            done = True
-            continue
+        if dynamic_infile is not None:
+            try:
+                command = get_next_command(dynamic_infile)
+            except EOFError:
+                dynamic_infile = None
+                continue
+        else:
+            try:
+                command = get_next_command(infile)
+            except EOFError:
+                done = True
+                continue
 
         # skip empty lines
         if not command.strip():
@@ -145,7 +158,32 @@ def main_loop(gen, opt, infile):
             break
 
         if command.startswith('!'):
-            command, operation = do_command(command, gen, opt, completer)
+            if command.startswith('!from_file'):
+                # We handle this command here since it modifies state held in the main loop.
+                if dynamic_infile is not None:
+                    print("You can't run !from_file recursively!")
+                    dynamic_infile = None
+                    continue
+
+                command_file = command.split(' ')[1]
+                try:
+                    if os.path.isfile(command_file):
+                        dynamic_infile = open(command_file, 'r', encoding='utf-8')
+                        completer.add_history(command)
+                        continue
+                    else:
+                        raise FileNotFoundError(f'{opt.infile} not found.')
+                except (FileNotFoundError, IOError) as e:
+                    print(f'{e}.')
+                    operation = None
+            else:
+                command, operation = do_command(
+                    command,
+                    gen,
+                    opt,
+                    completer,
+                    store_history=dynamic_infile is None
+                )
 
         if operation is None:
             continue
@@ -235,7 +273,8 @@ def main_loop(gen, opt, infile):
         if operation == 'postprocess':
             completer.add_history(f'!fix {command}')
         else:
-            completer.add_history(command)
+            if dynamic_infile is None:
+                completer.add_history(command)
 
         # Here is where the images are actually generated!
         last_results = []
@@ -309,10 +348,12 @@ def main_loop(gen, opt, infile):
             if operation == 'generate':
                 catch_ctrl_c = infile is None # if running interactively, we catch keyboard interrupts
                 opt.last_operation='generate'
+                interrupt_callback = None if dynamic_infile is None else clear_dynamic_infile
                 gen.prompt2image(
                     image_callback=image_writer,
                     step_callback=step_callback,
                     catch_interrupts=catch_ctrl_c,
+                    interrupt_callback=interrupt_callback,
                     **vars(opt)
                 )
             elif operation == 'postprocess':
@@ -354,7 +395,7 @@ def main_loop(gen, opt, infile):
 
     print('goodbye!')
 
-def do_command(command:str, gen, opt:Args, completer) -> tuple:
+def do_command(command:str, gen, opt:Args, completer, store_history=True) -> tuple:
     operation = 'generate'   # default operation, alternative is 'postprocess'
 
     if command.startswith('!dream'):   # in case a stored prompt still contains the !dream command
@@ -367,9 +408,10 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
     elif command.startswith('!switch'):
         model_name = command.replace('!switch ','',1)
         gen.set_model(model_name)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
-        
+
     elif command.startswith('!models'):
         gen.model_cache.print_models()
         operation = None
@@ -382,7 +424,8 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
             print(f'** {path[1]}: file not found')
         else:
             add_weights_to_config(path[1], gen, opt, completer)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif command.startswith('!edit'):
@@ -391,7 +434,8 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
             print('** please provide the name of a model')
         else:
             edit_config(path[1], gen, opt, completer)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif command.startswith('!fetch'):
@@ -415,6 +459,8 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
     elif command.startswith('!set_prompts'):
         prompts = re.findall(r'"(.*?)"', command)
         gen.set_prompts(prompts)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif re.match('^!(\d+)',command):
