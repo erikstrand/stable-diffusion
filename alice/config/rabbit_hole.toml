@@ -39,10 +39,15 @@ masks = [
 [[keyframes]]
 frame = 227
 
+[[keyframes]]
+frame = 231
+strength = 0.6
+
 # camera starts panning up
 [[keyframes]]
 frame = 232
 strength = 0.0
+masks = []
 
 
 # ==================================================
@@ -120,7 +125,7 @@ seed = "random"
 
 [[keyframes]]
 duration = 10
-prompt = "portrait of michael myers, by greg rutkowski, by ross tran, by fenghua zhong, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
+prompt = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
 
 [[keyframes]]
 duration = 10
