@@ -7,7 +7,7 @@ from dream_state import DreamState
 from masks import Mask
 
 # TODO
-# - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
+# - implement "interpolate" for fields other than strength
 
 
 @dataclass
@@ -367,6 +367,8 @@ class KeyFrame:
             dict["scale"] = prev_keyframe.scale
         if "strength" not in dict or dict["strength"] == "same":
             dict["strength"] = prev_keyframe.strength
+        elif dict["strength"] == "interpolate":
+            dict["strength"] = None
         if "steps" not in dict or dict["steps"] == "same":
             dict["steps"] = prev_keyframe.steps
 
@@ -441,6 +443,9 @@ class DreamSchedule:
         keyframe_frames = [keyframe.frame for keyframe in self.keyframes]
         assert(keyframe_frames == sorted(keyframe_frames))
 
+        # Interpolate strengths where relevant.
+        self._interpolate_strengths()
+
         # Collect all anonymous prompts.
         anonymous_prompts = {keyframe.prompt for keyframe in self.keyframes}
         anonymous_prompts = [*anonymous_prompts]
@@ -467,6 +472,41 @@ class DreamSchedule:
             for variation in keyframe.prompt_variations:
                 assert variation.prompt in prompt_to_idx
                 variation.prompt_idx = prompt_to_idx[variation.prompt]
+
+    def _interpolate_strengths(self):
+        assert(self.keyframes[0].strength is not None)
+        assert(self.keyframes[-1].strength is not None)
+        keyframe_idx = 0
+
+        # We could add the condition "while keyframe_idx < len(self.keyframes)",
+        # but the first statement in the loop checks this anyway.
+        while True:
+            # Look for a keyframe that doesn't have an assigned strength.
+            while (keyframe_idx < len(self.keyframes) and self.keyframes[keyframe_idx].strength is not None):
+                keyframe_idx += 1
+
+            # If there are no more keyframes that don't have assigned strenghts, we're done.
+            if keyframe_idx >= len(self.keyframes):
+                return
+
+            # Remember the last keyframe that did have a strength.
+            prev_keyframe_idx = keyframe_idx - 1
+
+            # Find the next keyframe that does have an assigned strength.
+            # We know there is one because we asserted that the last keyframe has an assigned strength.
+            keyframe_idx += 1
+            while (self.keyframes[keyframe_idx].strength is None):
+                keyframe_idx += 1
+
+            # Interpolate strength between the two keyframes.
+            prev_keyframe = self.keyframes[prev_keyframe_idx]
+            next_keyframe = self.keyframes[keyframe_idx]
+            n_frames = float(next_keyframe.frame - prev_keyframe.frame)
+            for i in range(prev_keyframe_idx + 1, keyframe_idx):
+                t = (self.keyframes[i].frame - prev_keyframe.frame) / n_frames
+                self.keyframes[i].strength = (1.0 - t) * prev_keyframe.strength + t * next_keyframe.strength
+
+            keyframe_idx += 1
 
     @classmethod
     def from_dict(cls, data):
