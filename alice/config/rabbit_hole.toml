@@ -7,6 +7,7 @@ height = 720
 tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
 jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
+skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 
 
 # ==================================================
@@ -14,28 +15,48 @@ witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutko
 [[keyframes]]
 frame = 138
 input_image = "rabbit_hole/IM{0138}.png"
-# interesting seeds: 438989805 1136108454
-seed = 1136108454
-prompt = "tombstone"
+prompt = "skull"
+seed = 2922644564 # actually gives a skull (only one out of 100 random seeds)
+# previously explored seeds for tombstone prompt: 438989805 1136108454
 scale = 8.0
-strength = 0.8
-steps = 50
+strength = 0.0
 masks = [
-    { center = [0.95, 0.3], radius = 0.25 }
     { center = [0.95, 0.4], radius = 0.25 }
-    { center = [0.95, 0.5], radius = 0.25 }
-    { center = [0.95, 0.6], radius = 0.25 }
 ]
+steps = 50
+
+[[keyframes]]
+frame = 148
+strength = 0.6
+
+[[keyframes]]
+frame = 160
+strength = 0.8
+
+[[keyframes]]
+frame = 179
+strength = 0.8
+
+[[keyframes]]
+frame = 188
+strength = 0.6
+
+[[keyframes]]
+frame = 189
+strength = 0.0
+masks = []
 
 # zoom in on alice
 [[keyframes]]
 frame = 190
-seed = 438989805
+prompt = "tombstone"
+seed = 438989805 # gives a coherent tombstone
 masks = [
     { center = [0.95, 0.4], radius = 0.25 }
     { center = [0.95, 0.5], radius = 0.25 }
     { center = [0.95, 0.6], radius = 0.25 }
 ]
+strength = 0.8
 
 [[keyframes]]
 frame = 222
@@ -109,7 +130,7 @@ masks = []
 [[keyframes]]
 frame = 1128
 prompt = "witch"
-seed = 1640273403 # golden seed for frame 1187
+seed = 1640273403 # golden seed for frame 1186/1187
 strength = 0.0
 masks = []
 
