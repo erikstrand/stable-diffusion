@@ -1,0 +1,81 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+scratch_dir = "transition of 17 to 20, less strength - 0.5 instead of 0.8"
+out_dir = "outputs/e1_46"
+width = 1024
+height = 768
+stride = 1
+
+[[keyframes]]
+frame = 1
+seed = 532770008
+prompt = "an iridescent poster of colorful abstract art, muted colors, behance gd, rich color palette"
+scale = 7.0
+strength = 0.5
+steps = 50
+color_coherence = "LAB"
+
+[[keyframes]]
+duration = 1
+seed = "random"
+animation.zoom = 1.01
+animation.translate = [2.0, 0.0]
+animation.rotate = 1.0
+
+[[keyframes]]
+duration = 50
+animation.zoom = 1.02
+animation.translate = [2.0, 1.0]
+animation.rotate = 1.0
+
+[[keyframes]]
+duration = 25
+animation.zoom = 1.03
+animation.translate = [3.0, 2.0]
+animation.rotate = 2.0
+
+[[keyframes]]
+duration = 20
+animation.zoom = 1.04
+animation.translate = [4.0, 2.0]
+animation.rotate = 3.0
+
+[[keyframes]]
+duration = 10
+animation.zoom = 0.98
+animation.translate = [-1.0, -2.0]
+animation.rotate = -1.0
+
+[[keyframes]]
+duration = 70
+animation.zoom = 0.98
+animation.translate = [-1.0, -2.0]
+animation.rotate = -1.0
+
+[[keyframes]]
+duration = 50
+animation.zoom = 0.99
+animation.translate = [5.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 50
+animation.zoom = 0.98
+animation.translate = [1.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 50
+animation.zoom = 0.98
+animation.translate = [1.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+prompt = "shattered glass, space, low poly, colorful, oil, expressionism, man, rain"
+animation.zoom = 1.02
+animation.translate = [0.0, 3.0]
+animation.rotate = 1.5
+
+[[keyframes]]
+duration = 100

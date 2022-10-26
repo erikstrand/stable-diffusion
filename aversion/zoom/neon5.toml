@@ -1,0 +1,46 @@
+in_dir = "n/a"
+mask_dir = "n/a"
+scratch_dir = "copy of erik2 neon.toml but with slightly different seeds "
+out_dir = "outputs/e1_43"
+width = 1024
+height = 768
+stride = 1
+
+[[keyframes]]
+frame = 1
+seed = 2880259306
+prompt = "neon hieroglyphics intertwined with shiny metal sculpture, onyx, pink, highly detailed, ultra realistic, octane render 8k, by guerrino boatto"
+scale = 10.0
+strength = 0.5
+steps = 50
+color_coherence = "LAB"
+
+[[keyframes]]
+duration = 1
+seed = "random"
+animation.zoom = 1.02             # multiplicative factor per frame
+animation.translate = [2.0, 0.0]  # pixels per frame for X and Y
+animation.rotate = -1.0           # degrees per frame (positive is CCW)
+  
+[[keyframes]]
+duration = 100
+animation.zoom = 0.98
+animation.translate = [0.0, -2.0]
+animation.rotate = -0.1
+
+[[keyframes]]
+duration = 100
+animation.zoom = 1.0
+animation.translate = [-5.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 80
+prompt = "shattered glass, space, low poly, colorful, oil, expressionism, man, rain"
+animation.zoom = 1.02
+animation.translate = [0.0, -2.0]
+animation.rotate = 1.0
+
+[[keyframes]]
+duration = 100
+prompt = "an iridescent poster of colorful abstract art, muted colors, behance gd, rich color palette"

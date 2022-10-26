@@ -180,8 +180,18 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             while skip_counter != int(dream_schedule.restart_from):
                 dream_state.advance_frame()    
                 skip_counter = skip_counter +1
+                
+            # get path to latest file (necessary for restart)
+            opt = dream_state.get_prompt()
+            #[['alice/aversion/e1_remove/000010.0.png', 2126656882]]
+            path = opt.outdir+"/"+str(skip_counter).zfill(6)+".0.png"
+            fake_seed = 0
+            assert os.path.exists(path)
+            last_results = [[path, fake_seed]]
+            single_use_bool = True
+            
+            # verbose 
             print(f"Skipped: {skip_counter} frames. Proceed?")
-    
 
     # This will be set by the image callback (when opt.is_reference_image is true).
     color_reference_array = None
@@ -208,6 +218,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                 )
 
                 if opt.color_coherence:
+                    if dream_schedule.restart_from is not None and single_use_bool: 
+                        color_reference_array = init_array.copy()
+                        single_use_bool = False
                     init_array = maintain_colors(init_array, color_reference_array, opt.color_coherence)
 
                 opt.init_Image = array_to_image(init_array)
