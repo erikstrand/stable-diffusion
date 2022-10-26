@@ -7,6 +7,7 @@ height = 720
 tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
 jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 
+
 # ==================================================
 # alice and cat relaxing on grass
 [[keyframes]]
@@ -19,9 +20,10 @@ scale = 8.0
 strength = 0.8
 steps = 50
 masks = [
-    { center = [0.92, 0.4], radius = 0.25 }
-    { center = [0.92, 0.5], radius = 0.25 }
-    { center = [0.92, 0.6], radius = 0.25 }
+    { center = [0.95, 0.3], radius = 0.25 }
+    { center = [0.95, 0.4], radius = 0.25 }
+    { center = [0.95, 0.5], radius = 0.25 }
+    { center = [0.95, 0.6], radius = 0.25 }
 ]
 
 # zoom in on alice
@@ -34,16 +36,29 @@ masks = [
     { center = [0.95, 0.6], radius = 0.25 }
 ]
 
+[[keyframes]]
+frame = 227
+
+# camera starts panning up
+[[keyframes]]
+frame = 232
+strength = 0.0
+
+
 # ==================================================
 # rabbit checks pocketwatch then starts running
 [[keyframes]]
 frame = 242
+strength = 0.0
+masks = []
 # nothing planned
 
 # rabbit checks pocketwatch
 [[keyframes]]
 frame = 257
 prompt = "jackrabbit"
+seed = 232288432 # clock eye
+#seed = 3853414560 # very coherent rabbit face
 strength = 0.0
 masks = [
     { center = [0.5, 0.55], radius = 0.3 }
@@ -54,35 +69,80 @@ frame = 259
 masks = [
     { center = [0.4, 0.5], radius = 0.3 }
 ]
+strenth = 0.2
 
 [[keyframes]]
 frame = 260
 masks = [
     { center = [0.38, 0.68], radius = 0.35 }
 ]
+strength = 0.3
 
 [[keyframes]]
 frame = 266
-strength = 0.2
+strength = 0.6
 masks = [
     { center = [0.35, 0.68], radius = 0.4 }
 ]
 
 [[keyframes]]
-frame = 276
-input_image = "rabbit_hole/IM0276.png"
-seed = "random"
-strength = 0.6
+frame = 267
+strength = 0.7
 
 [[keyframes]]
-duration = 50
+frame = 277
 
-#[[keyframes]]
-#frame = 281
-#
-#[[keyframes]]
-#frame = 287
-#strength = 0.0
+[[keyframes]]
+frame = 287
+strength = 0.0
+masks = []
 
 
 # ==================================================
+# alice crawls into the rabbit hole (viewed from front)
+[[keyframes]]
+frame = 1128
+strength = 0.0
+
+[[keyframes]]
+frame = 1182
+strength = 0.0
+masks = [
+    { center = [0.74, 0.666], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1187
+input_image = "rabbit_hole/IM1187.png"
+strength = 0.65
+prompt = "portrait of a wicked witch with blonde hair, by greg rutkowski, by ross tran, by fenghua zhong, horror, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
+seed = "random"
+
+[[keyframes]]
+duration = 10
+prompt = "portrait of michael myers, by greg rutkowski, by ross tran, by fenghua zhong, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
+
+[[keyframes]]
+duration = 10
+prompt = "portrait of michael myers, by Kilian Eng and Esao Andrews, octane, soft render, blood, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation"
+
+[[keyframes]]
+duration = 10
+prompt = "portrait of michael myers played by alice in wonderland, by Kilian Eng and Esao Andrews, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation"
+
+[[keyframes]]
+duration = 25
+
+# ==================================================
+# alice crawls deeper into the rabbit hole (side view)
+# 1390: alice falls
+# 1412: cat enters frame to look, slips down slope but catches herself
+# 1500: peers after alice
+[[keyframes]]
+frame = 1264
+
+
+# ==================================================
+# cat peers down, as seen by alice (cat recedes into distance)
+[[keyframes]]
+frame = 1562
