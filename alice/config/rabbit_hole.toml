@@ -119,24 +119,9 @@ masks = [
 [[keyframes]]
 frame = 1187
 input_image = "rabbit_hole/IM1187.png"
+seed = 1640273403
 strength = 0.65
-prompt = "portrait of a wicked witch with blonde hair, by greg rutkowski, by ross tran, by fenghua zhong, horror, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
-seed = "random"
-
-[[keyframes]]
-duration = 10
 prompt = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
-
-[[keyframes]]
-duration = 10
-prompt = "portrait of michael myers, by Kilian Eng and Esao Andrews, octane, soft render, blood, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation"
-
-[[keyframes]]
-duration = 10
-prompt = "portrait of michael myers played by alice in wonderland, by Kilian Eng and Esao Andrews, blood, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation"
-
-[[keyframes]]
-duration = 25
 
 # ==================================================
 # alice crawls deeper into the rabbit hole (side view)
