@@ -271,6 +271,20 @@ class Args(object):
                     switches.append(f'-tf {angle}:{zoom}:{tx}:{ty}')
                 else:
                     raise ValueError(f'Invalid image transform (should be a string or list): {a["init_img_transform"]}')
+            if a['mask_fill'] is not None:
+                switches.append(f'-mf {a["mask_fill"]}')
+            if a['mask_fill_transform'] is not None:
+                # Mask transforms start as strings but get parsed into tuples in invoke.py.
+                # This handles either case.
+                if isinstance(a['mask_fill_transform'], str):
+                    switches.append(f'-mft {a["mask_fill_transform"]}')
+                elif isinstance(a['mask_fill_transform'], tuple):
+                    zoom = a['mask_fill_transform'][0]
+                    tx = a['mask_fill_transform'][1]
+                    ty = a['mask_fill_transform'][2]
+                    switches.append(f'-mft {zoom}:{tx}:{ty}')
+                else:
+                    raise ValueError(f'Invalid mask transform (should be a string or list): {a["mask_fill_transform"]}')
         else:
             switches.append(f'-A {a["sampler_name"]}')
 
@@ -779,7 +793,21 @@ class Args(object):
             '--init_img_transform',
             default=None,
             type=str,
-            help='a transformation applied to the init image, in the form `rotation_degrees:zoom_scale:translate_x:translate_y'
+            help='a transformation applied to the init image, in the form rotation_degrees:zoom_scale:translate_x:translate_y'
+        )
+        img2img_group.add_argument(
+            '-mf',
+            '--mask_fill',
+            default=None,
+            type=str,
+            help='When using a mask, fill it with the contents of this image (filepath)'
+        )
+        img2img_group.add_argument(
+            '-mft',
+            '--mask_fill_transform',
+            default=None,
+            type=str,
+            help='When using --mask_fill, apply this transform to the image, in the form zoom_scale:translate_x:translate_y'
         )
         postprocessing_group.add_argument(
             '-ft',
