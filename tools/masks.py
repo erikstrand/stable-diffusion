@@ -11,7 +11,6 @@ class Mask:
         assert(self.center.shape == (2,))
         self.radius = float(radius)
         self.sigmoid_k = float(sigmoid_k)
-        print(f"making mask: {self.sigmoid_k}")
 
     def __str__(self):
         return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
@@ -42,7 +41,6 @@ def generate_mask_array(width, height, masks):
         # Generate the mask.
         dist = np.linalg.norm(coords - center, axis=2)
         # sigmoid
-        print(f"using mask: {mask.sigmoid_k}")
         mask = 255.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
         # 255 means opaque, 0 means transparent
         mask = mask.astype('uint8')

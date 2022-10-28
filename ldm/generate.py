@@ -1004,7 +1004,6 @@ class Generate:
             c_y = mask_fill_transform[4] * image_h
 
             rows, cols = mask_fill_np.shape[0:2]
-            center = (0.5 * (cols - 1), 0.5 * (rows - 1))
             translate_mat = np.float32([
                 [1.0, 0.0, translate_x],
                 [0.0, 1.0, -translate_y],
@@ -1019,12 +1018,12 @@ class Generate:
                 (cols, rows),
                 borderMode=cv2.BORDER_REPLICATE
             )
-            Image.fromarray(mask_fill_np).save('mf_mask_transformed.png')
+            #Image.fromarray(mask_fill_np).save('mf_mask_transformed.png')
 
         # Combine.
         result_np = mask_np * image_np + (1.0 - mask_np) * mask_fill_np
         result = Image.fromarray(result_np.astype('uint8'), 'RGB')
-        result.save('mf_new_image.png')
+        #result.save('mf_new_image.png')
         return result
 
     def _create_init_image(self, image, width, height, fit=True):
