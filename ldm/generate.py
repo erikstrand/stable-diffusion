@@ -1000,12 +1000,23 @@ class Generate:
             zoom = mask_fill_transform[0]
             translate_x = mask_fill_transform[1]
             translate_y = mask_fill_transform[2]
-            translation_matrix = np.float32([
-                [zoom, 0, translate_x],
-                [0, zoom, -translate_y]
-            ])
+
             rows, cols = mask_fill_np.shape[0:2]
-            mask_fill_np = cv2.warpAffine(mask_fill_np, translation_matrix, (cols, rows))
+            center = (0.5 * (cols - 1), 0.5 * (rows - 1))
+            trans_mat = np.float32([
+                [1.0, 0.0, translate_x],
+                [0.0, 1.0, -translate_y],
+                [0.0, 0.0, 1.0]
+            ])
+            rot_mat = cv2.getRotationMatrix2D(center, 0.0, zoom)
+            rot_mat = np.vstack([rot_mat, [0.0, 0.0, 1.0]])
+            xform = np.matmul(rot_mat, trans_mat)
+            mask_fill_np = cv2.warpPerspective(
+                mask_fill_np,
+                xform,
+                (cols, rows),
+                borderMode=cv2.BORDER_REPLICATE
+            )
             Image.fromarray(mask_fill_np).save('mf_mask_transformed.png')
 
         # Combine.
