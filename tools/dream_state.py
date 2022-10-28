@@ -36,6 +36,8 @@ class DreamState:
 
         self.prev_frame_masks = []
         self.this_frame_masks = []
+        # maps a frame number to a list of masks
+        self.ref_frame_masks = {}
 
         return self
 
@@ -64,6 +66,8 @@ class DreamState:
             self.this_frame_masks = self.get_masks()
         else:
             self.this_frame_masks = []
+        if self.frame_idx in self.schedule.mask_fill_frames:
+            self.ref_frame_masks[self.frame_idx] = self.this_frame_masks
 
         # Record the current output file as a color reference, if requested.
         set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
@@ -167,10 +171,16 @@ class DreamState:
         mask_fill_img = None
         mask_fill_transform = None
         if self.has_mask() and self.prev_keyframe.fill_mask is not None:
-            assert(len(self.prev_frame_masks) == 1)
             assert(len(self.this_frame_masks) == 1)
-            prev_mask = self.prev_frame_masks[0]
             this_mask = self.this_frame_masks[0]
+
+            if self.prev_keyframe.fill_mask.use_prev:
+                assert(len(self.prev_frame_masks) == 1)
+                prev_mask = self.prev_frame_masks[0]
+            else:
+                prev_masks = self.ref_frame_masks[self.prev_keyframe.fill_mask.frame]
+                assert(len(prev_masks) == 1)
+                prev_mask = prev_masks[0]
 
             zoom = this_mask.radius / prev_mask.radius
             t_x = this_mask.center[0] - prev_mask.center[0]
@@ -178,7 +188,7 @@ class DreamState:
             c_x = prev_mask.center[0]
             c_y = prev_mask.center[1]
 
-            mask_fill_img = self.output_path(self.prev_keyframe.fill_mask, self.frame_idx)
+            mask_fill_img = self.output_path(self.prev_keyframe.fill_mask.get_frame(self.frame_idx))
             mask_fill_transform = f"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}"
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
