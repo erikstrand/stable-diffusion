@@ -4,16 +4,20 @@ from pathlib import Path
 
 
 class Mask:
-    __slots__ = ["center", "radius", "sigmoid_k"]
+    __slots__ = ["center", "radius", "sigmoid_k", "invert"]
 
-    def __init__(self, center, radius, sigmoid_k=0.2):
+    def __init__(self, center, radius, sigmoid_k=0.2, invert=False):
         self.center = np.array(center)
         assert(self.center.shape == (2,))
         self.radius = float(radius)
         self.sigmoid_k = float(sigmoid_k)
+        self.invert = bool(invert)
 
     def __str__(self):
-        return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
+        result = f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
+        if self.invert:
+            result += ", invert"
+        return result
 
 
 def generate_mask_array(width, height, masks):
@@ -41,12 +45,15 @@ def generate_mask_array(width, height, masks):
         # Generate the mask.
         dist = np.linalg.norm(coords - center, axis=2)
         # sigmoid
-        mask = 255.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
+        mask_array = 255.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
         # 255 means opaque, 0 means transparent
-        mask = mask.astype('uint8')
+        mask_array = mask_array.astype('uint8')
+
+        if mask.invert:
+            mask_array = 255 - mask_array
 
         # Merge with previous masks.
-        result = np.minimum(result, mask)
+        result = np.minimum(result, mask_array)
 
     return result
 

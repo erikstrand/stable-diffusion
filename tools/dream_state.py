@@ -286,7 +286,7 @@ class DreamState:
                 center = (1.0 - t) * prev_mask.center + t * next_mask.center
                 radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
                 sigmoid_k = (1.0 - t) * prev_mask.sigmoid_k + t * next_mask.sigmoid_k
-                masks.append(Mask(center, radius, sigmoid_k))
+                masks.append(Mask(center, radius, sigmoid_k, prev_mask.invert))
             return masks
 
         # Currently the case where n_prev_masks != n_next_masks and both are greater than zero is
