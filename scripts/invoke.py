@@ -775,18 +775,21 @@ def split_transform(transform_string) -> list:
     return (angle, zoom, t_x, t_y)
 
 def split_mask_transform(transform_string) -> list:
+    n_components = 5
     components = transform_string.split(':')
-    if len(components) != 3:
-        print(f'** Could not parse mask transform string "{transform_string}": expected 3 components separated by colons')
+    if len(components) != n_components:
+        print(f'** Could not parse mask transform string "{transform_string}": expected {n_components} components separated by colons')
         return None
     try:
         zoom = float(components[0])
         t_x = float(components[1])
         t_y = float(components[2])
+        c_x = float(components[3])
+        c_y = float(components[4])
     except ValueError:
         print(f'** Could not parse transform string "{transform_string}": error parsing floats')
         return None
-    return (zoom, t_x, t_y)
+    return (zoom, t_x, t_y, c_x, c_y)
 
 def load_face_restoration(opt):
     try:

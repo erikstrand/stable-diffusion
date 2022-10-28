@@ -1000,17 +1000,19 @@ class Generate:
             zoom = mask_fill_transform[0]
             translate_x = mask_fill_transform[1]
             translate_y = mask_fill_transform[2]
+            c_x = mask_fill_transform[3]
+            c_y = mask_fill_transform[4]
 
             rows, cols = mask_fill_np.shape[0:2]
             center = (0.5 * (cols - 1), 0.5 * (rows - 1))
-            trans_mat = np.float32([
+            translate_mat = np.float32([
                 [1.0, 0.0, translate_x],
                 [0.0, 1.0, -translate_y],
                 [0.0, 0.0, 1.0]
             ])
-            rot_mat = cv2.getRotationMatrix2D(center, 0.0, zoom)
+            rot_mat = cv2.getRotationMatrix2D((c_x, rows - 1 - c_y), 0.0, zoom)
             rot_mat = np.vstack([rot_mat, [0.0, 0.0, 1.0]])
-            xform = np.matmul(rot_mat, trans_mat)
+            xform = np.matmul(translate_mat, rot_mat)
             mask_fill_np = cv2.warpPerspective(
                 mask_fill_np,
                 xform,

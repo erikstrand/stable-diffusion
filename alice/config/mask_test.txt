@@ -2,4 +2,4 @@
 -I alice/frames/rabbit_hole/IM1187.png -M alice/outputs/rabbit_hole/masks/frame_001187.png --prompt_idx 2 -S 1640273403 -C 8.00 -f 0.650 -s 50 -W 960 -H 720 -o alice/outputs/rabbit_hole/frames -N mask_fill.png -mf alice/outputs/rabbit_hole/frames/frame_001186.png
 -I alice/frames/rabbit_hole/IM1187.png -M alice/outputs/rabbit_hole/masks/frame_001187.png --prompt_idx 2 -S 23458976 -C 8.00 -f 0.5 -s 50 -W 960 -H 720 -o alice/outputs/rabbit_hole/frames -N mask_fill.png -mf alice/outputs/rabbit_hole/frames/frame_001186.png
 
--I alice/frames/rabbit_hole/IM1187.png -M alice/outputs/rabbit_hole/masks/frame_001187.png --prompt_idx 2 -S 23458976 -C 8.00 -f 0.5 -s 50 -W 960 -H 720 -o alice/outputs/rabbit_hole/frames -N mask_fill.png -mf alice/outputs/rabbit_hole/frames/frame_001186.png -mft 1.0:50.0:0.0
+-I alice/frames/rabbit_hole/IM1187.png -M alice/outputs/rabbit_hole/masks/frame_001187.png --prompt_idx 2 -S 23458976 -C 8.00 -f 0.5 -s 50 -W 960 -H 720 -o alice/outputs/rabbit_hole/frames -N mask_fill.png -mf alice/outputs/rabbit_hole/frames/frame_001186.png -mft 0.5:0:0:0:0

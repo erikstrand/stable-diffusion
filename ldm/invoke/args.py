@@ -282,7 +282,9 @@ class Args(object):
                     zoom = a['mask_fill_transform'][0]
                     tx = a['mask_fill_transform'][1]
                     ty = a['mask_fill_transform'][2]
-                    switches.append(f'-mft {zoom}:{tx}:{ty}')
+                    cx = a['mask_fill_transform'][3]
+                    cy = a['mask_fill_transform'][4]
+                    switches.append(f'-mft {zoom}:{tx}:{ty}:{cx}:{cy}')
                 else:
                     raise ValueError(f'Invalid mask transform (should be a string or list): {a["mask_fill_transform"]}')
         else:
@@ -807,7 +809,7 @@ class Args(object):
             '--mask_fill_transform',
             default=None,
             type=str,
-            help='When using --mask_fill, apply this transform to the image, in the form zoom_scale:translate_x:translate_y'
+            help='When using --mask_fill, apply this transform to the image, in the form zoom_scale:translate_x:translate_y:center_x:center_y'
         )
         postprocessing_group.add_argument(
             '-ft',
