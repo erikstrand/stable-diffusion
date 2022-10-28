@@ -137,7 +137,7 @@ class Transform2D:
         self.translation = (float(translation[0]), float(translation[1])) # in pixels
 
     def arg_string(self):
-        return f"{self.rotation:.3f}:{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}"
+        return f"\"{self.rotation:.3f}:{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}\""
 
 
 class MaskFillTransform:
@@ -149,7 +149,7 @@ class MaskFillTransform:
         self.center = (float(center[0]), float(center[1])) # in pixels
 
     def arg_string(self):
-        return f"{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}:{self.center[0]:.3f}:{self.center[1]:.3f}"
+        return f"\"{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}:{self.center[0]:.3f}:{self.center[1]:.3f}\""
 
 
 class KeyFrame:

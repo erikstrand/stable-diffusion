@@ -32,6 +32,12 @@ if __name__ == "__main__":
         help="The last frame to render (1-indexed).",
         required=True
     )
+    parser.add_argument(
+        "--stride",
+        type=int,
+        help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
+        default=1
+    )
 
     # Video Options
     parser.add_argument(
@@ -53,7 +59,7 @@ if __name__ == "__main__":
 
     # Generate the list of frames, write it to a file.
     outdir = Path(args.dir)
-    files = [str(outdir / f"frame_{i:06d}.png") for i in range(args.start_at, args.end_at + 1)]
+    files = [str(outdir / f"frame_{i:06d}.png") for i in range(args.start_at, args.end_at + 1, args.stride)]
     with open('frames.txt', 'w') as outfile:
         for file in files:
             outfile.write(f"file '{file}'\n")

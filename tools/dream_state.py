@@ -189,7 +189,7 @@ class DreamState:
             c_y = prev_mask.center[1]
 
             mask_fill_img = self.output_path(self.prev_keyframe.fill_mask.get_frame(self.frame_idx))
-            mask_fill_transform = f"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}"
+            mask_fill_transform = f"\"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}\""
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
         prompt_variations = self.interpolate_variations(
