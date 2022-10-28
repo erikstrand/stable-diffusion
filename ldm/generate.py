@@ -710,7 +710,12 @@ class Generate:
 
             if mask_init_img is not None:
                 mask_fill_image = self._load_img(mask_init_img, width, height)
-                image = self._fill_mask(image_pil=image, mask_pil=mask_image, mask_fill_pil=mask_fill_image)
+                image = self._fill_mask(
+                    image_pil=image,
+                    mask_pil=mask_image,
+                    mask_fill_pil=mask_fill_image,
+                    mask_fill_transform=mask_init_img_transform,
+                )
 
             # convert the PIL image to a torch tensor
             init_mask = self._create_init_mask(mask_image,width,height,fit=fit)
@@ -951,7 +956,13 @@ class Generate:
         format = 'RGB' if image_array.shape[2] == 3 else 'RGBA'
         return Image.fromarray(image_array, format)
 
-    def _fill_mask(self, image_pil, mask_pil, mask_fill_pil):
+    def _fill_mask(
+        self,
+        image_pil,
+        mask_pil,
+        mask_fill_pil,
+        mask_fill_transform,
+    ):
         # Check sizes.
         #print(f"image size: {image_pil.size}")
         #print(f"mask size: {mask_pil.size}")
@@ -984,9 +995,24 @@ class Generate:
         mask_np = np.array(mask_pil)[:, :, 3]
         mask_np = np.expand_dims(mask_np, axis=2) * np.float32(1.0 / 255)
 
+        # Transform the mask fill image.
+        if mask_fill_transform is not None:
+            zoom = mask_fill_transform[0]
+            translate_x = mask_fill_transform[1]
+            translate_y = mask_fill_transform[2]
+            translation_matrix = np.float32([
+                [zoom, 0, translate_x],
+                [0, zoom, -translate_y]
+            ])
+            rows, cols = mask_fill_np.shape[0:2]
+            mask_fill_np = cv2.warpAffine(mask_fill_np, translation_matrix, (cols, rows))
+            Image.fromarray(mask_fill_np).save('mf_mask_transformed.png')
+
         # Combine.
         result_np = mask_np * image_np + (1.0 - mask_np) * mask_fill_np
-        return Image.fromarray(result_np.astype('uint8'), 'RGB')
+        result = Image.fromarray(result_np.astype('uint8'), 'RGB')
+        result.save('mf_new_image.png')
+        return result
 
     def _create_init_image(self, image, width, height, fit=True):
         image = image.convert('RGB')
