@@ -8,6 +8,7 @@ tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng an
 jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
+pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
 
 
 # ==================================================
@@ -193,8 +194,98 @@ strength = 0.0
 [[keyframes]]
 frame = 1264
 
-
 # ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
 [[keyframes]]
-frame = 1562
+frame = 1575
+prompt = "pit"
+seed = "random"
+strength = 0.5
+masks = []
+
+[[keyframes]]
+duration = 100
+
+#[[keyframes]]
+#frame = 1582
+#strength = 0.5
+#
+#[[keyframes]]
+#frame = 1600
+#strength = 0.5
+#
+#[[keyframes]]
+#frame = 1617
+#strength = 0.0
+
+
+# ==================================================
+# alice tumbles through darkness
+#[[keyframes]]
+#frame = 1618
+
+#1660: dress acts as parachute
+
+# ==================================================
+# zoom in
+[[keyframes]]
+frame = 1716
+
+# ==================================================
+# alice's feet from her viewpoint
+[[keyframes]]
+frame = 1762
+
+# ==================================================
+# back to zoomed in side view
+[[keyframes]]
+frame = 1798
+#1895: starts getting darker
+#1950: stable darkness
+
+# ==================================================
+# zooms out a bit
+[[keyframes]]
+frame = 1972
+#2012: lamp appears at bottom
+#2045: alice turns on lamp, other furniture is visible
+
+# ==================================================
+# cuts to lower view, only alice's legs in frame, mirror on right side
+[[keyframes]]
+frame = 2210
+#2335: alice grabs book
+
+# ==================================================
+# close up of alice reading book
+[[keyframes]]
+frame = 2368
+
+# ==================================================
+# zoom back out
+[[keyframes]]
+frame = 2468
+#2520: grandfather clock goes by on right, bent chimney on left
+#2545: alice falls into chair
+#2680: kettle over fire in stove on right
+#2742: alice slips out of chair
+
+# ==================================================
+# only alice's feet visible, funnel below
+[[keyframes]]
+frame = 2810
+#2870: halfway through funnel
+#2900: narrowest point
+#2940: restabilized, map coming into view
+#3000: looking at map (alice is upside down)
+
+# ==================================================
+# zoom in, upside down alice looking at map
+[[keyframes]]
+frame = 3008
+#3070: map leaving view
+
+# ==================================================
+# rabbit running away (upside down since alice is)
+[[keyframes]]
+frame = 3160
