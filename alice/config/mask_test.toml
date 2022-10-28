@@ -1,5 +1,5 @@
 in_dir = "alice/frames"
-out_dir = "alice/outputs/rabbit_hole"
+out_dir = "alice/outputs/mask_test"
 width = 960
 height = 720
 
@@ -9,71 +9,26 @@ jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, 
 witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 
-# ==================================================
-# alice crawls into the rabbit hole (viewed from front)
 [[keyframes]]
-frame = 1128
-input_image = "rabbit_hole/IM{1128}.png"
+frame = 1186
+input_image = "rabbit_hole/IM1186.png"
 prompt = "witch"
 seed = 1640273403 # golden seed for frame 1186/1187
-strength = 0.0
-masks = []
-
-[[keyframes]]
-frame = 1172
-masks = [
-    { center = [0.77, 0.566], radius = 0.2 }
-]
-
-[[keyframes]]
-frame = 1177
-masks = [
-    { center = [0.77, 0.566], radius = 0.2 }
-]
-strength = "interpolate"
-
-[[keyframes]]
-frame = 1182
 masks = [
     { center = [0.74, 0.666], radius = 0.2 }
 ]
 strength = 0.65
 
-[[keyframes]]
-frame = 1186
 
 [[keyframes]]
 frame = 1187
-fill_mask = true
-strength = 0.2
-
-[[keyframes]]
-frame = 1197
-masks = [
-    { center = [0.75, 0.666], radius = 0.2 }
-]
-
-[[keyframes]]
-frame = 1198
-masks = [
-    { center = [0.77, 0.6], radius = 0.2 }
-]
-
-[[keyframes]]
-frame = 1200
+input_image = "rabbit_hole/IM1200.png"
 masks = [
     { center = [0.79, 0.52], radius = 0.2 }
 ]
+fill_mask = true
+seed = "random"
+strength = 0.5
 
 [[keyframes]]
-frame = 1206
-masks = [
-    { center = [0.79, 0.5], radius = 0.2 }
-]
-
-[[keyframes]]
-# she starts moving to the right here (eventually leaving the frame)
-frame = 1220
-masks = []
-strength = 0.0
-fill_mask = false
+duration = 1
