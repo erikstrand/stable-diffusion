@@ -100,21 +100,24 @@ if __name__ == "__main__":
         print("The video option must be used on its own.")
         exit(0)
 
-    # Construct some paths.
+    # Construct the version string.
     version_string = ""
     if args.version:
         version_string = "_" + args.version
-    if args.outfile is None:
-        assert(args.config_file.endswith(".toml"))
-        if args.commands:
-            args.outfile = args.config_file[:-5] + version_string + ".txt"
-        else:
-            args.outfile = args.config_file[:-5] + version_string + ".mp4"
 
     # Build the dream schedule.
     schedule = DreamSchedule.from_file(args.config_file)
     if args.version:
         schedule.out_dir = schedule.out_dir.parent / (schedule.out_dir.name + version_string)
+
+    # Determine the output file.
+    if args.outfile is None:
+        assert(args.config_file.endswith(".toml"))
+        if args.commands:
+            args.outfile = schedule.out_dir / (str(Path(args.config_file).stem) + version_string + ".txt")
+            Path(args.outfile).parent.mkdir(parents=True, exist_ok=True)
+        else:
+            args.outfile = args.config_file[:-5] + version_string + ".mp4"
 
     # Determine the range of frames to render.
     if args.start_at is None:

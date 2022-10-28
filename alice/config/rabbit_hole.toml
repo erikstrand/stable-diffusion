@@ -8,8 +8,10 @@ tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng an
 jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
 witch2 = "portrait of a wicked witch with blonde hair and countless sharp teeth crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
+witch3 = "a painting of a blonde witch in a blue dress splattered with blood crawling in a tunnel in the catacombs, alice in wonderland, dramatic lighting, shattered bones, chiaroscuro, high detail, painted by greg rutkowski, painted by igor kieryluk, painted by bobby chiu, trending on artstation"
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
+falling = "a blonde witch in a blue dress falls into a dimensional rift, alice in wonderland, horror, cinematic, dynamic lighting, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
 
 
 # ==================================================
@@ -191,25 +193,35 @@ strength = 0.0
 # alice crawls deeper into the rabbit hole (side view)
 [[keyframes]]
 frame = 1264
-input_image = "rabbit_hole/IM1275.png"
-prompt = "a painting of a blonde woman in a blue dress crawling in a tunnel in the catacombs, glowing blue mushrooms, human skulls, eerie, volumetric lighting, key light, cinematic, by jana schirmer, by boby chiu"
-strength = 0.5
-seed = "random"
+input_image = "rabbit_hole/IM{1264}.png"
+prompt = "witch3"
+strength = 0.0
+seed = 2390586
 
 [[keyframes]]
-duration = 20
-prompt = "a painting of a blonde woman in a blue dress crawling in a tunnel in the catacombs, alice in wonderland, angry, eerie, scary, cheeky, steampunk googles, highly detailed, cinematic, 8 k, by megan duncanson, benjamin lacombe, adrian borda, stanley artgermm, tom bagshaw, craig mullins, carne griffiths, ayami kojima, beksinski, giger, trending on deviantart, hyper detailed, horror, full of colour"
+frame = 1310
+strength = 0.0
 
 [[keyframes]]
-duration = 20
-prompt = "a painting of a blonde woman in a blue dress crawling in a tunnel in the catacombs, alice in wonderland, dramatic lighting, city background, chiaroscuro, high detail, painted by greg rutkowski, painted by igor kieryluk, painted by bobby chiu, trending on artstation"
+frame = 1360
+strength = 0.6
 
 [[keyframes]]
-duration = 20
+frame = 1383
+strength = 0.6
 
-# 1390: alice falls
-# 1412: cat enters frame to look, slips down slope but catches herself
-# 1500: peers after alice
+# alice falls 1390ish
+[[keyframes]]
+frame = 1393
+strength = 0.0
+
+#cat enters frame to look, slips down slope but catches herself
+[[keyframes]]
+frame = 1412
+
+#peers after alice
+[[keyframes]]
+frame = 1500
 
 # ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
@@ -233,48 +245,42 @@ input_image = "previous"
 strength = 0.5
 correct_colors = true
 transform.zoom = 0.97
-transform.translate = [-7.0, 15.0]
+transform.translate = [-3.0, 6.0]
 transform.rotate = 0.0
 
+[[keyframes]]
+frame = 1594
+transform.zoom = 0.96
+transform.translate = [0.0, 5.0]
+transform.rotate = 0.05
 
 # ==================================================
 # alice tumbles through darkness
 [[keyframes]]
 frame = 1618
 transform = "none"
-#input_image = "rabbit_hole/IM{1618}.png"
-input_image = "rabbit_hole/IM1660.png"
-prompt = "a blonde woman in a blue dress falls into the void, alice in wonderland, psychedelic trippy digital art, highly detailed concept art, sharp focus, intricate, dynamic lighting, by emylie boivin, by rossdraws, by sandra chevrier"
-strength = 0.3
-seed = "random"
+input_image = "rabbit_hole/IM{1618}.png"
+prompt = "falling"
+strength = 0.0
+seed = 29348756
+
+# dress acts as parachute
+[[keyframes]]
+frame = 1660
+strength = 0.0
 
 [[keyframes]]
-duration = 20
-# bad prompt, not horror enough
-prompt = "a blonde woman in a blue dress falls into a dimensional rift, alice in wonderland, Death Tarot card, highly detailed,half skull face,cinematic,8k,by Stanley Artgermm, Tom Bagshaw, Greg Rutkowski, Carne Griffiths, Ayami Kojima, Beksinski, Giger, trending on DeviantArt, hyper detailed,horror, full of colour"
+frame = 1680
+strength = 0.6
 
 [[keyframes]]
-duration = 20
-# pretty good
-prompt = "a blonde woman in a blue dress falls into a dimensional rift, alice in wonderland, Death Tarot card, highly detailed,half skull face,cinematic,8k,by Stanley Artgermm, Tom Bagshaw, Greg Rutkowski, Carne Griffiths, Ayami Kojima, Beksinski, Giger, trending on DeviantArt, hyper detailed,horror, full of colour"
-
-[[keyframes]]
-duration = 20
-prompt = "a blonde woman in a blue dress falls into a dimensional rift, alice in wonderland, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
-
-[[keyframes]]
-duration = 20
-prompt = "a blonde woman in a blue dress falls into a dimensional rift, alice in wonderland, dramatic lighting, chiaroscuro, high detail, by greg rutkowski, igor kieryluk, raymond swanland, jordan grimmer, trending on artstation"
-
-[[keyframes]]
-duration = 20
-
-#1660: dress acts as parachute
+frame = 1715
+strength = 0.6
 
 # ==================================================
 # zoom in
-#[[keyframes]]
-#frame = 1716
+[[keyframes]]
+frame = 1716
 
 # ==================================================
 # alice's feet from her viewpoint
