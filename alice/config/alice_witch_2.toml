@@ -1,5 +1,5 @@
 in_dir = "alice/frames"
-out_dir = "alice/outputs/alice_witch_1"
+out_dir = "alice/outputs/alice_witch_2"
 width = 960
 height = 720
 
@@ -23,34 +23,36 @@ masks = []
 [[keyframes]]
 frame = 1172
 masks = [
-    { center = [0.77, 0.566], radius = 0.2, sigmoid_k=100.0 }
+    { center = [0.77, 0.566], radius = 0.2 }
 ]
 
 [[keyframes]]
 frame = 1177
 masks = [
-    { center = [0.77, 0.566], radius = 0.2, sigmoid_k=100.0 }
+    { center = [0.77, 0.566], radius = 0.2 }
 ]
 strength = "interpolate"
 
 [[keyframes]]
 frame = 1182
 masks = [
-    { center = [0.74, 0.666], radius = 0.2, sigmoid_k=100.0 }
+    { center = [0.74, 0.666], radius = 0.2 }
 ]
 strength = 0.65
 
 [[keyframes]]
 frame = 1186
+set_color_reference = true
 
 [[keyframes]]
 frame = 1187
 masks = [
-    { center = [0.74, 0.666], radius = 0.2, sigmoid_k=0.2 }
+    { center = [0.74, 0.666], radius = 0.2 }
 ]
 fill_mask = -1
-strength = 0.6
 seed = "random"
+strength = 0.6
+correct_colors = true
 
 [[keyframes]]
 frame = 1197
