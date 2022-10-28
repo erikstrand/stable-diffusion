@@ -998,10 +998,10 @@ class Generate:
         # Transform the mask fill image.
         if mask_fill_transform is not None:
             zoom = mask_fill_transform[0]
-            translate_x = mask_fill_transform[1]
-            translate_y = mask_fill_transform[2]
-            c_x = mask_fill_transform[3]
-            c_y = mask_fill_transform[4]
+            translate_x = mask_fill_transform[1] * image_w
+            translate_y = mask_fill_transform[2] * image_h
+            c_x = mask_fill_transform[3] * image_w
+            c_y = mask_fill_transform[4] * image_h
 
             rows, cols = mask_fill_np.shape[0:2]
             center = (0.5 * (cols - 1), 0.5 * (rows - 1))
