@@ -48,7 +48,7 @@ frame = 1187
 masks = [
     { center = [0.74, 0.666], radius = 0.2, sigmoid_k=0.2 }
 ]
-fill_mask = true
+fill_mask = -1
 strength = 0.6
 seed = "random"
 
