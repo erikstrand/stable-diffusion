@@ -34,8 +34,8 @@ class DreamState:
         self.color_reference = None
         self.seed = None
 
-        # This is pretty hacky. I should compute it without needing this state.
         self.prev_frame_masks = []
+        self.this_frame_masks = []
 
         return self
 
@@ -57,6 +57,18 @@ class DreamState:
             self.seed = self.random.getrandbits(32)
         else:
             self.seed = self.prev_keyframe.seed
+
+        # Update mask state.
+        self.prev_frame_masks = self.this_frame_masks
+        if self.has_mask():
+            self.this_frame_masks = self.get_masks()
+        else:
+            self.this_frame_masks = []
+
+        # Record the current output file as a color reference, if requested.
+        set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
+        if set_color_reference:
+            self.color_reference = str(self.output_path())
 
         return self
 
@@ -148,7 +160,6 @@ class DreamState:
         # Set the mask path (if any).
         if self.has_mask():
             mask = self.mask_path()
-            self.prev_frame_masks = self.get_masks()
         else:
             mask = None
 
@@ -157,10 +168,9 @@ class DreamState:
         mask_fill_transform = None
         if self.has_mask() and self.prev_keyframe.fill_mask:
             assert(len(self.prev_frame_masks) == 1)
-            this_frame_masks = self.get_masks()
-            assert(len(this_frame_masks) == 1)
+            assert(len(self.this_frame_masks) == 1)
             prev_mask = self.prev_frame_masks[0]
-            this_mask = this_frame_masks[0]
+            this_mask = self.this_frame_masks[0]
 
             zoom = this_mask.radius / prev_mask.radius
             t_x = this_mask.center[0] - prev_mask.center[0]
@@ -214,11 +224,6 @@ class DreamState:
         steps = self.prev_keyframe.steps
         correct_colors = self.prev_keyframe.correct_colors
         init_color = self.color_reference if correct_colors else None
-
-        # Record the current output file as a color reference, if requested.
-        set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
-        if set_color_reference:
-            self.color_reference = str(self.output_path())
 
         return {
             "-I": init_img,

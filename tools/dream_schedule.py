@@ -265,10 +265,10 @@ class KeyFrame:
                 dict["transform"]["rotate"],
             )
 
-        if "correct_colors" not in dict:
-            correct_colors = False
-        else:
-            correct_colors = True
+        # The first frame has no color reference (except perhaps itself, which would do nothing).
+        if "correct_colors" in dict:
+            assert(dict["correct_colors"] is False)
+        correct_colors = False
 
         if "set_color_reference" not in dict:
             set_color_reference = False
@@ -419,7 +419,7 @@ class KeyFrame:
         if "correct_colors" not in dict or dict["correct_colors"] == "same":
             correct_colors = prev_keyframe.correct_colors
         else:
-            correct_colors = True
+            correct_colors = dict["correct_colors"]
 
         # This indicates the current frame should be used as a color reference.
         # It defaults to False.
