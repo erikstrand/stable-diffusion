@@ -124,6 +124,14 @@ class KeyFrame:
         if "animation" not in dict or dict["animation"] == "none":
             animation = None
         else:
+            # set animation defaults if not specified
+            if "translate" not in dict["animation"]:
+                dict["animation"]["translate"] = [0.0, 0.0]
+            if "zoom" not in dict["animation"]:
+                dict["animation"]["zoom"] = 1.0
+            if "rotate" not in dict["animation"]:
+                dict["animation"]["rotate"] = 0.0      
+                
             animation = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],
@@ -203,6 +211,15 @@ class KeyFrame:
         elif dict["animation"] == "none":
             animation = None
         else:
+            
+            # set animation defaults if not specified
+            if "translate" not in dict["animation"]:
+                dict["animation"]["translate"] = [0.0, 0.0]
+            if "zoom" not in dict["animation"]:
+                dict["animation"]["zoom"] = 1.0
+            if "rotate" not in dict["animation"]:
+                dict["animation"]["rotate"] = 0.0      
+            
             animation = Animation2D(
                 dict["animation"]["zoom"],
                 dict["animation"]["translate"],
