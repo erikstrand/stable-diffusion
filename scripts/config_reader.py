@@ -6,7 +6,6 @@ from dream_state import DreamState
 # TODO
 # - implement "pass" (meaning interpolation is defined by previous/later non "pass" frames)
 # - implement a way to shift between image inputs and pure txt2img
-# - implement 2D movement (zoom, translation, rotation)
 
 
 class SeedVariation:
