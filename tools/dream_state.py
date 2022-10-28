@@ -33,6 +33,10 @@ class DreamState:
             self.random = random.Random(42)
         self.color_reference = None
         self.seed = None
+
+        # This is pretty hacky. I should compute it without needing this state.
+        self.prev_frame_masks = []
+
         return self
 
     def __next__(self):
@@ -62,8 +66,10 @@ class DreamState:
         else:
             return self.prev_keyframe.input_image.get_path(self.schedule.in_dir, self.frame_idx)
 
-    def output_file(self):
-        return f"frame_{self.frame_idx:06d}.png"
+    def output_file(self, frame=None):
+        if frame is None:
+            frame = self.frame_idx
+        return f"frame_{frame:06d}.png"
 
     def mask_path(self):
         if self.prev_keyframe.input_image is None:
@@ -71,8 +77,10 @@ class DreamState:
         else:
             return str(self.schedule.out_dir / "masks" / self.output_file())
 
-    def output_path(self):
-        return self.schedule.out_dir / "frames" / self.output_file()
+    def output_path(self, frame=None):
+        if frame is None:
+            frame = self.frame_idx
+        return self.schedule.out_dir / "frames" / self.output_file(frame)
 
     @staticmethod
     def interpolate_variations(prev_variations, next_base, next_variations, t):
@@ -140,8 +148,28 @@ class DreamState:
         # Set the mask path (if any).
         if self.has_mask():
             mask = self.mask_path()
+            self.prev_frame_masks = self.get_masks()
         else:
             mask = None
+
+        # Add mask fill options (if any).
+        mask_fill_img = None
+        mask_fill_transform = None
+        if self.has_mask() and self.prev_keyframe.fill_mask:
+            assert(len(self.prev_frame_masks) == 1)
+            this_frame_masks = self.get_masks()
+            assert(len(this_frame_masks) == 1)
+            prev_mask = self.prev_frame_masks[0]
+            this_mask = this_frame_masks[0]
+
+            zoom = this_mask.radius / prev_mask.radius
+            t_x = this_mask.center[0] - prev_mask.center[0]
+            t_y = this_mask.center[1] - prev_mask.center[1]
+            c_x = prev_mask.center[0]
+            c_y = prev_mask.center[1]
+
+            mask_fill_img = self.output_path(self.frame_idx - 1)
+            mask_fill_transform = f"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}"
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
         prompt_variations = self.interpolate_variations(
@@ -204,6 +232,8 @@ class DreamState:
             "-s": steps,
             "-tf": init_img_transform,
             "--init_color": init_color,
+            "-mf": mask_fill_img,
+            "-mft": mask_fill_transform,
             "-W": self.schedule.width,
             "-H": self.schedule.height,
             "-o": str(outpath.parent),
