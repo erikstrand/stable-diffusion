@@ -102,6 +102,32 @@ class InputImage:
             return in_dir / f"{self.path_start}{input_frame}{self.path_end}"
 
 
+@dataclass
+class MaskFillImage:
+    __slots__ = ["use_prev", "frame"]
+
+    def __init__(self, use_prev, frame):
+        self.use_prev = use_prev
+        self.frame = frame
+
+    @classmethod
+    def from_string(cls, string, frame):
+        if string == "previous":
+            return cls(use_prev=True, frame=None)
+        else:
+            x = int(string)
+            if x >= 0:
+                return cls(use_prev=False, frame=x)
+            else:
+                return cls(use_prev=False, frame=frame + x)
+
+    def get_frame(self, frame):
+        if self.use_prev:
+            return frame - 1
+        else:
+            return self.frame
+
+
 class Transform2D:
     __slots__ = ["zoom", "translation", "rotation"]
 
@@ -197,7 +223,7 @@ class KeyFrame:
             assert(input_image.in_video_mode())
         self.masks = masks
 
-        assert(fill_mask in [True, False])
+        assert(fill_mask is None or isinstance(fill_mask, MaskFillImage))
         self.fill_mask = fill_mask
 
         assert(transform is None or isinstance(transform, Transform2D))
@@ -253,8 +279,10 @@ class KeyFrame:
         else:
             masks = [Mask(**mask) for mask in dict["masks"]]
 
+        # You can't mask paste on the first frame.
         if "fill_mask" in dict:
-            assert(dict["fill_mask"] is False)
+            assert(dict["fill_mask"] == "none")
+        fill_mask = None
 
         if "transform" not in dict or dict["transform"] == "none":
             transform = None
@@ -286,7 +314,7 @@ class KeyFrame:
             strength=strength,
             steps=steps,
             masks=masks,
-            fill_mask=False,
+            fill_mask=fill_mask,
             transform=transform,
             correct_colors=correct_colors,
             set_color_reference=set_color_reference
@@ -401,7 +429,11 @@ class KeyFrame:
 
         # Mask fill defaults to the value from the previous keyframe.
         if "fill_mask" not in dict or dict["fill_mask"] == "same":
-            dict["fill_mask"] = prev_keyframe.fill_mask
+            fill_mask = prev_keyframe.fill_mask
+        elif dict["fill_mask"] == "none":
+            fill_mask = None
+        else:
+            fill_mask = MaskFillImage.from_string(dict["fill_mask"], frame)
 
         # The active transform (applied to each frame) defaults to that of the previous keyframe.
         if "transform" not in dict or dict["transform"] == "same":
@@ -439,7 +471,7 @@ class KeyFrame:
             strength=dict["strength"],
             steps=dict["steps"],
             masks=dict["masks"],
-            fill_mask=dict["fill_mask"],
+            fill_mask=fill_mask,
             transform=transform,
             correct_colors=correct_colors,
             set_color_reference=set_color_reference,

@@ -166,7 +166,7 @@ class DreamState:
         # Add mask fill options (if any).
         mask_fill_img = None
         mask_fill_transform = None
-        if self.has_mask() and self.prev_keyframe.fill_mask:
+        if self.has_mask() and self.prev_keyframe.fill_mask is not None:
             assert(len(self.prev_frame_masks) == 1)
             assert(len(self.this_frame_masks) == 1)
             prev_mask = self.prev_frame_masks[0]
@@ -178,7 +178,7 @@ class DreamState:
             c_x = prev_mask.center[0]
             c_y = prev_mask.center[1]
 
-            mask_fill_img = self.output_path(self.frame_idx - 1)
+            mask_fill_img = self.output_path(self.prev_keyframe.fill_mask, self.frame_idx)
             mask_fill_transform = f"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}"
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
