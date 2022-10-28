@@ -170,12 +170,10 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
     done = False
     last_results = list()
 
-    # This will be set by the image callback (when opt.is_reference_image is true).
-    color_reference_array = None
-
     dream_state = None
     if dream_schedule:
         dream_state = DreamState(dream_schedule)
+
 
         if dream_schedule.restart_from is not None: 
             skip_counter = 0    
@@ -203,12 +201,6 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
             done = dream_state.done()
             if done:
                 break
-
-            if last_frame is not None and dream_state.frame_idx <= last_frame:
-                print(f"Already rendered frame {dream_state.frame_idx}")
-                dream_state.advance_frame()
-                continue
-
             opt = dream_state.get_prompt()
             dream_state.advance_frame()
 
