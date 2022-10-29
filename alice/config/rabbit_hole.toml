@@ -11,7 +11,7 @@ witch2 = "portrait of a wicked witch with blonde hair and countless sharp teeth 
 witch3 = "a painting of a blonde witch with demon eyes in a blue dress splattered with blood crawling in a tunnel in the catacombs, alice in wonderland, dramatic lighting, shattered bones, chiaroscuro, high detail, painted by greg rutkowski, painted by igor kieryluk, painted by bobby chiu, trending on artstation"
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, piles of skulls, gnarled black roots, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
-falling = "a blonde witch in a blue dress with blood stains falls into a dimensional rift, alice in wonderland, horror, cinematic, dynamic lighting, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
+falling = "a blonde witch in a blue dress with blood stains falls into a dimensional rift, alice in wonderland, front facing, horror, sharp details, cinematic, dynamic lighting, clear face, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
 
 
 # ==================================================
@@ -201,23 +201,80 @@ seed = 2390586
 [[keyframes]]
 frame = 1310
 strength = 0.0
+masks = [
+    { center = [0.65, 0.55], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1316
+strength = "interpolate"
+masks = [
+    { center = [0.75, 0.7], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1324
+strength = "interpolate"
+masks = [
+    { center = [0.7, 0.52], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1330
+strength = "interpolate"
+
+[[keyframes]]
+frame = 1337
+strength = "interpolate"
+masks = [
+    { center = [0.6, 0.7], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1349
+strength = "interpolate"
+masks = [
+    { center = [0.4, 0.75], radius = 0.2 }
+]
 
 [[keyframes]]
 frame = 1360
-strength = 0.5
+strength = 0.9
+masks = [
+    { center = [0.4, 0.75], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1367
+masks = [
+    { center = [0.4, 0.65], radius = 0.2 }
+]
+
+[[keyframes]]
+frame = 1373
+masks = [
+    { center = [0.55, 0.75], radius = 0.2 }
+]
 
 [[keyframes]]
 frame = 1383
-strength = 0.5
+strength = 0.9
+masks = [
+    { center = [0.52, 0.65], radius = 0.2 }
+]
 
 # alice falls 1390ish
 [[keyframes]]
 frame = 1393
 strength = 0.0
+masks = [
+    { center = [0.65, 0.5], radius = 0.2 }
+]
 
 #cat enters frame to look, slips down slope but catches herself
 [[keyframes]]
 frame = 1412
+masks = []
 
 #peers after alice
 [[keyframes]]
@@ -272,11 +329,15 @@ strength = 0.0
 
 [[keyframes]]
 frame = 1680
-strength = 0.5
+strength = 0.6
+
+[[keyframes]]
+frame = 1695
+strength = 0.6
 
 [[keyframes]]
 frame = 1715
-strength = 0.5
+strength = 0.9
 
 # ==================================================
 # zoom in
@@ -292,8 +353,70 @@ frame = 1762
 # back to zoomed in side view
 [[keyframes]]
 frame = 1798
+masks = []
+strength = 0.0
+prompt = "witch2"
+
+#1820: apron starts rising
+#1828: apron covers face
+#1852: clear
+
+#1890: side view of face
+[[keyframes]]
+frame = 1890
+masks = [
+    { center = [0.47, 0.55], radius = 0.23 }
+]
+
+[[keyframes]]
+frame = 1909
+strength = 0.5
+masks = [
+    { center = [0.43, 0.7], radius = 0.23 }
+]
+
 #1895: starts getting darker
+#1916: head start turning toward camera
+[[keyframes]]
+frame = 1916
+masks = [
+    { center = [0.45, 0.71], radius = 0.23 }
+]
+
+#1920: head facing camera
+[[keyframes]]
+frame = 1924
+masks = [
+    { center = [0.48, 0.67], radius = 0.23 }
+]
+
+[[keyframes]]
+frame = 1940
+masks = [
+    { center = [0.48, 0.57], radius = 0.23 }
+]
+strength = 0.55
+
+[[keyframes]]
+frame = 1945
+masks = [
+    { center = [0.45, 0.6], radius = 0.23 }
+]
+
+[[keyframes]]
+frame = 1960
+masks = [
+    { center = [0.39, 0.65], radius = 0.23 }
+]
+strength = 0.4
+
 #1950: stable darkness
+[[keyframes]]
+frame = 1971
+masks = [
+    { center = [0.39, 0.57], radius = 0.23 }
+]
+strength = 0.0
 
 # ==================================================
 # zooms out a bit

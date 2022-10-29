@@ -38,6 +38,12 @@ if __name__ == "__main__":
         help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
         default=1
     )
+    parser.add_argument(
+        "-i",
+        "--irregular",
+        action="store_true",
+        help="When set, only frames that exist are included.",
+    )
 
     # Video Options
     parser.add_argument(
@@ -60,6 +66,8 @@ if __name__ == "__main__":
     # Generate the list of frames, write it to a file.
     outdir = Path(args.dir)
     files = [str(outdir / f"frame_{i:06d}.png") for i in range(args.start_at, args.end_at + 1, args.stride)]
+    if args.irregular:
+        files = [f for f in files if Path(f).exists()]
     with open('frames.txt', 'w') as outfile:
         for file in files:
             outfile.write(f"file '{file}'\n")
