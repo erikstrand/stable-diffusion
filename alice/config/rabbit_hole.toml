@@ -320,21 +320,21 @@ seed = 2390586
 frame = 1310
 strength = 0.0
 masks = [
-    { center = [0.65, 0.55], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.65, 0.55], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1316
 strength = "interpolate"
 masks = [
-    { center = [0.75, 0.7], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.75, 0.7], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1324
 strength = "interpolate"
 masks = [
-    { center = [0.7, 0.52], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.7, 0.52], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
@@ -345,40 +345,40 @@ strength = "interpolate"
 frame = 1337
 strength = "interpolate"
 masks = [
-    { center = [0.6, 0.7], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.6, 0.7], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1349
 strength = "interpolate"
 masks = [
-    { center = [0.4, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.4, 0.75], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1360
-strength = 0.9
+strength = 0.4
 masks = [
-    { center = [0.4, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.4, 0.75], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1367
 masks = [
-    { center = [0.4, 0.65], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.4, 0.65], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1373
 masks = [
-    { center = [0.55, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.55, 0.75], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1383
-strength = 0.9
+strength = 0.4
 masks = [
-    { center = [0.52, 0.65], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.52, 0.65], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 # alice falls 1390ish
@@ -386,7 +386,7 @@ masks = [
 frame = 1393
 strength = 0.0
 masks = [
-    { center = [0.65, 0.5], radius = 0.25, invert = true, sigmoid_k=0.1 }
+    { center = [0.65, 0.5], radius = 0.25, sigmoid_k=0.1 }
 ]
 
 #cat enters frame to look, slips down slope but catches herself
