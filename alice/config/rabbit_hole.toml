@@ -15,7 +15,13 @@ falling = "a blonde witch in a blue dress with blood stains falls into a dimensi
 
 
 # ==================================================
+# cat paws at alice
+# let's just use this as is
+frame = 86
+
+# ==================================================
 # alice and cat relaxing on grass
+# add skull
 [[keyframes]]
 frame = 138
 input_image = "rabbit_hole/IM{0138}.png"
@@ -50,7 +56,9 @@ frame = 189
 strength = 0.0
 masks = []
 
+# ==================================================
 # zoom in on alice
+# add tombstones
 [[keyframes]]
 frame = 190
 prompt = "tombstone"
@@ -82,7 +90,6 @@ masks = []
 frame = 242
 strength = 0.0
 masks = []
-# nothing planned
 
 # rabbit checks pocketwatch
 [[keyframes]]
@@ -123,11 +130,61 @@ strength = 0.7
 [[keyframes]]
 frame = 277
 
+# rabbit starts running
 [[keyframes]]
 frame = 287
 strength = 0.0
 masks = []
 
+
+# ==================================================
+# alice and cat look in direction of rabbit, confused
+[[keyframes]]
+frame = 322
+
+# ==================================================
+# zoom in on cat
+[[keyframes]]
+frame = 382
+
+# ==================================================
+# alice and cat follow (jumping on stones to cross river)
+[[keyframes]]
+frame = 416
+
+# ==================================================
+# rabbit checks watch, runs. lots of motion
+[[keyframes]]
+frame = 466
+#544ish: waves at alice
+#?: starts running again
+#600: alice starts appearing in frame, following
+#650: alice looks at cat. maybe add ominious creature in background?
+
+# ==================================================
+# rabbit running
+[[keyframes]]
+frame = 743
+
+# ==================================================
+# cut to rabbit running into hole
+[[keyframes]]
+frame = 813
+#845ish: rabbit re-emerges to wave
+#868: waving
+#886: leaving
+#910: alice appears
+#935: peers in hole
+
+# ==================================================
+# zoom in
+[[keyframes]]
+frame = 956
+
+# ==================================================
+# alice starts crawling in
+[[keyframes]]
+frame = 1090
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
@@ -202,21 +259,21 @@ seed = 2390586
 frame = 1310
 strength = 0.0
 masks = [
-    { center = [0.65, 0.55], radius = 0.2 }
+    { center = [0.65, 0.55], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1316
 strength = "interpolate"
 masks = [
-    { center = [0.75, 0.7], radius = 0.2 }
+    { center = [0.75, 0.7], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1324
 strength = "interpolate"
 masks = [
-    { center = [0.7, 0.52], radius = 0.2 }
+    { center = [0.7, 0.52], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
@@ -227,40 +284,40 @@ strength = "interpolate"
 frame = 1337
 strength = "interpolate"
 masks = [
-    { center = [0.6, 0.7], radius = 0.2 }
+    { center = [0.6, 0.7], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1349
 strength = "interpolate"
 masks = [
-    { center = [0.4, 0.75], radius = 0.2 }
+    { center = [0.4, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1360
 strength = 0.9
 masks = [
-    { center = [0.4, 0.75], radius = 0.2 }
+    { center = [0.4, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1367
 masks = [
-    { center = [0.4, 0.65], radius = 0.2 }
+    { center = [0.4, 0.65], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1373
 masks = [
-    { center = [0.55, 0.75], radius = 0.2 }
+    { center = [0.55, 0.75], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 [[keyframes]]
 frame = 1383
 strength = 0.9
 masks = [
-    { center = [0.52, 0.65], radius = 0.2 }
+    { center = [0.52, 0.65], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 # alice falls 1390ish
@@ -268,7 +325,7 @@ masks = [
 frame = 1393
 strength = 0.0
 masks = [
-    { center = [0.65, 0.5], radius = 0.2 }
+    { center = [0.65, 0.5], radius = 0.25, invert = true, sigmoid_k=0.1 }
 ]
 
 #cat enters frame to look, slips down slope but catches herself

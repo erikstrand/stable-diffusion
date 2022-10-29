@@ -19,6 +19,13 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "-rn",
+        "--rename",
+        help="Rename IMxxxx to frame_xxxxxx",
+        action="store_true"
+    )
+
+    parser.add_argument(
         "-s",
         "--start_at",
         type=int,
@@ -62,6 +69,14 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    if args.rename:
+        outdir = Path(args.dir)
+        files = [(i, outdir / f"IM{i:04d}.png") for i in range(args.start_at, args.end_at + 1, args.stride)]
+        files = [(i, f) for i, f in files if f.exists()]
+        for i, f in files:
+            f.rename(outdir / f"frame_{i:06d}.png")
+        exit(0)
 
     # Generate the list of frames, write it to a file.
     outdir = Path(args.dir)
