@@ -5,6 +5,7 @@ height = 720
 
 [prompts]
 tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
+graveyard = "new orleans style graveyard, grass, mossy tombstones, human bones, thick fog, volumetric lighting, cinematic, key light, rim light, by evgeny lushpin, by essao andrews, by inessa garmash"
 jackrabbit = "a portrait of jack skelington as a rabbit, demon eyes, steampunk, dark atmospheric, by Kilian Eng and Esao Andrews"
 witch = "portrait of a wicked witch with blonde hair crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
 witch2 = "portrait of a wicked witch with blonde hair and countless sharp teeth crying blood, by greg rutkowski, by ross tran, by fenghua zhong, horror, octane, soft render, oil on canvas, moody lighting, high contrast, cinematic, trending on artstation, masterpiece"
@@ -16,12 +17,17 @@ falling = "a blonde witch in a blue dress with blood stains falls into a dimensi
 
 # ==================================================
 # cat paws at alice
-# let's just use this as is
+# status: let's just use this as is
+[[keyframes]]
 frame = 86
+input_image = "rabbit_hole/IM{0086}.png"
+prompt = "skull"
+seed = 1234
+strength = 0.0
 
 # ==================================================
 # alice and cat relaxing on grass
-# add skull
+# status: done, added skull
 [[keyframes]]
 frame = 138
 input_image = "rabbit_hole/IM{0138}.png"
@@ -58,15 +64,15 @@ masks = []
 
 # ==================================================
 # zoom in on alice
-# add tombstones
+# status: done, add tombstones
 [[keyframes]]
 frame = 190
 prompt = "tombstone"
 seed = 438989805 # gives a coherent tombstone
 masks = [
-    { center = [0.95, 0.4], radius = 0.25 }
-    { center = [0.95, 0.5], radius = 0.25 }
-    { center = [0.95, 0.6], radius = 0.25 }
+    { center = [0.95, 0.4], radius = 0.25 },
+    { center = [0.95, 0.5], radius = 0.25 },
+    { center = [0.95, 0.6], radius = 0.25 },
 ]
 strength = 0.8
 
@@ -86,17 +92,18 @@ masks = []
 
 # ==================================================
 # rabbit checks pocketwatch then starts running
+# status: searching for seeds to use for mask filling
 [[keyframes]]
 frame = 242
+prompt = "jackrabbit"
+seed = 232288432 # clock eye
+#seed = 3853414560 # very coherent rabbit face
 strength = 0.0
 masks = []
 
 # rabbit checks pocketwatch
 [[keyframes]]
 frame = 257
-prompt = "jackrabbit"
-seed = 232288432 # clock eye
-#seed = 3853414560 # very coherent rabbit face
 strength = 0.0
 masks = [
     { center = [0.5, 0.55], radius = 0.3 }
@@ -125,9 +132,13 @@ masks = [
 
 [[keyframes]]
 frame = 267
-strength = 0.7
+fill_mask = "previous"
+seed = "random"
+strength = 0.3
 
 [[keyframes]]
+fill_mask = "none"
+seed = 23096
 frame = 277
 
 # rabbit starts running
@@ -139,21 +150,64 @@ masks = []
 
 # ==================================================
 # alice and cat look in direction of rabbit, confused
+# status: searching for seeds to turn the background into a graveyard
 [[keyframes]]
 frame = 322
+input_image = "rabbit_hole/IM0322.png"
+prompt = "graveyard"
+strength = 0.6
+masks = [
+    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.35, 1.2], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.55, 1.2], radius = 0.6, sigmoid_k = 0.1 },
+]
+seed = "random"
+
+[[keyframes]]
+#frame = 340
+duration = 50
+
+#[[keyframes]]
+#frame = 355
+#masks = [
+#    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+#    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+#    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+#    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+#    { center = [0.35, 1.35], radius = 0.6, sigmoid_k = 0.1 },
+#    { center = [0.55, 1.35], radius = 0.6, sigmoid_k = 0.1 },
+#]
+#
+#[[keyframes]]
+#frame = 370
+#masks = [
+#    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+#    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+#    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+#    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+#    { center = [0.35, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+#    { center = [0.55, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+#]
+
 
 # ==================================================
 # zoom in on cat
+# status: leave out or use as is
 [[keyframes]]
 frame = 382
 
 # ==================================================
 # alice and cat follow (jumping on stones to cross river)
+# status: will add same graveyard as 322
 [[keyframes]]
 frame = 416
 
 # ==================================================
 # rabbit checks watch, runs. lots of motion
+# status: TODO
 [[keyframes]]
 frame = 466
 #544ish: waves at alice
@@ -163,11 +217,13 @@ frame = 466
 
 # ==================================================
 # rabbit running
+# status: TODO
 [[keyframes]]
 frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
+# status: TODO
 [[keyframes]]
 frame = 813
 #845ish: rabbit re-emerges to wave
@@ -178,18 +234,22 @@ frame = 813
 
 # ==================================================
 # zoom in
+# status: TODO
 [[keyframes]]
 frame = 956
 
 # ==================================================
 # alice starts crawling in
+# status: probably leave out
 [[keyframes]]
 frame = 1090
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
+# status: I guess done, have a good enough mask fill animation
 [[keyframes]]
 frame = 1128
+input_image = "rabbit_hole/IM{1128}.png"
 prompt = "witch"
 seed = 1640273403 # golden seed for frame 1186/1187
 strength = 0.0
@@ -248,6 +308,7 @@ strength = 0.0
 
 # ==================================================
 # alice crawls deeper into the rabbit hole (side view)
+# status: want to try two passes, high strength off face, lower strength on face
 [[keyframes]]
 frame = 1264
 input_image = "rabbit_hole/IM{1264}.png"
@@ -339,6 +400,7 @@ frame = 1500
 
 # ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
+# status: done, nailed it (transitions to deforum animation)
 [[keyframes]]
 frame = 1562
 input_image = "rabbit_hole/IM{1562}.png"
@@ -370,13 +432,14 @@ transform.rotate = 0.005
 
 # ==================================================
 # alice tumbles through darkness
+# status: working on it
 [[keyframes]]
 frame = 1618
 transform = "none"
 input_image = "rabbit_hole/IM{1618}.png"
 prompt = "falling"
 strength = 0.0
-seed = 29348756
+seed = 457348756
 correct_colors = false
 
 # dress acts as parachute
@@ -394,7 +457,7 @@ strength = 0.6
 
 [[keyframes]]
 frame = 1715
-strength = 0.9
+strength = 0.8
 
 # ==================================================
 # zoom in
