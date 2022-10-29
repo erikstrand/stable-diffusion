@@ -99,7 +99,7 @@ masks = []
 
 # ==================================================
 # rabbit checks pocketwatch then starts running
-# status: done, late_animation_3_nocc
+# status: done, late_animation_3_nocc, copied to rabbit_hole_final
 [[keyframes]]
 frame = 242
 prompt = "jackrabbit"
@@ -178,7 +178,7 @@ masks = []
 
 # ==================================================
 # alice and cat look in direction of rabbit, confused
-# status: done, graveyard_scene_1
+# status: done, graveyard_scene_1, copied to rabbit_hole_final
 [[keyframes]]
 frame = 322
 input_image = "rabbit_hole/IM{0322}.png"
@@ -235,7 +235,7 @@ masks = []
 
 # ==================================================
 # alice and cat follow (jumping on stones to cross river)
-# status: done, graveyard_scene_2
+# status: done, graveyard_scene_2, copied to rabbit_hole_final
 [[keyframes]]
 frame = 416
 prompt = "graveyard"
@@ -328,7 +328,7 @@ frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
-# status: rendering two animation candidates
+# status: done, forest_demon_2, copied to rabbit_hole_final
 [[keyframes]]
 frame = 813
 input_image = "rabbit_hole/IM{0813}.png"
@@ -562,7 +562,7 @@ frame = 1514
 
 # ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
-# status: done, nailed it (transitions to deforum animation), cat_wave_animation_7
+# status: done, nailed it (transitions to deforum animation), cat_wave_animation_7, copied
 [[keyframes]]
 frame = 1562
 input_image = "rabbit_hole/IM{1562}.png"
@@ -592,9 +592,12 @@ transform.zoom = 0.96
 transform.translate = [0.0, 5.0]
 transform.rotate = 0.005
 
+[[keyframes]]
+frame = 1617
+
 # ==================================================
 # alice tumbles through darkness
-# status: done, none are great but fall_animation_1 works
+# status: done, none are great but fall_animation_1 works, copied
 [[keyframes]]
 frame = 1618
 transform = "none"
@@ -623,7 +626,7 @@ strength = 0.8
 
 # ==================================================
 # zoom in, alice stare into space as she floats down
-# status: searching for seeds
+# status: done, vampire_queen_2 is good enough, copied
 #
 # best seeds: 1739, 1742, 1749, 1751, 1754**, 1769*, 1770*, 1774
 [[keyframes]]
@@ -673,7 +676,7 @@ masks = [
 
 # ==================================================
 # alice's feet from her viewpoint
-# status: rendering candidates
+# status: done, gaping_maw_3, copied
 #
 # best seeds: 1766, 1767, 1777, 1782, 1785, 1786, 1797
 [[keyframes]]
@@ -682,7 +685,7 @@ input_image = "rabbit_hole/IM{1762}.png"
 prompt = "gaping_maw"
 seed = 1281708734 # 1785
 #seed = 3615780435 # 1786
-strength = 0.7
+strength = 0.3
 scale = 10.0
 masks = [
     { center = [0.55, 1.52], radius = 1.0 }
@@ -690,13 +693,14 @@ masks = [
 
 [[keyframes]]
 frame = 1797
+strength = 0.7
 masks = [
     { center = [0.55, 1.48], radius = 1.0 }
 ]
 
 # ==================================================
 # back to zoomed in side view
-# status: done, floating_animation_1
+# status: done, floating_animation_1, copied
 [[keyframes]]
 frame = 1798
 scale = 8.0
