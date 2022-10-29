@@ -16,7 +16,8 @@ witch3 = "a painting of a blonde witch with demon eyes in a blue dress splattere
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, piles of skulls, gnarled black roots, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
 falling = "a blonde witch in a blue dress with blood stains falls into a dimensional rift, alice in wonderland, front facing, horror, sharp details, cinematic, dynamic lighting, clear face, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
-forest_demon = "a monster with huge fangs emerging from a forest, forest demon, fresh kill, horror, cinematic, high contrast, intricate details, by esao andrews, by ignacio fernandes rios, by evgeny lushpin, iris van herpen, cgsociety"
+forest_demon = "a snarling demon with glowing red eyes hidden in dense green leafy foliage, fresh kill, drool, horror, cinematic, high contrast, intricate details, by esao andrews, by ignacio fernandes rios, by evgeny lushpin, cgsociety"
+skull_wall = "white skulls embedded in a grassy dirt wall, deadly whitecap mushrooms with red spots and impossibly long stalks grow in tangles, lush moss, ancient decay, cinematic, high contrast, by esao andrews, by evgeny lushpin, by jason gonzalez, by hannah yata, trending on artstation"
 
 
 # ==================================================
@@ -325,7 +326,7 @@ frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
-# status: probably don't use. maybe add gravestones to static background?
+# status: rendering seed test (1)
 [[keyframes]]
 frame = 813
 input_image = "rabbit_hole/IM0813.png"
@@ -345,18 +346,40 @@ seed = "random"
 [[keyframes]]
 frame = 955
 strength = 0.6
+# just need this when rendering the next frame!
+masks = []
 
 # ==================================================
 # zoom in
-# status: TODO
+# status: working
 [[keyframes]]
 frame = 956
-masks = []
-strength = 0.0
+input_image = "rabbit_hole/IM0956.png"
+masks = [
+    { center = [1.5, 0.25], radius = 1.0 },
+    { center = [1.47, 0.75], radius = 1.0 },
+    { center = [0.0, 1.4], radius = 0.7 },
+    { center = [0.4, 1.6], radius = 0.7 },
+    { center = [0.7, 1.6], radius = 0.7 },
+]
+strength = 0.8
+seed = "random"
+prompt = "skull_wall"
 
-# alice starts crawling in
 [[keyframes]]
-frame = 1090
+frame = 972
+masks = [
+    { center = [1.5, 0.25], radius = 1.0 },
+    { center = [1.47, 0.75], radius = 1.0 },
+    { center = [0.0, 1.3], radius = 0.7 },
+    { center = [0.4, 1.5], radius = 0.7 },
+    { center = [0.7, 1.5], radius = 0.7 },
+]
+
+# 1090 alice starts crawling in
+
+[[keyframes]]
+frame = 1127
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
