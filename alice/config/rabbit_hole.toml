@@ -3,6 +3,9 @@ out_dir = "alice/outputs/rabbit_hole"
 width = 960
 height = 720
 
+# todo
+# review graveyard seed test 2
+
 [prompts]
 tombstone = "an old tombstone in a grassy graveyard, weathered, by Kilian Eng and Esao Andrews"
 graveyard = "new orleans style graveyard, grass, mossy tombstones, human bones, thick fog, volumetric lighting, cinematic, key light, rim light, by evgeny lushpin, by essao andrews, by inessa garmash"
@@ -17,7 +20,7 @@ falling = "a blonde witch in a blue dress with blood stains falls into a dimensi
 
 # ==================================================
 # cat paws at alice
-# status: let's just use this as is
+# status: done, let's just use this as is. copied into rabbit_hole_final
 [[keyframes]]
 frame = 86
 input_image = "rabbit_hole/IM{0086}.png"
@@ -27,7 +30,7 @@ strength = 0.0
 
 # ==================================================
 # alice and cat relaxing on grass
-# status: done, added skull
+# status: done, added skull, rabbit_hole_final
 [[keyframes]]
 frame = 138
 input_image = "rabbit_hole/IM{0138}.png"
@@ -64,7 +67,7 @@ masks = []
 
 # ==================================================
 # zoom in on alice
-# status: done, add tombstones
+# status: done, add tombstones, rabbit_hole_final
 [[keyframes]]
 frame = 190
 prompt = "tombstone"
@@ -92,11 +95,26 @@ masks = []
 
 # ==================================================
 # rabbit checks pocketwatch then starts running
-# status: searching for seeds to use for mask filling
+# status: done, late_animation_3_nocc
 [[keyframes]]
 frame = 242
 prompt = "jackrabbit"
-seed = 232288432 # clock eye
+# new seeds ("late_seed_test")
+#3075280817 # 279
+#3259052811 # 285
+#1973214822 # 297**
+#338444264 # 300
+#3673561638 # 310
+#3582477022 # 314
+seed = 2727210979 # 321***
+#2955633092 # 327
+#943239974 # 328*
+#1722989659 # 334*
+#3208399878 # 347
+#687117441 # 357
+#2561557300 # 359
+# old seeds
+#seed = 232288432 # clock eye
 #seed = 3853414560 # very coherent rabbit face
 strength = 0.0
 masks = []
@@ -129,16 +147,18 @@ strength = 0.6
 masks = [
     { center = [0.35, 0.68], radius = 0.4 }
 ]
+set_color_reference = true
 
 [[keyframes]]
 frame = 267
 fill_mask = "previous"
 seed = "random"
 strength = 0.3
+correct_colors = true
 
 [[keyframes]]
 fill_mask = "none"
-seed = 23096
+correct_colors = false
 frame = 277
 
 # rabbit starts running
@@ -147,14 +167,21 @@ frame = 287
 strength = 0.0
 masks = []
 
+[[keyframes]]
+frame = 321
+strength = 0.2
+masks = []
 
 # ==================================================
 # alice and cat look in direction of rabbit, confused
-# status: searching for seeds to turn the background into a graveyard
+# status: rendering (2)
 [[keyframes]]
 frame = 322
-input_image = "rabbit_hole/IM0322.png"
+input_image = "rabbit_hole/IM{0322}.png"
 prompt = "graveyard"
+# frames with good seeds good seeds (graveyard seed test 2)
+#322, 334, 337, 343, 344, 349, 350, 354, 363, 364, 365, 368, 369, 370, 371
+seed = 2844927732
 strength = 0.6
 masks = [
     { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
@@ -164,52 +191,119 @@ masks = [
     { center = [0.35, 1.2], radius = 0.6, sigmoid_k = 0.1 },
     { center = [0.55, 1.2], radius = 0.6, sigmoid_k = 0.1 },
 ]
-seed = "random"
 
 [[keyframes]]
-#frame = 340
-duration = 50
+frame = 340
 
-#[[keyframes]]
-#frame = 355
-#masks = [
-#    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
-#    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
-#    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
-#    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
-#    { center = [0.35, 1.35], radius = 0.6, sigmoid_k = 0.1 },
-#    { center = [0.55, 1.35], radius = 0.6, sigmoid_k = 0.1 },
-#]
-#
-#[[keyframes]]
-#frame = 370
-#masks = [
-#    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
-#    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
-#    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
-#    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
-#    { center = [0.35, 1.5], radius = 0.6, sigmoid_k = 0.1 },
-#    { center = [0.55, 1.5], radius = 0.6, sigmoid_k = 0.1 },
-#]
+[[keyframes]]
+frame = 355
+masks = [
+    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.35, 1.35], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.55, 1.35], radius = 0.6, sigmoid_k = 0.1 },
+]
+
+[[keyframes]]
+frame = 370
+masks = [
+    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.85, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.85, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.35, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.55, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+]
 
 
 # ==================================================
 # zoom in on cat
-# status: leave out or use as is
+# status: done, use as is, rabbit_hole_final
 [[keyframes]]
 frame = 382
+strength = 0.0
+masks = []
 
 # ==================================================
 # alice and cat follow (jumping on stones to cross river)
-# status: will add same graveyard as 322
+# status: rendering (3)
 [[keyframes]]
 frame = 416
+prompt = "graveyard"
+seed = 2844927732
+strength = 0.6
+masks = [
+    { center = [0.1, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.1, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.9, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.9, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.35, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.55, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [-0.4, 0.8], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [-0.4, 0.6], radius = 0.4, sigmoid_k = 0.1 },
+]
+
+[[keyframes]]
+frame = 428
+masks = [
+    { center = [0.15, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.15, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.97, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.97, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.4, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.6, 1.7], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [-0.2, 0.8], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [-0.2, 0.6], radius = 0.4, sigmoid_k = 0.1 },
+]
+
+[[keyframes]]
+frame = 440
+masks = [
+    { center = [0.4, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.4, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [1.2, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [1.2, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.65, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.85, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.05, 0.8], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.05, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+]
+
+[[keyframes]]
+frame = 446
+masks = [
+    { center = [0.7, 0.78], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [0.7, 0.69], radius = 0.3, sigmoid_k = 0.1 },
+    { center = [1.5, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [1.5, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.95, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [1.15, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.4, 0.8], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.2, 0.9], radius = 0.6, sigmoid_k = 0.1 },
+]
+
+[[keyframes]]
+frame = 450
+masks = [
+    { center = [0.8, 0.78], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.8, 0.69], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [2.0, 0.75], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [2.0, 0.65], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.95, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [1.15, 1.5], radius = 0.6, sigmoid_k = 0.1 },
+    { center = [0.4, 0.8], radius = 0.4, sigmoid_k = 0.1 },
+    { center = [0.2, 0.9], radius = 0.6, sigmoid_k = 0.1 },
+]
+
 
 # ==================================================
 # rabbit checks watch, runs. lots of motion
-# status: TODO
+# status: don't use, everything is moving all the time
 [[keyframes]]
 frame = 466
+strength = 0.0
 #544ish: waves at alice
 #?: starts running again
 #600: alice starts appearing in frame, following
@@ -217,13 +311,13 @@ frame = 466
 
 # ==================================================
 # rabbit running
-# status: TODO
+# status: don't use
 [[keyframes]]
 frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
-# status: TODO
+# status: probalby don't use. maybe add gravestones to static background?
 [[keyframes]]
 frame = 813
 #845ish: rabbit re-emerges to wave
@@ -238,15 +332,13 @@ frame = 813
 [[keyframes]]
 frame = 956
 
-# ==================================================
 # alice starts crawling in
-# status: probably leave out
 [[keyframes]]
 frame = 1090
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
-# status: I guess done, have a good enough mask fill animation
+# status: done (good enough), rabbit_hole_final
 [[keyframes]]
 frame = 1128
 input_image = "rabbit_hole/IM{1128}.png"
@@ -308,7 +400,7 @@ strength = 0.0
 
 # ==================================================
 # alice crawls deeper into the rabbit hole (side view)
-# status: want to try two passes, high strength off face, lower strength on face
+# status: done, crawling_animation_3
 [[keyframes]]
 frame = 1264
 input_image = "rabbit_hole/IM{1264}.png"
@@ -400,7 +492,7 @@ frame = 1500
 
 # ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
-# status: done, nailed it (transitions to deforum animation)
+# status: done, nailed it (transitions to deforum animation), cat_wave_animation_7
 [[keyframes]]
 frame = 1562
 input_image = "rabbit_hole/IM{1562}.png"
@@ -432,7 +524,7 @@ transform.rotate = 0.005
 
 # ==================================================
 # alice tumbles through darkness
-# status: working on it
+# status: done, none are great but fall_animation_1 works
 [[keyframes]]
 frame = 1618
 transform = "none"
@@ -471,6 +563,7 @@ frame = 1762
 
 # ==================================================
 # back to zoomed in side view
+# status: done, floating_animation_1
 [[keyframes]]
 frame = 1798
 masks = []
