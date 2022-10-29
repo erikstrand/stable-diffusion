@@ -978,11 +978,13 @@ class Generate:
             else:
                 # If the mask is too big, crop it.
                 extra_x = mask_w - image_w
-                exra_y = mask_h - image_h
-                mask_pil.crop((extra_x // 2, extra_y // 2, mask_w - extra_x // 2, mask_h - extra_y // 2))
+                extra_y = mask_h - image_h
+                mask_pil = mask_pil.crop((extra_x // 2, extra_y // 2, mask_w - extra_x // 2, mask_h - extra_y // 2))
         if mask_fill_w > image_w or mask_fill_h > image_h:
-            print(f"Mask fill cannot be larger than the input image in any dimension. Aborting mask paste")
-            return image_pil
+            # TODO make sure it's not too big in one dim and too small in another
+            extra_x = mask_fill_w - image_w
+            extra_y = mask_fill_h - image_h
+            mask_fill_pil = mask_fill_pil.crop((extra_x // 2, extra_y // 2, mask_fill_w - extra_x // 2, mask_fill_h - extra_y // 2))
         if mask_fill_w < image_w or mask_fill_h < image_h:
             # If the mask fill image is smaller than the current one, just pad it with black.
             new_mask_fill_pil = Image.new('RGB', (image_w, image_h), (0, 0, 0))
