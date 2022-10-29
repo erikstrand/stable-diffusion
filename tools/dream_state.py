@@ -99,13 +99,15 @@ class DreamState:
         return self.schedule.out_dir / "frames" / self.output_file(frame)
 
     @staticmethod
-    def interpolate_variations(prev_variations, next_base, next_variations, t):
+    def interpolate_variations(prev_base, prev_variations, next_base, next_variations, t):
         n_prev_variations = len(prev_variations)
         n_next_variations = len(next_variations)
 
         # If neither keyframe has variations, this frame has no variations.
         if n_prev_variations == 0 and n_next_variations == 0:
-            return []
+            if prev_base == next_base:
+                return []
+            return [[next_base, t]] if t > 0.0 else []
 
         variations = [[var.base, var.amount] for var in prev_variations]
         if n_next_variations == 0:
@@ -193,6 +195,7 @@ class DreamState:
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
         prompt_variations = self.interpolate_variations(
+            self.prev_keyframe.prompt_idx,
             self.prev_keyframe.prompt_variations,
             self.next_keyframe.prompt_idx,
             self.next_keyframe.prompt_variations,
@@ -213,6 +216,7 @@ class DreamState:
 
         # Create the final list of seed variations. The weight of the last variation may be interpolated.
         seed_variations = self.interpolate_variations(
+            self.prev_keyframe.seed,
             self.prev_keyframe.seed_variations,
             self.next_keyframe.seed,
             self.next_keyframe.seed_variations,
