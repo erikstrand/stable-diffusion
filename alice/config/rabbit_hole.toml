@@ -17,7 +17,9 @@ skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews
 pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, piles of skulls, gnarled black roots, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
 falling = "a blonde witch in a blue dress with blood stains falls into a dimensional rift, alice in wonderland, front facing, horror, sharp details, cinematic, dynamic lighting, clear face, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
 forest_demon = "a snarling demon with glowing red eyes hidden in dense green leafy foliage, fresh kill, drool, horror, cinematic, high contrast, intricate details, by esao andrews, by ignacio fernandes rios, by evgeny lushpin, cgsociety"
-skull_wall = "white skulls embedded in a grassy dirt wall, deadly whitecap mushrooms with red spots and impossibly long stalks grow in tangles, lush moss, ancient decay, cinematic, high contrast, by esao andrews, by evgeny lushpin, by jason gonzalez, by hannah yata, trending on artstation"
+skull_wall = "floral skulls covered in moss, embedded in a grassy dirt wall, ancient decay, cinematic, high contrast, by esao andrews, by evgeny lushpin, by jason gonzalez, by hannah yata, trending on artstation"
+vampire_queen = "a wicked vampire queen with bloody fangs, perfect face, blue dress, blonde hair, cinematic, stunning, horror, highly detailed, digital painting, artstation, smooth, hard focus, illustration, art by esao andrews and artgerm and greg rutkowski and alphonse mucha"
+gaping_maw = "digital painting of a wet smily undead drowned monster at the bottom of a deep hole, with translucent and veiny skin, long freaky finger, by filipe pagliuso and justin gerard, fantasy, highly detailed, realistic, intricate, glowing eyes"
 
 
 # ==================================================
@@ -134,7 +136,7 @@ frame = 259
 masks = [
     { center = [0.4, 0.5], radius = 0.3 }
 ]
-strenth = 0.2
+strength = 0.2
 
 [[keyframes]]
 frame = 260
@@ -326,16 +328,18 @@ frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
-# status: rendering seed test (1)
+# status: rendering two animation candidates
 [[keyframes]]
 frame = 813
-input_image = "rabbit_hole/IM0813.png"
+input_image = "rabbit_hole/IM{0813}.png"
 prompt = "forest_demon"
+# good frames from seed search
+# 814, 828, 861
+seed = 2768682949
 masks = [
     { center = [0.9, 1.2], radius = 0.65 }
 ]
 strength = 0.6
-seed = "random"
 
 #845ish: rabbit re-emerges to wave
 #868: waving
@@ -346,15 +350,27 @@ seed = "random"
 [[keyframes]]
 frame = 955
 strength = 0.6
+seed = 1872862534
 # just need this when rendering the next frame!
 masks = []
 
 # ==================================================
-# zoom in
-# status: working
+# zoom in, alice peers into the rabbit hole
+# status: rendering two candidates
+#
+# good frames (seed test 1, floral skulls)
+# 957, 964, 970, 971, 974, 984, 997, 1008, 1017, 1020, 1030, 1045, 1062
+# good frames (seed test 2, mushroom skulls)
+# 973, 989
+# good frames (seed test 3, skull fungus)
+# 963, 967, 983
+#
+# want to try 974 -> 970 and 974 -> 984
+# i.e. 880813338 -> 1973840922 and 880813338 -> 2029097179
 [[keyframes]]
 frame = 956
-input_image = "rabbit_hole/IM0956.png"
+input_image = "rabbit_hole/IM{0956}.png"
+#masks = [] # just need this to render the previous frame
 masks = [
     { center = [1.5, 0.25], radius = 1.0 },
     { center = [1.47, 0.75], radius = 1.0 },
@@ -362,9 +378,10 @@ masks = [
     { center = [0.4, 1.6], radius = 0.7 },
     { center = [0.7, 1.6], radius = 0.7 },
 ]
-strength = 0.8
-seed = "random"
 prompt = "skull_wall"
+seed = 880813338
+strength = 0.6
+scale = 8.0
 
 [[keyframes]]
 frame = 972
@@ -380,6 +397,7 @@ masks = [
 
 [[keyframes]]
 frame = 1127
+seed = 2029097179
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
@@ -536,6 +554,12 @@ masks = []
 frame = 1500
 
 # ==================================================
+# alice falls, as seen by cat from above
+# status: use as is, copied to rabbit_hole_final
+[[keyframes]]
+frame = 1514
+
+# ==================================================
 # cat peers down, as seen by alice (cat recedes into distance)
 # status: done, nailed it (transitions to deforum animation), cat_wave_animation_7
 [[keyframes]]
@@ -597,20 +621,81 @@ frame = 1715
 strength = 0.8
 
 # ==================================================
-# zoom in
+# zoom in, alice stare into space as she floats down
+# status: searching for seeds
 [[keyframes]]
 frame = 1716
+prompt = "vampire_queen"
+masks = [
+    { center = [0.5, 0.76], radius = 0.25 }
+]
+
+[[keyframes]]
+frame = 1725
+masks = [
+    { center = [0.55, 0.7], radius = 0.25 }
+]
+strength = 0.0
+
+[[keyframes]]
+input_image = "rabbit_hole/IM1735.png"
+frame = 1735
+masks = [
+    { center = [0.48, 0.74], radius = 0.25 }
+]
+strength = 0.6
+seed = "random"
+
+#[[keyframes]]
+#duration = 50
+
+#[[keyframes]]
+#frame = 1740
+#masks = [
+#    { center = [0.46, 0.76], radius = 0.25 }
+#]
+#strength = 0.5
+#
+#[[keyframes]]
+#frame = 1752
+#masks = [
+#    { center = [0.59, 0.57], radius = 0.25 }
+#]
+#strength = 0.0
+#
+#
+#[[keyframes]]
+#frame = 1761
+#masks = [
+#    { center = [0.63, 0.52], radius = 0.25 }
+#]
 
 # ==================================================
 # alice's feet from her viewpoint
+# status: searching for seeds
 [[keyframes]]
 frame = 1762
+input_image = "rabbit_hole/IM{1762}.png"
+prompt = "gaping_maw"
+seed = "random"
+strength = 0.7
+scale = 10.0
+masks = [
+    { center = [0.55, 1.52], radius = 1.0 }
+]
+
+[[keyframes]]
+frame = 1797
+masks = [
+    { center = [0.55, 1.48], radius = 1.0 }
+]
 
 # ==================================================
 # back to zoomed in side view
 # status: done, floating_animation_1
 [[keyframes]]
 frame = 1798
+scale = 8.0
 masks = []
 strength = 0.0
 prompt = "witch2"
