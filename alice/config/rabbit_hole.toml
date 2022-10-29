@@ -367,6 +367,8 @@ masks = []
 #
 # want to try 974 -> 970 and 974 -> 984
 # i.e. 880813338 -> 1973840922 and 880813338 -> 2029097179
+# 974 is dependent on the exact mask, so the zombie head doesn't look as cool, giving up
+
 [[keyframes]]
 frame = 956
 input_image = "rabbit_hole/IM{0956}.png"
@@ -379,7 +381,7 @@ masks = [
     { center = [0.7, 1.6], radius = 0.7 },
 ]
 prompt = "skull_wall"
-seed = 880813338
+seed = 1973840922
 strength = 0.6
 scale = 8.0
 
@@ -397,7 +399,6 @@ masks = [
 
 [[keyframes]]
 frame = 1127
-seed = 2029097179
 
 # ==================================================
 # alice crawls into the rabbit hole (viewed from front)
@@ -623,9 +624,15 @@ strength = 0.8
 # ==================================================
 # zoom in, alice stare into space as she floats down
 # status: searching for seeds
+#
+# best seeds: 1739, 1742, 1749, 1751, 1754**, 1769*, 1770*, 1774
 [[keyframes]]
 frame = 1716
+input_image = "rabbit_hole/IM{1716}.png"
 prompt = "vampire_queen"
+#seed = 398868574 # 1754
+seed = 314934025 # 1770
+strength = 0.0
 masks = [
     { center = [0.5, 0.76], radius = 0.25 }
 ]
@@ -638,46 +645,43 @@ masks = [
 strength = 0.0
 
 [[keyframes]]
-input_image = "rabbit_hole/IM1735.png"
 frame = 1735
 masks = [
     { center = [0.48, 0.74], radius = 0.25 }
 ]
 strength = 0.6
-seed = "random"
 
-#[[keyframes]]
-#duration = 50
+[[keyframes]]
+frame = 1740
+masks = [
+    { center = [0.46, 0.76], radius = 0.25 }
+]
+strength = 0.6
 
-#[[keyframes]]
-#frame = 1740
-#masks = [
-#    { center = [0.46, 0.76], radius = 0.25 }
-#]
-#strength = 0.5
-#
-#[[keyframes]]
-#frame = 1752
-#masks = [
-#    { center = [0.59, 0.57], radius = 0.25 }
-#]
-#strength = 0.0
-#
-#
-#[[keyframes]]
-#frame = 1761
-#masks = [
-#    { center = [0.63, 0.52], radius = 0.25 }
-#]
+[[keyframes]]
+frame = 1752
+masks = [
+    { center = [0.59, 0.57], radius = 0.25 }
+]
+strength = 0.0
+
+[[keyframes]]
+frame = 1761
+masks = [
+    { center = [0.63, 0.52], radius = 0.25 }
+]
 
 # ==================================================
 # alice's feet from her viewpoint
-# status: searching for seeds
+# status: rendering candidates
+#
+# best seeds: 1766, 1767, 1777, 1782, 1785, 1786, 1797
 [[keyframes]]
 frame = 1762
 input_image = "rabbit_hole/IM{1762}.png"
 prompt = "gaping_maw"
-seed = "random"
+seed = 1281708734 # 1785
+#seed = 3615780435 # 1786
 strength = 0.7
 scale = 10.0
 masks = [
