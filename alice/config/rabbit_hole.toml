@@ -16,6 +16,7 @@ witch3 = "a painting of a blonde witch with demon eyes in a blue dress splattere
 skull = "a weathered skull in a grassy graveyard, by Kilian Eng, by Esao Andrews, cinematic, high contrast"
 pit = "the cheshire cat stares down a deep pit lined with decaying human skulls, piles of skulls, gnarled black roots, fire consumes all, smiling as the viewer falls to their death, highly detailed matte painting, by kilian eng, by esao andrews"
 falling = "a blonde witch in a blue dress with blood stains falls into a dimensional rift, alice in wonderland, front facing, horror, sharp details, cinematic, dynamic lighting, clear face, high contrast, by Raphael Lacoste and Delphin Enjolras and William Bliss Baker"
+forest_demon = "a monster with huge fangs emerging from a forest, forest demon, fresh kill, horror, cinematic, high contrast, intricate details, by esao andrews, by ignacio fernandes rios, by evgeny lushpin, iris van herpen, cgsociety"
 
 
 # ==================================================
@@ -174,7 +175,7 @@ masks = []
 
 # ==================================================
 # alice and cat look in direction of rabbit, confused
-# status: rendering (2)
+# status: done, graveyard_scene_1
 [[keyframes]]
 frame = 322
 input_image = "rabbit_hole/IM{0322}.png"
@@ -217,6 +218,9 @@ masks = [
     { center = [0.55, 1.5], radius = 0.6, sigmoid_k = 0.1 },
 ]
 
+[[keyframes]]
+frame = 381
+strength = 0.6
 
 # ==================================================
 # zoom in on cat
@@ -228,7 +232,7 @@ masks = []
 
 # ==================================================
 # alice and cat follow (jumping on stones to cross river)
-# status: rendering (3)
+# status: done, graveyard_scene_2
 [[keyframes]]
 frame = 416
 prompt = "graveyard"
@@ -297,6 +301,9 @@ masks = [
     { center = [0.2, 0.9], radius = 0.6, sigmoid_k = 0.1 },
 ]
 
+[[keyframes]]
+frame = 465
+strength = 0.6
 
 # ==================================================
 # rabbit checks watch, runs. lots of motion
@@ -304,6 +311,7 @@ masks = [
 [[keyframes]]
 frame = 466
 strength = 0.0
+masks = []
 #544ish: waves at alice
 #?: starts running again
 #600: alice starts appearing in frame, following
@@ -317,20 +325,34 @@ frame = 743
 
 # ==================================================
 # cut to rabbit running into hole
-# status: probalby don't use. maybe add gravestones to static background?
+# status: probably don't use. maybe add gravestones to static background?
 [[keyframes]]
 frame = 813
+input_image = "rabbit_hole/IM0813.png"
+prompt = "forest_demon"
+masks = [
+    { center = [0.9, 1.2], radius = 0.65 }
+]
+strength = 0.6
+seed = "random"
+
 #845ish: rabbit re-emerges to wave
 #868: waving
 #886: leaving
 #910: alice appears
 #935: peers in hole
 
+[[keyframes]]
+frame = 955
+strength = 0.6
+
 # ==================================================
 # zoom in
 # status: TODO
 [[keyframes]]
 frame = 956
+masks = []
+strength = 0.0
 
 # alice starts crawling in
 [[keyframes]]
