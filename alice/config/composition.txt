@@ -1,0 +1,9 @@
+python tools/make_video.py alice/outputs/rabbit_hole_1/frames/ -s 1972 -e 2085 -o alice/outputs/rabbit_hole_1/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_2/frames/ -s 2135 -e 2209 -o alice/outputs/rabbit_hole_2/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_3/frames/ -s 1972 -e 2085 -o alice/outputs/rabbit_hole_3/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_4/frames/ -s 2135 -e 2209 -o alice/outputs/rabbit_hole_4/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_5/frames/ -s 2210 -e 2255 -o alice/outputs/rabbit_hole_5/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_7/frames/ -s 2210 -e 2255 -o alice/outputs/rabbit_hole_7/video.mp4 -r 20 -i
+
+python tools/make_video.py alice/outputs/rabbit_hole_6/frames/ -s 2256 -e 2410 -o alice/outputs/rabbit_hole_6/video.mp4 -r 20 -i
+python tools/make_video.py alice/outputs/rabbit_hole_8/frames/ -s 2256 -e 2410 -o alice/outputs/rabbit_hole_8/video.mp4 -r 20 -i

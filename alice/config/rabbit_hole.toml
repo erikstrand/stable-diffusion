@@ -20,6 +20,7 @@ forest_demon = "a snarling demon with glowing red eyes hidden in dense green lea
 skull_wall = "floral skulls covered in moss, embedded in a grassy dirt wall, ancient decay, cinematic, high contrast, by esao andrews, by evgeny lushpin, by jason gonzalez, by hannah yata, trending on artstation"
 vampire_queen = "a wicked vampire queen with bloody fangs, perfect face, blue dress, blonde hair, cinematic, stunning, horror, highly detailed, digital painting, artstation, smooth, hard focus, illustration, art by esao andrews and artgerm and greg rutkowski and alphonse mucha"
 gaping_maw = "digital painting of a wet smily undead drowned monster at the bottom of a deep hole, with translucent and veiny skin, long freaky finger, by filipe pagliuso and justin gerard, fantasy, highly detailed, realistic, intricate, glowing eyes"
+ego_death = "alice falls down the rabbit hole, colorful foreboding forest, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
 
 
 # ==================================================
@@ -771,47 +772,93 @@ strength = 0.0
 
 # ==================================================
 # zooms out a bit
+
+# clip 1
 [[keyframes]]
 frame = 1972
-#2012: lamp appears at bottom
-#2045: alice turns on lamp, other furniture is visible
+prompt = "ego_death"
+seed = 22475039 # pulled out of a hat... hopefully it's good
+strength = 0.0
+scale = 10.0
+masks = []
+
+# lamp appears at bottom
+[[keyframes]]
+frame = 2012
+
+# alice turns on lamp, other furniture is visible
+[[keyframes]]
+frame = 2045
+strength = 0.0
+
+[[keyframes]]
+frame = 2060
+strength = 0.5
+
+[[keyframes]]
+frame = 2070
+strength = 0.5
+
+[[keyframes]]
+frame = 2085
+strength = 0.0
+
+# clip 2
+[[keyframes]]
+frame = 2135
+strength = 0.0
+
+[[keyframes]]
+frame = 2185
+strength = 0.4
+
+[[keyframes]]
+frame = 2209
+strength = 0.6
 
 # ==================================================
 # cuts to lower view, only alice's legs in frame, mirror on right side
+
+# clip 3
 [[keyframes]]
 frame = 2210
-#2335: alice grabs book
+strength = 0.0
+seed = 1345698 # also random
+
+[[keyframes]]
+frame = 2235
+strength = 0.0
+
+[[keyframes]]
+frame = 2255
+strength = 0.6
 
 # ==================================================
-# close up of alice reading book
-[[keyframes]]
-frame = 2368
+# ego death
 
-# ==================================================
-# zoom back out
+# clip 4
 [[keyframes]]
-frame = 2468
-#2520: grandfather clock goes by on right, bent chimney on left
-#2545: alice falls into chair
-#2680: kettle over fire in stove on right
-#2742: alice slips out of chair
+frame = 2256
+strength = 0.6
+set_color_reference = true
 
-# ==================================================
-# only alice's feet visible, funnel below
 [[keyframes]]
-frame = 2810
-#2870: halfway through funnel
-#2900: narrowest point
-#2940: restabilized, map coming into view
-#3000: looking at map (alice is upside down)
+frame = 2257
+seed = "random"
+input_image = "previous"
+strength = 0.5
+correct_colors = true
+transform.zoom = 1.0
+transform.translate = [0.0, 6.0]
+transform.rotate = 0.0
 
-# ==================================================
-# zoom in, upside down alice looking at map
 [[keyframes]]
-frame = 3008
-#3070: map leaving view
+duration = 100
+transform.zoom = 1.2
+transform.translate = [0.0, 4.0]
+transform.rotate = 0.005
+correct_colors = true
 
-# ==================================================
-# rabbit running away (upside down since alice is)
 [[keyframes]]
-frame = 3160
+duration = 50
+correct_colors = true
