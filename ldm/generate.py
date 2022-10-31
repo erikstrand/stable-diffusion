@@ -340,7 +340,7 @@ class Generate:
             def process_image(image,seed):
                 image.save(f{'images/seed.png'})
 
-        The code used to save images to a directory can be found in ldm/invoke/pngwriter.py. 
+        The code used to save images to a directory can be found in ldm/invoke/pngwriter.py.
         It contains code to create the requested output directory, select a unique informative
         name for each image, and write the prompt into the PNG metadata.
         """
@@ -375,7 +375,7 @@ class Generate:
         # to the width and height of the image training set
         width = width or self.width
         height = height or self.height
-        
+
         for m in model.modules():
             if isinstance(m, (nn.Conv2d, nn.ConvTranspose2d)):
                 m.padding_mode = 'circular' if seamless else m._orig_padding_mode
@@ -651,7 +651,7 @@ class Generate:
                 image_callback = callback,
                 prefix         = prefix
             )
-                
+
         elif tool is None:
             print(f'* please provide at least one postprocessing option, such as -G or -U')
             return None
@@ -690,7 +690,7 @@ class Generate:
             self._transparency_check_and_warning(image, mask)
             # this returns a torch tensor
             init_mask = self._create_init_mask(image, width, height, fit=fit)
-            
+
         if (image.width * image.height) > (self.width * self.height) and self.size_matters:
             print(">> This input is larger than your defaults. If you run out of memory, please use a smaller image.")
             self.size_matters = False
@@ -770,7 +770,7 @@ class Generate:
         self.set_model(self.model_name)
 
     def set_model(self,model_name):
-        """ 
+        """
         Given the name of a model defined in models.yaml, will load and initialize it
         and return the model object. Previously-used models will be cached.
         """
@@ -789,7 +789,7 @@ class Generate:
 
         # uncache generators so they pick up new models
         self.generators = {}
-        
+
         seed_everything(random.randrange(0, np.iinfo(np.uint32).max))
         if self.embedding_path is not None:
             self.model.embedding_manager.load(
@@ -832,7 +832,7 @@ class Generate:
                                 image_callback = None,
                                 prefix = None,
     ):
-            
+
         for r in image_list:
             image, seed = r
             try:
@@ -842,7 +842,7 @@ class Generate:
                             if self.gfpgan is None:
                                 print('>> GFPGAN not found. Face restoration is disabled.')
                             else:
-                              image = self.gfpgan.process(image, strength, seed)                              
+                              image = self.gfpgan.process(image, strength, seed)
                         if facetool == 'codeformer':
                             if self.codeformer is None:
                                 print('>> CodeFormer not found. Face restoration is disabled.')
@@ -971,11 +971,20 @@ class Generate:
         mask_w, mask_h = mask_pil.size
         mask_fill_w, mask_fill_h = mask_fill_pil.size
         if image_w != mask_w or image_h != mask_h:
-            print(f"Image and mask have different sizes! Aborting mask paste")
-            return image_pil
+            if image_w > mask_w or image_h > mask_h:
+                # TODO We could make the mask bigger, assuming no transparency in the added regions.
+                print(f"Image and mask have different sizes! Aborting mask paste")
+                return image_pil
+            else:
+                # If the mask is too big, crop it.
+                extra_x = mask_w - image_w
+                extra_y = mask_h - image_h
+                mask_pil = mask_pil.crop((extra_x // 2, extra_y // 2, mask_w - extra_x // 2, mask_h - extra_y // 2))
         if mask_fill_w > image_w or mask_fill_h > image_h:
-            print(f"Mask fill cannot be larger than the input image in any dimension. Aborting mask paste")
-            return image_pil
+            # TODO make sure it's not too big in one dim and too small in another
+            extra_x = mask_fill_w - image_w
+            extra_y = mask_fill_h - image_h
+            mask_fill_pil = mask_fill_pil.crop((extra_x // 2, extra_y // 2, mask_fill_w - extra_x // 2, mask_fill_h - extra_y // 2))
         if mask_fill_w < image_w or mask_fill_h < image_h:
             # If the mask fill image is smaller than the current one, just pad it with black.
             new_mask_fill_pil = Image.new('RGB', (image_w, image_h), (0, 0, 0))

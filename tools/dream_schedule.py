@@ -137,7 +137,7 @@ class Transform2D:
         self.translation = (float(translation[0]), float(translation[1])) # in pixels
 
     def arg_string(self):
-        return f"{self.rotation:.3f}:{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}"
+        return f"\"{self.rotation:.3f}:{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}\""
 
 
 class MaskFillTransform:
@@ -149,7 +149,7 @@ class MaskFillTransform:
         self.center = (float(center[0]), float(center[1])) # in pixels
 
     def arg_string(self):
-        return f"{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}:{self.center[0]:.3f}:{self.center[1]:.3f}"
+        return f"\"{self.zoom:.3f}:{self.translation[0]:.3f}:{self.translation[1]:.3f}:{self.center[0]:.3f}:{self.center[1]:.3f}\""
 
 
 class KeyFrame:
@@ -487,7 +487,7 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "out_dir", "width", "height", "prompts", "keyframes"]
+    __slots__ = ["in_dir", "out_dir", "width", "height", "prompts", "keyframes", "mask_fill_frames"]
 
     def __init__(self, in_dir, out_dir, width, height, named_prompts, keyframes):
         self.in_dir = Path(in_dir)
@@ -530,6 +530,13 @@ class DreamSchedule:
             for variation in keyframe.prompt_variations:
                 assert variation.prompt in prompt_to_idx
                 variation.prompt_idx = prompt_to_idx[variation.prompt]
+
+        # Collect all outputs used as mask fills (other than by referencing the previous frame).
+        self.mask_fill_frames = set()
+        for keyframe in self.keyframes:
+            # Kinda hacky, I'm referencing what could be private state.
+            if keyframe.fill_mask is not None and not keyframe.fill_mask.use_prev:
+                self.mask_fill_frames.add(keyframe.fill_mask.frame)
 
     def _interpolate_strengths(self):
         assert(self.keyframes[0].strength is not None)

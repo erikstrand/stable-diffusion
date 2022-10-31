@@ -36,6 +36,8 @@ class DreamState:
 
         self.prev_frame_masks = []
         self.this_frame_masks = []
+        # maps a frame number to a list of masks
+        self.ref_frame_masks = {}
 
         return self
 
@@ -64,6 +66,8 @@ class DreamState:
             self.this_frame_masks = self.get_masks()
         else:
             self.this_frame_masks = []
+        if self.frame_idx in self.schedule.mask_fill_frames:
+            self.ref_frame_masks[self.frame_idx] = self.this_frame_masks
 
         # Record the current output file as a color reference, if requested.
         set_color_reference = (self.frame_idx == self.prev_keyframe.frame and self.prev_keyframe.set_color_reference)
@@ -95,13 +99,15 @@ class DreamState:
         return self.schedule.out_dir / "frames" / self.output_file(frame)
 
     @staticmethod
-    def interpolate_variations(prev_variations, next_base, next_variations, t):
+    def interpolate_variations(prev_base, prev_variations, next_base, next_variations, t):
         n_prev_variations = len(prev_variations)
         n_next_variations = len(next_variations)
 
         # If neither keyframe has variations, this frame has no variations.
         if n_prev_variations == 0 and n_next_variations == 0:
-            return []
+            if prev_base == next_base:
+                return []
+            return [[next_base, t]] if t > 0.0 else []
 
         variations = [[var.base, var.amount] for var in prev_variations]
         if n_next_variations == 0:
@@ -167,10 +173,16 @@ class DreamState:
         mask_fill_img = None
         mask_fill_transform = None
         if self.has_mask() and self.prev_keyframe.fill_mask is not None:
-            assert(len(self.prev_frame_masks) == 1)
             assert(len(self.this_frame_masks) == 1)
-            prev_mask = self.prev_frame_masks[0]
             this_mask = self.this_frame_masks[0]
+
+            if self.prev_keyframe.fill_mask.use_prev:
+                assert(len(self.prev_frame_masks) == 1)
+                prev_mask = self.prev_frame_masks[0]
+            else:
+                prev_masks = self.ref_frame_masks[self.prev_keyframe.fill_mask.frame]
+                assert(len(prev_masks) == 1)
+                prev_mask = prev_masks[0]
 
             zoom = this_mask.radius / prev_mask.radius
             t_x = this_mask.center[0] - prev_mask.center[0]
@@ -178,11 +190,12 @@ class DreamState:
             c_x = prev_mask.center[0]
             c_y = prev_mask.center[1]
 
-            mask_fill_img = self.output_path(self.prev_keyframe.fill_mask, self.frame_idx)
-            mask_fill_transform = f"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}"
+            mask_fill_img = self.output_path(self.prev_keyframe.fill_mask.get_frame(self.frame_idx))
+            mask_fill_transform = f"\"{zoom:.3f}:{t_x:.3f}:{t_y:.3f}:{c_x:.3f}:{c_y:.3f}\""
 
         # Create the final list of prompt variations. The weight of the last variation may be interpolated.
         prompt_variations = self.interpolate_variations(
+            self.prev_keyframe.prompt_idx,
             self.prev_keyframe.prompt_variations,
             self.next_keyframe.prompt_idx,
             self.next_keyframe.prompt_variations,
@@ -203,6 +216,7 @@ class DreamState:
 
         # Create the final list of seed variations. The weight of the last variation may be interpolated.
         seed_variations = self.interpolate_variations(
+            self.prev_keyframe.seed,
             self.prev_keyframe.seed_variations,
             self.next_keyframe.seed,
             self.next_keyframe.seed_variations,
@@ -276,7 +290,7 @@ class DreamState:
                 center = (1.0 - t) * prev_mask.center + t * next_mask.center
                 radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
                 sigmoid_k = (1.0 - t) * prev_mask.sigmoid_k + t * next_mask.sigmoid_k
-                masks.append(Mask(center, radius, sigmoid_k))
+                masks.append(Mask(center, radius, sigmoid_k, prev_mask.invert))
             return masks
 
         # Currently the case where n_prev_masks != n_next_masks and both are greater than zero is
