@@ -7,3 +7,5 @@ python tools/make_video.py alice/outputs/rabbit_hole_7/frames/ -s 2210 -e 2255 -
 
 python tools/make_video.py alice/outputs/rabbit_hole_6/frames/ -s 2256 -e 2410 -o alice/outputs/rabbit_hole_6/video.mp4 -r 20 -i
 python tools/make_video.py alice/outputs/rabbit_hole_8/frames/ -s 2256 -e 2410 -o alice/outputs/rabbit_hole_8/video.mp4 -r 20 -i
+
+python tools/make_video.py alice/outputs/rabbit_hole_final/frames/ -s 86 -e 2209 -o alice/outputs/rabbit_hole_final/rabbit_hole.mp4 -r 20 -i
