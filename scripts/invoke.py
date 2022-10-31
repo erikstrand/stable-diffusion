@@ -221,6 +221,16 @@ def main_loop(gen, opt, infile):
                 opt.init_img = None
                 continue
 
+        if opt.mask_fill and re.match('^-\\d+$', opt.mask_fill):
+            try:
+                opt.mask_fill = last_results[int(opt.init_img)][0]
+                print(f'>> Reusing previous image {opt.mask_fill} for mask fill')
+            except IndexError:
+                print(
+                    f'>> No previous initial image at position {opt.mask_fill} found')
+                opt.mask_fill = None
+                continue
+
         # try to relativize pathnames
         for attr in ('init_img','init_mask','init_color','embedding_path'):
             if getattr(opt,attr) and not os.path.exists(getattr(opt,attr)):
@@ -249,6 +259,9 @@ def main_loop(gen, opt, infile):
 
         if opt.init_img_transform is not None:
             opt.init_img_transform = split_transform(opt.init_img_transform)
+
+        if opt.mask_fill_transform is not None:
+            opt.mask_fill_transform = split_mask_transform(opt.mask_fill_transform)
 
         if opt.prompt_as_dir and operation == 'generate':
             # sanitize the prompt to a valid folder name
@@ -760,6 +773,23 @@ def split_transform(transform_string) -> list:
         print(f'** Could not parse transform string "{transform_string}": error parsing floats')
         return None
     return (angle, zoom, t_x, t_y)
+
+def split_mask_transform(transform_string) -> list:
+    n_components = 5
+    components = transform_string.split(':')
+    if len(components) != n_components:
+        print(f'** Could not parse mask transform string "{transform_string}": expected {n_components} components separated by colons')
+        return None
+    try:
+        zoom = float(components[0])
+        t_x = float(components[1])
+        t_y = float(components[2])
+        c_x = float(components[3])
+        c_y = float(components[4])
+    except ValueError:
+        print(f'** Could not parse transform string "{transform_string}": error parsing floats')
+        return None
+    return (zoom, t_x, t_y, c_x, c_y)
 
 def load_face_restoration(opt):
     try:

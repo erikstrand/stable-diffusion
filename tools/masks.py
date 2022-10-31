@@ -4,18 +4,19 @@ from pathlib import Path
 
 
 class Mask:
-    __slots__ = ["center", "radius"]
+    __slots__ = ["center", "radius", "sigmoid_k"]
 
-    def __init__(self, center, radius):
+    def __init__(self, center, radius, sigmoid_k=0.2):
         self.center = np.array(center)
         assert(self.center.shape == (2,))
         self.radius = float(radius)
+        self.sigmoid_k = float(sigmoid_k)
 
     def __str__(self):
-        return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}"
+        return f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
 
 
-def generate_mask_array(width, height, circles):
+def generate_mask_array(width, height, masks):
     width = float(width)
     height = float(height)
 
@@ -31,19 +32,20 @@ def generate_mask_array(width, height, circles):
 
     result = np.full(coords.shape[0:2], 255, dtype='uint8')
 
-    for circle in circles:
+    for mask in masks:
         # Rescale center and radius.
-        center = circle.center
+        center = mask.center
         center = np.array([width, height]) * center
-        radius = height * circle.radius
+        radius = height * mask.radius
 
         # Generate the mask.
         dist = np.linalg.norm(coords - center, axis=2)
-        # mask as True/False
-        mask = dist > radius
-        # mask as 255/0 (255 means opaque, 0 means transparent)
-        mask = (255 * mask).astype('uint8')
+        # sigmoid
+        mask = 255.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
+        # 255 means opaque, 0 means transparent
+        mask = mask.astype('uint8')
 
+        # Merge with previous masks.
         result = np.minimum(result, mask)
 
     return result

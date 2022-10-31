@@ -283,6 +283,8 @@ class Generate:
             strength         = None,
             init_color       = None,
             init_img_transform = None,
+            mask_fill        = None,
+            mask_fill_transform = None,
             # these are specific to embiggen (which also relies on img2img args)
             embiggen       =    None,
             embiggen_tiles =    None,
@@ -434,6 +436,8 @@ class Generate:
                 height,
                 fit=fit,
                 transform=init_img_transform,
+                mask_init_img=mask_fill,
+                mask_init_img_transform=mask_fill_transform,
             )
 
             # TODO: Hacky selection of operation to perform. Needs to be refactored.
@@ -664,6 +668,8 @@ class Generate:
             height,
             fit=False,
             transform=None,
+            mask_init_img=None,
+            mask_init_img_transform=None,
     ):
         init_image      = None
         init_mask       = None
@@ -698,13 +704,24 @@ class Generate:
                 t_y = transform[3],
             )
 
-        # this converts the PIL image to a torch tensor
-        init_image = self._create_init_image(image,width,height,fit=fit)
-
         if mask:
             mask_image = self._load_img(
                 mask, width, height)  # this returns an Image
+
+            if mask_init_img is not None:
+                mask_fill_image = self._load_img(mask_init_img, width, height)
+                image = self._fill_mask(
+                    image_pil=image,
+                    mask_pil=mask_image,
+                    mask_fill_pil=mask_fill_image,
+                    mask_fill_transform=mask_init_img_transform,
+                )
+
+            # convert the PIL image to a torch tensor
             init_mask = self._create_init_mask(mask_image,width,height,fit=fit)
+
+        # convert the PIL image to a torch tensor
+        init_image = self._create_init_image(image,width,height,fit=fit)
 
         return init_image, init_mask
 
@@ -938,6 +955,76 @@ class Generate:
         image_array = np.flip(np.swapaxes(image_array, 0, 1), 0)
         format = 'RGB' if image_array.shape[2] == 3 else 'RGBA'
         return Image.fromarray(image_array, format)
+
+    def _fill_mask(
+        self,
+        image_pil,
+        mask_pil,
+        mask_fill_pil,
+        mask_fill_transform,
+    ):
+        # Check sizes.
+        #print(f"image size: {image_pil.size}")
+        #print(f"mask size: {mask_pil.size}")
+        #print(f"mask fill size: {mask_fill_pil.size}")
+        image_w, image_h = image_pil.size
+        mask_w, mask_h = mask_pil.size
+        mask_fill_w, mask_fill_h = mask_fill_pil.size
+        if image_w != mask_w or image_h != mask_h:
+            print(f"Image and mask have different sizes! Aborting mask paste")
+            return image_pil
+        if mask_fill_w > image_w or mask_fill_h > image_h:
+            print(f"Mask fill cannot be larger than the input image in any dimension. Aborting mask paste")
+            return image_pil
+        if mask_fill_w < image_w or mask_fill_h < image_h:
+            # If the mask fill image is smaller than the current one, just pad it with black.
+            new_mask_fill_pil = Image.new('RGB', (image_w, image_h), (0, 0, 0))
+            x_pos = (image_w - mask_fill_w) // 2
+            y_pos = (image_h - mask_fill_h) // 2
+            new_mask_fill_pil.paste(mask_fill_pil, (x_pos, y_pos))
+            mask_fill_pil = new_mask_fill_pil
+
+        # Useful for debugging
+        #image_pil.save('mf_image.png')
+        #mask_fill_pil.save('mf_mask_fill.png')
+        #mask_pil.save('mf_mask.png')
+
+        # Convert to numpy arrays.
+        image_np = np.array(image_pil)
+        mask_fill_np = np.array(mask_fill_pil)
+        mask_np = np.array(mask_pil)[:, :, 3]
+        mask_np = np.expand_dims(mask_np, axis=2) * np.float32(1.0 / 255)
+
+        # Transform the mask fill image.
+        if mask_fill_transform is not None:
+            zoom = mask_fill_transform[0]
+            translate_x = mask_fill_transform[1] * image_w
+            translate_y = mask_fill_transform[2] * image_h
+            c_x = mask_fill_transform[3] * image_w
+            c_y = mask_fill_transform[4] * image_h
+
+            rows, cols = mask_fill_np.shape[0:2]
+            translate_mat = np.float32([
+                [1.0, 0.0, translate_x],
+                [0.0, 1.0, -translate_y],
+                [0.0, 0.0, 1.0]
+            ])
+            rot_mat = cv2.getRotationMatrix2D((c_x, rows - 1 - c_y), 0.0, zoom)
+            rot_mat = np.vstack([rot_mat, [0.0, 0.0, 1.0]])
+            xform = np.matmul(translate_mat, rot_mat)
+            mask_fill_np = cv2.warpPerspective(
+                mask_fill_np,
+                xform,
+                (cols, rows),
+                borderMode=cv2.BORDER_REPLICATE
+            )
+            #Image.fromarray(mask_fill_np).save('mf_mask_transformed.png')
+
+        # Combine.
+        result_np = mask_np * image_np + (1.0 - mask_np) * mask_fill_np
+        result = Image.fromarray(result_np.astype('uint8'), 'RGB')
+        #result.save('mf_new_image.png')
+        return result
 
     def _create_init_image(self, image, width, height, fit=True):
         image = image.convert('RGB')
