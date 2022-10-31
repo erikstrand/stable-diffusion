@@ -1,7 +1,7 @@
 in_dir = "n/a"
 mask_dir = "n/a"
-scratch_dir = "transition of 17 to 20"
-out_dir = "outputs/e1_42"
+scratch_dir = "transition of 17 to 20, less strength - 0.5 instead of 0.8"
+out_dir = "outputs/e1_46"
 width = 1024
 height = 768
 stride = 1
@@ -11,7 +11,7 @@ frame = 1
 seed = 532770008
 prompt = "an iridescent poster of colorful abstract art, muted colors, behance gd, rich color palette"
 scale = 7.0
-strength = 0.8
+strength = 0.5
 steps = 50
 color_coherence = "LAB"
 

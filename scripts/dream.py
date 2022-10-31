@@ -224,6 +224,9 @@ def main_loop(t2i, outdir, prompt_as_dir, parser, infile, dream_schedule):
                 )
 
                 if opt.color_coherence:
+                    if dream_schedule.restart_from is not None and single_use_bool:
+                        color_reference_array = init_array.copy()
+                        single_use_bool = False
                     init_array = maintain_colors(init_array, color_reference_array, opt.color_coherence)
 
                 opt.init_Image = array_to_image(init_array)
