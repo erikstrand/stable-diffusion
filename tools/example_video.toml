@@ -1,0 +1,34 @@
+in_dir = "alice/frames"
+out_dir = "alice/outputs/example_video"
+width = 960
+height = 720
+
+[prompts]
+ghost = "a ghostly apparition, fog, art by greg rutkowski"
+
+[[keyframes]]
+# You choose what frame number you want to start at.
+# It defaults to 1 if you don't specify anything.
+frame = 100
+# Input images are named cheshire/IM0000.png, cheshire/IM0001.png, etc.
+# Note that you don't have to start at frame 0; you can write e.g. "cheshire/IM{0617}.png".
+input_image = "cheshire/IM{0000}.png"
+seed = 89075690
+prompt = "ghost"
+scale = 8.0
+strength = 0.0
+steps = 50
+masks = [
+    { center = [0.5, 0.6], radius = 0.2 }
+]
+
+[[keyframes]]
+duration = 50
+strength = 0.5
+masks = [
+    { center = [0.5, 0.55], radius = 0.25 }
+]
+
+[[keyframes]]
+duration = 50
+strength = 0.0

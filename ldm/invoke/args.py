@@ -210,7 +210,24 @@ class Args(object):
         a = vars(self)
         a.update(kwargs)
         switches = list()
-        switches.append(f'"{a["prompt"]}"')
+        if a['prompt_idx'] is None:
+            switches.append(f'"{a["prompt"]}"')
+        else:
+            switches.append(f'--prompt_idx {a["prompt_idx"]}')
+
+        if a['prompt_variations'] is not None:
+            # Prompt variations start as strings (e.g. "0:0.5,1:0.75") but get parsed into lists in
+            # invoke.py (e.g. [[0, 0.5], [1, 0.75]]). This handles either case.
+            if isinstance(a['prompt_variations'], str):
+                switches.append(f'-P {a["prompt_variations"]}')
+            elif isinstance(a['prompt_variations'], list):
+                formatted_variations = ','.join([
+                    f'{prompt_idx}:{weight}' for prompt_idx, weight in a["prompt_variations"]
+                ])
+                switches.append(f'-P {formatted_variations}')
+            else:
+                raise ValueError(f'Invalid prompt_variations (should be a string or list): {a["prompt_variations"]}')
+
         switches.append(f'-s {a["steps"]}')
         switches.append(f'-S {a["seed"]}')
         switches.append(f'-W {a["width"]}')
@@ -241,6 +258,19 @@ class Args(object):
                 switches.append(f'-f {a["strength"]}')
             if a['inpaint_replace']:
                 switches.append(f'--inpaint_replace')
+            if a['init_img_transform'] is not None:
+                # Image transforms start as strings but get parsed into tuples in invoke.py.
+                # This handles either case.
+                if isinstance(a['init_img_transform'], str):
+                    switches.append(f'-tf {a["init_img_transform"]}')
+                elif isinstance(a['init_img_transform'], tuple):
+                    angle = a['init_img_transform'][0]
+                    zoom = a['init_img_transform'][1]
+                    tx = a['init_img_transform'][2]
+                    ty = a['init_img_transform'][3]
+                    switches.append(f'-tf {angle}:{zoom}:{tx}:{ty}')
+                else:
+                    raise ValueError(f'Invalid image transform (should be a string or list): {a["init_img_transform"]}')
         else:
             switches.append(f'-A {a["sampler_name"]}')
 
@@ -553,6 +583,19 @@ class Args(object):
         special_effects_group  = parser.add_argument_group('Special effects')
         render_group.add_argument('prompt')
         render_group.add_argument(
+            '--prompt_idx',
+            type=int,
+            default=None,
+            help='Specify the zero-based index of a precomputed prompt latent (set with !set_prompts "prompt 0" "prompt 1" ...).'
+        )
+        render_group.add_argument(
+            '-P',
+            '--prompt_variations',
+            default=None,
+            type=str,
+            help='list of prompt variations to apply, in the format `prompt_idx:weight,prompt_idx:weight,...'
+        )
+        render_group.add_argument(
             '-s',
             '--steps',
             type=int,
@@ -645,6 +688,18 @@ class Args(object):
             help='Directory to save generated images and a log of prompts and seeds',
         )
         render_group.add_argument(
+            '--name',
+            '-N',
+            type=str,
+            help='The name of the generated image',
+        )
+        parser.add_argument(
+            '--exclude_seed_from_filename',
+            '-e',
+            action='store_true',
+            help=f'When True, the seed will appear as "0" in the filename.',
+        )
+        render_group.add_argument(
             '--hires_fix',
             action='store_true',
             dest='hires_fix',
@@ -718,6 +773,13 @@ class Args(object):
             type=float,
             default=0.0,
             help='when inpainting, adjust how aggressively to replace the part of the picture under the mask, from 0.0 (a gentle merge) to 1.0 (replace entirely)',
+        )
+        img2img_group.add_argument(
+            '-tf',
+            '--init_img_transform',
+            default=None,
+            type=str,
+            help='a transformation applied to the init image, in the form `rotation_degrees:zoom_scale:translate_x:translate_y'
         )
         postprocessing_group.add_argument(
             '-ft',

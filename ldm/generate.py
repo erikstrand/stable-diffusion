@@ -189,6 +189,10 @@ class Generate:
         self.free_gpu_mem = free_gpu_mem
         self.size_matters = True  # used to warn once about large image sizes and VRAM
 
+        # Added parameters (by @erikstrand)
+        # This stores a list of prompts that can be referred to by index.
+        self.prompts = []
+
         # Note that in previous versions, there was an option to pass the
         # device to Generate(). However the device was then ignored, so
         # it wasn't actually doing anything. This logic could be reinstated.
@@ -213,6 +217,13 @@ class Generate:
 
         # gets rid of annoying messages about random seed
         logging.getLogger('pytorch_lightning').setLevel(logging.ERROR)
+
+    def set_prompts(self, prompts):
+        """Accepts a list of prompts (as strings).
+
+        These prompts can be referred to by index later. This makes commands for prompt interpolation more manageable.
+        """
+        self.prompts = prompts
 
     def prompt2png(self, prompt, outdir, **kwargs):
         """
@@ -246,6 +257,8 @@ class Generate:
             self,
             # these are common
             prompt,
+            prompt_idx       = None,
+            prompt_variations = None,
             iterations       = None,
             steps            = None,
             seed             = None,
@@ -269,6 +282,7 @@ class Generate:
             fit              = False,
             strength         = None,
             init_color       = None,
+            init_img_transform = None,
             # these are specific to embiggen (which also relies on img2img args)
             embiggen       =    None,
             embiggen_tiles =    None,
@@ -282,6 +296,7 @@ class Generate:
             inpaint_replace  = 0.0,
             # Set this True to handle KeyboardInterrupt internally
             catch_interrupts = False,
+            interrupt_callback = None,
             hires_fix        = False,
             **args,
     ):   # eat up additional cruft
@@ -289,6 +304,8 @@ class Generate:
         ldm.generate.prompt2image() is the common entry point for txt2img() and img2img()
         It takes the following arguments:
            prompt                          // prompt string (no default)
+           prompt_idx                      // index of prompt (in list of prompts set with !set_prompts command)
+           prompt_variations               // a weighted list [(prompt_idx_1, weight_1), (prompt_idx_2, weight_2), ...] used for interpolating between prompts
            iterations                      // iterations (1); image count=iterations
            steps                           // refinement steps per iteration
            seed                            // seed for random number generator
@@ -325,6 +342,15 @@ class Generate:
         It contains code to create the requested output directory, select a unique informative
         name for each image, and write the prompt into the PNG metadata.
         """
+        if prompt_idx is not None:
+            assert(not prompt)
+            assert(0 <= prompt_idx < len(self.prompts))
+            prompt = self.prompts[prompt_idx]
+        prompt_variations = [] if prompt_variations is None else prompt_variations
+        if len(prompt_variations) > 0:
+            assert all(0 <= weight <= 1 for _, weight in prompt_variations),\
+                f"prompt variation weights must be in [0.0, 1.0]: got {[weight for _, weight in prompt_variations]}"
+
         # TODO: convert this into a getattr() loop
         steps = steps or self.steps
         width = width or self.width
@@ -393,10 +419,12 @@ class Generate:
         mask_image = None
 
         try:
+            # Compute latents for the base prompt.
             uc, c = get_uc_and_c(
-                prompt, model =self.model,
-                skip_normalize=skip_normalize,
-                log_tokens    =self.log_tokenization
+                prompt,
+                model = self.model,
+                skip_normalize = skip_normalize,
+                log_tokens = self.log_tokenization
             )
 
             init_image,mask_image = self._make_images(
@@ -405,6 +433,7 @@ class Generate:
                 width,
                 height,
                 fit=fit,
+                transform=init_img_transform,
             )
 
             # TODO: Hacky selection of operation to perform. Needs to be refactored.
@@ -422,6 +451,18 @@ class Generate:
             generator.set_variation(
                 self.seed, variation_amount, with_variations
             )
+
+            # Apply prompt variations.
+            for prompt_idx, weight in prompt_variations:
+                prompt = self.prompts[prompt_idx]
+                uc_variation, c_variation = get_uc_and_c(
+                    prompt,
+                    model = self.model,
+                    skip_normalize = skip_normalize,
+                    log_tokens = self.log_tokenization
+                )
+                uc = generator.slerp(weight, uc, uc_variation)
+                c = generator.slerp(weight, c, c_variation)
 
             results = generator.generate(
                 prompt,
@@ -467,6 +508,8 @@ class Generate:
         except KeyboardInterrupt:
             if catch_interrupts:
                 print('**Interrupted** Partial results will be returned.')
+                if interrupt_callback is not None:
+                    interrupt_callback()
             else:
                 raise KeyboardInterrupt
 
@@ -620,6 +663,7 @@ class Generate:
             width,
             height,
             fit=False,
+            transform=None,
     ):
         init_image      = None
         init_mask       = None
@@ -645,7 +689,17 @@ class Generate:
             print(">> This input is larger than your defaults. If you run out of memory, please use a smaller image.")
             self.size_matters = False
 
-        init_image   = self._create_init_image(image,width,height,fit=fit)                   # this returns a torch tensor
+        if transform is not None:
+            image = self._transform_init_image(
+                image,
+                angle = transform[0],
+                zoom = transform[1],
+                t_x = transform[2],
+                t_y = transform[3],
+            )
+
+        # this converts the PIL image to a torch tensor
+        init_image = self._create_init_image(image,width,height,fit=fit)
 
         if mask:
             mask_image = self._load_img(
@@ -850,6 +904,40 @@ class Generate:
             )
         image = ImageOps.exif_transpose(image)
         return image
+
+    def _transform_init_image(self, image, angle, zoom, t_x, t_y):
+        """Transforms the initial image.
+
+        The angle should be in revolutions. The zoom is a unitless scale factor.
+        The translation parameters are in pixels.
+
+        This method is useful for making disco diffusion or deforum diffusion style animations.
+        """
+        # convert the PIL image to a numpy array
+        image_array = np.array(image)
+        image_array = np.swapaxes(np.flip(image_array, 0), 0, 1)
+
+        # transform the image
+        center = (0.5 * (image_array.shape[1] - 1), 0.5 * (image_array.shape[0] - 1))
+        trans_mat = np.float32([
+            [1.0, 0.0, t_y],
+            [0.0, 1.0, t_x],
+            [0.0, 0.0, 1.0]
+        ])
+        rot_mat = cv2.getRotationMatrix2D(center, 360.0 * angle, zoom)
+        rot_mat = np.vstack([rot_mat, [0.0, 0.0, 1.0]])
+        xform = np.matmul(rot_mat, trans_mat)
+        image_array = cv2.warpPerspective(
+            image_array,
+            xform,
+            (image_array.shape[1], image_array.shape[0]),
+            borderMode=cv2.BORDER_REPLICATE
+        )
+
+        # convert back to a PIL image
+        image_array = np.flip(np.swapaxes(image_array, 0, 1), 0)
+        format = 'RGB' if image_array.shape[2] == 3 else 'RGBA'
+        return Image.fromarray(image_array, format)
 
     def _create_init_image(self, image, width, height, fit=True):
         image = image.convert('RGB')

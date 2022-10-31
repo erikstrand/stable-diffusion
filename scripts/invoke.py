@@ -123,15 +123,28 @@ def main_loop(gen, opt, infile):
         path_max = 260
         name_max = 255
 
+    # this variable is just like infile except we use it for the !from_file command
+    dynamic_infile = None
+    def clear_dynamic_infile():
+        nonlocal dynamic_infile
+        dynamic_infile = None
+
     while not done:
 
         operation = 'generate'
 
-        try:
-            command = get_next_command(infile)
-        except EOFError:
-            done = True
-            continue
+        if dynamic_infile is not None:
+            try:
+                command = get_next_command(dynamic_infile)
+            except EOFError:
+                dynamic_infile = None
+                continue
+        else:
+            try:
+                command = get_next_command(infile)
+            except EOFError:
+                done = True
+                continue
 
         # skip empty lines
         if not command.strip():
@@ -145,7 +158,32 @@ def main_loop(gen, opt, infile):
             break
 
         if command.startswith('!'):
-            command, operation = do_command(command, gen, opt, completer)
+            if command.startswith('!from_file'):
+                # We handle this command here since it modifies state held in the main loop.
+                if dynamic_infile is not None:
+                    print("You can't run !from_file recursively!")
+                    dynamic_infile = None
+                    continue
+
+                command_file = command.split(' ')[1]
+                try:
+                    if os.path.isfile(command_file):
+                        dynamic_infile = open(command_file, 'r', encoding='utf-8')
+                        completer.add_history(command)
+                        continue
+                    else:
+                        raise FileNotFoundError(f'{opt.infile} not found.')
+                except (FileNotFoundError, IOError) as e:
+                    print(f'{e}.')
+                    operation = None
+            else:
+                command, operation = do_command(
+                    command,
+                    gen,
+                    opt,
+                    completer,
+                    store_history=dynamic_infile is None
+                )
 
         if operation is None:
             continue
@@ -155,14 +193,14 @@ def main_loop(gen, opt, infile):
 
         if opt.init_img:
             try:
-                if not opt.prompt:
+                if not opt.prompt and opt.prompt_idx is None:
                     oldargs    = metadata_from_png(opt.init_img)
                     opt.prompt = oldargs.prompt
                     print(f'>> Retrieved old prompt "{opt.prompt}" from {opt.init_img}')
             except (OSError, AttributeError, KeyError):
                 pass
 
-        if len(opt.prompt) == 0:
+        if len(opt.prompt) == 0 and opt.prompt_idx is None:
             print('\nTry again with a prompt!')
             continue
 
@@ -206,6 +244,12 @@ def main_loop(gen, opt, infile):
         if opt.with_variations is not None:
             opt.with_variations = split_variations(opt.with_variations)
 
+        if opt.prompt_variations is not None:
+            opt.prompt_variations = split_prompt_variations(opt.prompt_variations)
+
+        if opt.init_img_transform is not None:
+            opt.init_img_transform = split_transform(opt.init_img_transform)
+
         if opt.prompt_as_dir and operation == 'generate':
             # sanitize the prompt to a valid folder name
             subdir = path_filter.sub('_', opt.prompt)[:name_max].rstrip(' .')
@@ -229,7 +273,8 @@ def main_loop(gen, opt, infile):
         if operation == 'postprocess':
             completer.add_history(f'!fix {command}')
         else:
-            completer.add_history(command)
+            if dynamic_infile is None:
+                completer.add_history(command)
 
         # Here is where the images are actually generated!
         last_results = []
@@ -264,6 +309,9 @@ def main_loop(gen, opt, infile):
                         postprocessed,
                         first_seed
                     )
+                    if opt.name:
+                        assert(opt.name.endswith('.png')), "Only .png files are supported"
+                        filename = opt.name
                     path = file_writer.save_image_and_prompt_to_png(
                         image           = image,
                         dream_prompt    = formatted_dream_prompt,
@@ -300,10 +348,12 @@ def main_loop(gen, opt, infile):
             if operation == 'generate':
                 catch_ctrl_c = infile is None # if running interactively, we catch keyboard interrupts
                 opt.last_operation='generate'
+                interrupt_callback = None if dynamic_infile is None else clear_dynamic_infile
                 gen.prompt2image(
                     image_callback=image_writer,
                     step_callback=step_callback,
                     catch_interrupts=catch_ctrl_c,
+                    interrupt_callback=interrupt_callback,
                     **vars(opt)
                 )
             elif operation == 'postprocess':
@@ -345,7 +395,7 @@ def main_loop(gen, opt, infile):
 
     print('goodbye!')
 
-def do_command(command:str, gen, opt:Args, completer) -> tuple:
+def do_command(command:str, gen, opt:Args, completer, store_history=True) -> tuple:
     operation = 'generate'   # default operation, alternative is 'postprocess'
 
     if command.startswith('!dream'):   # in case a stored prompt still contains the !dream command
@@ -358,9 +408,10 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
     elif command.startswith('!switch'):
         model_name = command.replace('!switch ','',1)
         gen.set_model(model_name)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
-        
+
     elif command.startswith('!models'):
         gen.model_cache.print_models()
         operation = None
@@ -373,7 +424,8 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
             print(f'** {path[1]}: file not found')
         else:
             add_weights_to_config(path[1], gen, opt, completer)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif command.startswith('!edit'):
@@ -382,7 +434,8 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
             print('** please provide the name of a model')
         else:
             edit_config(path[1], gen, opt, completer)
-        completer.add_history(command)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif command.startswith('!fetch'):
@@ -401,6 +454,13 @@ def do_command(command:str, gen, opt:Args, completer) -> tuple:
 
     elif command.startswith('!clear'):
         completer.clear_history()
+        operation = None
+
+    elif command.startswith('!set_prompts'):
+        prompts = re.findall(r'"(.*?)"', command)
+        gen.set_prompts(prompts)
+        if store_history:
+            completer.add_history(command)
         operation = None
 
     elif re.match('^!(\d+)',command):
@@ -562,7 +622,11 @@ def prepare_image_metadata(
     if postprocessed and opt.save_original:
         filename = choose_postprocess_name(opt,prefix,seed)
     else:
-        filename = f'{prefix}.{seed}.png'
+        if opt.exclude_seed_from_filename:
+            # We add the .0 so that we still match the regex for filenames in PngWriter.
+            filename = f'{prefix}.0.png'
+        else:
+            filename = f'{prefix}.{seed}.png'
 
     if opt.variation_amount > 0:
         first_seed             = first_seed or seed
@@ -589,9 +653,17 @@ def choose_postprocess_name(opt,prefix,seed) -> str:
     available = False
     while not available:
         if counter == 0:
-            filename = f'{prefix}.{seed}.{modifier}.png'
+            if opt.exclude_seed_from_filename:
+                # We add the .0 so that we still match the regex for filenames in PngWriter.
+                filename = f'{prefix}.0.{modifier}.png'
+            else:
+                filename = f'{prefix}.{seed}.{modifier}.png'
         else:
-            filename = f'{prefix}.{seed}.{modifier}-{counter:02d}.png'
+            if opt.exclude_seed_from_filename:
+                # We add the .0 so that we still match the regex for filenames in PngWriter.
+                filename = f'{prefix}.0.{modifier}-{counter:02d}.png'
+            else:
+                filename = f'{prefix}.{seed}.{modifier}-{counter:02d}.png'
         available = not os.path.exists(os.path.join(opt.outdir,filename))
         counter += 1
     return filename
@@ -649,6 +721,45 @@ def split_variations(variations_string) -> list:
         return None
     else:
         return parts
+
+def split_prompt_variations(variations_string) -> list:
+    parts = []
+    broken = False  # python doesn't have labeled loops...
+    for part in variations_string.split(','):
+        prompt_idx_and_weight = part.split(':')
+        if len(prompt_idx_and_weight) != 2:
+            print(f'** Could not parse prompt_variation part "{part}"')
+            broken = True
+            break
+        try:
+            prompt_idx = int(prompt_idx_and_weight[0])
+            weight = float(prompt_idx_and_weight[1])
+        except ValueError:
+            print(f'** Could not parse promp_variation part "{part}"')
+            broken = True
+            break
+        parts.append([prompt_idx, weight])
+    if broken:
+        return None
+    elif len(parts) == 0:
+        return None
+    else:
+        return parts
+
+def split_transform(transform_string) -> list:
+    components = transform_string.split(':')
+    if len(components) != 4:
+        print(f'** Could not parse transform string "{transform_string}": expected 4 components separated by colons')
+        return None
+    try:
+        angle = float(components[0])
+        zoom = float(components[1])
+        t_x = float(components[2])
+        t_y = float(components[3])
+    except ValueError:
+        print(f'** Could not parse transform string "{transform_string}": error parsing floats')
+        return None
+    return (angle, zoom, t_x, t_y)
 
 def load_face_restoration(opt):
     try:
