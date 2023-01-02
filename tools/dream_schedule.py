@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from dataclasses import dataclass
 from dream_state import DreamState
-from masks import Mask
+from masks import Mask, SegmentationMask
 
 # TODO
 # - implement "interpolate" for fields other than strength
@@ -127,6 +127,7 @@ class KeyFrame:
         "strength",
         "steps",
         "masks",
+        "seg_masks",
         "transform",
         "correct_colors",
         "set_color_reference"
@@ -144,6 +145,7 @@ class KeyFrame:
         strength,
         steps,
         masks,
+        seg_masks,
         transform,
         correct_colors,
         set_color_reference
@@ -182,6 +184,8 @@ class KeyFrame:
         if (len(masks) > 0):
             assert(input_image.in_video_mode())
         self.masks = masks
+
+        self.seg_masks = seg_masks
 
         assert(transform is None or isinstance(transform, Transform2D))
         self.transform = transform
@@ -236,6 +240,11 @@ class KeyFrame:
         else:
             masks = [Mask(**mask) for mask in dict["masks"]]
 
+        if "seg_masks" not in dict or len(dict["seg_masks"]) == 0:
+            seg_masks = []
+        else:
+            seg_masks = [SegmentationMask(**seg_mask) for seg_mask in dict["seg_masks"]]
+
         if "transform" not in dict or dict["transform"] == "none":
             transform = None
         else:
@@ -266,6 +275,7 @@ class KeyFrame:
             strength=strength,
             steps=steps,
             masks=masks,
+            seg_masks=seg_masks,
             transform=transform,
             correct_colors=correct_colors,
             set_color_reference=set_color_reference
@@ -378,6 +388,11 @@ class KeyFrame:
         else:
             dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
 
+        if "seg_masks" not in dict or len(dict["seg_masks"]) == 0:
+            seg_masks = prev_keyframe.seg_masks
+        else:
+            seg_masks = [SegmentationMask(**seg_mask) for seg_mask in dict["seg_masks"]]
+
         # The active transform (applied to each frame) defaults to that of the previous keyframe.
         if "transform" not in dict or dict["transform"] == "same":
             transform = prev_keyframe.transform
@@ -414,6 +429,7 @@ class KeyFrame:
             strength=dict["strength"],
             steps=dict["steps"],
             masks=dict["masks"],
+            seg_masks=seg_masks,
             transform=transform,
             correct_colors=correct_colors,
             set_color_reference=set_color_reference,

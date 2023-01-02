@@ -246,3 +246,7 @@ class DreamState:
         # Currently the case where n_prev_masks != n_next_masks and both are greater than zero is
         # not supported.
         assert(False), "Currently you have to create or remove all masks at once."
+
+    def get_seg_masks(self):
+        seg_masks = self.next_keyframe.seg_masks
+        return seg_masks

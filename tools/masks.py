@@ -16,7 +16,7 @@ segmodel = CLIPDensePredT(version='ViT-B/16', reduce_dim=64)
 segmodel.eval()
 
 # non-strict, because we only stored decoder weights (not CLIP weights)
-segmodel.load_state_dict(torch.load('../clipseg/weights/rd64-uni.pth', map_location=torch.device('cpu')), strict=False);
+segmodel.load_state_dict(torch.load('clipseg/weights/rd64-uni.pth', map_location=torch.device('cpu')), strict=False);
 
 
 class Mask:
@@ -33,9 +33,12 @@ class Mask:
 class SegmentationMask:
     __slots__ = ["cls", "mask_val"]
 
-    def __init__(self, cls:str, mask_val:bool):
+    def __init__(self, cls:str, mask_val:str):
         self.cls = cls
-        self.mask_val = mask_val
+        if mask_val == "mask":
+            self.mask_val = True
+        elif mask_val == "antimask":
+            self.mask_val = False
 
 
 def generate_mask_array(width, height, circles):
@@ -72,7 +75,6 @@ def generate_mask_array(width, height, circles):
     print(result.shape)
 
     im = Image.fromarray(result)
-    im.show()
 
     return result
 
@@ -100,31 +102,19 @@ def run_class_segmentation(img_data, segmentation_class, width, height):
     # predict
     with torch.no_grad():
         pred = segmodel(img.repeat(1,1,1,1), [segmentation_class.cls])[0][0]
-        out_pred = []
         pred = np.asarray(np.squeeze(pred))
-        print(pred.shape)
         kernel  = np.ones((5, 5), np.uint8)
         dilated = cv2.dilate(pred, kernel, iterations=1)
         if segmentation_class.mask_val:
             pred = (dilated < 0.5)
         else:
             pred = (dilated > 0.5)
-        #pred_w_image = img_grayscale * pred
-        pred_w_image = pred
-        out_pred.append(pred_w_image)
-        mask = Image.fromarray(np.asarray(pred_w_image * 255).astype(np.int8))
-        #mask = Image.fromarray(np.asarray(pred_w_image.squeeze() * 255).astype(np.int8))
-        #mask = Image.fromarray(np.asarray(pred) * 255)
+        mask = Image.fromarray(np.asarray(pred * 255).astype(np.int8))
         mask = mask.resize((width, height))
     
     # visualize prediction
     _, ax = plt.subplots(1, 5, figsize=(15, 4))
     [a.axis('off') for a in ax.flatten()]
-    ax[0].imshow(img_data)
-    #[ax[i+1].imshow(torch.sigmoid(out_preds[i])) for i in range(4)];
-    ax[1].imshow(out_pred[0])
-    
-    mask.show()
 
     mask = np.asarray(mask)
     mask = (mask == 255)
@@ -138,13 +128,11 @@ def generate_segmentation_array(rgb_array, segmentation_classes: List[Segmentati
         res = run_class_segmentation(rgb_array, cls, width, height)
         masks.append(res)
 
-    for mask in masks:
-        # compile them all into one
-        pass
+    #TODO combine each mask in some way that makes sense
+
     return masks[0]
 
 def apply_segmentation_array(mask_array, segmentation_array):
-    print(segmentation_array)
     new_arr = mask_array*segmentation_array
     return new_arr
     
@@ -161,10 +149,7 @@ def generate_mask_image(circles, segmentation_classes, infile):
     mask_array = generate_mask_array(width, height, circles)
     segmentation_array = generate_segmentation_array(rgb_PIL, segmentation_classes, width, height)
     mask_array = apply_segmentation_array(mask_array,segmentation_array)
-    #mask_array = np.flip(np.swapaxes(mask_array, 0, 1), 0)
     mask_array = np.expand_dims(mask_array, axis=2)
-    print(rgb_array.shape)
-    print(mask_array.shape)
     image_data = np.concatenate((rgb_array, mask_array), axis=2)
     return Image.fromarray(image_data, 'RGBA')
 
@@ -202,6 +187,6 @@ if __name__ == "__main__":
 
     print(circles[0])
 
-    segmentation_classes = [SegmentationMask("a person", False)]
+    segmentation_classes = [SegmentationMask("a person", "antimask")]
 
     save_mask_image(circles, segmentation_classes, "../seance/frames/IM0000.png", 'mask.png')
