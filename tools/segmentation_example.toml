@@ -1,0 +1,36 @@
+in_dir = "seance/frames/"
+mask_dir = "seance/masks/"
+out_dir = "outputs/seance"
+width = 960
+height = 540
+
+[prompts]
+mushroom1 = "Mushrooms, a beautiful swirling painting of a group sitting around a table in candlelight in an enchanted room, by android jones, alex grey, chris dyer, and aaron brooks"
+ghosts1 = "Ghost Haunting, a beautiful swirling painting of a group sitting around a table in candlelight in an enchanted room, surrounded by ghosts and suspicious shadows, by android jones, alex grey, chris dyer, and aaron brooks"
+
+[[keyframes]]
+frame = 1
+input_image = "IM{0000}.png"
+seed = "random"
+prompt = "ghosts1"             
+scale = 8.0
+strength = 0.65
+steps = 50
+masks = [
+    { center = [0.512, 0.39], radius = 0 } # Right now you do need to specify that masks exist (can have radius zero) in order for segmentation to be run
+]
+seg_masks = [{cls="a person", mask_val="antimask"}]
+
+[[keyframes]]
+prompt = "ghosts1"
+duration = 10
+seed = "random"
+seg_masks = [{cls="a person", mask_val="antimask"}] # "antimask" to mask everything but the pixels classified as the target class
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 10
+strength = 0.65
+seed = 1296655599
+prompt = "mushroom1"
+seg_masks = [{cls="a person", mask_val="mask"}] # "mask" to mask only the pixels classified as the target class
