@@ -1,0 +1,3 @@
+[submodule "clipseg"]
+	path = clipseg
+	url = git@github.com:timojl/clipseg.git
