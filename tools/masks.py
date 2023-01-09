@@ -88,7 +88,6 @@ def run_class_segmentation(img_data, segmentation_class, width, height):
 
     transform_grayscale = transforms.Compose([
         transforms.ToTensor(),
-        #transforms.Resize((352, 352)),
         transforms.Resize((704, 704)),
     ])
 
@@ -96,7 +95,6 @@ def run_class_segmentation(img_data, segmentation_class, width, height):
 
     img_data = ImageOps.grayscale(img_data)
     img_grayscale = transform_grayscale(img_data)
-    print(img_grayscale.shape)
     Image.fromarray(np.asarray(img_grayscale.squeeze()).astype(np.int8))
     
     # predict
@@ -129,8 +127,11 @@ def generate_segmentation_array(rgb_array, segmentation_classes: List[Segmentati
         masks.append(res)
 
     #TODO combine each mask in some way that makes sense
+    outmask = masks[0]
+    for mask in masks[1:]:
+        outmask = np.logical_or(outmask, mask)
 
-    return masks[0]
+    return outmask
 
 def apply_segmentation_array(mask_array, segmentation_array):
     new_arr = mask_array*segmentation_array
@@ -181,12 +182,12 @@ if __name__ == "__main__":
     radius = 0.25
 
     circles = [
-        Mask(center, radius),
-        Mask(np.array([0.7, 0.8]), 0.2)
+        #Mask(center, radius),
+        #Mask(np.array([0.7, 0.8]), 0.2)
     ]
 
-    print(circles[0])
 
-    segmentation_classes = [SegmentationMask("a person", "antimask")]
+    #segmentation_classes = [SegmentationMask("a person", "antimask"), SegmentationMask("a table", "antimask")]
+    segmentation_classes = [SegmentationMask("a framed mirror", "antimask")]
 
-    save_mask_image(circles, segmentation_classes, "../seance/frames/IM0000.png", 'mask.png')
+    save_mask_image(circles, segmentation_classes, "seance/frames/IM0000.png", 'mask.png')
