@@ -3,6 +3,7 @@ import subprocess
 from pathlib import Path
 from dream_schedule import DreamSchedule
 from masks import save_mask_image
+import os
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -36,6 +37,12 @@ if __name__ == "__main__":
 
     # General Options
     parser.add_argument(
+        "--version",
+        type=str,
+        help="When specified, this string will be appended to the output directory and command file.",
+        default=None
+    )
+    parser.add_argument(
         "-o",
         "--outfile",
         type=str,
@@ -53,6 +60,13 @@ if __name__ == "__main__":
         "--end_at",
         type=int,
         help="The last frame to render (1-indexed).",
+        default=None
+    )
+    parser.add_argument(
+        "-n",
+        "--n_frames",
+        type=int,
+        help="The number of frames to render (ignoring stride).",
         default=None
     )
     parser.add_argument(
@@ -78,7 +92,7 @@ if __name__ == "__main__":
         default=23
     )
 
-    # Parse args.
+    # Parse args and do sanity checks.
     args = parser.parse_args()
     if args.commands is False and args.masks is False and args.video is False:
         print("No commands specified! Use -c to generate commands, -m to generate masks, or -v to generate a video.")
@@ -86,21 +100,34 @@ if __name__ == "__main__":
     if args.video and (args.commands or args.masks):
         print("The video option must be used on its own.")
         exit(0)
+
+    # Construct some paths.
+    version_string = ""
+    if args.version:
+        version_string = "_" + args.version
     if args.outfile is None:
         assert(args.config_file.endswith(".toml"))
         if args.commands:
-            args.outfile = args.config_file[:-4] + "txt"
+            args.outfile = args.config_file[:-5] + version_string + ".txt"
         else:
-            args.outfile = args.config_file[:-4] + "mp4"
+            args.outfile = args.config_file[:-5] + version_string + ".mp4"
 
     # Build the dream schedule.
     schedule = DreamSchedule.from_file(args.config_file)
+    if args.version:
+        schedule.out_dir = schedule.out_dir.parent / (schedule.out_dir.name + version_string)
 
     # Determine the range of frames to render.
     if args.start_at is None:
         args.start_at = schedule.keyframes[0].frame
     if args.end_at is None:
-        args.end_at = schedule.keyframes[-1].frame
+        if args.n_frames is None:
+            args.end_at = schedule.keyframes[-1].frame
+        else:
+            # Minus one since we include args.end_at in the range.
+            args.end_at = args.start_at + args.n_frames - 1
+    elif args.n_frames is not None:
+        print("Warning: both end_at and n_frames were specified. Ignoring n_frames.")
 
     # Initialize state.
     frame_names = [] # records the filenames of all generated frames
@@ -129,16 +156,16 @@ if __name__ == "__main__":
         # Generate the mask if requested.
         if args.masks:
             masks = frame.get_masks()
+            seg_classes = frame.get_seg_masks()
             if len(masks) > 0:
                 image_file = frame.input_image_path()
                 mask_file = frame.mask_path()
                 print(f"generating mask for frame {frame.frame_idx} ({mask_file})")
                 save_mask_image(
-                    schedule.width,
-                    schedule.height,
-                    masks,
-                    image_file,
-                    mask_file
+                    circles=masks,
+                    segmentation_classes=seg_classes,
+                    infile=image_file,
+                    outfile=mask_file
                 )
 
     # Print a summary if we wrote commands.
@@ -155,12 +182,13 @@ if __name__ == "__main__":
         prefix = Path("../" * n_dirs)
         with open(frame_file, 'w') as outfile:
             for frame in frame_names:
-                outfile.write(f"file '{prefix / frame}'\n")
+                if os.path.isfile(frame):
+                    outfile.write(f"file '{prefix / frame}'\n")
 
         # Generate the video. We run an ffmpeg command like the following.
         # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
         args = [
-            "ffmpeg",
+            "/usr/bin/ffmpeg",
             "-r",
             str(args.framerate),
             "-f",
