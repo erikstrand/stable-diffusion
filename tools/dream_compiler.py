@@ -3,6 +3,7 @@ import subprocess
 from pathlib import Path
 from dream_schedule import DreamSchedule
 from masks import save_mask_image
+import os
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -155,16 +156,16 @@ if __name__ == "__main__":
         # Generate the mask if requested.
         if args.masks:
             masks = frame.get_masks()
+            seg_classes = frame.get_seg_masks()
             if len(masks) > 0:
                 image_file = frame.input_image_path()
                 mask_file = frame.mask_path()
                 print(f"generating mask for frame {frame.frame_idx} ({mask_file})")
                 save_mask_image(
-                    schedule.width,
-                    schedule.height,
-                    masks,
-                    image_file,
-                    mask_file
+                    circles=masks,
+                    segmentation_classes=seg_classes,
+                    infile=image_file,
+                    outfile=mask_file
                 )
 
     # Print a summary if we wrote commands.
@@ -181,12 +182,13 @@ if __name__ == "__main__":
         prefix = Path("../" * n_dirs)
         with open(frame_file, 'w') as outfile:
             for frame in frame_names:
-                outfile.write(f"file '{prefix / frame}'\n")
+                if os.path.isfile(frame):
+                    outfile.write(f"file '{prefix / frame}'\n")
 
         # Generate the video. We run an ffmpeg command like the following.
         # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
         args = [
-            "ffmpeg",
+            "/usr/bin/ffmpeg",
             "-r",
             str(args.framerate),
             "-f",

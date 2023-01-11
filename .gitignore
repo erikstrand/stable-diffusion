@@ -199,3 +199,9 @@ models/ldm/stable-diffusion-v1/model.sha256
 
 # GFPGAN model files
 gfpgan/
+
+# Filetypes we probably don't want
+*.toml
+*.txt
+*.zip
+*.png
