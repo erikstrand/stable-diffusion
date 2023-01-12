@@ -9,6 +9,7 @@ ghosts = "ghosts swirl around a seance room, psychedelic digital painting, by ha
 
 
 # ==================================================
+# Seance 1
 [[keyframes]]
 frame = 1
 input_image = "seance1/IM{0001}.png"
@@ -19,4 +20,4 @@ strength = 0.7
 scale = 7.0
 
 [[keyframes]]
-duration = 10
+frame = 158
