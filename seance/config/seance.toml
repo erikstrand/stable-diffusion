@@ -6,6 +6,7 @@ height = 540
 
 [prompts]
 ghosts = "ghosts swirl around a seance room, psychedelic digital painting, by hannah yata, by evgeny lushpin"
+candles = "a dungeon with hundreds of ancient dripping candles, piles of wax, dark cinematic lighting, flickering candlelight, intricate details, by inessa garmash, by esao andrews"
 
 
 # ==================================================
@@ -14,9 +15,9 @@ ghosts = "ghosts swirl around a seance room, psychedelic digital painting, by ha
 frame = 1
 input_image = "seance1/IM{0001}.png"
 input_mask = "seance1/masks_sum/frame_{000001}.png"
-prompt = "ghosts"
-seed = 1234
-strength = 0.7
+prompt = "candles"
+seed = 61305
+strength = 0.6
 scale = 7.0
 
 [[keyframes]]
