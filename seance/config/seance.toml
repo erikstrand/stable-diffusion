@@ -1,5 +1,6 @@
 in_dir = "seance/frames"
 out_dir = "seance/outputs"
+mask_in_dir = "seance/masks"
 width = 960
 height = 540
 
@@ -11,6 +12,7 @@ ghosts = "ghosts swirl around a seance room, psychedelic digital painting, by ha
 [[keyframes]]
 frame = 1
 input_image = "seance1/IM{0001}.png"
+input_mask = "seance1/masks_sum/frame_{000001}.png"
 prompt = "ghosts"
 seed = 1234
 strength = 0.7
