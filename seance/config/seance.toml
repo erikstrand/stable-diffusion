@@ -1,0 +1,20 @@
+in_dir = "seance/frames"
+out_dir = "seance/outputs"
+width = 960
+height = 540
+
+[prompts]
+ghosts = "ghosts swirl around a seance room, psychedelic digital painting, by hannah yata, by evgeny lushpin"
+
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "seance1/IM{0001}.png"
+prompt = "ghosts"
+seed = 1234
+strength = 0.7
+scale = 7.0
+
+[[keyframes]]
+duration = 10
