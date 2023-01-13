@@ -90,7 +90,6 @@ if __name__ == "__main__":
         span = re_res.span()
         path_start = args.input_pattern[:span[0]]
         path_end = args.input_pattern[span[1]:]
-    print("n digits", n_digits)
 
     # Deprecated for now (Jan 2023), might add back later.
     """
