@@ -1,7 +1,22 @@
 import argparse
+import numpy as np
 import re
 from PIL import Image
 from pathlib import Path
+
+
+def image_to_array(image):
+    # convert a PIL image to a numpy array
+    image_array = np.array(image)
+    return np.swapaxes(np.flip(image_array, 0), 0, 1)
+
+
+def array_to_image(array):
+    # convert a numpy array to a PIL image
+    array = np.flip(np.swapaxes(array, 0, 1), 0)
+    format = 'RGB' if array.shape[2] == 3 else 'RGBA'
+    return Image.fromarray(array, format)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -119,9 +134,32 @@ if __name__ == "__main__":
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
 
+    # Load the background image.
+    background_pil = Image.open(background_image)
+    background_np = image_to_array(background_pil)
+
     # Paste the background image into the masked region of each frame.
-    background = Image.open(background_image)
     for i in range(len(frames)):
-        frame = Image.open(frames[i])
-        mask = Image.open(masks[i])
-        frame.save(outputs[i])
+        # Print progress.
+        print(f"Processing {frames[i]}")
+
+        # Load the frame and mask.
+        frame_pil = Image.open(frames[i])
+        mask_pil = Image.open(masks[i])
+        frame_np = image_to_array(frame_pil)
+        mask_np = image_to_array(mask_pil)
+
+        # The frame, mask, and backgruond image must be the same size.
+        assert(frame_np.shape[0:2] == mask_np.shape[0:2])
+        assert(frame_np.shape[0:2] == background_np.shape[0:2])
+        # The mask must have an alpha channel.
+        assert(len(mask_np.shape) == 3)
+        assert(mask_np.shape[2] == 4)
+
+        # Paste the background image into the masked region of the frame.
+        alpha = mask_np[:, :, 3].reshape(mask_np.shape[0], mask_np.shape[1], 1) / 255
+        frame_np[:,:,0:3] = alpha * frame_np[:,:,0:3] + (1 - alpha) * background_np[:,:,0:3]
+
+        # Save the result.
+        frame_pil = array_to_image(frame_np)
+        frame_pil.save(outputs[i])
