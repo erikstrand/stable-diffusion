@@ -30,7 +30,7 @@ class Inpaint(Img2Img):
                 f">> Using recommended DDIM sampler for inpainting."
             )
             sampler = DDIMSampler(self.model, device=self.model.device)
-
+        
         sampler.make_schedule(
             ddim_num_steps=steps, ddim_eta=ddim_eta, verbose=False
         )
@@ -38,14 +38,11 @@ class Inpaint(Img2Img):
         mask_image = mask_image[0][0].unsqueeze(0).repeat(4,1,1).unsqueeze(0)
         mask_image = repeat(mask_image, '1 ... -> b ...', b=1)
 
-        print(f"init_image: {init_image.mean()}")
-        print(type(self.model))
         scope = choose_autocast(self.precision)
         with scope(self.model.device.type):
             self.init_latent = self.model.get_first_stage_encoding(
                 self.model.encode_first_stage(init_image)
             ) # move to latent space
-        print(f"setting init_latent: {self.init_latent.mean()}")
 
         t_enc   = int(strength * steps)
         uc, c   = conditioning
@@ -54,16 +51,12 @@ class Inpaint(Img2Img):
 
         @torch.no_grad()
         def make_image(x_T):
-            print(f"t_enc: {t_enc}")
-            print(f"init_latent mean: {self.init_latent.mean()}")
-            print(f"x_T mean: {x_T.mean()}")
             # encode (scaled latent)
             z_enc = sampler.stochastic_encode(
                 self.init_latent,
                 torch.tensor([t_enc]).to(self.model.device),
                 noise=x_T
             )
-            print(f"z enc mean: {z_enc.mean()}")
 
             # to replace masked area with latent noise, weighted by inpaint_replace strength
             if inpaint_replace > 0.0:
@@ -84,8 +77,10 @@ class Inpaint(Img2Img):
                 mask                       = mask_image,
                 init_latent                = self.init_latent
             )
-            print(f"output mean: {samples.mean()}")
 
             return self.sample_to_image(samples)
 
         return make_image
+
+
+
