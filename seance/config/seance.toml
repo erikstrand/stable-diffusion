@@ -15,10 +15,9 @@ candles = "a dungeon with hundreds of ancient dripping candles, piles of wax, da
 frame = 1
 input_image = "seance1_background.png"
 prompt = "ghosts"
-seed = 61305
+seed = "random"
 strength = 0.5
 scale = 7.0
 
 [[keyframes]]
 frame = 158
-seed = 73425
