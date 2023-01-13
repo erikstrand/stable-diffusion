@@ -33,6 +33,16 @@
 
 - need to look more closely
 - but probably will change anyway with masks and such
+- 22: cool tree root texture
+- 24: similar but ghostier
+- 28: preserves the room well
+- 29: great texture
+- 37: also good texture
+- 42: tentacle-like texture
+- 43: ethereal ectoplasm texture
+- 45: similar but more colorful
+- 49: evil forest
+- 50: dense ghost texture
 - 104 is interesting
 
 ## 012 Seed Search for Ghost Prompt
