@@ -82,7 +82,7 @@ class Generator():
                     image_callback(image, seed, first_seed=first_seed)
                 seed = self.new_seed()
         return results
-    
+
     def sample_to_image(self,samples):
         """
         Returns a function returning an image derived from the prompt and the initial image
@@ -99,16 +99,19 @@ class Generator():
         return Image.fromarray(x_sample.astype(np.uint8))
 
     def generate_initial_noise(self, seed, width, height):
+        print("Generating initial noise")
         initial_noise = None
         if self.variation_amount > 0 or len(self.with_variations) > 0:
             # use fixed initial noise plus random noise per iteration
             seed_everything(seed)
             initial_noise = self.get_noise(width,height)
+            print(f"  initial noise uses seed {seed}: {initial_noise.mean().item()}")
             for v_seed, v_weight in self.with_variations:
                 seed = v_seed
                 seed_everything(seed)
                 next_noise = self.get_noise(width,height)
                 initial_noise = self.slerp(v_weight, initial_noise, next_noise)
+                print(f"  slerping to {seed} ({next_noise.mean().item()}) with weight {v_weight}: {initial_noise.mean().item()}")
             if self.variation_amount > 0:
                 random.seed() # reset RNG to an actually random state, so we can get a random seed for variations
                 seed = random.randrange(0,np.iinfo(np.uint32).max)
@@ -123,11 +126,11 @@ class Generator():
         (txt2img) or from the latent image (img2img, inpaint)
         """
         raise NotImplementedError("get_noise() must be implemented in a descendent class")
-    
+
     def get_perlin_noise(self,width,height):
         fixdevice = 'cpu' if (self.model.device.type == 'mps') else self.model.device
         return torch.stack([rand_perlin_2d((height, width), (8, 8), device = self.model.device).to(fixdevice) for _ in range(self.latent_channels)], dim=0).to(self.model.device)
-    
+
     def new_seed(self):
         self.seed = random.randrange(0, np.iinfo(np.uint32).max)
         return self.seed
@@ -178,5 +181,3 @@ class Generator():
             print(f'** creating directory {dirname}')
             os.makedirs(dirname, exist_ok=True)
         image.save(filepath,'PNG')
-
-        

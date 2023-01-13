@@ -100,12 +100,12 @@ class KSampler(Sampler):
         )
         self.sigmas = self.model_sigmas
         #self.sigmas = self.karras_sigmas
-        
+
     # ALERT: We are completely overriding the sample() method in the base class, which
     # means that inpainting will not work. To get this to work we need to be able to
     # modify the inner loop of k_heun, k_lms, etc, as is done in an ugly way
     # in the lstein/k-diffusion branch.
-    
+
     @torch.no_grad()
     def decode(
             self,
@@ -136,8 +136,9 @@ class KSampler(Sampler):
     # this is a no-op, provided here for compatibility with ddim and plms samplers
     @torch.no_grad()
     def stochastic_encode(self, x0, t, use_original_steps=False, noise=None):
+        print(f"stochastic encode: {x0.mean()}, {noise.mean()}")
         return x0
-    
+
     # Most of these arguments are ignored and are only present for compatibility with
     # other samples
     @torch.no_grad()
@@ -237,7 +238,7 @@ class KSampler(Sampler):
         # terrible, confusing names here
         steps = self.ddim_num_steps
         t_enc = self.t_enc
-        
+
         # sigmas is a full steps in length, but t_enc might
         # be less. We start in the middle of the sigma array
         # and work our way to the end after t_enc steps.
@@ -268,7 +269,7 @@ class KSampler(Sampler):
             return x_T + x
         else:
             return x
-        
+
     def prepare_to_sample(self,t_enc):
         self.t_enc      = t_enc
         self.model_wrap = None
@@ -280,4 +281,3 @@ class KSampler(Sampler):
         Overrides parent method to return the q_sample of the inner model.
         '''
         return self.model.inner_model.q_sample(x0,ts)
-
