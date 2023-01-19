@@ -1,0 +1,26 @@
+in_dir = "projects/playa/inputs"
+out_dir = "projects/playa/outputs"
+mask_in_dir = "projects/playa" # not used
+width = 960
+height = 540
+
+[prompts]
+sandstorm = "a technicolor sandstorm on a desert planet, cinematic lighting, psychedelic digital painting, by hannah yata, by evgeny lushpin"
+
+
+# ==================================================
+# Seance 1
+[[keyframes]]
+frame = 1
+input_image = "playa_50_percent.jpg"
+prompt = "sandstorm"
+seed = 562945
+strength = 0.6
+scale = 7.0
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+duration = 50
