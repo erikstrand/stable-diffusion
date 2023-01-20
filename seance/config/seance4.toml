@@ -34,8 +34,8 @@ input_image = "IM0001.png"
 input_mask = "frame_000001.png"
 prompt = "flowers"
 seed = 3674185847
-strength = 0.7
-scale = 7.0
+strength = 0.8
+scale = 8.0
 
 [[keyframes]]
 frame = 476
