@@ -26,7 +26,7 @@ if __name__ =='__main__':
     success,image = vidcap.read()
 
     # save 
-    c = 0
+    c = 1
     while success:
         
         # skip frames 
