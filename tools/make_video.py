@@ -52,8 +52,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_pattern",
         type=str,
-        help="The names of the input frames, with the number of digits after '%', e.g. frame_%6.png (default) or IM%4.jpg",
-        default="frame_%6.png"
+        # note: can't put % in the string or argparse gets confused
+        help="The names of the input frames, with the number of digits after the percent symbol, e.g. frame_#6.png (default) or IM#4.jpg",
+        default="frame_#6.png"
     )
     parser.add_argument(
         "-i",

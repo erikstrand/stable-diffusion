@@ -112,9 +112,10 @@ if __name__ == "__main__":
     # Parse the mask filename pattern.
     re_res = re.search(r"%(\d+)", args.mask_pattern)
     if re_res is None:
-        print("Invalid input pattern, you must include '%' followed by a number to indicate the format of the frame number")
-        exit(0)
+        static_mask = True
+        mask_file = args.mask_pattern
     else:
+        static_mask = False
         mask_n_digits = int(re_res.group(1))
         span = re_res.span()
         mask_file_start = args.mask_pattern[:span[0]]
@@ -125,10 +126,13 @@ if __name__ == "__main__":
         str(in_dir / f"{frame_file_start}{str(i).zfill(frame_n_digits)}{frame_file_end}")
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
-    masks = [
-        str(mask_dir / f"{mask_file_start}{str(i).zfill(mask_n_digits)}{mask_file_end}")
-        for i in range(args.start_at, args.end_at + 1, args.stride)
-    ]
+    if static_mask:
+        masks = [ str(mask_dir / mask_file) for i in range(args.start_at, args.end_at + 1, args.stride) ]
+    else:
+        masks = [
+            str(mask_dir / f"{mask_file_start}{str(i).zfill(mask_n_digits)}{mask_file_end}")
+            for i in range(args.start_at, args.end_at + 1, args.stride)
+        ]
     outputs = [
         str(out_dir / f"{frame_file_start}{str(i).zfill(frame_n_digits)}{frame_file_end}")
         for i in range(args.start_at, args.end_at + 1, args.stride)
