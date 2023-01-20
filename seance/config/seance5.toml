@@ -1,6 +1,6 @@
 in_dir = "seance/frames2/seance5"
 out_dir = "seance/outputs/seance5"
-mask_in_dir = "seance/outputs/seance5_0/masks"
+mask_in_dir = "seance/outputs/seance5_1/masks"
 width = 960
 height = 576
 
@@ -18,10 +18,10 @@ seed = 423957
 strength = 0.7
 scale = 7.0
 #masks = [
-#    { center = [1.05, 0.0], radius = 0.35, sigmoid_k = 0.2 },
-#    { center = [1.05, 0.2], radius = 0.35, sigmoid_k = 0.2 },
-#    { center = [1.05, 0.4], radius = 0.35, sigmoid_k = 0.2 },
-#    { center = [0.85, -0.3], radius = 0.45, sigmoid_k = 0.2 }
+#    { center = [1.0, 0.0], radius = 0.35, sigmoid_k = 0.2 },
+#    { center = [1.0, 0.2], radius = 0.35, sigmoid_k = 0.2 },
+#    { center = [1.0, 0.4], radius = 0.35, sigmoid_k = 0.2 },
+#    { center = [0.8, -0.3], radius = 0.45, sigmoid_k = 0.2 }
 #]
 
 [[keyframes]]
