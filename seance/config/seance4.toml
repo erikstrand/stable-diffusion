@@ -1,6 +1,6 @@
 in_dir = "seance/frames2/seance4"
 out_dir = "seance/outputs/seance4"
-mask_in_dir = "seance/masks"
+mask_in_dir = "seance/outputs/seance4_1/masks"
 width = 960
 height = 576
 
@@ -28,19 +28,15 @@ flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark 
 
 
 # ==================================================
-# Seance 2
 [[keyframes]]
 frame = 1
 input_image = "IM0001.png"
+input_mask = "frame_000001.png"
 prompt = "flowers"
-seed = 345790
+seed = 3674185847
 strength = 0.7
 scale = 7.0
-masks = [{ center = [0.2, 0.75], radius = 0.2, sigmoid_k = 0.2 }]
 
 [[keyframes]]
-duration = 1
-seed = "random"
-
-[[keyframes]]
-frame = 100
+frame = 476
+seed = 1130604459
