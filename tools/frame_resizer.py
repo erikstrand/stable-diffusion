@@ -96,6 +96,14 @@ if __name__ == "__main__":
         help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
         default=1
     )
+    parser.add_argument(
+        "--downscale",
+        type=int,
+        nargs='+',
+        help="The files are scaled to this resolution at first, and resized. ",
+        default=None
+    )
+
 
     args = parser.parse_args()
 
@@ -127,6 +135,8 @@ if __name__ == "__main__":
     for i in range(len(input_files)):
         # Load the frame.
         frame_pil = Image.open(input_files[i])
+        if args.downscale is not None:
+	        frame_pil = frame_pil.resize((args.downscale[0], args.downscale[1]))
         frame_np = image_to_array(frame_pil)
 
         # Figure out the new size.
