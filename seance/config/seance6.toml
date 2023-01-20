@@ -1,11 +1,11 @@
 in_dir = "seance/frames2/seance6"
 out_dir = "seance/outputs/seance6"
-mask_in_dir = "seance/outputs/seance6_0/masks"
+mask_in_dir = "seance/outputs/seance6_1/masks"
 width = 960
 height = 576
 
 [prompts]
-blue_bricks = "a tear in the wallpaper reveals a blue brick wall, by killian eng, by kim jung gi, by esao andrews"
+blue_bricks = "a blue brick wall, ultra realistic, cinematic lighting, by killian eng, by kim jung gi, by esao andrews"
 
 
 # ==================================================
