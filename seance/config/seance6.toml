@@ -1,0 +1,27 @@
+in_dir = "seance/frames2/seance6"
+out_dir = "seance/outputs/seance6"
+mask_in_dir = "seance/outputs/seance6_0/masks"
+width = 960
+height = 576
+
+[prompts]
+blue_bricks = "a tear in the wallpaper reveals a blue brick wall, by killian eng, by kim jung gi, by esao andrews"
+
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "IM0001.png"
+input_mask = "frame_000001.png"
+prompt = "blue_bricks"
+seed = 345790
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100
