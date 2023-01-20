@@ -1,0 +1,27 @@
+in_dir = "seance/frames2/seance2"
+out_dir = "seance/outputs/seance2"
+mask_in_dir = "seance/masks"
+width = 960
+height = 576
+
+[prompts]
+picture = "a framed classical painting of Hilda af Klint hangs on a wall, museum, detailed photograph, cinematic lighting, 50mm lens, ultra realistic"
+
+
+# ==================================================
+# Seance 2
+[[keyframes]]
+frame = 1
+input_image = "IM0001.png"
+prompt = "picture"
+seed = 345790
+strength = 0.7
+scale = 7.0
+masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100

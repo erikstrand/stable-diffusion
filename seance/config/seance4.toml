@@ -1,0 +1,27 @@
+in_dir = "seance/frames2/seance4"
+out_dir = "seance/outputs/seance4"
+mask_in_dir = "seance/masks"
+width = 960
+height = 576
+
+[prompts]
+flowers = "a vase with white flowers, ultra realistic photo, dark cinematic lighting, highly detailed, 50mm lens"
+
+
+# ==================================================
+# Seance 2
+[[keyframes]]
+frame = 1
+input_image = "IM0001.png"
+prompt = "flowers"
+seed = 345790
+strength = 0.7
+scale = 7.0
+masks = [{ center = [0.2, 0.75], radius = 0.2, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100
