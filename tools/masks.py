@@ -13,6 +13,16 @@ class Mask:
         self.sigmoid_k = float(sigmoid_k)
         self.invert = bool(invert)
 
+    @classmethod
+    def from_dict(cls, dict):
+        invert = False
+        if "invert" in dict:
+            if dict["invert"] == "true":
+                invert = True
+            else:
+                assert(dict["invert"] == "false")
+        return cls(dict["center"], dict["radius"], float(dict["sigmoid_k"]), bool(dict["invert"]))
+
     def __str__(self):
         result = f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
         if self.invert:
