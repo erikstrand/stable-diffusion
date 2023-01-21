@@ -1,12 +1,12 @@
 in_dir = "projects/mindvault/inputs/tests_resized/"
 out_dir = "projects/mindvault/outputs/trees/"
-mask_in_dir = "projects/mindvault/outputs/trees_0/masks"
+mask_in_dir = "projects/mindvault/outputs/trees_3/masks"
 width = 960
 height = 576
 
 [prompts]
 smoke = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
-trees = "a dense forest of psychedelic birch trees, dense colorful neon outlines, psychedelic pastel, intricate details, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a dense jungle of interconnected psychedelic birch trees, thick colorful neon outlines, psychedelic pastel, rim light, intricate details, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, infrared, vibrant colors, vivid colors, volumetric lighting, high contrast"
 
 # ==================================================
 [[keyframes]]
