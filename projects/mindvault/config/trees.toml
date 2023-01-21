@@ -1,0 +1,27 @@
+in_dir = "projects/mindvault/inputs/tests_resized/"
+out_dir = "projects/mindvault/outputs/trees/"
+mask_in_dir = "projects/mindvault/outputs/trees_0/masks"
+width = 960
+height = 576
+
+[prompts]
+smoke = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a dense forest of psychedelic birch trees, dense colorful neon outlines, psychedelic pastel, intricate details, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "Wide_25.png"
+input_mask = "frame_000001.png"
+prompt = "trees"
+seed = 42597987
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.34, 0.25], radius = 0.36, sigmoid_k = 0.075, invert = "true" }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100
