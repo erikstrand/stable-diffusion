@@ -18,7 +18,7 @@ input_mask = "frame_000001.png"
 prompt = "smoke"
 # 4 lamps are still there 3871195581
 seed = 29340857
-strength = 0.7
+strength = 0.5
 scale = 7.0
 #masks = [
 #    { center = [0.43, 0.35], radius = 0.36, sigmoid_k = 0.1, invert = "true" },

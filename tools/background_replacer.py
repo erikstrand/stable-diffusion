@@ -18,21 +18,46 @@ def array_to_image(array):
     return Image.fromarray(array, format)
 
 
+class FrameName:
+    def __init__(self, name_beginning, name_ending, n_digits):
+        self.name_beginning = name_beginning
+        self.name_ending = name_ending
+        self.n_digits = n_digits
+
+    def filename(self, frame_number):
+        if self.n_digits is not None:
+            return self.name_beginning + str(frame_number).zfill(self.n_digits) + self.name_ending
+        else:
+            return self.name_beginning
+
+    @classmethod
+    def from_string(cls, string):
+        re_res = re.search(r"%(\d+)", string)
+        if re_res is None:
+            return cls(string, None, None)
+        else:
+            n_digits = int(re_res.group(1))
+            span = re_res.span()
+            name_beginning = string[:span[0]]
+            name_ending = string[span[1]:]
+            return cls(name_beginning, name_ending, n_digits)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "-i",
-        "--in_dir",
+        "-c",
+        "--copy_dir",
         type=str,
-        help="The path to a directory containing frames.",
+        help="The path to a directory containing frames from which mask regions will be copied.",
         required=True
     )
     parser.add_argument(
-        "-o",
-        "--out_dir",
+        "-p",
+        "--paste_dir",
         type=str,
-        help="Where to store the manipulated frames",
+        help="The path to a directory containing frames into which mask regions will be pasted.",
         required=True
     )
     parser.add_argument(
@@ -43,14 +68,22 @@ if __name__ == "__main__":
         required=True
     )
     parser.add_argument(
-        "-b",
-        "--background_image",
+        "-o",
+        "--out_dir",
         type=str,
-        help="The path to the file that should be pasted in the masked regions of each frame.",
+        help="Where to store the manipulated frames",
         required=True
     )
     parser.add_argument(
-        "--frame_pattern",
+        "--copy_pattern",
+        type=str,
+        help="The names of the input frame files, with the number of digits after 'percent'",
+        # e.g. frame_%6.png (default) or IM%4.jpg
+        # (I can't put % in the help string or argparse gets confused)
+        default="frame_%6.png"
+    )
+    parser.add_argument(
+        "--paste_pattern",
         type=str,
         help="The names of the input frame files, with the number of digits after 'percent'",
         # e.g. frame_%6.png (default) or IM%4.jpg
@@ -64,6 +97,12 @@ if __name__ == "__main__":
         # e.g. frame_%6.png (default) or IM%4.jpg
         # (I can't put % in the help string or argparse gets confused)
         default="frame_%6.png"
+    )
+    parser.add_argument(
+        "--invert_masks",
+        help="Whether to invert the mask before using it.",
+        action="store_true",
+        default=False
     )
     parser.add_argument(
         "-s",
@@ -89,81 +128,70 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Parse paths.
-    in_dir = Path(args.in_dir)
-    out_dir = Path(args.out_dir)
+    copy_dir = Path(args.copy_dir)
+    paste_dir = Path(args.paste_dir)
     mask_dir = Path(args.mask_dir)
-    background_image = Path(args.background_image)
-    assert(in_dir.exists())
-    assert(out_dir.exists())
+    out_dir = Path(args.out_dir)
+    assert(copy_dir.exists())
+    assert(paste_dir.exists())
     assert(mask_dir.exists())
-    assert(background_image.exists())
+    assert(out_dir.exists())
 
-    # Parse the input filename pattern.
-    re_res = re.search(r"%(\d+)", args.frame_pattern)
-    if re_res is None:
-        print("Invalid input pattern, you must include '%' followed by a number to indicate the format of the frame number")
-        exit(0)
-    else:
-        frame_n_digits = int(re_res.group(1))
-        span = re_res.span()
-        frame_file_start = args.frame_pattern[:span[0]]
-        frame_file_end = args.frame_pattern[span[1]:]
-
-    # Parse the mask filename pattern.
-    re_res = re.search(r"%(\d+)", args.mask_pattern)
-    if re_res is None:
-        static_mask = True
-        mask_file = args.mask_pattern
-    else:
-        static_mask = False
-        mask_n_digits = int(re_res.group(1))
-        span = re_res.span()
-        mask_file_start = args.mask_pattern[:span[0]]
-        mask_file_end = args.mask_pattern[span[1]:]
+    # Parse the filename patterns.
+    copy_pattern = FrameName.from_string(args.copy_pattern)
+    paste_pattern = FrameName.from_string(args.paste_pattern)
+    mask_pattern = FrameName.from_string(args.mask_pattern)
+    out_pattern = copy_pattern
 
     # Generate file lists.
-    frames = [
-        str(in_dir / f"{frame_file_start}{str(i).zfill(frame_n_digits)}{frame_file_end}")
+    copy_frames = [
+        str(copy_dir / copy_pattern.filename(i))
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
-    if static_mask:
-        masks = [ str(mask_dir / mask_file) for i in range(args.start_at, args.end_at + 1, args.stride) ]
-    else:
-        masks = [
-            str(mask_dir / f"{mask_file_start}{str(i).zfill(mask_n_digits)}{mask_file_end}")
-            for i in range(args.start_at, args.end_at + 1, args.stride)
-        ]
+    paste_frames = [
+        str(paste_dir / paste_pattern.filename(i))
+        for i in range(args.start_at, args.end_at + 1, args.stride)
+    ]
+    mask_frames = [
+        str(mask_dir / mask_pattern.filename(i))
+        for i in range(args.start_at, args.end_at + 1, args.stride)
+    ]
     outputs = [
-        str(out_dir / f"{frame_file_start}{str(i).zfill(frame_n_digits)}{frame_file_end}")
+        str(out_dir / out_pattern.filename(i))
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
-
-    # Load the background image.
-    background_pil = Image.open(background_image)
-    background_np = image_to_array(background_pil)
 
     # Paste the background image into the masked region of each frame.
-    for i in range(len(frames)):
+    for i in range(len(copy_frames)):
         # Print progress.
-        print(f"Processing {frames[i]}")
+        print(f"Copying from {copy_frames[i]} into {paste_frames[i]} with mask {mask_frames[i]} and saving to {outputs[i]}")
 
-        # Load the frame and mask.
-        frame_pil = Image.open(frames[i])
-        mask_pil = Image.open(masks[i])
-        frame_np = image_to_array(frame_pil)
+        # Load the images.
+        copy_pil = Image.open(copy_frames[i])
+        paste_pil = Image.open(paste_frames[i])
+        mask_pil = Image.open(mask_frames[i])
+
+        # Convert to numpy arrays.
+        copy_np = image_to_array(copy_pil)
+        paste_np = image_to_array(paste_pil)
         mask_np = image_to_array(mask_pil)
 
-        # The frame, mask, and backgruond image must be the same size.
-        assert(frame_np.shape[0:2] == mask_np.shape[0:2])
-        assert(frame_np.shape[0:2] == background_np.shape[0:2])
+        if args.invert_masks:
+            print("inverting mask")
+            mask_np[:, :, 3] = 255 - mask_np[:, :, 3]
+
+        # The copy, paste, and mask images must be the same size.
+        assert(copy_np.shape[0:2] == paste_np.shape[0:2])
+        assert(copy_np.shape[0:2] == mask_np.shape[0:2])
+
         # The mask must have an alpha channel.
         assert(len(mask_np.shape) == 3)
         assert(mask_np.shape[2] == 4)
 
-        # Paste the background image into the masked region of the frame.
+        # copy/paste
         alpha = mask_np[:, :, 3].reshape(mask_np.shape[0], mask_np.shape[1], 1) / 255
-        frame_np[:,:,0:3] = alpha * frame_np[:,:,0:3] + (1 - alpha) * background_np[:,:,0:3]
+        paste_np[:,:,0:3] = alpha * paste_np[:,:,0:3] + (1 - alpha) * copy_np[:,:,0:3]
 
         # Save the result.
-        frame_pil = array_to_image(frame_np)
-        frame_pil.save(outputs[i])
+        paste_pil = array_to_image(paste_np)
+        paste_pil.save(outputs[i])
