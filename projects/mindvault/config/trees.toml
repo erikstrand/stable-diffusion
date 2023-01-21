@@ -17,8 +17,8 @@ input_image = "Wide_25.png"
 input_mask = "frame_000001.png"
 prompt = "trees3"
 seed = 47952032
-strength = 0.7
-scale = 7.0
+strength = 0.8
+scale = 8.0
 #masks = [{ center = [0.34, 0.25], radius = 0.36, sigmoid_k = 0.075, invert = "true" }]
 
 [[keyframes]]
