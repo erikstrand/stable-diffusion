@@ -45,6 +45,7 @@ def generate_mask_array(width, height, masks):
     # dist[i, j] = distance from (i, j) to center
 
     result = np.full(coords.shape[0:2], 255, dtype='uint8')
+    inverted = False
 
     for mask in masks:
         # Rescale center and radius.
@@ -60,10 +61,15 @@ def generate_mask_array(width, height, masks):
         mask_array = mask_array.astype('uint8')
 
         if mask.invert:
-            mask_array = 255 - mask_array
+            #mask_array = 255 - mask_array
+            inverted = True
 
         # Merge with previous masks.
         result = np.minimum(result, mask_array)
+        #result = np.maximum(result, mask_array)
+
+    if inverted:
+        result = 255 - result
 
     return result
 
