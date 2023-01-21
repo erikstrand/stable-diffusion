@@ -1,8 +1,8 @@
-in_dir = "projects/mindvault/inputs/tests/"
+in_dir = "projects/mindvault/inputs/tests_resized/"
 out_dir = "projects/mindvault/outputs/tests/"
 mask_in_dir = "projects/mindvault/outputs/tests_0/masks"
-width = 1920
-height = 1080
+width = 960
+height = 576
 
 [prompts]
 p1 = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
@@ -10,17 +10,18 @@ p1 = "technicolor smoke swirling in the air, psychedelic, by android jones, by e
 # ==================================================
 [[keyframes]]
 frame = 1
-input_image = "Wide_50.png"
-input_mask = "frame_000001.png"
+input_image = "Wide_25.png"
+#input_mask = "frame_000001.png"
 prompt = "p1"
 seed = 34958702
 strength = 0.7
 scale = 7.0
 #masks = [{ center = [0.34, 0.25], radius = 0.34, sigmoid_k = 0.2, invert = "true" }]
+masks = [{ center = [0.34, 0.25], radius = 0.34, sigmoid_k = 0.2 }]
 
 [[keyframes]]
 duration = 1
 seed = "random"
 
 [[keyframes]]
-frame = 100
+duration = 100
