@@ -25,14 +25,16 @@ class FrameName:
         self.n_digits = n_digits
 
     def filename(self, frame_number):
-        return self.name_beginning + str(frame_number).zfill(self.n_digits) + self.name_ending
+        if self.n_digits is not None:
+            return self.name_beginning + str(frame_number).zfill(self.n_digits) + self.name_ending
+        else:
+            return self.name_beginning
 
     @classmethod
     def from_string(cls, string):
         re_res = re.search(r"%(\d+)", string)
         if re_res is None:
-            print("Invalid input pattern, you must include '%' followed by a number to indicate the format of the frame number")
-            exit(0)
+            return cls(string, None, None)
         else:
             n_digits = int(re_res.group(1))
             span = re_res.span()
