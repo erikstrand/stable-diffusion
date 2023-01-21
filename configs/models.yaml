@@ -18,3 +18,9 @@ stable-diffusion-1.4:
     description: Stable Diffusion inference model version 1.4
     width: 512
     height: 512
+parisfusion:
+    config:  configs/stable-diffusion/v1-inference.yaml
+    weights: models/ldm/stable-diffusion-v1/paris_v2_no_prior.ckpt
+    description: Paris dreambooth, finetuned on Stable Diffusion inference model version 1.5
+    width: 512
+    height: 512
