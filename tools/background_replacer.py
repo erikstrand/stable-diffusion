@@ -149,7 +149,7 @@ if __name__ == "__main__":
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
     paste_frames = [
-        str(paste_dir / paste_pattern.filename(i))
+        str(paste_dir / paste_pattern.filename(i + 353))
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
     mask_frames = [
@@ -170,6 +170,12 @@ if __name__ == "__main__":
         copy_pil = Image.open(copy_frames[i])
         paste_pil = Image.open(paste_frames[i])
         mask_pil = Image.open(mask_frames[i])
+
+        # Upscale mask.
+        mw = mask_pil.width
+        mh = mask_pil.height
+        print(f"resizing mask from {mw}x{mh}")
+        mask_pil = mask_pil.resize((4*mw, 4*mh), resample=Image.BICUBIC)
 
         # Convert to numpy arrays.
         copy_np = image_to_array(copy_pil)

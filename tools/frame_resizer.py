@@ -93,6 +93,19 @@ if __name__ == "__main__":
         required=True
     )
     parser.add_argument(
+        "-w",
+        "--width",
+        type=int,
+        help="The desired width.",
+        default=None
+    )
+    parser.add_argument(
+        "--height",
+        type=int,
+        help="The desired height. (Can't use -h cause that's for --help.)",
+        default=None
+    )
+    parser.add_argument(
         "--stride",
         type=int,
         help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
@@ -132,10 +145,16 @@ if __name__ == "__main__":
         frame_np = image_to_array(frame_pil)
 
         # Figure out the new size.
-        width = frame_np.shape[0]
-        height = frame_np.shape[1]
-        new_width = ((width + 63) // 64) * 64
-        new_height = ((height + 63) // 64) * 64
+        if args.width is not None:
+            width = args.width
+        else:
+            width = frame_np.shape[0]
+            new_width = ((width + 63) // 64) * 64
+        if args.height is not None:
+            height = args.height
+        else:
+            height = frame_np.shape[1]
+            new_height = ((height + 63) // 64) * 64
         print(f"{input_files[i]}: {width}x{height} --> {output_files[i]}: {new_width}x{new_height}")
 
         # Generate the canvas.
