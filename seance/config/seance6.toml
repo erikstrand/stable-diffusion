@@ -5,7 +5,7 @@ width = 960
 height = 576
 
 # python tools/dream_compiler.py seance/config/seance6.toml -m --version 2 -s 1 -e 1
-# python tools/dream_compiler.py seance/config/seance6.toml -c --version 2 -s 1 -e 299
+# python tools/dream_compiler.py seance/config/seance6.toml -c --version 3 -s 1 -e 299
 
 [prompts]
 blue_bricks = "a blue brick wall, flickering candles in sconces, dark cinematic lighting, ultra realistic digital painting, by evgeny lushpin, by esao andrews, high contrast, 30mm lens"
@@ -32,20 +32,30 @@ blue_bricks = "a blue brick wall, flickering candles in sconces, dark cinematic 
 # 97 blue bricks through archwa
 # 100 blue bricks!
 
+# 6_2
+# 4 plain bricks, red on left
+# 5 blue bricks, sconce on right
+# 6 grungy bricks, regular window on right
+# 11 stone, foggy
+# 12 stone, medieval window
+# 13 moody room with lots of paintings (no brick)
+# 20 dark brick, window or painting on right
+# 32 dark small bricks, big french/gothic window on right
+# 34 blue brick, eastern painting on righr
+# 92 blue brick, blue light on right
+
+
 # ==================================================
 [[keyframes]]
 frame = 1
 input_image = "frame_05480.png"
 input_mask = "frame_05555_mask.png"
 prompt = "blue_bricks"
-seed = 345790
+seed = 1189732246 # 12
 strength = 0.7
 scale = 7.0
 #masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
 
 [[keyframes]]
-duration = 1
-seed = "random"
-
-[[keyframes]]
-frame = 100
+frame = 299
+seed = 1904964363 # 32

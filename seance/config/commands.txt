@@ -1,3 +1,7 @@
 # Break up the whole video
 ffmpeg -i seance/source_videos/ecumen-sun.mp4 -r 24/1 -vf "scale=iw/2:ih/2" seance/frames_sun/frame_%05d.png
 python tools/frame_resizer.py -i seance/frames_sun -o seance/frames_sun_2 --input_pattern frame_%5.png --output_pattern frame_%5.png -s 1 -e 14376
+
+# seance2 compositing
+python tools/background_replacer.py -c seance/outputs/seance2_5/frames -p seance/frames_sun_2/ -m seance/outputs/seance2_2/masks -o seance/outputs/seance2_5/frames2 --copy_pattern frame_%6.png --paste_pattern frame_%5.png --mask_pattern frame_000001.png -s 2719 --copy_start 1 -e 2858
+python tools/make_video.py seance/outputs/seance2_5/frames2 -o seance/outputs/seance2_5/seance2.mp4 --input_pattern frame_%6.png -s 2719 -e 2858 -r 24
