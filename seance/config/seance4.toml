@@ -1,11 +1,14 @@
-in_dir = "seance/frames2/seance4"
+in_dir = "seance/frames_sun_2/"
 out_dir = "seance/outputs/seance4"
-mask_in_dir = "seance/outputs/seance4_1/masks"
+mask_in_dir = "seance/outputs/seance4_3/masks"
 width = 960
 height = 576
 
+# python tools/dream_compiler.py seance/config/seance4.toml -m --version 3 -s 1 -e 1
+# python tools/dream_compiler.py seance/config/seance4.toml -c --version 3 -s 1 -e 474
+
 [prompts]
-flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark cinematic lighting, highly detailed, 30mm lens, soft focus"
+flowers = "a vase with small white flowers, photo, dark cinematic lighting, highly detailed, 50mm lens, by kim jung gi"
 
 # 4_0
 # 4 bright white bushy bouquet
@@ -13,12 +16,18 @@ flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark 
 # 6 more white flowers
 # 7 candle, but not integrated well
 # 10 blurry sticks
-# 11 different white flowers
-# 23 flowery flowers
-# 26 one nice flower
+# 11 different white flowers 39611231
+# 23 flowery flowers 3674185847
+# 26 one nice flower 1130604459
 # 27 nice blurry flowers
 # 34 another nice bouquet
-# not looking further, these are all too bright to blend in
+# 36 very cool bouquet
+# 38 one bright flower
+# 41 very good flower
+# 55 bigger bouquet
+# 57 nice big flower
+# 59 another single flower
+# 65 another single flower
 
 # 4_1
 # 21 blurry sticks
@@ -33,12 +42,16 @@ flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark 
 # ==================================================
 [[keyframes]]
 frame = 1
-input_image = "IM0001.png"
+input_image = "frame_03694.png"
 input_mask = "frame_000001.png"
 prompt = "flowers"
 seed = 3674185847
 strength = 0.8
 scale = 8.0
+#masks = [
+#    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
+#    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
+#]
 
 [[keyframes]]
 frame = 476
