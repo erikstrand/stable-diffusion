@@ -1,11 +1,11 @@
 in_dir = "seance/frames_sun_2/"
 out_dir = "seance/outputs/seance2"
-mask_in_dir = "seance/outputs/seance2_3/masks"
+mask_in_dir = "seance/outputs/seance2_2/masks"
 width = 960
 height = 576
 
-# python tools/dream_compiler.py seance/config/seance2.toml -m --version 4 -s 1 -e 1
-# python tools/dream_compiler.py seance/config/seance2.toml -c --version 4 -s 1 -e 192
+# python tools/dream_compiler.py seance/config/seance2.toml -m --version 5 -s 1 -e 1
+# python tools/dream_compiler.py seance/config/seance2.toml -c --version 5 -s 1 -e 192
 
 [prompts]
 picture = "a smirking witch, framed classical painting hanging on a wall, dark cinematic lighting, 30mm lens, soft focus"
@@ -39,26 +39,14 @@ clocks = "a wall clock with too many hands, physical spaces anchor our spirits t
 # 9: crazy clock with rune symbols 1797633953
 # 20: oculus clock 2729731671
 # 45 evil spirit clock 2444795489
+
 # 11: bigger sticky tree clock 1586991152
 # 17: another spirit clock 1916318397
 # 25: picasso clock 4009120808
 # 34: aquatic clock 3305617673
 
 # 2_3
-# 56 1436497366
-# 90 2105863265
-# 59 427864619
-# 45 melty clock! 3022033244
 
-# 10 meh
-# 42 anchor
-# 48
-# 49
-# 103
-# 104
-
-#seance/outputs/seance2_3/frames/frame_000056.png: --prompt_idx 1 -s 50 -S 1436497366 -W 960 -H 576 -C 7.0 -I seance/frames_sun_2/frame_02736.png -A k_lms -M seance/outputs/seance2_3/masks/frame_000001.png -f 0.7 -V 2444795489:0.284
-#seance/outputs/seance2_4/frames/frame_000001.png: --prompt_idx 1 -s 50 -S 1436497366 -W 960 -H 576 -C 7.0 -I seance/frames_sun_2/frame_02736.png -A k_lms -M seance/outputs/seance2_3/masks/frame_000001.png -f 0.7
 
 # ==================================================
 # Seance 2
@@ -67,19 +55,20 @@ frame = 1
 input_image = "frame_02736.png"
 input_mask = "frame_000001.png"
 prompt = "clocks"
-seed = 1436497366
+seed = 1947472317 # 71 from 2_3
 strength = 0.7
 scale = 7.0
-#masks = [{ center = [0.74, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+#masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
 
 [[keyframes]]
-frame = 64
-seed = 2105863265
+duration = 24
+seed = 2051060900
+seed_weight = 0.2
 
 [[keyframes]]
-frame = 128
-seed = 427864619
+duration = 1
+seed = 1947472317 # 71 from 2_3
 
 [[keyframes]]
 frame = 192
-seed = 3022033244
+seed = 805022600 # 61

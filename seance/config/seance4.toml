@@ -54,5 +54,12 @@ scale = 8.0
 #]
 
 [[keyframes]]
-frame = 476
-seed = 1130604459
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100
+
+#[[keyframes]]
+#frame = 476
+#seed = 1130604459

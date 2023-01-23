@@ -1,0 +1,28 @@
+in_dir = "seance/frames_sun_2/"
+out_dir = "seance/outputs/seance13"
+mask_in_dir = "seance/outputs/seance13_0/masks"
+width = 960
+height = 576
+
+# python tools/dream_compiler.py seance/config/seance13.toml -c --version 0 -s 1 -e 100
+
+[prompts]
+clergy = "ghost monks in an occult ceremony, ancient runes, ghosts are spawning, ghosts are responding, the constant clergy, dark cinematic lighting, ultra realistic digital painting, by evgeny lushpin, by killian eng"
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "frame_11716.png"
+input_mask = "frame_12216_mask.png"
+prompt = "clergy"
+seed = 768793460
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100
