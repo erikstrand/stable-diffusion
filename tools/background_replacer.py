@@ -108,8 +108,20 @@ if __name__ == "__main__":
         "-s",
         "--start_at",
         type=int,
-        help="The first frame to render (1-indexed).",
+        help="The first paste frame to render (1-indexed).",
         required=True
+    )
+    parser.add_argument(
+        "--copy_start",
+        type=int,
+        help="The first copy frame to render (1-indexed). Defaults to start_at if not specified.",
+        default=None
+    )
+    parser.add_argument(
+        "--mask_start",
+        type=int,
+        help="The first mask frame to render (1-indexed). Defaults to start_at if not specified.",
+        default=None
     )
     parser.add_argument(
         "-e",
@@ -135,6 +147,9 @@ if __name__ == "__main__":
     assert(copy_dir.exists())
     assert(paste_dir.exists())
     assert(mask_dir.exists())
+    if not out_dir.exists():
+        print(f"Creating output directory {out_dir}")
+        out_dir.mkdir(parents=True)
     assert(out_dir.exists())
 
     # Parse the filename patterns.
@@ -144,17 +159,22 @@ if __name__ == "__main__":
     out_pattern = copy_pattern
 
     # Generate file lists.
+    n_frames = args.end_at - args.start_at + 1
+    copy_start = args.copy_start if args.copy_start is not None else args.start_at
+    copy_end = copy_start + n_frames
+    mask_start = args.mask_start if args.mask_start is not None else args.start_at
+    mask_end = mask_start + n_frames
     copy_frames = [
         str(copy_dir / copy_pattern.filename(i))
-        for i in range(args.start_at, args.end_at + 1, args.stride)
+        for i in range(copy_start, copy_end + 1, args.stride)
     ]
     paste_frames = [
-        str(paste_dir / paste_pattern.filename(i + 353))
+        str(paste_dir / paste_pattern.filename(i))
         for i in range(args.start_at, args.end_at + 1, args.stride)
     ]
     mask_frames = [
         str(mask_dir / mask_pattern.filename(i))
-        for i in range(args.start_at, args.end_at + 1, args.stride)
+        for i in range(mask_start, mask_end + 1, args.stride)
     ]
     outputs = [
         str(out_dir / out_pattern.filename(i))
@@ -171,11 +191,11 @@ if __name__ == "__main__":
         paste_pil = Image.open(paste_frames[i])
         mask_pil = Image.open(mask_frames[i])
 
-        # Upscale mask.
-        mw = mask_pil.width
-        mh = mask_pil.height
-        print(f"resizing mask from {mw}x{mh}")
-        mask_pil = mask_pil.resize((4*mw, 4*mh), resample=Image.BICUBIC)
+        # Hack! Upscale mask.
+        #mw = mask_pil.width
+        #mh = mask_pil.height
+        #print(f"resizing mask from {mw}x{mh}")
+        #mask_pil = mask_pil.resize((4*mw, 4*mh), resample=Image.BICUBIC)
 
         # Convert to numpy arrays.
         copy_np = image_to_array(copy_pil)
