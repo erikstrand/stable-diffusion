@@ -4,7 +4,7 @@ mask_in_dir = "seance/outputs/seance4_5/masks"
 width = 960
 height = 576
 
-# python tools/dream_compiler.py seance/config/seance4.toml -m --version 3 -s 1 -e 1
+# python tools/dream_compiler.py seance/config/seance4.toml -m --version 5 -s 1 -e 1
 # python tools/dream_compiler.py seance/config/seance4.toml -c --version 5 -s 1 -e 474
 
 [prompts]
@@ -43,15 +43,15 @@ flowers = "small white flowers in an organic glass vase, dark cinematic lighting
 [[keyframes]]
 frame = 1
 input_image = "frame_03715.png"
-input_mask = "frame_03715_mask.png"
+#input_mask = "frame_03715_mask.png"
 prompt = "flowers"
 seed = 346299947
 strength = 0.7
 scale = 7.0
-#masks = [
-#    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
-#    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
-#]
+masks = [
+    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
+    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
+]
 
 [[keyframes]]
 duration = 1
