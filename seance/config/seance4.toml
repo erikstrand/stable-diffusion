@@ -5,7 +5,7 @@ width = 960
 height = 576
 
 # python tools/dream_compiler.py seance/config/seance4.toml -m --version 5 -s 1 -e 1
-# python tools/dream_compiler.py seance/config/seance4.toml -c --version 5 -s 1 -e 474
+# python tools/dream_compiler.py seance/config/seance4.toml -c --version 6 -s 1 -e 474
 
 [prompts]
 flowers = "small white flowers in an organic glass vase, dark cinematic lighting, ultra realistic digital painting, highly detailed, by evgeny lushpin, by alex gray"
@@ -38,28 +38,40 @@ flowers = "small white flowers in an organic glass vase, dark cinematic lighting
 # 60 beautiful dead plants!
 # 98 cool diverse bouquet
 
+# 4_5
+# 3 floaty glowy flowers
+# 7 yellowy flowers
+# 10 two large white flowers
+# 17* 1952097685 smaller flowers, semi-plausibly in vases
+# 27* 3671782570 smaller flowers, placed well
+# 41 too big but maybe good at the end
+# 61* 40599853 best integration yet
+# 64 perfect coherence, but nothing on the right
+# 82 weird but interesting
+# 89 double flowers but kinda blurry
+# 90* 1763283441 white flowers, plausibly in vases
+
 
 # ==================================================
+# starts 3694
+# faded in 3720
+# ends after 4168
+# duration 474
 [[keyframes]]
 frame = 1
 input_image = "frame_03715.png"
-#input_mask = "frame_03715_mask.png"
+input_mask = "frame_03715_mask.png"
 prompt = "flowers"
-seed = 346299947
+# 61 best integration yet
+seed = 40599853
 strength = 0.7
 scale = 7.0
-masks = [
-    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
-    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
-]
+#masks = [
+#    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
+#    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
+#]
 
 [[keyframes]]
-duration = 1
-seed = "random"
-
-[[keyframes]]
-frame = 100
-
-#[[keyframes]]
-#frame = 476
-#seed = 1130604459
+frame = 474
+# 90 white flowers, plausibly in vases
+seed = 1763283441
