@@ -45,7 +45,10 @@ def generate_mask_array(width, height, masks):
     # dist[i, j] = distance from (i, j) to center
 
     result = np.full(coords.shape[0:2], 255, dtype='uint8')
+
     inverted = False
+    clamp_cutoff = 0.99
+    clamp_scale = 1.0 / clamp_cutoff
 
     for mask in masks:
         # Rescale center and radius.
@@ -56,8 +59,11 @@ def generate_mask_array(width, height, masks):
         # Generate the mask.
         dist = np.linalg.norm(coords - center, axis=2)
         # sigmoid
-        mask_array = 255.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
+        mask_array = 1.0 / (1.0 + np.exp(-mask.sigmoid_k * (dist - radius)))
+        mask_array = (mask_array - 0.5) * clamp_scale + 0.5
+        mask_array = np.clip(mask_array, 0.0, 1.0)
         # 255 means opaque, 0 means transparent
+        mask_array = 255.0 * mask_array
         mask_array = mask_array.astype('uint8')
 
         if mask.invert:
