@@ -121,7 +121,8 @@ if __name__ == "__main__":
     in_dir = Path(args.in_dir)
     assert(in_dir.exists())
     out_dir = Path(args.out_dir)
-    assert(in_dir != out_dir)
+    if in_dir == out_dir:
+        assert(args.input_pattern != args.output_pattern)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Parse the filename patterns.
