@@ -34,3 +34,9 @@ python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o pro
 python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o projects/mindvault/outputs/wide_0/wide_0_4k_4.mp4 -s 287 -e 343 --input_pattern IM%4.png -r 24
 
 python tools/make_video.py projects/mindvault/outputs/eyes/results/ -o projects/mindvault/outputs/eyes/extreme_close_4k.mp4 -s 1 -e 652 --input_pattern frame_%6_out.png -r 24
+
+medium scene (waves) upscale
+python tools/make_video.py projects/mindvault/outputs/medium_upscale/frames -o projects/mindvault/outputs/medium_upscale/medium_upscale.mp4 -s 1 -e 342 --input_pattern frame_%6_out.png -r 24
+python tools/frame_shrinker.py -i projects/mindvault/inputs/medium/masks_576 -o projects/mindvault/inputs/medium/masks --input_pattern IM%4.png --output_pattern IM%4.png -s 1 -e 342 -w 960 --height 540
+python tools/background_replacer.py -c projects/mindvault/inputs/medium/frames -p projects/mindvault/outputs/medium_upscale/frames -m projects/mindvault/inputs/medium/masks_540 -o projects/mindvault/outputs/medium_upscale/frames_pasted --copy_pattern frame_%3.png --paste_pattern frame_%6_out.png --mask_pattern IM%4.png --invert_masks -s 1 -e 342
+python tools/make_video.py projects/mindvault/outputs/medium_upscale/frames_pasted -o projects/mindvault/outputs/medium_upscale/medium_upscale_composite.mp4 -s 1 -e 342 --input_pattern frame_%3.png -r 24
