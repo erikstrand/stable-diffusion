@@ -166,7 +166,7 @@ if __name__ == "__main__":
     mask_end = mask_start + n_frames
     copy_frames = [
         str(copy_dir / copy_pattern.filename(i))
-        for i in range(copy_start, copy_end + 1, args.stride)
+        for i in range(copy_start, copy_end, args.stride)
     ]
     paste_frames = [
         str(paste_dir / paste_pattern.filename(i))
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     ]
     mask_frames = [
         str(mask_dir / mask_pattern.filename(i))
-        for i in range(mask_start, mask_end + 1, args.stride)
+        for i in range(mask_start, mask_end, args.stride)
     ]
     outputs = [
         str(out_dir / out_pattern.filename(i))
@@ -191,31 +191,35 @@ if __name__ == "__main__":
         paste_pil = Image.open(paste_frames[i])
         mask_pil = Image.open(mask_frames[i])
 
-        # Hack! Upscale mask.
-        #mw = mask_pil.width
-        #mh = mask_pil.height
-        #print(f"resizing mask from {mw}x{mh}")
-        #mask_pil = mask_pil.resize((4*mw, 4*mh), resample=Image.BICUBIC)
+        # Scale the mask if necessary.
+        if copy_pil.width != mask_pil.width or copy_pil.height != mask_pil.height:
+            x_scale = copy_pil.width / mask_pil.width
+            y_scale = copy_pil.height / mask_pil.height
+            if x_scale == y_scale and float(int(x_scale)) == x_scale:
+                print(f"Resizing mask from {mask_pil.width}x{mask_pil.height} to {copy_pil.width}x{copy_pil.height}")
+                mask_pil = mask_pil.resize((copy_pil.width, copy_pil.height), resample=Image.BICUBIC)
+            else:
+                print(f"Cannot resize mask from {mask_pil.width}x{mask_pil.height} to {copy_pil.width}x{copy_pil.height} (x_scale={x_scale}, y_scale={y_scale})")
+                assert(False)
 
         # Convert to numpy arrays.
         copy_np = image_to_array(copy_pil)
         paste_np = image_to_array(paste_pil)
         mask_np = image_to_array(mask_pil)
 
+        # We expect the images to be RGB (with optional ignored alpha).
+        assert(len(copy_np.shape) >= 3)
+        assert(len(paste_np.shape) >= 3)
+        # The copy and paste images must be the same size.
+        assert(copy_np.shape[0:2] == paste_np.shape[0:2])
+        alpha_channel = len(mask_np.shape) - 1
+
         if args.invert_masks:
             print("inverting mask")
-            mask_np[:, :, 3] = 255 - mask_np[:, :, 3]
-
-        # The copy, paste, and mask images must be the same size.
-        assert(copy_np.shape[0:2] == paste_np.shape[0:2])
-        assert(copy_np.shape[0:2] == mask_np.shape[0:2])
-
-        # The mask must have an alpha channel.
-        assert(len(mask_np.shape) == 3)
-        assert(mask_np.shape[2] == 4)
+            mask_np[:, :, alpha_channel] = 255 - mask_np[:, :, alpha_channel]
 
         # copy/paste
-        alpha = mask_np[:, :, 3].reshape(mask_np.shape[0], mask_np.shape[1], 1) / 255
+        alpha = mask_np[:, :, alpha_channel].reshape(mask_np.shape[0], mask_np.shape[1], 1) / 255
         paste_np[:,:,0:3] = alpha * paste_np[:,:,0:3] + (1 - alpha) * copy_np[:,:,0:3]
 
         # Save the result.
