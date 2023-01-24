@@ -1,18 +1,20 @@
 import numpy as np
 from PIL import Image
 from pathlib import Path
+import os 
 
 
 class Mask:
-    __slots__ = ["center", "radius", "sigmoid_k", "invert"]
+    __slots__ = ["center", "radius", "sigmoid_k", "invert", "refobject"]
 
-    def __init__(self, center, radius, sigmoid_k=0.2, invert=False):
+    def __init__(self, center, radius, sigmoid_k=0.2, invert=False, refobject=None):
         self.center = np.array(center)
         assert(self.center.shape == (2,))
         self.radius = float(radius)
         self.sigmoid_k = float(sigmoid_k)
         self.invert = bool(invert)
-
+        self.refobject = refobject 
+        
     def __str__(self):
         result = f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
         if self.invert:
@@ -72,8 +74,66 @@ def generate_mask_image(width, height, masks, infile):
     return Image.fromarray(image_data, 'RGBA')
 
 
+def generate_image_with_object_inside_masked_region(width, height, masks, infile):
+    # Load the RGB data from infile
+    image = Image.open(infile)
+    image = image.convert('RGBA') # need to convert to RGBA to prevent type error on object paste  
+
+    for mask in masks:
+        if mask.refobject is not None:
+            # Grab path 
+            objectfile = mask.refobject
+            assert os.path.exists(objectfile),f"Refobject does not exist. Check path? {objectfile}"
+            
+            # Load the object 
+            if objectfile.endswith('jpg') or objectfile.endswith('jpeg'):
+                base = os.path.splitext(objectfile)[0]
+                if not os.path.exists(base+".png"):
+                    obj = Image.open(objectfile)
+                    objectfile = base+".png"
+                    obj.save(objectfile)
+                else: 
+                    objectfile = base+".png"
+            
+            # open ref object 
+            obj = Image.open(objectfile)
+            w,h = obj.size
+                    
+            # # resize obj to the radius of the mask (such that it fully fits in the mask) 
+            assert not mask.invert, f"Cannot use inverted masks when pasting objects"
+            d = mask.radius*2        
+            d_im = int(height * d)        # diameter w.r.t to the image 
+            #nh = int(d_im)                # use this if you the square height equals diameter  
+            nh = int(np.sqrt(d_im**2/2))        # use this if you want to fit square enterily into the circle 
+            nw = int((w/h)*nh)
+            objr = obj.resize((nw,nh))
+                    
+            # crop to square 
+            left = (nw - nh)/2
+            top = 0
+            right = (nw + nh)/2
+            bottom = nh
+            objrc = objr.crop((left,top,right,bottom))
+            
+            # paste into the image 
+            wc,hc = list(mask.center)   # get center coordinates of the mask
+            hc = 1-hc # when pasting over images with PIL, the coord system is from top-left corner (not bottom left, like our masks are defined)
+            wc,hc, = int(width*wc), int(height*hc) # define in the image coord system 
+            wc,hc = wc-int(nh/2),hc-int(nh/2) # when pasting over images with PIL, the count is from the edge of the object, not the center 
+                
+            objrc2 = objrc.convert('RGBA')
+            image.paste(objrc2, (wc,hc))
+            
+    out = image.convert('RGB')
+    return out
+
 def save_mask_image(width, height, masks, infile, outfile):
     image = generate_mask_image(width, height, masks, infile)
+    Path(outfile).parent.mkdir(parents=True, exist_ok=True)
+    image.save(outfile)
+
+def save_image_with_object_in_masked_region(width, height, masks, infile, outfile):
+    image = generate_image_with_object_inside_masked_region(width, height, masks, infile)
     Path(outfile).parent.mkdir(parents=True, exist_ok=True)
     image.save(outfile)
 
@@ -98,21 +158,95 @@ def array_to_image(array):
 
 
 if __name__ == "__main__":
-    # in pixels
-    width = 960
-    height = 720
+    
+    debug = "serge"
+    
+    if debug == "erik":
+        # in pixels
+        width = 960
+        height = 720
 
-    masks = [
-        Mask([0.92, 0.4], 0.25),
-        Mask([0.92, 0.5], 0.25),
-        Mask([0.92, 0.6], 0.25),
-    ]
+        masks = [
+            Mask([0.92, 0.4], 0.25),
+            Mask([0.92, 0.5], 0.25),
+            Mask([0.92, 0.6], 0.25),
+        ]
 
-    image_file = "../alice/frames/rabbit_hole/IM0138.png"
+        image_file = "../alice/frames/rabbit_hole/IM0138.png"
 
-    original = Image.open(image_file)
-    original.crop((650, 30, 960, 690)).save("frame.png")
+        original = Image.open(image_file)
+        original.crop((650, 30, 960, 690)).save("frame.png")
 
-    image = generate_mask_image(width, height, masks, image_file)
-    image.save('mask.png')
-    image.crop((650, 30, 960, 690)).save('mask_crop.png')
+        image = generate_mask_image(width, height, masks, image_file)
+        image.save('mask.png')
+        image.crop((650, 30, 960, 690)).save('mask_crop.png')
+    elif debug == "serge":
+        
+        width = 960
+        height = 576 
+        
+        # get image and masks
+        object_file = "forest.jpeg"
+        image_file = "seance/frames_r/seance7/IM0001.png"
+        image = Image.open(image_file)     
+        masks = [MagicMask([0.2, 0.2], radius = 0.4)] # lower left 
+        
+        
+        # check file type 
+        if object_file.endswith('jpg') or object_file.endswith('jpeg'):
+            base = os.path.splitext(object_file)[0]
+            if not os.path.exists(base+".png"):
+                obj = Image.open(object_file)
+                object_file = base+".png"
+                obj.save(object_file)
+            else: 
+                object_file = base+".png"
+
+        # open ref object 
+        obj = Image.open(object_file)
+        w,h = obj.size
+        
+        # # resize obj to the radius of the mask (such that it fully fits in the mask) 
+        # r = masks[0].radius*2
+        # r_im = int(height * r)        # diameter w.r.t to the image 
+        # nw = int(r_im*2)              # 
+        # nh = int((h/w)*nw)
+        # objr = obj.resize((nw,nh))
+
+        # # resize obj to the radius of the mask (such that it fully fits in the mask) 
+        d = masks[0].radius*2
+        d_im = int(height * d)        # diameter w.r.t to the image 
+        #nh = int(d_im)                # use this if you the square height equals diameter  
+        nh = int(np.sqrt(d_im**2/2))        # use this if you want to fit square enterily into the circle 
+        nw = int((w/h)*nh)
+        objr = obj.resize((nw,nh))
+                
+    
+        # crop to square 
+        left = (nw - nh)/2
+        top = 0
+        right = (nw + nh)/2
+        bottom = nh
+        objrc = objr.crop((left,top,right,bottom))
+        
+        # test saves 
+        image_masked = generate_mask_image(width, height, masks, image_file)
+        image_masked.save('test_with_mask.png')
+        image.save("test.png")              
+        objrc.save("test_forest_cropped.png")
+                
+        # paste into the image 
+        wc,hc = list(masks[0].center)   # get center coordinates of the mask
+        hc = 1-hc # when pasting over images with PIL, the coord system is from top-left corner (not bottom left, like our masks are defined)
+        wc,hc, = int(width*wc), int(height*hc) # define in the image coord system 
+        wc,hc = wc-int(nh/2),hc-int(nh/2) # when pasting over images with PIL, the count is from the edge of the object, not the center 
+        
+        image2 = image.convert('RGBA')
+        image2.save("test_original.png")
+        objrc2 = objrc.convert('RGBA')
+        
+        image2.paste(objrc2, (wc,hc))
+        image2.save("test_with_forrest.png")
+        
+        
+

@@ -1,6 +1,8 @@
 import copy
 import random
 from masks import Mask
+from pathlib import Path
+
 
 
 class DreamState:
@@ -245,6 +247,10 @@ class DreamState:
         correct_colors = self.prev_keyframe.correct_colors
         init_color = self.color_reference if correct_colors else None
 
+        # replace input dir with new one if refobject had been specified        
+        if self.has_refobject():  
+            init_img = Path(str(self.schedule.out_dir) + "/frames_filled/" + self.output_path().parts[-1])        
+
         return {
             "-I": init_img,
             "-M": mask,
@@ -270,6 +276,14 @@ class DreamState:
         pairs = [(k, v) for k, v in opts.items() if v is not None]
         return ' '.join(f"{k} {v}" for k, v in pairs)
 
+    def has_refobject(self):    
+        # If refobject is specified in ANY keyframe in the .toml
+        for kf in self.schedule.keyframes:
+            for m in kf.masks:
+                if m.refobject is not None:
+                    return True
+        return False
+        
     def has_mask(self):
         return len(self.prev_keyframe.masks) > 0
 
@@ -296,7 +310,7 @@ class DreamState:
                 center = (1.0 - t) * prev_mask.center + t * next_mask.center
                 radius = (1.0 - t) * prev_mask.radius + t * next_mask.radius
                 sigmoid_k = (1.0 - t) * prev_mask.sigmoid_k + t * next_mask.sigmoid_k
-                masks.append(Mask(center, radius, sigmoid_k, prev_mask.invert))
+                masks.append(Mask(center, radius, sigmoid_k, prev_mask.invert,prev_mask.refobject))
             return masks
 
         # Currently the case where n_prev_masks != n_next_masks and both are greater than zero is

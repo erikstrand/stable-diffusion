@@ -1,8 +1,9 @@
+import os
 import argparse
 import subprocess
 from pathlib import Path
 from dream_schedule import DreamSchedule
-from masks import save_mask_image
+from masks import save_mask_image, save_image_with_object_in_masked_region
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -169,10 +170,22 @@ if __name__ == "__main__":
                     image_file,
                     mask_file
                 )
+                # paste objects into image
+                if any([m.refobject is not None for m in masks]): # if refobject specified 
+                    image_file_filled = mask_file.replace('/masks/', '/frames_filled/')
+                    os.makedirs(os.path.dirname(image_file_filled), exist_ok=True)
+                    save_image_with_object_in_masked_region(
+                        schedule.width,
+                        schedule.height,
+                        masks,
+                        image_file,
+                        image_file_filled
+                    )
+                        
 
     # Print a summary if we wrote commands.
     if args.commands:
-        print(f"Wrote commands for {len(frame_names)} frames ({args.start_at} through {args.end_at}) to {args.outfile}.")
+        print(f"Wrote commands for {len(frame_names)} frames ({args.start_at} through {args.end_at}) to {args.outfile}")
 
     if args.video:
         # Write the list of frames to a file.

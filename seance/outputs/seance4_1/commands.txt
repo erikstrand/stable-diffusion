@@ -1,3 +1,0 @@
-python tools/background_replacer.py -i seance/frames2/seance4/ -o seance/outputs/seance4_1/frames2 -m seance/outputs/seance4_1/masks -b seance/outputs/seance4_1/frames/frame_000060.png --frame_pattern "IM%4.png" --mask_pattern frame_000001.png -s 1 -e 135
-
-python tools/make_video.py seance/outputs/seance4_1/frames2 -o seance/outputs/seance4_1/seance4_v1.mp4 -s 1 -e 135 --input_pattern IM%4.png -r 20

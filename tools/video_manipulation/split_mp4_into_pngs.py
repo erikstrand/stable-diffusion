@@ -22,7 +22,7 @@ if __name__ =='__main__':
     success,image = vidcap.read()
 
     # save 
-    c = 0
+    c = 1
     while success:
         if c < 10: 
             i="000"+str(c)
