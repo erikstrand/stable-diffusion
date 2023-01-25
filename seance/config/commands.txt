@@ -79,4 +79,5 @@ python tools/background_replacer.py -c seance/pasting/seance12/masks/dynamic -p 
 # this does work
 python tools/mask_merger.py -i seance/pasting/seance12/masks/static -j seance/pasting/seance12/masks/dynamic -o seance/pasting/seance12/masks/combined --pattern_2 seance12_mask_%5.png --pattern_1 feather30.png --output_pattern mask_%5.png -s 0 -e 1651
 # dynamic mask 426 corresponds to frame 9793, so mask 0 must correspond to frame 9367
-python tools/background_replacer.py -c seance/pasting/seance12/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/pasting/seance12/frames_180_c --copy_pattern placeholder.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 9367 --copy_start 0 --mask_start 0 -e 110119
+python tools/background_replacer.py -c seance/pasting/seance12/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/pasting/seance12/frames_1080_c --copy_pattern placeholder.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 9367 --copy_start 0 --mask_start 0 -e 110119
+python tools/make_video.py seance/pasting/seance12/frames_1080_c -o seance/pasting/seance12/seance12_paste_test.mp4 --input_pattern frame_%5.png -s 9367 -e 110119 -r 24
