@@ -212,7 +212,9 @@ if __name__ == "__main__":
         assert(len(paste_np.shape) >= 3)
         # The copy and paste images must be the same size.
         assert(copy_np.shape[0:2] == paste_np.shape[0:2])
-        alpha_channel = len(mask_np.shape) - 1
+        alpha_channel = mask_np.shape[2] - 1
+        #print(f"mask alpha channel is {alpha_channel} (shape={mask_np.shape})")
+        #print(f"mask min={np.min(mask_np)}, max={np.max(mask_np)}")
 
         if args.invert_masks:
             print("inverting mask")
