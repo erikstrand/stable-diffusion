@@ -99,6 +99,14 @@ if __name__ == "__main__":
         default="frame_%6.png"
     )
     parser.add_argument(
+        "--out_pattern",
+        type=str,
+        help="The names of the resulting files, with the number of digits after 'percent'. Defaults to copy_pattern.",
+        # e.g. frame_%6.png (default) or IM%4.jpg
+        # (I can't put % in the help string or argparse gets confused)
+        default=None
+    )
+    parser.add_argument(
         "--invert_masks",
         help="Whether to invert the mask before using it.",
         action="store_true",
@@ -156,7 +164,7 @@ if __name__ == "__main__":
     copy_pattern = FrameName.from_string(args.copy_pattern)
     paste_pattern = FrameName.from_string(args.paste_pattern)
     mask_pattern = FrameName.from_string(args.mask_pattern)
-    out_pattern = copy_pattern
+    out_pattern = copy_pattern if args.out_pattern is None else FrameName.from_string(args.out_pattern)
 
     # Generate file lists.
     n_frames = args.end_at - args.start_at + 1
