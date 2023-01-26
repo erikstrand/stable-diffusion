@@ -8,7 +8,7 @@ import cv2
 
 if __name__ =='__main__':
     
-    """python split_video.py <mp4 file> <folder>"""
+    """python split_mp4_into_pngs.py <mp4 file> <folder>"""
     
     filename = sys.argv[1]
     savedir = sys.argv[2]
