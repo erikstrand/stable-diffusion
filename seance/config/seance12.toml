@@ -1,0 +1,256 @@
+# from anna
+in_dir = "seance/frames/seance12_576/"
+mask_in_dir = "seance/outputs/seance12_0/masks/"
+out_dir = "seance/outputs/seance12"
+width = 960
+height = 576
+
+[prompts]
+prompt1 =  "Energy Waves Wanting to Come Through The Fire Place, a beautiful painting of a Renaissance style fireplace, fire burning, cozy lounge ambiance, low lightning, room is lit by the fire, 4 k, hyper realistic photography"
+prompt2 =  "Physical spaces anchor our spirits through time, epic angle and pose, reflective pool, symmetrical artwork, ayahuasca, translucent, fungus, energy flows of water and fire, highly detailed, epic cinematic concept art, excellent composition, dystopian brutalist atmosphere, dynamic dramatic lighting, aesthetic, very inspirational, arthouse, greg rutkowski, artgerm"
+prompt3 =  "Who is she, whose face I cannot see, little velvet bed, little leather case, who has come, to take her place?"
+prompt4 =  "white flowers heavy heart gauze dressed what are you holding?, A surreal painting of a breakfast still life, flowers, by george baselitz, symbolist, soft colors, dramatic lighting, smooth, sharp focus, extremely detailed, aesthetically pleasing composition"
+prompt5 =  "'Whose hand is holding the flowers?' and I'm glad we thanked the hardworking atoms, many hands coming to grab something. Eerie oil painting."
+prompt6 =  "why blue, a beautiful painting of the view looking up from under the ocean"
+prompt7 =  "void mouth, a painting of many small mounths "
+prompt8 =  "is that us? father of waters, portal, river, fireplace"
+prompt9 =  "<nonsense> "
+prompt10 = "synergy, energy, the constant clergy, bits on bits on bits, 1010100102"
+prompt11 = "who created what threshold? "
+prompt12 = "why the square portals?, the doors, and the fireplaces?"
+prompt13 = "the constant clergy..."
+prompt14 = "door way to your highest self, your highest good"
+testprompt1= "a digital painting of a wall covered in doors and windows"
+testprompt2= "a realistic photograph of a wall covered in doors and windows"
+testprompt3= "many doors and fireplaces"
+testprompt4= "many square portals to different magical dimensions"
+testprompt5= "square holes cut into the fabric of reality"
+testprompt6= "monsters looking through windows"
+
+
+[[keyframes]]
+frame = 1
+input_image = "frame_00001.png"
+input_mask = "static.png"
+seed = 999270936  #"random" #599310825
+prompt = "testprompt1"
+scale = 8.0
+strength = 0.1 #str 0.4 seems best for keeping the semantic layout of the image (mirror, etc) while still having interesting diffusion happening on top of it.
+steps = 50
+#masks = [
+#    { center = [0.22, 0.4], radius = 0.20 }, # mirror
+#    { center = [0.53, 0.9], radius = 0.15 }, #
+#]
+#seg_masks = [{cls="a person", mask_val="antimask"},
+#             {cls="person", mask_val="antimask"},
+#             {cls="people", mask_val="antimask"}]
+
+#need ~1610 frames
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 24
+strength = 0.65
+#
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 100
+seed = 136505587
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 100
+seed = 540356193
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 100
+seed = 478163327
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 100
+seed = 171961156
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 75
+seed = 2342331444
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 90
+seed = 738427529
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 80
+seed = 2523876245
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 70
+seed = 1801823908
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 80
+seed = 412588393
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 60
+seed = 697673237
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 50
+seed = 3259052811
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 65
+seed = 1191715782
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 55
+seed = 338444264
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 60
+seed = 2329695612
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 45
+seed = 65204750
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 55
+seed = 2832278071
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 35
+seed = 197611208
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 40
+seed = 2173089288
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 45
+seed = 3825119540
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 50
+seed = 1296369586
+
+# found seeds
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 40
+seed = 440213415
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 65
+seed = 3098954116
+
+[[keyframes]]
+prompt = "testprompt2"
+duration = 35
+seed = 1801823908
+
+[[keyframes]]
+prompt = "testprompt3"
+duration = 25
+seed = 1947382419
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 65
+seed = 843420538
+
+[[keyframes]]
+prompt = "testprompt5"
+duration = 40
+seed = 656448479
+
+[[keyframes]]
+prompt = "testprompt2"
+duration = 35
+seed = 3259052811
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 999270936
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 65
+seed = 3077646034
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 30
+seed = 1051802512
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 2410529190
+
+[[keyframes]]
+prompt = "testprompt4"
+duration = 25
+seed = 284277889
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 1191715782
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 3359207257
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 3013568338
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 2830996406
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 2184797280
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 3098954116
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 310704377
+
+[[keyframes]]
+prompt = "testprompt1"
+duration = 25
+seed = 1334835847
