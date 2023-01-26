@@ -73,7 +73,7 @@ python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_
 python tools/background_replacer.py -c seance/outputs/seance4_6/frames_1080 -p seance/frames_sun/ -m seance/outputs/seance4_5/masks -o seance/upscaling/seance7/frames_composite --copy_pattern frame_%6.png --paste_pattern frame_%5.png --mask_pattern frame_03715_chop.png -s 3694 --copy_start 1 -e 4167
 
 
-# seance 12
+# seance 12 tests
 # this didn't work
 python tools/background_replacer.py -c seance/pasting/seance12/masks/dynamic -p seance/pasting/seance12/masks/static -m seance/pasting/seance12/masks/dynamic -o seance/pasting/seance12/masks/combined --copy_pattern seance12_mask_%5.png --paste_pattern feather30.png --mask_pattern seance12_mask_%5.png --alpha -s 0 --copy_start 0 -e 1651
 # this does work
@@ -81,3 +81,6 @@ python tools/mask_merger.py -i seance/pasting/seance12/masks/static -j seance/pa
 # dynamic mask 426 corresponds to frame 9793, so mask 0 must correspond to frame 9367
 python tools/background_replacer.py -c seance/pasting/seance12/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/pasting/seance12/frames_1080_c --copy_pattern placeholder.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 9367 --copy_start 0 --mask_start 0 -e 110119
 python tools/make_video.py seance/pasting/seance12/frames_1080_c -o seance/pasting/seance12/seance12_paste_test.mp4 --input_pattern frame_%5.png -s 9367 -e 110119 -r 24
+
+# seance 12
+python tools/frame_resizer.py -i seance/outputs/seance12_0/masks -o seance/outputs/seance12_0/masks --input_pattern static2_540.png --output_pattern static2_576.png -s 1 -e 1
