@@ -66,11 +66,11 @@ python tools/background_replacer.py -c seance/outputs/seance13_1/frames_u -p sea
 python tools/make_video.py seance/outputs/seance13_1/frames_uc -o seance/outputs/seance13_1/seance13_1_upscaled.mp4 --input_pattern frame_%6_out.png -s 11716 -e 12358 -r 24
 
 
-# seance7
+# seance 7
 python tools/frame_shrinker.py -i seance/upscaling/seance7/frames_576 -o seance/upscaling/seance7/frames_540 --input_pattern frame_%6.png --output_pattern frame_%6.png -s 6036 -e 6242 --height 540
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/upscaling/seance7/frames_540 -o /media/data1/erik/code/stable-diffusion/seance/upscaling/seance7/frames_1080 -g 7
-# need the mask
-python tools/background_replacer.py -c seance/outputs/seance4_6/frames_1080 -p seance/frames_sun/ -m seance/outputs/seance4_5/masks -o seance/upscaling/seance7/frames_composite --copy_pattern frame_%6.png --paste_pattern frame_%5.png --mask_pattern frame_03715_chop.png -s 3694 --copy_start 1 -e 4167
+python tools/background_replacer.py -c seance/upscaling/seance7/frames_1080 -p seance/frames_sun_big/ -m seance/upscaling/seance7/masks -o seance/upscaling/seance7/frames_1080_c --copy_pattern frame_%6_out.png --paste_pattern frame_%5.png --mask_pattern frame_006140_mask.png --invert_mask -s 6036 -e 6242
+python tools/make_video.py seance/upscaling/seance7/frames_1080_c -o seance/upscaling/seance7/seance7_upscaled.mp4 --input_pattern frame_%6_out.png -s 6036 -e 6242 -r 24
 
 
 # seance 12 tests
@@ -84,3 +84,40 @@ python tools/make_video.py seance/pasting/seance12/frames_1080_c -o seance/pasti
 
 # seance 12
 python tools/frame_resizer.py -i seance/outputs/seance12_0/masks -o seance/outputs/seance12_0/masks --input_pattern static2_540.png --output_pattern static2_576.png -s 1 -e 1
+python tools/make_video.py seance/outputs/seance12_0/frames -o seance/outputs/seance12_0/seance12_0.mp4 --input_pattern frame_%6.png -s 1 -e 1654 -r 24
+python tools/make_video.py seance/outputs/seance12_2/frames -o seance/outputs/seance12_2/seance12_2.mp4 --input_pattern frame_%6.png -s 1 -e 1654 -r 24
+python tools/make_video.py seance/outputs/seance12_4/frames -o seance/outputs/seance12_4/seance12_4.mp4 --input_pattern frame_%6.png -s 1 -e 1654 -r 24
+python tools/make_video.py seance/outputs/seance12_6/frames -o seance/outputs/seance12_6/seance12_6.mp4 --input_pattern frame_%6.png -s 1 -e 1654 -r 24
+
+# seance 12_0 upscaling
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames2 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 1
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames3 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 2
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames4 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 3
+python tools/frame_shrinker.py -i seance/outputs/seance12_0/frames_1152 -o seance/outputs/seance12_0/frames_1080 --input_pattern frame_%6_out.png --output_pattern frame_%5.png -s 1 -e 1654 --height 1080
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 9367 --copy_start 1 --mask_start 0 -e 10193
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 10194 --copy_start 828 --mask_start 827 -e 110119
+python tools/make_video.py seance/outputs/seance12_0/frames_1080_c -o seance/outputs/seance12_0/seance12_0_upscaled.mp4 --input_pattern frame_%5.png -s 9367 -e 11018 -r 24
+
+# seance 12_0 pasting
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames2 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 1
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames3 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 2
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames4 -o /media/data1/erik/code/stable-diffusion/seance/outputs/seance12_0/frames_1080 -g 3
+python tools/frame_shrinker.py -i seance/outputs/seance12_2/frames_1152 -o seance/outputs/seance12_2/frames_1080 --input_pattern frame_%6_out.png --output_pattern frame_%5.png -s 1 -e 412 --height 1080
+python tools/frame_shrinker.py -i seance/outputs/seance12_2/frames_1152 -o seance/outputs/seance12_2/frames_1080 --input_pattern frame_%6_out.png --output_pattern frame_%5.png -s 413 -e 826 --height 1080
+python tools/frame_shrinker.py -i seance/outputs/seance12_2/frames_1152 -o seance/outputs/seance12_2/frames_1080 --input_pattern frame_%6_out.png --output_pattern frame_%5.png -s 827 -e 1239 --height 1080
+python tools/frame_shrinker.py -i seance/outputs/seance12_2/frames_1152 -o seance/outputs/seance12_2/frames_1080 --input_pattern frame_%6_out.png --output_pattern frame_%5.png -s 1240 -e 1654 --height 1080
+python tools/background_replacer.py -c seance/outputs/seance12_2/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_2/frames_1080_c --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 9367 --copy_start 1 --mask_start 0 -e 10193
+python tools/background_replacer.py -c seance/outputs/seance12_2/frames_1080/ -p seance/frames_sun_big -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_2/frames_1080_c --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 10194 --copy_start 828 --mask_start 827 -e 110119
+python tools/make_video.py seance/outputs/seance12_2/frames_1080_c -o seance/outputs/seance12_2/seance12_2_upscaled.mp4 --input_pattern frame_%5.png -s 9367 -e 11018 -r 24
+
+# seance 12_0 upscaling v2 (correct base frames)
+ffmpeg -i seance/source_videos/seance12_aep.mp4 -r 24/1 seance/frames/seance12_1080/frame_%05d.png
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames/seance12_1080 -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c_v2 --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 1 --mask_start 0 -e 827
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames/seance12_1080 -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c_v2 --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 828 --mask_start 827 -e 1654
+python tools/makepython tools/make_video.py seance/outputs/seance12_0/frames_1080_c_v2 -o seance/outputs/seance12_0/seance12_0_upscaled_v2.mp4 --input_pattern frame_%5.png -s 1 -e 1652 -r 24_video.py seance/outputs/seance12_0/frames_1080_c_v2 -o seance/outputs/seance12_0/seance12_0_upscaled_v2.mp4 --input_pattern frame_%5.png -s 1 -e 1652 -r 24
+# proper mask shift
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames/seance12_1080 -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c_v3 --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 3 --mask_start 0 -e 829
+python tools/background_replacer.py -c seance/outputs/seance12_0/frames_1080/ -p seance/frames/seance12_1080 -m seance/pasting/seance12/masks/combined -o seance/outputs/seance12_0/frames_1080_c_v3 --copy_pattern frame_%5.png --paste_pattern frame_%5.png --mask_pattern mask_%5.png --out_pattern frame_%5.png -s 830 --mask_start 827 -e 1654
+python tools/make_video.py seance/outputs/seance12_0/frames_1080_c_v3 -o seance/outputs/seance12_0/seance12_0_upscaled_v3.mp4 --input_pattern frame_%5.png -s 3 -e 1654 -r 24
