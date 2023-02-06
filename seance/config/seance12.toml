@@ -30,7 +30,7 @@ testprompt6= "monsters looking through windows"
 
 [[keyframes]]
 frame = 1
-input_image = "frame_00001.png"
+input_image = "frame_00845.png"
 input_mask = "static2_576.png"
 seed = 999270936  #"random" #599310825
 prompt = "testprompt1"
