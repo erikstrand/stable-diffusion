@@ -1,0 +1,161 @@
+in_dir = "seance/frames_sun_2/"
+out_dir = "seance/outputs/seance13"
+mask_in_dir = "seance/outputs/seance13_0/masks"
+width = 960
+height = 576
+
+# python tools/dream_compiler.py seance/config/seance13.toml -c --version 1 -s 1 -e 643
+
+[prompts]
+clergy = "ghost monks in an occult ceremony, ancient runes, ghosts are spawning, ghosts are responding, the constant clergy, dark cinematic lighting, ultra realistic digital painting, by evgeny lushpin, by killian eng"
+
+# 13_0
+# 1* stones, swirly ghosts, glowing things
+# 2* outdoor stones, good candles
+# 4* stone arches, cloaked figure in background, burning pyres
+# 6* ghost monks in stony elven forest
+# 10* last supper
+# 11 red lamps in ancient ruins
+# 17* orange lamps in ruined city
+# 18* stone arches, torches, nearly a figure, stone mirror border
+# 19 cool candles, outside, graveyard vibes, creepy figure
+# 21 torches, stone, fog
+# 22* electric soul lamps, stormy outdoor stonescape
+# 23 stony monks meditating, candles
+# 24 meh, himalayan mountainscape
+# 30* crypt
+# 31 stony ruins, candles
+# 38 stony ruins, candles 2
+# 41 stony hall interior, candles
+# 42* gothic graveyard cathedral, torches
+# 49** medieval torture room
+# 50 dark gothic cave cathedral
+# 52** glowing runes, stone blocks
+# 55 many candles, intricate stonework
+# 56* glowing paper lamps in stone hall
+# 57* imposing statue in the shadows, lone candles
+# 59 electric soul lamps in recessed stone cubbies
+# 61* graveyard, full moon, creepy figure
+# 63* coherent stone interior, candles
+# 65** ghost monks! candles
+# 69* dark gothic interior, mystery glowing things
+# 71* praying monks in forest
+# 73 abstract blocky stone stuff
+# 74 more stone stuff, torches
+# 77 stone crypt with almost cross
+# 84 red glow, stone stuff, almost a figure
+# 87* religious ceremony in the woods
+# 90* mirror leaning against natural stone wall, arches, candles
+# 92* mirror leaning against stone wall in outdoor ritual space
+# 93** glowing runes on stone arches
+# 98 ruined stone interior
+
+# favorites
+# 1  768793460
+# 2  2290352924
+# 4  4110304191
+# 6  2828703126
+# 10 494910134
+# 17 3018731352
+# 18 695725056
+# 22 2179267386
+# 30 1931188990
+# 42 2819431236
+# 49 3680785963
+# 52 423714922
+# 56 270467658
+# 57 3188342093
+# 61 2922615587
+# 63 439567650
+# 65 1893643115
+# 69 2983359332
+# 71 2492313167
+# 87 753104353
+# 90 310142283
+# 92 2628883096
+# 93 1137395318
+
+
+
+
+# ==================================================
+# starts 11716
+# image fully in mirror at 12216
+# last frame 12359
+# duration 643
+[[keyframes]]
+frame = 1
+input_image = "frame_11716.png"
+input_mask = "frame_12216_mask.png"
+prompt = "clergy"
+# 63 coherent stony interior
+seed = 439567650
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 90
+
+[[keyframes]]
+duration = 99
+# 93 glowing runes on stone arches
+seed = 1137395318
+
+[[keyframes]]
+duration = 20
+
+[[keyframes]]
+duration = 43
+# 56 glowing paper lamps in stone hall
+seed = 270467658
+
+[[keyframes]]
+duration = 42
+# 49 medieval torture room
+seed = 3680785963
+
+[[keyframes]]
+duration = 41
+# 65 ghost monks! candles
+seed = 1893643115
+
+[[keyframes]]
+duration = 40
+# 52 glowing runes, stone blocks
+seed = 423714922
+
+[[keyframes]]
+duration = 39
+# 57 imposing statue in the shadows, lone candles
+seed = 3188342093
+
+[[keyframes]]
+duration = 38
+# 1 stones, swirly ghosts, glowing things
+seed = 768793460
+
+[[keyframes]]
+duration = 38
+# 42 gothic graveyard cathedral, torches
+seed = 4110304191
+
+[[keyframes]]
+duration = 38
+# 6 ghost monks in stony elven forest
+seed = 2828703126
+
+[[keyframes]]
+duration = 38
+# 10 last supper
+seed = 494910134
+
+[[keyframes]]
+duration = 38
+# 71 praying monks in forest
+seed = 2492313167
+
+[[keyframes]]
+duration = 38
+# 90 mirror leaning against natural stone wall, arches, candles
+seed = 310142283

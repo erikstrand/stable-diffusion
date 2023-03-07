@@ -1,0 +1,152 @@
+in_dir = "highest_self_resized"
+mask_in_dir = "seance14/masks/"
+out_dir = "outputs/seance14"
+width = 960
+height = 576
+
+[prompts]
+prompt1 =  "Energy Waves Wanting to Come Through The Fire Place, a beautiful painting of a Renaissance style fireplace, fire burning, cozy lounge ambiance, low lightning, room is lit by the fire, 4 k, hyper realistic photography"
+prompt2 =  "Physical spaces anchor our spirits through time, epic angle and pose, reflective pool, symmetrical artwork, ayahuasca, translucent, fungus, energy flows of water and fire, highly detailed, epic cinematic concept art, excellent composition, dystopian brutalist atmosphere, dynamic dramatic lighting, aesthetic, very inspirational, arthouse, greg rutkowski, artgerm"
+prompt3 =  "Who is she, whose face I cannot see, little velvet bed, little leather case, who has come, to take her place?"
+prompt4 =  "white flowers heavy heart gauze dressed what are you holding?, A surreal painting of a breakfast still life, flowers, by george baselitz, symbolist, soft colors, dramatic lighting, smooth, sharp focus, extremely detailed, aesthetically pleasing composition"
+prompt5 =  "'Whose hand is holding the flowers?' and I'm glad we thanked the hardworking atoms, many hands coming to grab something. Eerie oil painting."
+prompt6 =  "why blue, a beautiful painting of the view looking up from under the ocean"
+prompt7 =  "void mouth, a painting of many small mounths "
+prompt8 =  "is that us? father of waters, portal, river, fireplace"
+prompt9 =  "<nonsense> "
+prompt10 = "synergy, energy, the constant clergy, bits on bits on bits, 1010100102"
+prompt11 = "who created what threshold? "
+prompt12 = "why the square portals?, the doors, and the fireplaces?"
+prompt13 = "the constant clergy..."
+prompt14 = "door way to your highest self, your highest good"
+clouds = "a doorway to heaven made up of clouds"
+clouds1 = "a digital painting of a beautiful sunset, ethereal, sun shining through clouds"
+doorway = "a digital painting in a psychedelic style of a beautiful magic portal, mystical, which leads to a magical dimension, masterpiece, dynamic lighting, sharp focus, elegant harmony"
+doorway1 = "highly detailed beautiful organic molding, art nouveau, gaudi, sharp focus, dynamic lighting, elegant harmony, beauty, masterpiece , patern, white"
+doorway2 = "flashing portals from heaven, digital painting, digital illustration, extreme detail, digital art, 4k, ultra hd, holographic, hyperdetailed,Michelangelo Buonarroti"
+doorway3 = "quantum"
+doorway4 = "God pocket dimensions space room"
+stars = "Ultradetailed illustration of a portal to a galaxy nebula in the universe, Kamehameha, neon psychedelic setting, mystic, highly detailed,Concept art by jama jurabaev,"
+stars1 = "cosmic space scene lots of color sharp resolution, galaxies horizontal"
+
+
+[[keyframes]]
+frame = 26
+input_image = "frame_{00026}.png"
+seed = 2342331444
+prompt = "stars"             
+scale = 8.0
+strength = 0.3 #str 0.4 seems best for keeping the semantic layout of the image (mirror, etc) while still having interesting diffusion happening on top of it.
+steps = 50
+masks = [
+    { center = [0.22, 0.4], radius = 0.20 }, # mirror
+    { center = [0.45, 0.66], radius = 0.12 }, # zivvy
+    { center = [0.60, 0.35], radius = 0.20 }, # hope
+    { center = [0.53, 0.85], radius = 0.15 }, # 
+]
+seg_masks = [{cls="a person", mask_val="antimask"}]
+             #{cls="person", mask_val="antimask"},
+             #{cls="people", mask_val="antimask"},
+             #{cls="a group of people", mask_val="antimask"},
+             #{cls="a person", mask_val="antimask"}]
+
+[[keyframes]]
+duration = 24
+strength = 0.7 #str 0.4 seems best for keeping the semantic layout of the image (mirror, etc) while still having interesting diffusion happening on top of it.
+prompt = "stars"
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 40
+seed = 2410529190
+prompt = "stars"
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 20
+prompt = "stars"
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 20
+seed = 136505587
+prompt = "stars"
+#
+[[keyframes]]
+duration = 20
+prompt = "stars"
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 20
+seed = 1801823908
+prompt = "stars"
+#
+
+[[keyframes]]
+duration = 20
+prompt = "stars"
+# Any center/radius masks specified are also applied (as an OR op)
+
+[[keyframes]]
+duration = 30
+seed = 1559936050
+prompt = "stars"
+#
+[[keyframes]]
+duration = 25
+seed = 676954002 
+prompt = "stars"
+#
+[[keyframes]]
+duration = 25
+seed = 3131278857 
+prompt = "stars"
+
+[[keyframes]]
+duration = 25
+seed = 1604810618  
+prompt = "stars"
+
+[[keyframes]]
+duration = 25
+seed = 589418884  
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 939367669 
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 1490737593 
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 3175060482 
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 1235653481 
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 982896597 
+prompt = "stars"
+
+
+[[keyframes]]
+duration = 25
+seed = 1115419568 
+prompt = "stars"
+
+

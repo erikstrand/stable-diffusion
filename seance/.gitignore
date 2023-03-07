@@ -1,6 +1,4 @@
-frames
-frames2
-outputs_*
-test_*
-scenes
+frames*
 backgrounds
+scenes
+source_videos

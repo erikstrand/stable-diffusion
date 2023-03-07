@@ -1,11 +1,15 @@
-in_dir = "seance/frames2/seance2"
+in_dir = "seance/frames_sun_2/"
 out_dir = "seance/outputs/seance2"
-mask_in_dir = "seance/masks"
+mask_in_dir = "seance/outputs/seance2_2/masks"
 width = 960
 height = 576
 
+# python tools/dream_compiler.py seance/config/seance2.toml -m --version 5 -s 1 -e 1
+# python tools/dream_compiler.py seance/config/seance2.toml -c --version 5 -s 1 -e 192
+
 [prompts]
 picture = "a smirking witch, framed classical painting hanging on a wall, dark cinematic lighting, 30mm lens, soft focus"
+clocks = "a wall clock with too many hands, physical spaces anchor our spirits throgh time"
 
 # seance2_0
 # 21: dark landscape painting
@@ -31,22 +35,40 @@ picture = "a smirking witch, framed classical painting hanging on a wall, dark c
 # 85: well integrated dark painting
 # 91: little statue on wall
 
+# 2_2
+# 9: crazy clock with rune symbols 1797633953
+# 20: oculus clock 2729731671
+# 45 evil spirit clock 2444795489
+
+# 11: bigger sticky tree clock 1586991152
+# 17: another spirit clock 1916318397
+# 25: picasso clock 4009120808
+# 34: aquatic clock 3305617673
+
+# 2_3
 
 
 # ==================================================
 # Seance 2
 [[keyframes]]
 frame = 1
-input_image = "IM0001.png"
-prompt = "picture"
-seed = 345790
+input_image = "frame_02736.png"
+input_mask = "frame_000001.png"
+prompt = "clocks"
+seed = 1947472317 # 71 from 2_3
 strength = 0.7
 scale = 7.0
-masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+#masks = [{ center = [0.73, 0.83], radius = 0.23, sigmoid_k = 0.2 }]
+
+[[keyframes]]
+duration = 24
+seed = 2051060900
+seed_weight = 0.2
 
 [[keyframes]]
 duration = 1
-seed = "random"
+seed = 1947472317 # 71 from 2_3
 
 [[keyframes]]
-frame = 100
+frame = 192
+seed = 805022600 # 61

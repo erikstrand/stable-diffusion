@@ -1,11 +1,14 @@
-in_dir = "seance/frames2/seance4"
+in_dir = "seance/frames_sun_2/"
 out_dir = "seance/outputs/seance4"
-mask_in_dir = "seance/outputs/seance4_1/masks"
+mask_in_dir = "seance/outputs/seance4_5/masks"
 width = 960
 height = 576
 
+# python tools/dream_compiler.py seance/config/seance4.toml -m --version 5 -s 1 -e 1
+# python tools/dream_compiler.py seance/config/seance4.toml -c --version 6 -s 1 -e 474
+
 [prompts]
-flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark cinematic lighting, highly detailed, 30mm lens, soft focus"
+flowers = "small white flowers in an organic glass vase, dark cinematic lighting, ultra realistic digital painting, highly detailed, by evgeny lushpin, by alex gray"
 
 # 4_0
 # 4 bright white bushy bouquet
@@ -13,12 +16,18 @@ flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark 
 # 6 more white flowers
 # 7 candle, but not integrated well
 # 10 blurry sticks
-# 11 different white flowers
-# 23 flowery flowers
-# 26 one nice flower
+# 11 different white flowers 39611231
+# 23 flowery flowers 3674185847
+# 26 one nice flower 1130604459
 # 27 nice blurry flowers
 # 34 another nice bouquet
-# not looking further, these are all too bright to blend in
+# 36 very cool bouquet
+# 38 one bright flower
+# 41 very good flower
+# 55 bigger bouquet
+# 57 nice big flower
+# 59 another single flower
+# 65 another single flower
 
 # 4_1
 # 21 blurry sticks
@@ -29,17 +38,40 @@ flowers = "a vase of dead flowers on a mantlepiece, ultra realistic photo, dark 
 # 60 beautiful dead plants!
 # 98 cool diverse bouquet
 
+# 4_5
+# 3 floaty glowy flowers
+# 7 yellowy flowers
+# 10 two large white flowers
+# 17* 1952097685 smaller flowers, semi-plausibly in vases
+# 27* 3671782570 smaller flowers, placed well
+# 41 too big but maybe good at the end
+# 61* 40599853 best integration yet
+# 64 perfect coherence, but nothing on the right
+# 82 weird but interesting
+# 89 double flowers but kinda blurry
+# 90* 1763283441 white flowers, plausibly in vases
+
 
 # ==================================================
+# starts 3694
+# faded in 3720
+# ends after 4168
+# duration 474
 [[keyframes]]
 frame = 1
-input_image = "IM0001.png"
-input_mask = "frame_000001.png"
+input_image = "frame_03715.png"
+input_mask = "frame_03715_mask.png"
 prompt = "flowers"
-seed = 3674185847
-strength = 0.8
-scale = 8.0
+# 61 best integration yet
+seed = 40599853
+strength = 0.7
+scale = 7.0
+#masks = [
+#    { center = [0.2, 0.76], radius = 0.2, sigmoid_k = 0.2 },
+#    { center = [0.62, 0.77], radius = 0.2, sigmoid_k = 0.2 }
+#]
 
 [[keyframes]]
-frame = 476
-seed = 1130604459
+frame = 474
+# 90 white flowers, plausibly in vases
+seed = 1763283441
