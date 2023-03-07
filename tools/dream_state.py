@@ -82,6 +82,12 @@ class DreamState:
         else:
             return self.prev_keyframe.input_image.get_path(self.schedule.in_dir, self.frame_idx)
 
+    def input_mask_path(self):
+        if self.prev_keyframe.input_mask is None:
+            return None
+        else:
+            return self.prev_keyframe.input_mask.get_path(self.schedule.mask_in_dir, self.frame_idx)
+
     def output_file(self, frame=None):
         if frame is None:
             frame = self.frame_idx
@@ -164,10 +170,10 @@ class DreamState:
             init_img_transform = self.prev_keyframe.transform.arg_string()
 
         # Set the mask path (if any).
-        if self.has_mask():
-            mask = self.mask_path()
-        else:
-            mask = None
+        mask = self.input_mask_path()
+        # Note that we ignore circular masks if a mask file is specified.
+        if mask is None and self.has_mask():
+             mask = self.mask_path()
 
         # Add mask fill options (if any).
         mask_fill_img = None

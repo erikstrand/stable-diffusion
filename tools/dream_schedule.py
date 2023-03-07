@@ -164,6 +164,7 @@ class KeyFrame:
         "scale",
         "strength",
         "steps",
+        "input_mask",
         "masks",
         "fill_mask",
         "transform",
@@ -182,6 +183,7 @@ class KeyFrame:
         scale,
         strength,
         steps,
+        input_mask,
         masks,
         fill_mask,
         transform,
@@ -215,12 +217,17 @@ class KeyFrame:
         self.strength = strength
         self.steps = steps
 
+        assert(input_mask is None or isinstance(input_mask, InputImage))
+        self.input_mask = input_mask
+
         assert(isinstance(masks, list))
         for mask in masks:
             assert(isinstance(mask, Mask))
         # For now you can only mask pre-existing frames.
         if (len(masks) > 0):
             assert(input_image.in_video_mode())
+            # And we don't combine with a pre-existing mask.
+            assert(self.input_mask is None)
         self.masks = masks
 
         assert(fill_mask is None or isinstance(fill_mask, MaskFillImage))
@@ -274,6 +281,11 @@ class KeyFrame:
         strength = float(dict["strength"]) if "strength" in dict else 0.0
         steps = int(dict["steps"]) if "steps" in dict else 50
 
+        if "input_mask" not in dict or dict["input_mask"] == "none":
+            input_mask = None
+        else:
+            input_mask = InputImage.from_string(dict["input_mask"], dict["frame"])
+
         if "masks" not in dict or len(dict["masks"]) == 0:
             masks = []
         else:
@@ -313,6 +325,7 @@ class KeyFrame:
             scale=scale,
             strength=strength,
             steps=steps,
+            input_mask=input_mask,
             masks=masks,
             fill_mask=fill_mask,
             transform=transform,
@@ -421,6 +434,15 @@ class KeyFrame:
         if "steps" not in dict or dict["steps"] == "same":
             dict["steps"] = prev_keyframe.steps
 
+        # The input mask defaults to that of the previous keyframe. (But if you put the frame
+        # number in brackets e.g. "mask_{0001}.png" then it will be incremented each frame.)
+        if "input_mask" not in dict:
+            input_mask = prev_keyframe.input_mask
+        elif dict["input_mask"] == "none":
+            input_mask = None
+        else:
+            input_mask = InputImage.from_string(dict["input_mask"], frame)
+
         # Masks default to those used in the last keyframe.
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
@@ -470,6 +492,7 @@ class KeyFrame:
             scale=dict["scale"],
             strength=dict["strength"],
             steps=dict["steps"],
+            input_mask=input_mask,
             masks=dict["masks"],
             fill_mask=fill_mask,
             transform=transform,
@@ -487,11 +510,12 @@ class KeyFrame:
 
 
 class DreamSchedule:
-    __slots__ = ["in_dir", "out_dir", "width", "height", "prompts", "keyframes", "mask_fill_frames"]
+    __slots__ = ["in_dir", "out_dir", "mask_in_dir", "width", "height", "prompts", "keyframes", "mask_fill_frames"]
 
-    def __init__(self, in_dir, out_dir, width, height, named_prompts, keyframes):
+    def __init__(self, in_dir, out_dir, mask_in_dir, width, height, named_prompts, keyframes):
         self.in_dir = Path(in_dir)
         self.out_dir = Path(out_dir)
+        self.mask_in_dir = Path(mask_in_dir)
         self.keyframes = keyframes
         self.width = width
         self.height = height
@@ -577,6 +601,7 @@ class DreamSchedule:
     def from_dict(cls, data):
         in_dir = data["in_dir"]
         out_dir = data["out_dir"]
+        mask_in_dir = data["mask_in_dir"] if "mask_in_dir" in data else None
         width = data["width"]
         height = data["height"]
         named_prompts = data["prompts"]
@@ -590,7 +615,7 @@ class DreamSchedule:
         for keyframe_dict in data["keyframes"][1:]:
             schedule.append(KeyFrame.from_dict_and_previous_keyframe(keyframe_dict, schedule[-1]))
 
-        return DreamSchedule(in_dir, out_dir, width, height, named_prompts, schedule)
+        return DreamSchedule(in_dir, out_dir, mask_in_dir, width, height, named_prompts, schedule)
 
     @classmethod
     def from_file(cls, config_path):

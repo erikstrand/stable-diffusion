@@ -1,4 +1,5 @@
 import argparse
+import re
 import subprocess
 from pathlib import Path
 
@@ -18,12 +19,15 @@ if __name__ == "__main__":
         required=True
     )
 
+    # Deprecated (see use below)
+    """
     parser.add_argument(
         "-rn",
         "--rename",
         help="Rename IMxxxx to frame_xxxxxx",
         action="store_true"
     )
+    """
 
     parser.add_argument(
         "-s",
@@ -44,6 +48,13 @@ if __name__ == "__main__":
         type=int,
         help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
         default=1
+    )
+    parser.add_argument(
+        "--input_pattern",
+        type=str,
+        # note: can't put % in the string or argparse gets confused
+        help="The names of the input frames, with the number of digits after the percent symbol, e.g. frame_#6.png (default) or IM#4.jpg",
+        default="frame_#6.png"
     )
     parser.add_argument(
         "-i",
@@ -70,6 +81,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    # Parse the input filename pattern.
+    re_res = re.search(r"%(\d+)", args.input_pattern)
+    if re_res is None:
+        print("Invalid input pattern, you must include '%' followed by a number to indicate the format of the frame number")
+        exit(0)
+    else:
+        n_digits = int(re_res.group(1))
+        span = re_res.span()
+        path_start = args.input_pattern[:span[0]]
+        path_end = args.input_pattern[span[1]:]
+
+    # Deprecated for now (Jan 2023), might add back later.
+    """
     if args.rename:
         outdir = Path(args.dir)
         files = [(i, outdir / f"IM{i:04d}.png") for i in range(args.start_at, args.end_at + 1, args.stride)]
@@ -77,10 +101,14 @@ if __name__ == "__main__":
         for i, f in files:
             f.rename(outdir / f"frame_{i:06d}.png")
         exit(0)
+    """
 
     # Generate the list of frames, write it to a file.
     outdir = Path(args.dir)
-    files = [str(outdir / f"frame_{i:06d}.png") for i in range(args.start_at, args.end_at + 1, args.stride)]
+    files = [
+        str(outdir / f"{path_start}{str(i).zfill(n_digits)}{path_end}")
+        for i in range(args.start_at, args.end_at + 1, args.stride)
+    ]
     if args.irregular:
         files = [f for f in files if Path(f).exists()]
     with open('frames.txt', 'w') as outfile:
