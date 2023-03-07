@@ -447,7 +447,7 @@ class KeyFrame:
         if "masks" not in dict or dict["masks"] == "same":
             dict["masks"] = prev_keyframe.masks
         else:
-            dict["masks"] = [Mask(**mask) for mask in dict["masks"]]
+            dict["masks"] = [Mask.from_dict(mask) for mask in dict["masks"]]
 
         # Mask fill defaults to the value from the previous keyframe.
         if "fill_mask" not in dict or dict["fill_mask"] == "same":

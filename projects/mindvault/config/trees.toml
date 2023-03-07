@@ -1,0 +1,29 @@
+in_dir = "projects/mindvault/inputs/tests_resized/"
+out_dir = "projects/mindvault/outputs/trees/"
+mask_in_dir = "projects/mindvault/outputs/trees_4/masks"
+width = 960
+height = 576
+
+[prompts]
+smoke = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a dense jungle of interconnected psychedelic birch trees, thick colorful neon outlines, psychedelic pastel, rim light, intricate details, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, infrared, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees2 = "a dense jungle, pschedelic textured birch trunks, forest canopies, psychedelic pastel, rim light, deep grooves, intricate details, by Armand Guillaumin, by android jones, by esao andrews, by alex gray, by antoine blanchard, psychedelic, infrared, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees3 = "a dense forest, pschedelic textured birch trunks, psychedelic neon pastel, rim light, hard glowing edges, deep grooves, intricate details, by Armand Guillaumin, by android jones, by esao andrews, by alex gray, by antoine blanchard, psychedelic, infrared, vibrant colors, vivid colors, volumetric lighting, high contrast"
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "Wide_25.png"
+input_mask = "frame_000001.png"
+prompt = "trees3"
+seed = 47952032
+strength = 0.8
+scale = 8.0
+#masks = [{ center = [0.34, 0.25], radius = 0.36, sigmoid_k = 0.075, invert = "true" }]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 100

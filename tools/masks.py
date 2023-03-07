@@ -13,6 +13,16 @@ class Mask:
         self.sigmoid_k = float(sigmoid_k)
         self.invert = bool(invert)
 
+    @classmethod
+    def from_dict(cls, dict):
+        invert = False
+        if "invert" in dict:
+            if dict["invert"] == "true":
+                invert = True
+            else:
+                assert(dict["invert"] == "false")
+        return cls(dict["center"], dict["radius"], float(dict["sigmoid_k"]), bool(dict["invert"]))
+
     def __str__(self):
         result = f"Mask: center {self.center[0]}, {self.center[1]}, radius {self.radius}, sigmoid_k {self.sigmoid_k}"
         if self.invert:
@@ -35,6 +45,7 @@ def generate_mask_array(width, height, masks):
     # dist[i, j] = distance from (i, j) to center
 
     result = np.full(coords.shape[0:2], 255, dtype='uint8')
+    inverted = False
 
     for mask in masks:
         # Rescale center and radius.
@@ -50,10 +61,15 @@ def generate_mask_array(width, height, masks):
         mask_array = mask_array.astype('uint8')
 
         if mask.invert:
-            mask_array = 255 - mask_array
+            #mask_array = 255 - mask_array
+            inverted = True
 
         # Merge with previous masks.
         result = np.minimum(result, mask_array)
+        #result = np.maximum(result, mask_array)
+
+    if inverted:
+        result = 255 - result
 
     return result
 

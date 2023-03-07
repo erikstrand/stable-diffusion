@@ -1,0 +1,171 @@
+in_dir = "projects/mindvault/inputs/tests_resized/"
+out_dir = "projects/mindvault/outputs/smoke/"
+mask_in_dir = "projects/mindvault/outputs/smoke_0/masks"
+width = 960
+height = 576
+
+[prompts]
+smoke = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a forest of birch trees, faint neon outlines, infrared film, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+
+# 4 lamps are still there 3871195581
+# 77 also normal couch 3648535776
+# 78 also also normal couch 1291356176
+# 30 oil swirls 1139881565
+# 44 aurora borealis 1165798114
+# 18 swirly 3864549314
+# 63 never ending story 3555624907
+# 31 gnome 2456718783
+# 8 ominious orb 1883942157
+# 89 pre dragon? 2131526818
+# 58 dissolved couch 1592470797
+# 88 put near dragon 1786290533
+# 35 dragon and insect/bird/lizard 1364423611
+# 20 couch monster 3504107295
+# 21 also couch monster 689916877
+# 24 post-couch monster 2640050005
+# 38 intense colorful clouds 2489508416
+# 74 couch arm 758483753
+# 84 abstract thing 3876747375
+# 48 intense color clouds 2966810668
+# 32 volcano 3440515095
+# 90 also post volcano 1261399347
+# 86 post volcano 895660190
+
+## others
+# 60 intense colorful clouds
+# 73 drips
+# 10 drips
+# 56 swirly colors; normal couch
+# 70 spirit realm
+# 25 post ominous orb
+# 26 gas mask
+# 49 cyber-chicken orb
+# clouds
+# 82 colorful smoke
+# 83 smoke tendrils
+# 19 drips
+
+
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "Wide_25.png"
+input_mask = "frame_000001.png"
+prompt = "smoke"
+# 4 lamps are still there 3871195581
+seed = 3871195581
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.34, 0.25], radius = 0.34, sigmoid_k = 0.2, invert = "true" }]
+
+# 77 also normal couch 3648535776
+[[keyframes]]
+duration = 16
+seed = 3648535776
+
+# 78 also also normal couch 1291356176
+[[keyframes]]
+duration = 16
+seed = 1291356176
+
+# 30 oil swirls 1139881565
+[[keyframes]]
+duration = 15
+seed = 1139881565
+
+# 44 aurora borealis 1165798114
+[[keyframes]]
+duration = 14
+seed = 1165798114
+
+# 18 swirly 3864549314
+[[keyframes]]
+duration = 13
+seed = 3864549314
+
+# 63 never ending story 3555624907
+[[keyframes]]
+duration = 12
+seed = 3555624907
+
+# 31 gnome 2456718783
+[[keyframes]]
+duration = 10
+seed = 2456718783
+
+# 8 ominious orb 1883942157
+[[keyframes]]
+duration = 8
+seed = 1883942157
+
+# 89 pre dragon? 2131526818
+[[keyframes]]
+duration = 7
+seed = 2131526818
+
+# 58 dissolved couch 1592470797
+[[keyframes]]
+duration = 6
+seed = 1592470797
+
+# 88 put near dragon 1786290533
+[[keyframes]]
+duration = 6
+seed = 1786290533
+
+# 35 dragon and insect/bird/lizard 1364423611
+[[keyframes]]
+duration = 6
+seed = 1364423611
+
+# 20 couch monster 3504107295
+[[keyframes]]
+duration = 6
+seed = 3504107295
+
+# 21 also couch monster 689916877
+[[keyframes]]
+duration = 6
+seed = 689916877
+
+# 24 post-couch monster 2640050005
+[[keyframes]]
+duration = 6
+seed = 2640050005
+
+# 38 intense colorful clouds 2489508416
+[[keyframes]]
+duration = 6
+seed = 2489508416
+
+# 74 couch arm 758483753
+[[keyframes]]
+duration = 6
+seed = 758483753
+
+# 84 abstract thing 3876747375
+[[keyframes]]
+duration = 6
+seed = 3876747375
+
+# 48 intense color clouds 2966810668
+[[keyframes]]
+duration = 6
+seed = 2966810668
+
+# 32 volcano 3440515095
+[[keyframes]]
+duration = 6
+seed = 3440515095
+
+# 90 also post volcano 1261399347
+[[keyframes]]
+duration = 6
+seed = 1261399347
+
+# 86 post volcano 895660190
+[[keyframes]]
+duration = 6
+seed = 895660190

@@ -93,6 +93,12 @@ if __name__ == "__main__":
         required=True
     )
     parser.add_argument(
+        "--stride",
+        type=int,
+        help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
+        default=1
+    )
+    parser.add_argument(
         "-w",
         "--width",
         type=int,
@@ -105,14 +111,11 @@ if __name__ == "__main__":
         help="The desired height. (Can't use -h cause that's for --help.)",
         default=None
     )
-    parser.add_argument(
-        "--stride",
-        type=int,
-        help="How much to increment the frame counter each step. If stride is 2, every other frame is included.",
-        default=1
-    )
 
     args = parser.parse_args()
+
+    # Ensure at least one of --width or --height is specified.
+    assert(args.width is not None or args.height is not None)
 
     # Parse paths.
     in_dir = Path(args.in_dir)
@@ -144,37 +147,29 @@ if __name__ == "__main__":
         frame_pil = Image.open(input_files[i])
         frame_np = image_to_array(frame_pil)
 
-        # Figure out the new size.
+        # Make sure the input frame is at least as big as the desired size.
+        in_width = frame_np.shape[0]
+        in_height = frame_np.shape[1]
         if args.width is not None:
             width = args.width
         else:
-            width = frame_np.shape[0]
-            new_width = ((width + 63) // 64) * 64
+            width = in_width
         if args.height is not None:
             height = args.height
         else:
-            height = frame_np.shape[1]
-            new_height = ((height + 63) // 64) * 64
-        print(f"{input_files[i]}: {width}x{height} --> {output_files[i]}: {new_width}x{new_height}")
+            height = in_height
+        assert(in_width >= width)
+        assert(in_height >= height)
+        print(f"{input_files[i]}: {in_width}x{in_height} --> {output_files[i]}: {width}x{height}")
 
         # Generate the canvas.
         n_channels = frame_np.shape[2]
-        result_np = np.zeros((new_width, new_height, n_channels), dtype=frame_np.dtype)
+        result_np = np.zeros((width, height, n_channels), dtype=frame_np.dtype)
 
         # Paste the frame in.
-        x_offset = (new_width - width) // 2
-        y_offset = (new_height - height) // 2
-        result_np[x_offset:x_offset+width, y_offset:y_offset+height, :] = frame_np
-
-        # Extend the top and bottom.
-        result_np[x_offset:x_offset+width, :y_offset, :] = frame_np[:, 0, :].reshape((width, 1, n_channels))
-        result_np[x_offset:x_offset+width, y_offset+height:, :] = frame_np[:, height-1, :].reshape((width, 1, n_channels))
-
-        # Extend the sides
-        result_np[:x_offset, y_offset:y_offset+height, :] = frame_np[0, :, :].reshape((1, height, n_channels))
-        result_np[x_offset+width::, y_offset:y_offset+height, :] = frame_np[width-1, :, :].reshape((1, height, n_channels))
-
-        # TODO Corners? Right now they're all black anyway so I'm not gonna worry about it.
+        x_offset = (in_width - width) // 2
+        y_offset = (in_height - height) // 2
+        result_np = frame_np[x_offset:x_offset+width, y_offset:y_offset+height, :]
 
         # Save the result.
         result_pil = array_to_image(result_np)

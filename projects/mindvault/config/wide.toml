@@ -1,0 +1,76 @@
+in_dir = "projects/mindvault/inputs/wide/frames/"
+out_dir = "projects/mindvault/outputs/wide/"
+mask_in_dir = "projects/mindvault/outputs/wide_0/masks"
+width = 960
+height = 576
+
+[prompts]
+smoke = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a forest of birch trees, faint neon outlines, infrared film, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+
+
+# ==================================================
+# frame 1
+[[keyframes]]
+frame = 1
+input_image = "IM0001.png"
+input_mask = "frame_000001.png"
+prompt = "smoke"
+# 4 lamps are still there 3871195581
+seed = 29340857
+strength = 0.5
+scale = 7.0
+#masks = [
+#    { center = [0.43, 0.35], radius = 0.36, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.43, 0.35], radius = 0.1, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.43, 0.35], radius = 0.1, sigmoid_k = 0.1, invert = "true" }
+#]
+
+[[keyframes]]
+duration = 1
+seed = "random"
+
+[[keyframes]]
+frame = 93
+
+# ==================================================
+# frame 94
+[[keyframes]]
+frame = 94
+input_image = "IM0094.png"
+input_mask = "frame_000094.png"
+#masks = [
+#    { center = [0.35, 0.25], radius = 0.35, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.2, 0.35], radius = 0.22, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.6, 0.3], radius = 0.17, sigmoid_k = 0.1, invert = "true" }
+#]
+
+[[keyframes]]
+frame = 188
+
+# ==================================================
+# frame 189
+[[keyframes]]
+frame = 189
+input_image = "IM0189.png"
+input_mask = "frame_000189.png"
+#masks = [
+#    { center = [0.38, 0.45], radius = 0.3, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.38, 0.45], radius = 0.1, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.38, 0.45], radius = 0.1, sigmoid_k = 0.1, invert = "true" }
+#]
+
+# ==================================================
+# frame 287
+[[keyframes]]
+frame = 287
+input_image = "IM0287.png"
+input_mask = "frame_000287.png"
+#masks = [
+#    { center = [0.38, 0.45], radius = 0.3, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.38, 0.45], radius = 0.1, sigmoid_k = 0.1, invert = "true" },
+#    { center = [0.38, 0.45], radius = 0.1, sigmoid_k = 0.1, invert = "true" }
+#]
+
+[[keyframes]]
+frame = 343

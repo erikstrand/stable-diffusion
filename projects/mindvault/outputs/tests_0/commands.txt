@@ -1,0 +1,36 @@
+many masks
+python tools/background_replacer.py -i projects/mindvault/outputs/tests_0/frames -o projects/mindvault/outputs/tests_0/frames2 -m projects/mindvault/outputs/tests_0/masks -b projects/mindvault/inputs/tests_resized/Wide_25.png --frame_pattern frame_%6.png --mask_pattern frame_%6.png -s 1 -e 100
+
+one mask
+python tools/background_replacer.py -i projects/mindvault/outputs/tests_0/frames -o projects/mindvault/outputs/tests_0/frames2 -m projects/mindvault/outputs/tests_0/masks -b projects/mindvault/inputs/tests_resized/Wide_25.png --frame_pattern frame_%6.png --mask_pattern paris.png -s 1 -e 100
+
+first interpolation video
+python tools/background_replacer.py -i projects/mindvault/outputs/tests_1/frames -o projects/mindvault/outputs/tests_1/frames2 -m projects/mindvault/outputs/tests_1/masks -b projects/mindvault/inputs/tests_resized/Wide_25.png --frame_pattern frame_%6.png --mask_pattern paris.png -s 1 -e 100
+python tools/make_video.py projects/mindvault/outputs/tests_1/frames2/ -o projects/mindvault/outputs/tests_1/tests_1.mp4 -s 1 -e 116 --input_pattern frame_%6.png -r 24
+
+second interpolation video
+python tools/background_replacer.py -i projects/mindvault/outputs/smoke_0/frames -o projects/mindvault/outputs/smoke_0/frames2 -m projects/mindvault/outputs/smoke_0/masks -b projects/mindvault/inputs/tests_resized/Wide_25.png --frame_pattern frame_%6.png --mask_pattern paris.png -s 1 -e 100
+python tools/make_video.py projects/mindvault/outputs/smoke_0/frames2/ -o projects/mindvault/outputs/smoke_0/smoke_0.mp4 -s 1 -e 116 --input_pattern frame_%6.png -r 24
+
+shrinking
+python tools/frame_shrinker.py -i projects/mindvault/outputs/smoke_0/frames2 -o projects/mindvault/outputs/smoke_0/frames3 --input_pattern frame_%6.png --output_pattern frame_%6.png -s 1 -e 1 -w 960 --height 540
+python tools/frame_shrinker.py -i projects/mindvault/inputs/wide/frames -o projects/mindvault/inputs/wide_chop --input_pattern IM%4.png --output_pattern IM%4.png -s 1 -e 343 --height 540
+python tools/frame_shrinker.py -i projects/mindvault/outputs/wide_0/masks -o projects/mindvault/outputs/wide_0/masks_chop --input_pattern frame_%6.png --output_pattern frame_%6.png -s 1 -e 343 --height 540
+
+interpolation stuff - first pass
+python tools/frame_shrinker.py -i projects/mindvault/inputs/wide_interp/ -o projects/mindvault/inputs/wide_interp_chop/ --input_pattern frame_%3.png --output_pattern frame_%3.png -s 1 -e 1 -w 960 --height 540
+python tools/background_replacer.py -c projects/mindvault/inputs/wide_chop -p projects/mindvault/inputs/wide_interp_chop -m projects/mindvault/outputs/wide_0/masks_chop -o projects/mindvault/outputs/wide_0/combined --copy_pattern IM%4.png --paste_pattern frame_%3.png --mask_pattern frame_%6.png --invert_masks -s 1 -e 1
+python tools/make_video.py projects/mindvault/outputs/wide_0/combined/ -o projects/mindvault/outputs/wide_0/wide_0.mp4 -s 1 -e 343 --input_pattern IM%4.png -r 24
+
+interpolation stuff - big
+python tools/background_replacer.py -c projects/mindvault/inputs/wide_4k -p projects/mindvault/inputs/wide_interp_chop_4k/wide_interp_chop_upscale -m projects/mindvault/outputs/wide_0/masks_chop -o projects/mindvault/outputs/wide_0/combined_4k --copy_pattern IM%4.png --paste_pattern frame_%3_out.png --mask_pattern frame_%6.png --invert_masks -s 1 -e 93
+python tools/background_replacer.py -c projects/mindvault/inputs/wide_4k -p projects/mindvault/inputs/wide_interp_chop_4k/wide_interp_chop_upscale -m projects/mindvault/outputs/wide_0/masks_chop -o projects/mindvault/outputs/wide_0/combined_4k --copy_pattern IM%4.png --paste_pattern frame_%3_out.png --mask_pattern frame_%6.png --invert_masks -s 94 -e 188
+python tools/background_replacer.py -c projects/mindvault/inputs/wide_4k -p projects/mindvault/inputs/wide_interp_chop_4k/wide_interp_chop_upscale -m projects/mindvault/outputs/wide_0/masks_chop -o projects/mindvault/outputs/wide_0/combined_4k --copy_pattern IM%4.png --paste_pattern frame_%3_out.png --mask_pattern frame_%6.png --invert_masks -s 189 -e 286
+python tools/background_replacer.py -c projects/mindvault/inputs/wide_4k -p projects/mindvault/inputs/wide_interp_chop_4k/wide_interp_chop_upscale -m projects/mindvault/outputs/wide_0/masks_chop -o projects/mindvault/outputs/wide_0/combined_4k --copy_pattern IM%4.png --paste_pattern frame_%3_out.png --mask_pattern frame_%6.png --invert_masks -s 287 -e 343
+
+python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o projects/mindvault/outputs/wide_0/wide_0_4k_1.mp4 -s 1 -e 93 --input_pattern IM%4.png -r 24
+python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o projects/mindvault/outputs/wide_0/wide_0_4k_2.mp4 -s 94 -e 188 --input_pattern IM%4.png -r 24
+python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o projects/mindvault/outputs/wide_0/wide_0_4k_3.mp4 -s 189 -e 286 --input_pattern IM%4.png -r 24
+python tools/make_video.py projects/mindvault/outputs/wide_0/combined_4k/ -o projects/mindvault/outputs/wide_0/wide_0_4k_4.mp4 -s 287 -e 343 --input_pattern IM%4.png -r 24
+
+python tools/make_video.py projects/mindvault/outputs/eyes/results/ -o projects/mindvault/outputs/eyes/extreme_close_4k.mp4 -s 1 -e 652 --input_pattern frame_%6_out.png -r 24

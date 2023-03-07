@@ -1,0 +1,73 @@
+in_dir = "projects/mindvault/inputs/tests_resized/"
+out_dir = "projects/mindvault/outputs/tests/"
+mask_in_dir = "projects/mindvault/outputs/tests_1/masks"
+width = 960
+height = 576
+
+[prompts]
+p1 = "technicolor smoke swirling in the air, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+trees = "a forest of birch trees, faint neon outlines, infrared film, psychedelic, by android jones, by esao andrews, cgsociety, psychedelic art, psychedelic, vibrant colors, vivid colors, volumetric lighting, high contrast"
+
+## meh
+# 36 colorful clouds
+# 9 storm
+
+## early
+# 4 lamps are still there
+# 56 swirly colors; normal couch
+# 77 also normal couch
+# 78 also also normal couch
+# 30 oil swirls
+# 44 aurora borealis
+# 63 never ending story
+# 70 spirit realm
+# 31 gnome
+
+## things
+# 8 ominious orb
+# 89 pre dragon?
+# 58 dissolved couch
+# 88 put near dragon
+# 35 dragon and insect/bird/lizard
+# 20 couch monster
+# 21 also couch monster
+# 24 post-couch monster
+# 74 couch arm
+
+# 25 post ominous orb
+# 26 gas mask
+# 49 cyber-chicken orb
+
+# clouds
+# 18 swirly
+# 38 intense colorful clouds
+# 48 intense color clouds
+# 60 intense colorful clouds
+# 82 colorful smoke
+# 83 smoke tendrils
+
+## drips
+# 10 drips
+# 19 drips
+# 73 drips
+
+# 32 volcano
+# 86 post volcano
+# 90 also post volcano
+
+# 84 abstract thing
+
+# ==================================================
+[[keyframes]]
+frame = 1
+input_image = "Wide_25.png"
+input_mask = "frame_000001.png"
+prompt = "p1"
+seed = 3475359760
+strength = 0.7
+scale = 7.0
+#masks = [{ center = [0.34, 0.25], radius = 0.34, sigmoid_k = 0.2, invert = "true" }]
+
+[[keyframes]]
+duration = 120
+seed = 3440515095
