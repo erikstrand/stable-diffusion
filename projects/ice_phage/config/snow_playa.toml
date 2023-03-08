@@ -5,13 +5,28 @@ width = 960
 height = 540
 
 [prompts]
-bio_valve = "biological valve body megastructure in the style of dr. seuss, intricate colorful masterpiece, hyper detailed, hd"
+snow_playa = "burning man in the snow. intricate artwork. by Tooth Wu, wlop, beeple, dan mumford. octane render, trending on artstation, greg rutkowski very coherent symmetrical artwork. cinematic, hyper realism, high detail, octane render, 8k, iridescent accents"
 
 [[keyframes]]
 frame = 1
-seed = ?
-prompt = "bio_valve"
+seed = 2345987
+prompt = "snow_playa"
 scale = 8.0
+
+[[keyframes]]
+duration = 150
+
+[[keyframes]]
+duration = 150
+seed = 9230745
+
+[[keyframes]]
+duration = 150
+seed = 1234970
+
+[[keyframes]]
+duration = 150
+seed = 82304597
 set_color_reference = true
 
 [[keyframes]]

@@ -1,0 +1,58 @@
+in_dir = "projects/ice_phage/not_used"
+out_dir = "projects/ice_phage/outputs/complex_virus/"
+mask_in_dir = "projects/ice_phage/not_used"
+width = 960
+height = 540
+
+[prompts]
+sculpture = "a burning man sculture made of blueish transparent glass, winter, ray traced refraction, cold colors, cinematic lighting, rim light, high contrast, saturated colors, by tooth wu, by evgeny lushpin, ultra realistic 8k render, cgsociety"
+
+[[keyframes]]
+frame = 1
+seed = ?
+prompt = "sculpture"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.5
+transform.zoom = 0.98             # multiplicative factor per frame
+transform.translate = [0.0, 3.0]  # pixels per frame for X and Y
+transform.rotate = 0.0            # degrees per frame (positive is CCW)
+
+[[keyframes]]
+duration = 123
+animation.zoom = 1.0
+animation.translate = [5.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 132
+animation.zoom = 1.03
+animation.translate = [0.0, 2.0]
+animation.rotate = 0.5
+
+[[keyframes]]
+duration = 168
+animation.zoom = 1.0
+animation.translate = [0.0, 6.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 87
+animation.zoom = 1.0
+animation.translate = [0.0, 6.0]
+animation.rotate = -0.4
+
+[[keyframes]]
+duration = 106
+animation.zoom = 0.98
+animation.translate = [0.0, -2.0]
+animation.rotate = -0.1
+
+[[keyframes]]
+duration = 110

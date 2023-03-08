@@ -34,7 +34,7 @@ animation.rotate = 0.0
 
 [[keyframes]]
 duration = 110
-animation.zoom = 0.0
+animation.zoom = 1.0
 animation.translate = [0.0, 2.0]
 animation.rotate = 0.0
 
