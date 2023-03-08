@@ -9,24 +9,25 @@ snow_playa = "burning man in the snow. intricate artwork. by Tooth Wu, wlop, bee
 
 [[keyframes]]
 frame = 1
-seed = 2345987
+seed = 983740
 prompt = "snow_playa"
 scale = 8.0
 
 [[keyframes]]
 duration = 150
+seed = 1129075
 
 [[keyframes]]
 duration = 150
-seed = 9230745
+seed = 3204759
 
 [[keyframes]]
 duration = 150
-seed = 1234970
+seed = 105027
 
 [[keyframes]]
 duration = 150
-seed = 82304597
+seed = 48765498
 set_color_reference = true
 
 [[keyframes]]

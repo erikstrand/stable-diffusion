@@ -9,7 +9,7 @@ sculpture = "a burning man sculture made of blueish transparent glass, winter, r
 
 [[keyframes]]
 frame = 1
-seed = 1923405780
+seed = 1780130923
 prompt = "sculpture"
 scale = 8.0
 set_color_reference = true
@@ -22,37 +22,37 @@ correct_colors = true
 strength = 0.5
 transform.zoom = 0.98             # multiplicative factor per frame
 transform.translate = [0.0, 3.0]  # pixels per frame for X and Y
-transform.rotate = 0.0            # degrees per frame (positive is CCW)
+transform.rotate = -0.02            # degrees per frame (positive is CCW)
 
-[[keyframes]]
-duration = 123
-animation.zoom = 1.0
-animation.translate = [5.0, 0.0]
-animation.rotate = 0.0
-
-[[keyframes]]
-duration = 132
-animation.zoom = 1.03
-animation.translate = [0.0, 2.0]
-animation.rotate = 0.5
-
-[[keyframes]]
-duration = 168
-animation.zoom = 1.0
-animation.translate = [0.0, 6.0]
-animation.rotate = 0.0
-
-[[keyframes]]
-duration = 87
-animation.zoom = 1.0
-animation.translate = [0.0, 6.0]
-animation.rotate = -0.4
-
-[[keyframes]]
-duration = 106
-animation.zoom = 0.98
-animation.translate = [0.0, -2.0]
-animation.rotate = -0.1
+#[[keyframes]]
+#duration = 123
+#transform.zoom = 1.0
+#transform.translate = [5.0, 0.0]
+#transform.rotate = 0.0
+#
+#[[keyframes]]
+#duration = 132
+#transform.zoom = 1.03
+#transform.translate = [0.0, 2.0]
+#transform.rotate = 0.03
+#
+#[[keyframes]]
+#duration = 168
+#transform.zoom = 1.0
+#transform.translate = [0.0, 6.0]
+#transform.rotate = 0.0
+#
+#[[keyframes]]
+#duration = 87
+#transform.zoom = 1.0
+#transform.translate = [0.0, 6.0]
+#transform.rotate = -0.03
+#
+#[[keyframes]]
+#duration = 106
+#transform.zoom = 0.98
+#transform.translate = [0.0, -2.0]
+#transform.rotate = -0.01
 
 [[keyframes]]
 duration = 110

@@ -9,7 +9,7 @@ bio_valve = "biological valve body megastructure in the style of dr. seuss, intr
 
 [[keyframes]]
 frame = 1
-seed = 5592345780
+seed = 98723456812121
 prompt = "bio_valve"
 scale = 8.0
 set_color_reference = true

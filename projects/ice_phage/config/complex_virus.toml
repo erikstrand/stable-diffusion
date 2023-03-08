@@ -11,7 +11,7 @@ virus3 = "an icosahedral virus with a head and tail and long stalk, electron mic
 
 [[keyframes]]
 frame = 1
-seed = 2736051988
+seed = 176892345
 prompt = "virus1"
 scale = 8.0
 set_color_reference = true
@@ -21,34 +21,40 @@ duration = 1
 seed = "random"
 input_image = "previous"
 correct_colors = true
-strength = 0.5
+strength = 0.6
 transform.zoom = 1.02             # multiplicative factor per frame
 transform.translate = [2.0, 0.0]  # pixels per frame for X and Y
-transform.rotate = 1.0           # degrees per frame (positive is CCW)
+transform.rotate = 0.0            # revolutions per frame (positive is CCW)
 
 [[keyframes]]
-duration = 104
-animation.zoom = 1.0
-animation.translate = [5.0, 0.0]
-animation.rotate = 0.0
+duration = 120
+transform.zoom = 1.02
+transform.translate = [2.0, 0.0]
+transform.rotate = -0.01
 
 [[keyframes]]
-duration = 110
-animation.zoom = 1.0
-animation.translate = [0.0, 2.0]
-animation.rotate = 0.0
+duration = 120
+transform.zoom = 1.0
+transform.translate = [6.0, 0.0]
+transform.rotate = 0.0
 
 [[keyframes]]
-duration = 97
-animation.zoom = 0.98
-animation.translate = [0.0, 2.0]
-animation.rotate = 0.0
+duration = 140
+transform.zoom = 0.98
+transform.translate = [3.0, 1.0]
+transform.rotate = 0.02
 
 [[keyframes]]
-duration = 106
-animation.zoom = 0.98
-animation.translate = [0.0, -2.0]
-animation.rotate = 1.0
+duration = 160
+transform.zoom = 1.0
+transform.translate = [5.0, 3.0]
+transform.rotate = 0.02
 
 [[keyframes]]
-duration = 110
+duration = 100
+transform.zoom = 1.02
+transform.translate = [0.0, -2.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 150

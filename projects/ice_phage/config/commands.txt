@@ -1,3 +1,9 @@
+!from_file projects/ice_phage/outputs/complex_virus_1/complex_virus_1.txt
 !from_file projects/ice_phage/outputs/bio_valve_1/bio_valve_1.txt
 !from_file projects/ice_phage/outputs/snow_playa_1/snow_playa_1.txt
 !from_file projects/ice_phage/outputs/ice_sculpture_1/ice_sculpture_1.txt
+
+!from_file projects/ice_phage/outputs/complex_virus_2/complex_virus_2.txt
+!from_file projects/ice_phage/outputs/bio_valve_2/bio_valve_2.txt
+!from_file projects/ice_phage/outputs/snow_playa_2/snow_playa_2.txt
+!from_file projects/ice_phage/outputs/ice_sculpture_2/ice_sculpture_2.txt
