@@ -262,13 +262,13 @@ class Args(object):
                 # Image transforms start as strings but get parsed into tuples in invoke.py.
                 # This handles either case.
                 if isinstance(a['init_img_transform'], str):
-                    switches.append(f'-tf {a["init_img_transform"]}')
+                    switches.append(f'-tf "{a["init_img_transform"]}"')
                 elif isinstance(a['init_img_transform'], tuple):
                     angle = a['init_img_transform'][0]
                     zoom = a['init_img_transform'][1]
                     tx = a['init_img_transform'][2]
                     ty = a['init_img_transform'][3]
-                    switches.append(f'-tf {angle}:{zoom}:{tx}:{ty}')
+                    switches.append(f'-tf "{angle}:{zoom}:{tx}:{ty}"')
                 else:
                     raise ValueError(f'Invalid image transform (should be a string or list): {a["init_img_transform"]}')
             if a['mask_fill'] is not None:
