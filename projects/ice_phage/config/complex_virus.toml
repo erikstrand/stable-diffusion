@@ -1,0 +1,54 @@
+in_dir = "projects/ice_phage/not_used"
+out_dir = "projects/ice_phage/outputs/complex_virus/"
+mask_in_dir = "projects/ice_phage/not_used"
+width = 960
+height = 540
+
+[prompts]
+virus1 = "an icosahedral virus on a long stalk attacks bacteria, electron microscope image, by kim jung gi"
+virus2 = "a virus with a head and tail, electron microscope image, by kim jung gi"
+virus3 = "an icosahedral virus with a head and tail and long stalk, electron microscope image, by kim jung gi"
+
+[[keyframes]]
+frame = 1
+seed = 2736051988
+prompt = "virus1"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.5
+transform.zoom = 1.02             # multiplicative factor per frame
+transform.translate = [2.0, 0.0]  # pixels per frame for X and Y
+transform.rotate = -1.0           # degrees per frame (positive is CCW)
+
+[[keyframes]]
+duration = 104
+animation.zoom = 1.0
+animation.translate = [5.0, 0.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 110
+animation.zoom = 0.0
+animation.translate = [0.0, 2.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 97
+animation.zoom = 0.98
+animation.translate = [0.0, 2.0]
+animation.rotate = 0.0
+
+[[keyframes]]
+duration = 106
+animation.zoom = 0.98
+animation.translate = [0.0, -2.0]
+animation.rotate = -0.1
+
+[[keyframes]]
+duration = 110
