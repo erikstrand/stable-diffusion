@@ -9,25 +9,25 @@ snow_playa = "burning man in the snow. intricate artwork. by Tooth Wu, wlop, bee
 
 [[keyframes]]
 frame = 1
-seed = 983740
+seed = 97092864
 prompt = "snow_playa"
 scale = 8.0
 
 [[keyframes]]
 duration = 150
-seed = 1129075
+seed = 3338490
 
 [[keyframes]]
 duration = 150
-seed = 3204759
+seed = 1080234798
 
 [[keyframes]]
 duration = 150
-seed = 105027
+seed = 19876666
 
 [[keyframes]]
 duration = 150
-seed = 48765498
+seed = 654418794
 set_color_reference = true
 
 [[keyframes]]
@@ -35,40 +35,46 @@ duration = 1
 seed = "random"
 input_image = "previous"
 correct_colors = true
-strength = 0.5
+strength = 0.6
 transform.zoom = 1.03
 transform.translate = [0.0, 0.0]
 transform.rotate = 0.0
 
 [[keyframes]]
 duration = 150
-animation.zoom = 1.0
-animation.translate = [0.0, -4.0]
-animation.rotate = 0.0
+transform.zoom = 1.0
+transform.translate = [4.0, 0.0]
+transform.rotate = 0.0
 
 [[keyframes]]
 duration = 160
-animation.zoom = 0.98
-animation.translate = [0.0, 2.0]
-animation.rotate = 0.0
+transform.zoom = 0.98
+transform.translate = [0.0, 2.0]
+transform.rotate = 0.01
 
 [[keyframes]]
-duration = 175
-animation.zoom = 0.98
-animation.translate = [0.0, 2.0]
-animation.rotate = 1.0
+duration = 120
+transform.zoom = 0.98
+transform.translate = [0.0, 2.0]
+transform.rotate = 0.015
+
+[[keyframes]]
+duration = 40
+transform.zoom = 0.98
+transform.translate = [0.0, 2.0]
+transform.rotate = 0.02
+
+[[keyframes]]
+duration = 50
+transform.zoom = 1.0
+transform.translate = [5.0, 3.0]
+transform.rotate = 0.0
 
 [[keyframes]]
 duration = 155
-animation.zoom = 1.0
-animation.translate = [5.0, 3.0]
-animation.rotate = 0.0
-
-[[keyframes]]
-duration = 155
-animation.zoom = 1.03
-animation.translate = [3.0, 2.0]
-animation.rotate = -1.0
+transform.zoom = 1.03
+transform.translate = [3.0, 2.0]
+transform.rotate = -0.015
 
 [[keyframes]]
 duration = 170
