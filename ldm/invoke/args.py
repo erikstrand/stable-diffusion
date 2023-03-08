@@ -795,7 +795,7 @@ class Args(object):
             '--init_img_transform',
             default=None,
             type=str,
-            help='a transformation applied to the init image, in the form rotation_degrees:zoom_scale:translate_x:translate_y'
+            help='a transformation applied to the init image, in the form rotation_revolutions:zoom_scale:translate_x_pixels:translate_y_pixels'
         )
         img2img_group.add_argument(
             '-mf',

@@ -760,6 +760,10 @@ def split_prompt_variations(variations_string) -> list:
         return parts
 
 def split_transform(transform_string) -> list:
+    if transform_string[0] == "'" or transform_string[0] == '"':
+        transform_string = transform_string[1:]
+    if transform_string[-1] == "'" or transform_string[-1] == '"':
+        transform_string = transform_string[:-1]
     components = transform_string.split(':')
     if len(components) != 4:
         print(f'** Could not parse transform string "{transform_string}": expected 4 components separated by colons')
