@@ -50,19 +50,19 @@ transform.rotate = 0.0
 duration = 160
 transform.zoom = 0.98
 transform.translate = [0.0, 2.0]
-transform.rotate = 0.01
+transform.rotate = 0.005
 
 [[keyframes]]
 duration = 120
 transform.zoom = 0.98
 transform.translate = [0.0, 2.0]
-transform.rotate = 0.015
+transform.rotate = 0.008
 
 [[keyframes]]
 duration = 40
 transform.zoom = 0.98
 transform.translate = [0.0, 2.0]
-transform.rotate = 0.02
+transform.rotate = 0.01
 
 [[keyframes]]
 duration = 50
@@ -74,7 +74,7 @@ transform.rotate = 0.0
 duration = 155
 transform.zoom = 1.03
 transform.translate = [3.0, 2.0]
-transform.rotate = -0.015
+transform.rotate = -0.005
 
 [[keyframes]]
 duration = 170

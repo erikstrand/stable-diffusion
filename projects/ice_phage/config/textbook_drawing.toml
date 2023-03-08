@@ -1,0 +1,46 @@
+in_dir = "projects/ice_phage/not_used"
+out_dir = "projects/ice_phage/outputs/textbook_drawing/"
+mask_in_dir = "projects/ice_phage/not_used"
+width = 960
+height = 576
+
+[prompts]
+textbook_drawing = "a science textbook illustration of a bacteriophage, by david goodsell, by kim jung gi"
+
+[[keyframes]]
+frame = 1
+seed = 392345867
+prompt = "textbook_drawing"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.7
+transform.zoom = 1.0
+transform.translate = [-5.0, 1.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 200
+transform.zoom = 0.985
+transform.translate = [-3.0, 1.0]
+transform.rotate = 0.004
+
+[[keyframes]]
+duration = 200
+transform.zoom = 1.015
+transform.translate = [-4.0, 3.0]
+transform.rotate = -0.004
+
+[[keyframes]]
+duration = 200
+transform.zoom = 1.02
+transform.translate = [4.0, 3.0]
+transform.rotate = -0.004
+
+[[keyframes]]
+duration = 200

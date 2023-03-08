@@ -9,7 +9,7 @@ bio_valve = "biological valve body megastructure in the style of dr. seuss, intr
 
 [[keyframes]]
 frame = 1
-seed = 2872342121
+seed = 128345087
 prompt = "bio_valve"
 scale = 8.0
 set_color_reference = true
@@ -19,10 +19,10 @@ duration = 1
 seed = "random"
 input_image = "previous"
 correct_colors = true
-strength = 0.7
+strength = 0.8
 transform.zoom = 1.02
 transform.translate = [3.0, 0.0]
-transform.rotate = -0.01
+transform.rotate = -0.005
 
 [[keyframes]]
 duration = 160
@@ -40,7 +40,7 @@ transform.rotate = 0.0
 duration = 175
 transform.zoom = 1.02
 transform.translate = [0.0, 2.0]
-transform.rotate = 0.015
+transform.rotate = 0.007
 
 [[keyframes]]
 duration = 155
@@ -52,7 +52,7 @@ transform.rotate = 0.0
 duration = 155
 transform.zoom = 1.03
 transform.translate = [3.0, 2.0]
-transform.rotate = -0.02
+transform.rotate = -0.01
 
 [[keyframes]]
 duration = 170

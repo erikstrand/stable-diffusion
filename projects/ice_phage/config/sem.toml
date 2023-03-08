@@ -1,0 +1,40 @@
+in_dir = "projects/ice_phage/not_used"
+out_dir = "projects/ice_phage/outputs/sem/"
+mask_in_dir = "projects/ice_phage/not_used"
+width = 960
+height = 576
+
+[prompts]
+sem = "scanning electron microscope image of a bacteriophage virus, axons and dendrites, DNA helix, high contrast, black background, x-ray, science has gone too far"
+
+[[keyframes]]
+frame = 1
+seed = 392345867
+prompt = "sem"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.7
+transform.zoom = 1.0
+transform.translate = [4.0, 0.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 200
+transform.zoom = 0.985
+transform.translate = [5.0, -1.0]
+transform.rotate = 0.003
+
+[[keyframes]]
+duration = 200
+transform.zoom = 1.01
+transform.translate = [5.0, -2.0]
+transform.rotate = -0.004
+
+[[keyframes]]
+duration = 200

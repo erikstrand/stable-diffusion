@@ -34,7 +34,7 @@ transform.rotate = 0.0
 duration = 132
 transform.zoom = 1.02
 transform.translate = [0.0, 2.0]
-transform.rotate = 0.017
+transform.rotate = 0.0057
 
 [[keyframes]]
 duration = 168
@@ -46,7 +46,7 @@ transform.rotate = 0.0
 duration = 87
 transform.zoom = 1.0
 transform.translate = [0.0, 6.0]
-transform.rotate = -0.014
+transform.rotate = -0.008
 
 [[keyframes]]
 duration = 106
