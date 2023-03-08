@@ -1,8 +1,8 @@
 in_dir = "projects/ice_phage/not_used"
-out_dir = "projects/ice_phage/outputs/bio_valve/"
+out_dir = "projects/ice_phage/outputs/snow_playa/"
 mask_in_dir = "projects/ice_phage/not_used"
 width = 960
-height = 540
+height = 576
 
 [prompts]
 snow_playa = "burning man in the snow. intricate artwork. by Tooth Wu, wlop, beeple, dan mumford. octane render, trending on artstation, greg rutkowski very coherent symmetrical artwork. cinematic, hyper realism, high detail, octane render, 8k, iridescent accents"

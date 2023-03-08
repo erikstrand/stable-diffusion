@@ -1,15 +1,15 @@
 in_dir = "projects/ice_phage/not_used"
-out_dir = "projects/ice_phage/outputs/complex_virus/"
+out_dir = "projects/ice_phage/outputs/ice_sculpture/"
 mask_in_dir = "projects/ice_phage/not_used"
 width = 960
-height = 540
+height = 576
 
 [prompts]
 sculpture = "a burning man sculture made of blueish transparent glass, winter, ray traced refraction, cold colors, cinematic lighting, rim light, high contrast, saturated colors, by tooth wu, by evgeny lushpin, ultra realistic 8k render, cgsociety"
 
 [[keyframes]]
 frame = 1
-seed = ?
+seed = 1923405780
 prompt = "sculpture"
 scale = 8.0
 set_color_reference = true

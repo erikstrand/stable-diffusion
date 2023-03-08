@@ -2,7 +2,7 @@ in_dir = "projects/ice_phage/not_used"
 out_dir = "projects/ice_phage/outputs/complex_virus/"
 mask_in_dir = "projects/ice_phage/not_used"
 width = 960
-height = 540
+height = 576
 
 [prompts]
 virus1 = "an icosahedral virus on a long stalk attacks bacteria, electron microscope image, by kim jung gi"
@@ -24,7 +24,7 @@ correct_colors = true
 strength = 0.5
 transform.zoom = 1.02             # multiplicative factor per frame
 transform.translate = [2.0, 0.0]  # pixels per frame for X and Y
-transform.rotate = -1.0           # degrees per frame (positive is CCW)
+transform.rotate = 1.0           # degrees per frame (positive is CCW)
 
 [[keyframes]]
 duration = 104
@@ -48,7 +48,7 @@ animation.rotate = 0.0
 duration = 106
 animation.zoom = 0.98
 animation.translate = [0.0, -2.0]
-animation.rotate = -0.1
+animation.rotate = 1.0
 
 [[keyframes]]
 duration = 110
