@@ -125,9 +125,11 @@ if __name__ == "__main__":
 
     # Write the filenames to a file.
     filenames = [str(f) for f in files]
+    frame_duration = 1.0 / args.framerate
     with open('frames.txt', 'w') as outfile:
         for filename in filenames:
             outfile.write(f"file '{filename}'\n")
+            outfile.write(f"duration {frame_duration}\n")
 
     # Generate the video. We run an ffmpeg command like the following.
     # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
