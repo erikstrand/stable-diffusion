@@ -34,14 +34,14 @@ if __name__ == "__main__":
         "--start_at",
         type=int,
         help="The first frame to render (1-indexed).",
-        required=True
+        default=None,
     )
     parser.add_argument(
         "-e",
         "--end_at",
         type=int,
         help="The last frame to render (1-indexed).",
-        required=True
+        default=None,
     )
     parser.add_argument(
         "--stride",
@@ -52,15 +52,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_pattern",
         type=str,
-        # note: can't put % in the string or argparse gets confused
-        help="The names of the input frames, with the number of digits after the percent symbol, e.g. frame_#6.png (default) or IM#4.jpg",
-        default="frame_#6.png"
-    )
-    parser.add_argument(
-        "-i",
-        "--irregular",
-        action="store_true",
-        help="When set, only frames that exist are included.",
+        help="The names of the input frames, with a '#' in place of the frame number, e.g. frame_#.png (default) or IM#.jpg",
+        default="frame_#.png"
     )
 
     # Video Options
@@ -81,17 +74,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # Parse the input filename pattern.
-    re_res = re.search(r"%(\d+)", args.input_pattern)
-    if re_res is None:
-        print("Invalid input pattern, you must include '%' followed by a number to indicate the format of the frame number")
-        exit(0)
-    else:
-        n_digits = int(re_res.group(1))
-        span = re_res.span()
-        path_start = args.input_pattern[:span[0]]
-        path_end = args.input_pattern[span[1]:]
-
     # Deprecated for now (Jan 2023), might add back later.
     """
     if args.rename:
@@ -103,17 +85,49 @@ if __name__ == "__main__":
         exit(0)
     """
 
-    # Generate the list of frames, write it to a file.
+    # Parse the input filename pattern.
+    path_components = args.input_pattern.split("#")
+    if len(path_components) != 2:
+        print("Invalid input pattern, you must include exactly one '#' to indicate where the frame number appears")
+        exit(0)
+    path_start = path_components[0]
+    path_end = path_components[1]
+    path_start_len = len(path_start)
+    path_end_len = len(path_end)
+
+    # Get a list of filenames in the output directory.
     outdir = Path(args.dir)
     files = [
-        str(outdir / f"{path_start}{str(i).zfill(n_digits)}{path_end}")
-        for i in range(args.start_at, args.end_at + 1, args.stride)
+        f for f in outdir.iterdir()
+        if f.is_file() and f.name.startswith(path_start) and f.name.endswith(path_end)
     ]
-    if args.irregular:
-        files = [f for f in files if Path(f).exists()]
+    if len(files) == 0:
+        print("Found no files matching the specified pattern.")
+        exit(0)
+
+    # Extract the frame numbers from the filenames.
+    frames = []
+    for idx, f in enumerate(files):
+        frame = int(f.name[path_start_len:-path_end_len])
+        frames.append((idx, frame))
+
+    # Check for missing frames.
+    frames = sorted(frames, key=lambda x: x[1])
+    first_frame = frames[0][1]
+    last_frame = frames[-1][1]
+    missing_frames = last_frame - first_frame + 1 - len(frames)
+    print(f"Found {len(frames)} frames ({first_frame}-{last_frame}).")
+    if missing_frames > 0:
+        print(f"Warning: Missing {missing_frames} frames.")
+
+    # Sort filenames.
+    files = [files[file_tuple[0]] for file_tuple in frames]
+
+    # Write the filenames to a file.
+    filenames = [str(f) for f in files]
     with open('frames.txt', 'w') as outfile:
-        for file in files:
-            outfile.write(f"file '{file}'\n")
+        for filename in filenames:
+            outfile.write(f"file '{filename}'\n")
 
     # Generate the video. We run an ffmpeg command like the following.
     # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
