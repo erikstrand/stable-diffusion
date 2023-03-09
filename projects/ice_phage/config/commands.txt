@@ -7,3 +7,35 @@
 !from_file projects/ice_phage/outputs/bio_valve_2/bio_valve_2.txt
 !from_file projects/ice_phage/outputs/snow_playa_2/snow_playa_2.txt
 !from_file projects/ice_phage/outputs/ice_sculpture_2/ice_sculpture_2.txt
+
+python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/dna_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1 \
+   --output_video
+
+
+conda activate film
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/sem_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1 \
+   --output_video
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/complex_virus_6/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/ice_sculpture_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+python3 tools/make_video.py projects/ice_phage/outputs/dna_1/frames/interpolated_frames/ --input_pattern frame_%3.png -o projects/ice_phage/videos/dna_1_interp.mp4 -s 1 -e 999 -r 20
