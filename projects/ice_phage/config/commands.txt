@@ -8,14 +8,13 @@
 !from_file projects/ice_phage/outputs/snow_playa_2/snow_playa_2.txt
 !from_file projects/ice_phage/outputs/ice_sculpture_2/ice_sculpture_2.txt
 
+conda activate film
+
 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/dna_1/frames \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
    --times_to_interpolate 1 \
    --output_video
-
-
-conda activate film
 
 CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/sem_1/frames \
@@ -38,4 +37,88 @@ CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
    --times_to_interpolate 1
 
-python3 tools/make_video.py projects/ice_phage/outputs/dna_1/frames/interpolated_frames/ --input_pattern frame_%3.png -o projects/ice_phage/videos/dna_1_interp.mp4 -s 1 -e 999 -r 20
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/brain_tissue_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/textbook_drawing_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_4/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_5/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_6/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 2
+
+
+
+python3 tools/make_video.py projects/ice_phage/outputs/bio_valve_5/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/bio_valve_5_interp_v2.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/brain_tissue_1/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/brain_tissue_1_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/complex_virus_6/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/complex_virus_6_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/dna_1/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/dna_1_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/ice_sculpture_3/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/ice_sculpture_3_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/sem_1/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/sem_1_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_3/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/snow_playa_3_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_4/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/snow_playa_4_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_5/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/snow_playa_5_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_6/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/snow_playa_6_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/textbook_drawing_1/frames/interpolated_frames/ --input_pattern frame_#.png -o projects/ice_phage/videos/textbook_drawing_1_interp.mp4 -r 20
+
+
+
+
+python3 tools/make_video.py projects/ice_phage/outputs/bio_valve_5/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/bio_valve_5_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/brain_tissue_1/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/brain_tissue_1_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/complex_virus_6/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/complex_virus_6_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/dna_1/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/dna_1_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/ice_sculpture_3/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/ice_sculpture_3_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/sem_1/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/sem_1_interp_1080.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_3/frames/interpolated_frames/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/snow_playa_3_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_4/frames/interpolated_frames/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/snow_playa_4_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_5/frames/interpolated_frames/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/snow_playa_5_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/snow_playa_6/frames/interpolated_frames/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/snow_playa_6_interp.mp4 -r 20
+python3 tools/make_video.py projects/ice_phage/outputs/textbook_drawing_1/frames_1080/ --input_pattern frame_#_out.png -o projects/ice_phage/videos/textbook_drawing_1_interp_1080.mp4 -r 20
+
+
+
+source /media/data1/erik/code/Real-ESRGAN/.venv/bin/activate
+
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames_1080 -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/brain_tissue_1/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/brain_tissue_1/frames_1080 -g 1
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/complex_virus_6/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/complex_virus_6/frames_1080 -g 2
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/dna_1/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/dna_1/frames_1080 -g 3
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/ice_sculpture_3/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/ice_sculpture_3/frames_1080 -g 4
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/sem_1/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/sem_1/frames_1080 -g 5
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/textbook_drawing_1/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/textbook_drawing_1/frames_1080 -g 6
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_3/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_3/frames_1080 -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_4/frames/interpolated_frames -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/snow_playa_4/frames_1080 -g 2
+
+mv outputs/bio_valve_5/frames_interp_v2/frame_2[[:digit:]][[:digit:]][[:digit:]].png outputs/bio_valve_5/frames_interp_v2b/
+mv outputs/bio_valve_5/frames_interp_v2/frame_3[[:digit:]][[:digit:]][[:digit:]].png outputs/bio_valve_5/frames_interp_v2b/
+
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames_interp_v2 -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames_1080_v2 -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames_interp_v2b -o /media/data1/erik/code/stable-diffusion/projects/ice_phage/outputs/bio_valve_5/frames_1080_v2b -g 1
