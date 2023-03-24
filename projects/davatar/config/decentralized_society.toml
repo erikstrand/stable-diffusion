@@ -9,7 +9,7 @@ decentralized_society = "a photo of planet earth, space sunrise, by gregory crew
 
 [[keyframes]]
 frame = 1
-seed = 2138653190
+seed = 421707902
 prompt = "decentralized_society"
 scale = 8.0
 set_color_reference = true
@@ -22,7 +22,7 @@ correct_colors = true
 strength = 0.6
 transform.zoom = 0.98
 transform.translate = [-2.0, -4.0]
-transform.rotate = 0.002
+transform.rotate = 0.0
 
 [[keyframes]]
 duration = 100

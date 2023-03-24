@@ -3,3 +3,11 @@
 !from_file projects/davatar/outputs/cultivating_creativity_0/cultivating_creativity_0.txt
 !from_file projects/davatar/outputs/mind_and_body_0/mind_and_body_0.txt
 !from_file projects/davatar/outputs/decentralized_society_0/decentralized_society_0.txt
+!from_file projects/davatar/outputs/decentralized_society_1/decentralized_society_1.txt
+!from_file projects/davatar/outputs/mind_and_body_1/mind_and_body_1.txt
+!from_file projects/davatar/outputs/cultivating_creativity_1/cultivating_creativity_1.txt
+!from_file projects/davatar/outputs/future_worlds_1/future_worlds_1.txt
+
+
+python tools/make_video.py projects/davatar/outputs/future_worlds_0/frames -r 10 -o projects/davatar/outputs/future_worlds_0/future_worlds_0.mp4
+python tools/make_video.py projects/davatar/outputs/life_with_ai_0/frames -r 10 -o projects/davatar/outputs/life_with_ai_0/life_with_ai_0.mp4

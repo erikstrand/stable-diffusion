@@ -9,7 +9,7 @@ cultivating_creativity = "brightly colored hummingbirds in flight, paper quillin
 
 [[keyframes]]
 frame = 1
-seed = 3382495593
+seed = 3596880348
 prompt = "cultivating_creativity"
 scale = 8.0
 set_color_reference = true
@@ -17,12 +17,12 @@ set_color_reference = true
 [[keyframes]]
 duration = 1
 seed = "random"
-#input_image = "previous"
-#correct_colors = true
-#strength = 0.6
-#transform.zoom = 1.01
-#transform.translate = [0.0, 4.0]
-#transform.rotate = 0.0
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [0.0, 4.0]
+transform.rotate = 0.0
 
 [[keyframes]]
 duration = 100

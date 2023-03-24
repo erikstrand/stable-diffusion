@@ -5,7 +5,7 @@ width = 960
 height = 576
 
 [prompts]
-mind_and_body = "a portrait of a beautiful cyborg woman, geometric surrealism, polygon tesselations, by james jean, by kim jung gi, symmetric, highly detailed, cinematic lighting"
+mind_and_body = "an earth goddess's face in profile made of colorful leaves, in the style of the dutch masters and gregory crewdson, by mark cooper, film grain texture, intricate detail, cinematic lighting, rim lighting"
 
 [[keyframes]]
 frame = 1

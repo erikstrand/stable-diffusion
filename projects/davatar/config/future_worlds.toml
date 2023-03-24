@@ -17,12 +17,12 @@ set_color_reference = true
 [[keyframes]]
 duration = 1
 seed = "random"
-input_image = "previous"
-correct_colors = true
-strength = 0.6
-transform.zoom = 0.997
-transform.translate = [-3.0, 0.0]
-transform.rotate = 0.0
+#input_image = "previous"
+#correct_colors = true
+#strength = 0.6
+#transform.zoom = 0.997
+#transform.translate = [-3.0, 0.0]
+#transform.rotate = 0.0
 
 [[keyframes]]
 duration = 100
