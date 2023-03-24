@@ -8,7 +8,7 @@ height = 576
 mind_and_body = "an earth goddess's face in profile made of colorful leaves, in the style of the dutch masters and gregory crewdson, by mark cooper, film grain texture, intricate detail, cinematic lighting, rim lighting"
 
 [[keyframes]]
-frame = 1
+frame = 0
 seed = 2107409691
 prompt = "mind_and_body"
 scale = 8.0
@@ -20,9 +20,198 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 1.01
+transform.zoom = 0.99
 transform.translate = [4.0, 3.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2107409691
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2107409691
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 349265078
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 114987250
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2432750846
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2107409691
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 48375204
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 437509803
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2107409691
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, 3.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98

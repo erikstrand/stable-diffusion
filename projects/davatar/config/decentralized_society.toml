@@ -6,11 +6,13 @@ height = 576
 
 [prompts]
 decentralized_society = "a photo of planet earth, space sunrise, by gregory crewdson, by hannah yata, cinematic lighting, sharp intricate details, cheerful colors"
+globe = "globe earth with illuminated circuit traces, cosmos, by gregory crewdon, satellite image, starfield, cinematic lighting"
+globe_2 = "a globe covered with glowing circuit traces, cosmos, satellite image, starfield, cinematic lighting, 8k octane render, by josan gonzalez, by android jones"
 
 [[keyframes]]
-frame = 1
-seed = 421707902
-prompt = "decentralized_society"
+frame = 0
+seed = 231098456
+prompt = "globe_2"
 scale = 8.0
 set_color_reference = true
 
@@ -22,7 +24,238 @@ correct_colors = true
 strength = 0.6
 transform.zoom = 0.98
 transform.translate = [-2.0, -4.0]
-transform.rotate = 0.0
+transform.rotate = 0.002
 
 [[keyframes]]
-duration = 100
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 1235492688
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 9234568
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-2.0, -4.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 349857604
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-2.0, -4.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 9236544
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 249576894
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 2785693485
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [-2.0, -4.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 112974859
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [-2.0, -4.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 29034567
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [4.0, -2.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 342956877
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02
+transform.translate = [-4.0, -2.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 39842608
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [4.0, -2.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 123488597
+prompt = "globe_2"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-4.0, -2.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98

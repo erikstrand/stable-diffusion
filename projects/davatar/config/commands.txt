@@ -7,7 +7,29 @@
 !from_file projects/davatar/outputs/mind_and_body_1/mind_and_body_1.txt
 !from_file projects/davatar/outputs/cultivating_creativity_1/cultivating_creativity_1.txt
 !from_file projects/davatar/outputs/future_worlds_1/future_worlds_1.txt
+!from_file projects/davatar/outputs/decentralized_society_2/decentralized_society_2.txt
+!from_file projects/davatar/outputs/life_with_ai_1/life_with_ai_1.txt
+!from_file projects/davatar/outputs/future_worlds_2/future_worlds_2.txt
+
+long ones
+!from_file projects/davatar/outputs/cultivating_creativity_2/cultivating_creativity_2.txt
+!from_file projects/davatar/outputs/mind_and_body_2/mind_and_body_2.txt
+!from_file projects/davatar/outputs/life_with_ai_2/life_with_ai_2.txt
+!from_file projects/davatar/outputs/future_worlds_3/future_worlds_3.txt
+!from_file projects/davatar/outputs/decentralized_society_3/decentralized_society_3.txt
 
 
 python tools/make_video.py projects/davatar/outputs/future_worlds_0/frames -r 10 -o projects/davatar/outputs/future_worlds_0/future_worlds_0.mp4
 python tools/make_video.py projects/davatar/outputs/life_with_ai_0/frames -r 10 -o projects/davatar/outputs/life_with_ai_0/life_with_ai_0.mp4
+python tools/make_video.py projects/davatar/outputs/mind_and_body_1/frames -r 10 -o projects/davatar/outputs/mind_and_body_1/mind_and_body_1.mp4
+python tools/make_video.py projects/davatar/outputs/decentralized_society_0/frames -r 10 -o projects/davatar/outputs/decentralized_society_0/decentralized_society_0.mp4
+python tools/make_video.py projects/davatar/outputs/decentralized_society_1/frames -r 10 -o projects/davatar/outputs/decentralized_society_1/decentralized_society_1.mp4
+python tools/make_video.py projects/davatar/outputs/cultivating_creativity_1/frames -r 10 -o projects/davatar/outputs/cultivating_creativity_1/cultivating_creativity_1.mp4
+python tools/make_video.py projects/davatar/outputs/mind_and_body_0/frames -r 10 -o projects/davatar/outputs/mind_and_body_0/mind_and_body_0.mp4
+
+
+CUDA_VISIBLE_DEVICES=7 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_0/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1 \
+   --output_video

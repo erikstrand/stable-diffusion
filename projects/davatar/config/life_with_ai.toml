@@ -8,7 +8,7 @@ height = 576
 life_with_ai = "a portrait of a beautiful cyborg woman, geometric surrealism, polygon tesselations, by james jean, by kim jung gi, symmetric, highly detailed, cinematic lighting"
 
 [[keyframes]]
-frame = 1
+frame = 0
 seed = 4099294540
 prompt = "life_with_ai"
 scale = 8.0
@@ -21,7 +21,196 @@ input_image = "previous"
 correct_colors = true
 strength = 0.6
 transform.zoom = 1.01
-transform.translate = [0.0, 4.0]
+transform.translate = [2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 623450897
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 164309574
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 3347059864
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [-1.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 4099294540
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 123456879
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 149387520
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 1093427509
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [-1.0, -4.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 44894062
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-5.0, -3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
+
+
+[[keyframes]]
+duration = 1
+seed = 1245729638
+prompt = "life_with_ai"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-5.0, -3.0]
 transform.rotate = 0.0
 
 [[keyframes]]

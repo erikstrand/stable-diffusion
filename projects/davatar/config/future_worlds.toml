@@ -6,23 +6,56 @@ height = 576
 
 [prompts]
 future_worlds = "aerial view of a futuristic metropolis perched atop a waterfall, glass architecture skyscrapers, verdant greenery, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
+future_worlds_2 = "aerial view of a futuristic metropolis perched atop a waterfall, glass architecture skyscrapers, verdant greenery, visible horizon, rule of thirds, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
+
+# seeds - v1 (future_worlds_1)
+# 1
+# 13
+
+# seeds - v2 (future_worlds_2)
+# 1  2082099083
+# 2  4099294540
+# 6  725866399
+# 13 2048532061
+# 35 256019809
+
 
 [[keyframes]]
-frame = 1
+frame = 0
 seed = 2082099083
-prompt = "future_worlds"
+prompt = "future_worlds_2"
 scale = 8.0
-set_color_reference = true
+
+[[keyframes]]
+duration = 99
+seed = 4099294540
+
 
 [[keyframes]]
 duration = 1
-seed = "random"
-#input_image = "previous"
-#correct_colors = true
-#strength = 0.6
-#transform.zoom = 0.997
-#transform.translate = [-3.0, 0.0]
-#transform.rotate = 0.0
+seed = 2082099083
+prompt = "future_worlds_2"
 
 [[keyframes]]
-duration = 100
+duration = 99
+seed = 725866399
+
+
+[[keyframes]]
+duration = 1
+seed = 2082099083
+prompt = "future_worlds_2"
+
+[[keyframes]]
+duration = 99
+seed = 2048532061
+
+
+[[keyframes]]
+duration = 1
+seed = 2082099083
+prompt = "future_worlds_2"
+
+[[keyframes]]
+duration = 99
+seed = 256019809

@@ -8,7 +8,7 @@ height = 576
 cultivating_creativity = "brightly colored hummingbirds in flight, paper quilling, flowers, golden hour lighting, by james jean, trending on artstation"
 
 [[keyframes]]
-frame = 1
+frame = 0
 seed = 3596880348
 prompt = "cultivating_creativity"
 scale = 8.0
@@ -20,9 +20,198 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 1.01
-transform.translate = [0.0, 4.0]
+transform.zoom = 1.0
+transform.translate = [-5.0, -3.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 4938276
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-5.0, -3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 74563200
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [-3.0, -2.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 432760987
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [3.0, 3.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 9543604
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [3.0, 3.0]
+transform.rotate = 0.001
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 1347204698
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.01
+transform.translate = [3.0, 3.0]
+transform.rotate = 0.001
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 21843750
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-5.0, -3.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 79423606
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-4.0, -3.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 14357049
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-4.0, -3.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
+
+
+[[keyframes]]
+duration = 1
+seed = 164893527
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.0
+transform.translate = [-4.0, 3.0]
+transform.rotate = -0.002
+
+[[keyframes]]
+duration = 98
