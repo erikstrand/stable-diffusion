@@ -1,8 +1,8 @@
 Status
 life with ai: generating more variations, I think the prompt will work
-decentralized society: interpolating
-future worlds: running longer latent space interpolation
-cultivating creativity: upscaling
+decentralized society: upscaling
+future worlds: upscaling
+cultivating creativity: done?
 mind and body: generating more variations, probably need a different prompt
 
 
@@ -59,6 +59,18 @@ CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
    --times_to_interpolate 1
 
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/future_worlds_4/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
 
 
-python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_1080 -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_4k -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_3/frames_4k -g 7
+
+python tools/make_video.py projects/davatar/outputs/cultivating_creativity_2/frames_4k -r 24 --input_pattern frame_#_out.png -o projects/davatar/videos/cultivating_creativity_2.mp4
+
+
+
+tests
+python tools/make_video.py projects/davatar/outputs/cultivating_creativity_2/frames_4k -r 30 -p slow --probesize 64000000 --input_pattern frame_#_out.png -o projects/davatar/videos/cultivating_creativity_2b.mp4

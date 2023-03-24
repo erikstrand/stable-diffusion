@@ -61,15 +61,28 @@ if __name__ == "__main__":
         "-r",
         "--framerate",
         type=float,
-        help="The framerate of the output video (only used with -v).",
+        help="The framerate of the output video.",
         default=10.0
     )
     parser.add_argument(
         "-crf",
         "--constant_rate_factor",
         type=int,
-        help="The constant rate factor of the output video (0-51, lower is higher quality but larger file) (only used with -v).",
+        help="The constant rate factor of the output video (0-51, lower is higher quality but larger file).",
         default=23
+    )
+    parser.add_argument(
+        "-p",
+        "--preset",
+        type=str,
+        help="The overall speed to compression ratio setting (default is 'medium').",
+        default='medium'
+    )
+    parser.add_argument(
+        "--probesize",
+        type=int,
+        help="How far ahead the encoder looks to determine certain information (should be enough to hold ~4 frames).",
+        default=5000000
     )
 
     args = parser.parse_args()
@@ -147,6 +160,12 @@ if __name__ == "__main__":
         "libx264",
         "-crf",
         str(args.constant_rate_factor),
+        "-preset",
+        args.preset,
+        "-probesize",
+        str(args.probesize),
+        "-fpsprobesize",
+        str(args.probesize),
         "-pix_fmt",
         "yuv420p",
         args.outfile
