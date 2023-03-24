@@ -1,0 +1,28 @@
+in_dir = "projects/davatar/not_used"
+out_dir = "projects/davatar/outputs/future_worlds/"
+mask_in_dir = "projects/davatar/not_used"
+width = 960
+height = 576
+
+[prompts]
+future_worlds = "aerial view of a futuristic metropolis perched atop a waterfall, glass architecture skyscrapers, verdant greenery, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
+
+[[keyframes]]
+frame = 1
+seed = 2082099083
+prompt = "future_worlds"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.997
+transform.translate = [-3.0, 0.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100

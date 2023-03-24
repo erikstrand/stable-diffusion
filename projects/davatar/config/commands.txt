@@ -1,0 +1,5 @@
+!from_file projects/davatar/outputs/future_worlds_0/future_worlds_0.txt
+!from_file projects/davatar/outputs/life_with_ai_0/life_with_ai_0.txt
+!from_file projects/davatar/outputs/cultivating_creativity_0/cultivating_creativity_0.txt
+!from_file projects/davatar/outputs/mind_and_body_0/mind_and_body_0.txt
+!from_file projects/davatar/outputs/decentralized_society_0/decentralized_society_0.txt

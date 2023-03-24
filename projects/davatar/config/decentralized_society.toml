@@ -1,0 +1,28 @@
+in_dir = "projects/davatar/not_used"
+out_dir = "projects/davatar/outputs/decentralized_society/"
+mask_in_dir = "projects/davatar/not_used"
+width = 960
+height = 576
+
+[prompts]
+decentralized_society = "a photo of planet earth, space sunrise, by gregory crewdson, by hannah yata, cinematic lighting, sharp intricate details, cheerful colors"
+
+[[keyframes]]
+frame = 1
+seed = 2138653190
+prompt = "decentralized_society"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.98
+transform.translate = [-2.0, -4.0]
+transform.rotate = 0.002
+
+[[keyframes]]
+duration = 100

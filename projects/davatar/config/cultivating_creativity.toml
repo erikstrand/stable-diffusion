@@ -1,0 +1,28 @@
+in_dir = "projects/davatar/not_used"
+out_dir = "projects/davatar/outputs/cultivating_creativity/"
+mask_in_dir = "projects/davatar/not_used"
+width = 960
+height = 576
+
+[prompts]
+cultivating_creativity = "brightly colored hummingbirds in flight, paper quilling, flowers, golden hour lighting, by james jean, trending on artstation"
+
+[[keyframes]]
+frame = 1
+seed = 3382495593
+prompt = "cultivating_creativity"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+#input_image = "previous"
+#correct_colors = true
+#strength = 0.6
+#transform.zoom = 1.01
+#transform.translate = [0.0, 4.0]
+#transform.rotate = 0.0
+
+[[keyframes]]
+duration = 100
