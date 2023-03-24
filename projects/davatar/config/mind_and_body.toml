@@ -21,58 +21,17 @@ input_image = "previous"
 correct_colors = true
 strength = 0.6
 transform.zoom = 0.99
-transform.translate = [4.0, 3.0]
+transform.translate = [4.0, 0.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
-seed = 2107409691
-prompt = "mind_and_body"
-scale = 8.0
-set_color_reference = true
-
-[[keyframes]]
-duration = 1
-seed = "random"
-input_image = "previous"
-correct_colors = true
-strength = 0.6
-transform.zoom = 0.98
-transform.translate = [4.0, 3.0]
-transform.rotate = 0.0
-
-[[keyframes]]
-duration = 98
-
-
-[[keyframes]]
-duration = 1
-seed = 2107409691
-prompt = "mind_and_body"
-scale = 8.0
-set_color_reference = true
-
-[[keyframes]]
-duration = 1
-seed = "random"
-input_image = "previous"
-correct_colors = true
-strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
-transform.rotate = 0.0
-
-[[keyframes]]
-duration = 98
-
-
-[[keyframes]]
-duration = 1
-seed = 349265078
+seed = 123984725
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -84,16 +43,61 @@ input_image = "previous"
 correct_colors = true
 strength = 0.6
 transform.zoom = 0.99
-transform.translate = [4.0, 3.0]
+transform.translate = [4.0, 0.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
+
+
+[[keyframes]]
+duration = 1
+seed = 2107409691
+input_image = "none"
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [-4.0, 0.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 198
+
+
+[[keyframes]]
+duration = 1
+seed = 349265078
+input_image = "none"
+prompt = "mind_and_body"
+scale = 8.0
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 0.99
+transform.translate = [-4.0, 3.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 114987250
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -104,17 +108,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [4.0, 3.0]
+transform.zoom = 0.99
+transform.translate = [4.0, -1.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 2432750846
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -125,17 +130,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
+transform.zoom = 1.0
+transform.translate = [-4.0, 0.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
-seed = 2107409691
+seed = 1079342785
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -146,17 +152,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
-transform.rotate = 0.002
+transform.zoom = 1.0
+transform.translate = [-4.0, 0.0]
+transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 48375204
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -167,17 +174,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
-transform.rotate = 0.002
+transform.zoom = 1.0
+transform.translate = [-4.0, 0.0]
+transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 437509803
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -188,17 +196,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
-transform.rotate = 0.002
+transform.zoom = 1.0
+transform.translate = [4.0, -1.0]
+transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198
 
 
 [[keyframes]]
 duration = 1
-seed = 2107409691
+seed = 107040367
+input_image = "none"
 prompt = "mind_and_body"
 scale = 8.0
 set_color_reference = true
@@ -209,9 +218,9 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
-transform.translate = [-4.0, 3.0]
-transform.rotate = -0.002
+transform.zoom = 1.0
+transform.translate = [4.0, -1.0]
+transform.rotate = 0.0
 
 [[keyframes]]
-duration = 98
+duration = 198

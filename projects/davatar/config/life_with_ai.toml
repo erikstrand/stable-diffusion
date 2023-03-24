@@ -21,16 +21,17 @@ input_image = "previous"
 correct_colors = true
 strength = 0.6
 transform.zoom = 1.01
-transform.translate = [2.0, -4.0]
+transform.translate = [1.0, -3.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 623450897
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -46,12 +47,13 @@ transform.translate = [2.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 164309574
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -67,12 +69,13 @@ transform.translate = [-2.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 3347059864
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -88,12 +91,13 @@ transform.translate = [-1.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 4099294540
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -104,17 +108,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
+transform.zoom = 0.99
 transform.translate = [2.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 123456879
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -125,17 +130,18 @@ seed = "random"
 input_image = "previous"
 correct_colors = true
 strength = 0.6
-transform.zoom = 0.98
+transform.zoom = 0.99
 transform.translate = [2.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 149387520
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -151,12 +157,13 @@ transform.translate = [-2.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 1093427509
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -172,12 +179,13 @@ transform.translate = [-1.0, -4.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 44894062
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -193,12 +201,13 @@ transform.translate = [-5.0, -3.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198
 
 
 [[keyframes]]
 duration = 1
 seed = 1245729638
+input_image = "none"
 prompt = "life_with_ai"
 scale = 8.0
 set_color_reference = true
@@ -214,4 +223,4 @@ transform.translate = [-5.0, -3.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 100
+duration = 198

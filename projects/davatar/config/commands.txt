@@ -1,3 +1,12 @@
+Status
+life with ai: generating more variations, I think the prompt will work
+decentralized society: interpolating
+future worlds: running longer latent space interpolation
+cultivating creativity: upscaling
+mind and body: generating more variations, probably need a different prompt
+
+
+
 !from_file projects/davatar/outputs/future_worlds_0/future_worlds_0.txt
 !from_file projects/davatar/outputs/life_with_ai_0/life_with_ai_0.txt
 !from_file projects/davatar/outputs/cultivating_creativity_0/cultivating_creativity_0.txt
@@ -18,6 +27,12 @@ long ones
 !from_file projects/davatar/outputs/future_worlds_3/future_worlds_3.txt
 !from_file projects/davatar/outputs/decentralized_society_3/decentralized_society_3.txt
 
+!from_file projects/davatar/outputs/life_with_ai_3/life_with_ai_3.txt
+!from_file projects/davatar/outputs/mind_and_body_3/mind_and_body_3.txt
+
+final-ish
+!from_file projects/davatar/outputs/future_worlds_4/future_worlds_4.txt
+
 
 python tools/make_video.py projects/davatar/outputs/future_worlds_0/frames -r 10 -o projects/davatar/outputs/future_worlds_0/future_worlds_0.mp4
 python tools/make_video.py projects/davatar/outputs/life_with_ai_0/frames -r 10 -o projects/davatar/outputs/life_with_ai_0/life_with_ai_0.mp4
@@ -27,9 +42,23 @@ python tools/make_video.py projects/davatar/outputs/decentralized_society_1/fram
 python tools/make_video.py projects/davatar/outputs/cultivating_creativity_1/frames -r 10 -o projects/davatar/outputs/cultivating_creativity_1/cultivating_creativity_1.mp4
 python tools/make_video.py projects/davatar/outputs/mind_and_body_0/frames -r 10 -o projects/davatar/outputs/mind_and_body_0/mind_and_body_0.mp4
 
+python tools/make_video.py projects/davatar/outputs/future_worlds_3/frames -r 10 -o projects/davatar/outputs/future_worlds_3/future_worlds_3.mp4
+python tools/make_video.py projects/davatar/outputs/cultivating_creativity_2/frames -r 10 -o projects/davatar/outputs/cultivating_creativity_2/cultivating_creativity_2.mp4
+python tools/make_video.py projects/davatar/outputs/life_with_ai_2/frames -r 10 -o projects/davatar/outputs/life_with_ai_2/life_with_ai_2.mp4
+python tools/make_video.py projects/davatar/outputs/decentralized_society_3/frames -r 10 -o projects/davatar/outputs/decentralized_society_3/decentralized_society_3.mp4
+python tools/make_video.py projects/davatar/outputs/mind_and_body_2/frames -r 10 -o projects/davatar/outputs/mind_and_body_2/mind_and_body_2.mp4
+
 
 CUDA_VISIBLE_DEVICES=7 python3 -m eval.interpolator_cli \
-   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_0/frames \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
-   --times_to_interpolate 1 \
-   --output_video
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+
+
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_1080 -g 7

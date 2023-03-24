@@ -21,41 +21,11 @@ future_worlds_2 = "aerial view of a futuristic metropolis perched atop a waterfa
 
 
 [[keyframes]]
-frame = 0
+frame = 1
 seed = 2082099083
 prompt = "future_worlds_2"
 scale = 8.0
 
 [[keyframes]]
-duration = 99
-seed = 4099294540
-
-
-[[keyframes]]
-duration = 1
-seed = 2082099083
-prompt = "future_worlds_2"
-
-[[keyframes]]
-duration = 99
-seed = 725866399
-
-
-[[keyframes]]
-duration = 1
-seed = 2082099083
-prompt = "future_worlds_2"
-
-[[keyframes]]
-duration = 99
+duration = 120
 seed = 2048532061
-
-
-[[keyframes]]
-duration = 1
-seed = 2082099083
-prompt = "future_worlds_2"
-
-[[keyframes]]
-duration = 99
-seed = 256019809
