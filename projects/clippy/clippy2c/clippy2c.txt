@@ -1,0 +1,604 @@
+!set_prompts "internet nostalgia, a digital drawing of kdaclippy on a grassy landscape with a blue sky with white clouds, by Artgeirm and Joshua Middleton, 8k, film grain, octane render, unreal engine 5, trending on artstation, artstationHD, artstationHQ, unreal engine, 4k, 8k, trending"
+--prompt_idx 0 -S 1051802512 -C 10.00 -f 0.600 -s 50 -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000001.png
+-I -1 --prompt_idx 0 -S 787307212 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000002.png
+-I -1 --prompt_idx 0 -S 3975230260 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000003.png
+-I -1 --prompt_idx 0 -S 2828802131 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000004.png
+-I -1 --prompt_idx 0 -S 1796911988 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000005.png
+-I -1 --prompt_idx 0 -S 28519194 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000006.png
+-I -1 --prompt_idx 0 -S 186870824 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000007.png
+-I -1 --prompt_idx 0 -S 941711636 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000008.png
+-I -1 --prompt_idx 0 -S 1115995823 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000009.png
+-I -1 --prompt_idx 0 -S 3760417559 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000010.png
+-I -1 --prompt_idx 0 -S 3406953559 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000011.png
+-I -1 --prompt_idx 0 -S 2404199037 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000012.png
+-I -1 --prompt_idx 0 -S 661838515 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000013.png
+-I -1 --prompt_idx 0 -S 1419088482 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000014.png
+-I -1 --prompt_idx 0 -S 691514166 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000015.png
+-I -1 --prompt_idx 0 -S 2751786559 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000016.png
+-I -1 --prompt_idx 0 -S 3943334498 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000017.png
+-I -1 --prompt_idx 0 -S 2075698294 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000018.png
+-I -1 --prompt_idx 0 -S 4073129173 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000019.png
+-I -1 --prompt_idx 0 -S 3554658194 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000020.png
+-I -1 --prompt_idx 0 -S 2517626217 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000021.png
+-I -1 --prompt_idx 0 -S 2745468146 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000022.png
+-I -1 --prompt_idx 0 -S 2878011315 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000023.png
+-I -1 --prompt_idx 0 -S 3273399258 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000024.png
+-I -1 --prompt_idx 0 -S 1052111400 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000025.png
+-I -1 --prompt_idx 0 -S 1444179045 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000026.png
+-I -1 --prompt_idx 0 -S 254449862 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000027.png
+-I -1 --prompt_idx 0 -S 1167672954 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000028.png
+-I -1 --prompt_idx 0 -S 778876502 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000029.png
+-I -1 --prompt_idx 0 -S 2404305911 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000030.png
+-I -1 --prompt_idx 0 -S 2555829866 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000031.png
+-I -1 --prompt_idx 0 -S 2546768404 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000032.png
+-I -1 --prompt_idx 0 -S 3637022023 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000033.png
+-I -1 --prompt_idx 0 -S 1637626091 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000034.png
+-I -1 --prompt_idx 0 -S 725731522 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000035.png
+-I -1 --prompt_idx 0 -S 220389719 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000036.png
+-I -1 --prompt_idx 0 -S 2038317530 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000037.png
+-I -1 --prompt_idx 0 -S 3988973437 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000038.png
+-I -1 --prompt_idx 0 -S 1051628416 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000039.png
+-I -1 --prompt_idx 0 -S 3913978520 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000040.png
+-I -1 --prompt_idx 0 -S 2298904602 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000041.png
+-I -1 --prompt_idx 0 -S 1295494650 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000042.png
+-I -1 --prompt_idx 0 -S 3318788234 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000043.png
+-I -1 --prompt_idx 0 -S 725474405 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000044.png
+-I -1 --prompt_idx 0 -S 3187076533 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000045.png
+-I -1 --prompt_idx 0 -S 1428829292 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000046.png
+-I -1 --prompt_idx 0 -S 3733588652 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000047.png
+-I -1 --prompt_idx 0 -S 3797710631 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000048.png
+-I -1 --prompt_idx 0 -S 3247709865 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000049.png
+-I -1 --prompt_idx 0 -S 2481274371 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000050.png
+-I -1 --prompt_idx 0 -S 2106398114 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000051.png
+-I -1 --prompt_idx 0 -S 1245896916 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000052.png
+-I -1 --prompt_idx 0 -S 2061579055 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000053.png
+-I -1 --prompt_idx 0 -S 3052451173 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000054.png
+-I -1 --prompt_idx 0 -S 4246225916 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000055.png
+-I -1 --prompt_idx 0 -S 1422681767 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000056.png
+-I -1 --prompt_idx 0 -S 2216673962 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000057.png
+-I -1 --prompt_idx 0 -S 52245271 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000058.png
+-I -1 --prompt_idx 0 -S 3404276538 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000059.png
+-I -1 --prompt_idx 0 -S 2831859783 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000060.png
+-I -1 --prompt_idx 0 -S 3006436816 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000061.png
+-I -1 --prompt_idx 0 -S 2855286578 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000062.png
+-I -1 --prompt_idx 0 -S 752595864 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000063.png
+-I -1 --prompt_idx 0 -S 2652257667 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000064.png
+-I -1 --prompt_idx 0 -S 3438765400 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000065.png
+-I -1 --prompt_idx 0 -S 2752335697 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000066.png
+-I -1 --prompt_idx 0 -S 2312452752 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000067.png
+-I -1 --prompt_idx 0 -S 1327302191 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000068.png
+-I -1 --prompt_idx 0 -S 44937427 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000069.png
+-I -1 --prompt_idx 0 -S 3403443895 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000070.png
+-I -1 --prompt_idx 0 -S 2577033684 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000071.png
+-I -1 --prompt_idx 0 -S 430381631 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000072.png
+-I -1 --prompt_idx 0 -S 3071786088 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000073.png
+-I -1 --prompt_idx 0 -S 961255187 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000074.png
+-I -1 --prompt_idx 0 -S 1527137898 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000075.png
+-I -1 --prompt_idx 0 -S 2609914579 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000076.png
+-I -1 --prompt_idx 0 -S 1361365590 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000077.png
+-I -1 --prompt_idx 0 -S 2561027425 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000078.png
+-I -1 --prompt_idx 0 -S 3617333692 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000079.png
+-I -1 --prompt_idx 0 -S 1486442782 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000080.png
+-I -1 --prompt_idx 0 -S 4259396383 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000081.png
+-I -1 --prompt_idx 0 -S 1846862658 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000082.png
+-I -1 --prompt_idx 0 -S 3643214994 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000083.png
+-I -1 --prompt_idx 0 -S 2307036381 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000084.png
+-I -1 --prompt_idx 0 -S 3710644290 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000085.png
+-I -1 --prompt_idx 0 -S 3065694580 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000086.png
+-I -1 --prompt_idx 0 -S 1457293598 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000087.png
+-I -1 --prompt_idx 0 -S 3133458108 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000088.png
+-I -1 --prompt_idx 0 -S 3400877945 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000089.png
+-I -1 --prompt_idx 0 -S 357762068 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000090.png
+-I -1 --prompt_idx 0 -S 3630023094 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000091.png
+-I -1 --prompt_idx 0 -S 383686317 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000092.png
+-I -1 --prompt_idx 0 -S 2401967903 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000093.png
+-I -1 --prompt_idx 0 -S 2329337433 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000094.png
+-I -1 --prompt_idx 0 -S 1207632028 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000095.png
+-I -1 --prompt_idx 0 -S 1942519314 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000096.png
+-I -1 --prompt_idx 0 -S 955441047 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000097.png
+-I -1 --prompt_idx 0 -S 4256023602 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000098.png
+-I -1 --prompt_idx 0 -S 4108970489 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000099.png
+-I -1 --prompt_idx 0 -S 3549764201 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000100.png
+-I -1 --prompt_idx 0 -S 1092575237 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000101.png
+-I -1 --prompt_idx 0 -S 1166997811 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000102.png
+-I -1 --prompt_idx 0 -S 373376534 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000103.png
+-I -1 --prompt_idx 0 -S 2519014765 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000104.png
+-I -1 --prompt_idx 0 -S 1258433170 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000105.png
+-I -1 --prompt_idx 0 -S 2338028002 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000106.png
+-I -1 --prompt_idx 0 -S 2660631241 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000107.png
+-I -1 --prompt_idx 0 -S 3853259591 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000108.png
+-I -1 --prompt_idx 0 -S 2242490731 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000109.png
+-I -1 --prompt_idx 0 -S 3522710426 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000110.png
+-I -1 --prompt_idx 0 -S 4180972770 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000111.png
+-I -1 --prompt_idx 0 -S 2575169817 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000112.png
+-I -1 --prompt_idx 0 -S 2744312679 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000113.png
+-I -1 --prompt_idx 0 -S 70145571 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000114.png
+-I -1 --prompt_idx 0 -S 3793495863 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000115.png
+-I -1 --prompt_idx 0 -S 2528307964 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000116.png
+-I -1 --prompt_idx 0 -S 1007429451 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000117.png
+-I -1 --prompt_idx 0 -S 2101067688 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000118.png
+-I -1 --prompt_idx 0 -S 3995326449 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000119.png
+-I -1 --prompt_idx 0 -S 3291670934 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000120.png
+-I -1 --prompt_idx 0 -S 753046084 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000121.png
+-I -1 --prompt_idx 0 -S 1426542672 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000122.png
+-I -1 --prompt_idx 0 -S 822749153 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000123.png
+-I -1 --prompt_idx 0 -S 2407998329 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000124.png
+-I -1 --prompt_idx 0 -S 3046521002 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000125.png
+-I -1 --prompt_idx 0 -S 2552936805 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000126.png
+-I -1 --prompt_idx 0 -S 2785498220 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000127.png
+-I -1 --prompt_idx 0 -S 2249316925 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000128.png
+-I -1 --prompt_idx 0 -S 220388626 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000129.png
+-I -1 --prompt_idx 0 -S 2699836174 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000130.png
+-I -1 --prompt_idx 0 -S 3759768208 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000131.png
+-I -1 --prompt_idx 0 -S 4200083395 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000132.png
+-I -1 --prompt_idx 0 -S 2952951706 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000133.png
+-I -1 --prompt_idx 0 -S 857315379 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000134.png
+-I -1 --prompt_idx 0 -S 2232484634 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000135.png
+-I -1 --prompt_idx 0 -S 1381176985 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000136.png
+-I -1 --prompt_idx 0 -S 373672993 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000137.png
+-I -1 --prompt_idx 0 -S 1165402940 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000138.png
+-I -1 --prompt_idx 0 -S 661692104 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000139.png
+-I -1 --prompt_idx 0 -S 3182536996 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000140.png
+-I -1 --prompt_idx 0 -S 2513606617 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000141.png
+-I -1 --prompt_idx 0 -S 3118883352 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000142.png
+-I -1 --prompt_idx 0 -S 3191003162 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000143.png
+-I -1 --prompt_idx 0 -S 85145594 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000144.png
+-I -1 --prompt_idx 0 -S 18305516 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000145.png
+-I -1 --prompt_idx 0 -S 161002972 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000146.png
+-I -1 --prompt_idx 0 -S 3221919092 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000147.png
+-I -1 --prompt_idx 0 -S 2449953246 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000148.png
+-I -1 --prompt_idx 0 -S 1777747507 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000149.png
+-I -1 --prompt_idx 0 -S 4183843415 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000150.png
+-I -1 --prompt_idx 0 -S 2278466788 -C 10.00 -f 0.600 -s 50 -tf '0.000:0.990:-5.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000151.png
+-I -1 --prompt_idx 0 -S 2951874328 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000152.png
+-I -1 --prompt_idx 0 -S 2732982541 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000153.png
+-I -1 --prompt_idx 0 -S 1936869178 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000154.png
+-I -1 --prompt_idx 0 -S 478422911 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000155.png
+-I -1 --prompt_idx 0 -S 3164877105 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000156.png
+-I -1 --prompt_idx 0 -S 1417314229 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000157.png
+-I -1 --prompt_idx 0 -S 4083694251 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000158.png
+-I -1 --prompt_idx 0 -S 3901398421 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000159.png
+-I -1 --prompt_idx 0 -S 3073918250 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000160.png
+-I -1 --prompt_idx 0 -S 732288297 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000161.png
+-I -1 --prompt_idx 0 -S 723515243 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000162.png
+-I -1 --prompt_idx 0 -S 2546482929 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000163.png
+-I -1 --prompt_idx 0 -S 3007107381 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000164.png
+-I -1 --prompt_idx 0 -S 3375979958 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000165.png
+-I -1 --prompt_idx 0 -S 1269757704 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000166.png
+-I -1 --prompt_idx 0 -S 2589419463 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000167.png
+-I -1 --prompt_idx 0 -S 3128330389 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000168.png
+-I -1 --prompt_idx 0 -S 678238176 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000169.png
+-I -1 --prompt_idx 0 -S 886308403 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000170.png
+-I -1 --prompt_idx 0 -S 4123981724 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000171.png
+-I -1 --prompt_idx 0 -S 3160814897 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000172.png
+-I -1 --prompt_idx 0 -S 3817186894 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000173.png
+-I -1 --prompt_idx 0 -S 1418593179 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000174.png
+-I -1 --prompt_idx 0 -S 1014448394 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000175.png
+-I -1 --prompt_idx 0 -S 2503546362 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000176.png
+-I -1 --prompt_idx 0 -S 1482463688 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000177.png
+-I -1 --prompt_idx 0 -S 833575300 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000178.png
+-I -1 --prompt_idx 0 -S 984365137 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000179.png
+-I -1 --prompt_idx 0 -S 4127463060 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000180.png
+-I -1 --prompt_idx 0 -S 2629299955 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000181.png
+-I -1 --prompt_idx 0 -S 2786452850 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000182.png
+-I -1 --prompt_idx 0 -S 1287688338 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000183.png
+-I -1 --prompt_idx 0 -S 3870763319 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000184.png
+-I -1 --prompt_idx 0 -S 1727783604 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000185.png
+-I -1 --prompt_idx 0 -S 1569570921 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000186.png
+-I -1 --prompt_idx 0 -S 1802618512 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000187.png
+-I -1 --prompt_idx 0 -S 1382829242 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000188.png
+-I -1 --prompt_idx 0 -S 844536086 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000189.png
+-I -1 --prompt_idx 0 -S 1112816778 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000190.png
+-I -1 --prompt_idx 0 -S 1484575432 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000191.png
+-I -1 --prompt_idx 0 -S 497967963 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000192.png
+-I -1 --prompt_idx 0 -S 1762025449 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000193.png
+-I -1 --prompt_idx 0 -S 1820659830 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000194.png
+-I -1 --prompt_idx 0 -S 925556978 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000195.png
+-I -1 --prompt_idx 0 -S 3119622812 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000196.png
+-I -1 --prompt_idx 0 -S 1742962559 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000197.png
+-I -1 --prompt_idx 0 -S 166996551 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000198.png
+-I -1 --prompt_idx 0 -S 2028752841 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000199.png
+-I -1 --prompt_idx 0 -S 1527245469 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000200.png
+-I -1 --prompt_idx 0 -S 646957768 -C 10.00 -f 0.600 -s 50 -tf '-0.010:1.000:0.000:0.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000201.png
+-I -1 --prompt_idx 0 -S 767079532 -C 10.00 -f 0.600 -s 50 -tf '0.000:1.000:0.000:-6.000' --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000202.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000203.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000204.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000205.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000206.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000207.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000208.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000209.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000210.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000211.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000212.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000213.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000214.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000215.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000216.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000217.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000218.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000219.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000220.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000221.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000222.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000223.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000224.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000225.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000226.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000227.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000228.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000229.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000230.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000231.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000232.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000233.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000234.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000235.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000236.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000237.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000238.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000239.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000240.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000241.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000242.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000243.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000244.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000245.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000246.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000247.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000248.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000249.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000250.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000251.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000252.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000253.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000254.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000255.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000256.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000257.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000258.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000259.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000260.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000261.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000262.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000263.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000264.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000265.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000266.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000267.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000268.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000269.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000270.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000271.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000272.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000273.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000274.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000275.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000276.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000277.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000278.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000279.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000280.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000281.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000282.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000283.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000284.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000285.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000286.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000287.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000288.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000289.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000290.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000291.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000292.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000293.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000294.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000295.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000296.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000297.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000298.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000299.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000300.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000301.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000302.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000303.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000304.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000305.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000306.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000307.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000308.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000309.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000310.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000311.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000312.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000313.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000314.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000315.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000316.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000317.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000318.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000319.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000320.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000321.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000322.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000323.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000324.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000325.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000326.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000327.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000328.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000329.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000330.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000331.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000332.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000333.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000334.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000335.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000336.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000337.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000338.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000339.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000340.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000341.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000342.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000343.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000344.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000345.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000346.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000347.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000348.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000349.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000350.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000351.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000352.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000353.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000354.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000355.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000356.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000357.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000358.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000359.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000360.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000361.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000362.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000363.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000364.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000365.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000366.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000367.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000368.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000369.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000370.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000371.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000372.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000373.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000374.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000375.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000376.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000377.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000378.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000379.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000380.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000381.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000382.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000383.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000384.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000385.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000386.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000387.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000388.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000389.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000390.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000391.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000392.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000393.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000394.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000395.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000396.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000397.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000398.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000399.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000400.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000401.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000402.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000403.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000404.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000405.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000406.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000407.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000408.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000409.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000410.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000411.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000412.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000413.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000414.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000415.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000416.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000417.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000418.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000419.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000420.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000421.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000422.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000423.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000424.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000425.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000426.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000427.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000428.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000429.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000430.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000431.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000432.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000433.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000434.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000435.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000436.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000437.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000438.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000439.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000440.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000441.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000442.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000443.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000444.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000445.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000446.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000447.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000448.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000449.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000450.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000451.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000452.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000453.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000454.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000455.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000456.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000457.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000458.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000459.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000460.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000461.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000462.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000463.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000464.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000465.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000466.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000467.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000468.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000469.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000470.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000471.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000472.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000473.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000474.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000475.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000476.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000477.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000478.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000479.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000480.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000481.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000482.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000483.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000484.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000485.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000486.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000487.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000488.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000489.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000490.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000491.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000492.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000493.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000494.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000495.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000496.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000497.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000498.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000499.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000500.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000501.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000502.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000503.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000504.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000505.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000506.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000507.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000508.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000509.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000510.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000511.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000512.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000513.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000514.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000515.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000516.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000517.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000518.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000519.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000520.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000521.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000522.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000523.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000524.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000525.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000526.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000527.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000528.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000529.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000530.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000531.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000532.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000533.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000534.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000535.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000536.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000537.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000538.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000539.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000540.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000541.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000542.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000543.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000544.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000545.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000546.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000547.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000548.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000549.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000550.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000551.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000552.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000553.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000554.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000555.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000556.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000557.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000558.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000559.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000560.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000561.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000562.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000563.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000564.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000565.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000566.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000567.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000568.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000569.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000570.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000571.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000572.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000573.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000574.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000575.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000576.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000577.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000578.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000579.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000580.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000581.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000582.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000583.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000584.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000585.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000586.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000587.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000588.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000589.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000590.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000591.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000592.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000593.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000594.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000595.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000596.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000597.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000598.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000599.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000600.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000601.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000602.png
+--prompt_idx 0 -S 2536146025 -C 10.00 -f 0.600 -s 50 --init_color projects/clippy/clippy2c/frames/frame_000002.png -W 960 -H 576 -o projects/clippy/clippy2c/frames -N frame_000603.png
