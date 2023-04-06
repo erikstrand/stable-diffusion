@@ -1,9 +1,9 @@
 Status
-life with ai: generating more variations, I think the prompt will work
-decentralized society: upscaling
-future worlds: upscaling
-cultivating creativity: done?
-mind and body: generating more variations, probably need a different prompt
+life with ai: done
+decentralized society: done
+future worlds: seed searching for MIT prompts
+cultivating creativity: done
+mind and body: making video of new variations, probably need a different prompt
 
 
 
@@ -64,13 +64,38 @@ CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
    --times_to_interpolate 1
 
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/mind_and_body_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=5 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_4/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_0/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
 
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/cultivating_creativity_2/frames_4k -g 7
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_3/frames_4k -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/future_worlds_4/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/future_worlds_4/frames_4k -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_3/frames_4k -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/mind_and_body_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/mind_and_body_3/frames_4k -g 5
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_4/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/decentralized_society_4/frames_4k -g 7
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_0/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/davatar/outputs/life_with_ai_0/frames_4k -g 6
 
 python tools/make_video.py projects/davatar/outputs/cultivating_creativity_2/frames_4k -r 24 --input_pattern frame_#_out.png -o projects/davatar/videos/cultivating_creativity_2.mp4
-
-
-
-tests
-python tools/make_video.py projects/davatar/outputs/cultivating_creativity_2/frames_4k -r 30 -p slow --probesize 64000000 --input_pattern frame_#_out.png -o projects/davatar/videos/cultivating_creativity_2b.mp4
+python tools/make_video.py projects/davatar/outputs/decentralized_society_3/frames_4k -r 35 -p slower --probesize 640000000 --input_pattern frame_#_out.png -o projects/davatar/videos/decentralized_society_3.mp4
+python tools/make_video.py projects/davatar/outputs/future_worlds_4/frames_4k -r 30 -p slower --input_pattern frame_#_out.png -o projects/davatar/videos/future_worlds_4.mp4
+python tools/make_video.py projects/davatar/outputs/life_with_ai_3/frames_4k -r 30 -p slower --input_pattern frame_#_out.png -o projects/davatar/videos/life_with_ai_3.mp4
+python tools/make_video.py projects/davatar/outputs/life_with_ai_0/frames_4k -r 30 -p slower --input_pattern frame_#_out.png -o projects/davatar/videos/life_with_ai_0.mp4
+python tools/make_video.py projects/davatar/outputs/mind_and_body_3/frames_4k -r 30 -p slower --input_pattern frame_#_out.png -o projects/davatar/videos/mind_and_body_3.mp4

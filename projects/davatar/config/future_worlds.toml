@@ -7,6 +7,8 @@ height = 576
 [prompts]
 future_worlds = "aerial view of a futuristic metropolis perched atop a waterfall, glass architecture skyscrapers, verdant greenery, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
 future_worlds_2 = "aerial view of a futuristic metropolis perched atop a waterfall, glass architecture skyscrapers, verdant greenery, visible horizon, rule of thirds, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
+future_mit = "aerial view of a futuristic MIT perched atop a waterfall with a massive dome, glass architecture skyscrapers, verdant greenery, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
+future_mit_2 = "a futuristic MIT campus perched atop a waterfall in the distance, a massive dome, glass architecture skyscrapers, verdant greenery, by renzo piano, in harmony with nature, blue sky, 8k ray traced hyper detailed rendering, bright lighting, high contrast, octane"
 
 # seeds - v1 (future_worlds_1)
 # 1
@@ -21,11 +23,21 @@ future_worlds_2 = "aerial view of a futuristic metropolis perched atop a waterfa
 
 
 [[keyframes]]
-frame = 1
+frame = 0
 seed = 2082099083
-prompt = "future_worlds_2"
+prompt = "future_mit"
 scale = 8.0
 
 [[keyframes]]
-duration = 120
-seed = 2048532061
+duration = 1
+seed = "random"
+
+[[keyframes]]
+duration = 98
+
+[[keyframes]]
+duration = 1
+prompt = "future_mit_2"
+
+[[keyframes]]
+duration = 100
