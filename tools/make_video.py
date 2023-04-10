@@ -80,9 +80,15 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--probesize",
-        type=int,
+        type=str,
         help="How far ahead the encoder looks to determine certain information (should be enough to hold ~4 frames).",
-        default=5000000
+        default="100M"
+    )
+    parser.add_argument(
+        "--analyzeduration",
+        type=str,
+        help="How far ahead the encoder looks to determine certain information (should be enough to hold ~4 frames).",
+        default="5M"
     )
 
     args = parser.parse_args()
@@ -148,14 +154,14 @@ if __name__ == "__main__":
     # ffmpeg -r 12.5 -f concat -i frame_file.txt -vcodec libx264 -crf 10 -pix_fmt yuv420p video.mp4
     args = [
         "ffmpeg",
-        "-r",
-        str(args.framerate),
         "-f",
         "concat",
         "-safe",
         "0",
         "-i",
         "frames.txt",
+        "-vf",
+        f"fps={args.framerate}",
         "-vcodec",
         "libx264",
         "-crf",
@@ -166,6 +172,8 @@ if __name__ == "__main__":
         str(args.probesize),
         "-fpsprobesize",
         str(args.probesize),
+        "-analyzeduration",
+        str(args.analyzeduration),
         "-pix_fmt",
         "yuv420p",
         args.outfile
