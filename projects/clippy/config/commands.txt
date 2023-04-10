@@ -11,6 +11,11 @@ CUDA_VISIBLE_DEVICES=4 python scripts/invoke.py
 !from_file projects/clippy/clippy2c/clippy2c.txt
 !from_file projects/clippy/zivvy2/zivvy2.txt
 
+!from_file projects/clippy/latex_clippy_0/latex_clippy_0.txt
+!from_file projects/clippy/latex_clippy_1/latex_clippy_1.txt
+!from_file projects/clippy/latex_clippy_2/latex_clippy_2.txt
+!from_file projects/clippy/latex_clippy_3/latex_clippy_3.txt
+
 
 CUDA_VISIBLE_DEVICES=7 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy/frames \
@@ -26,6 +31,7 @@ CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
    --times_to_interpolate 1
 mv /media/data1/erik/code/stable-diffusion/projects/clippy/clippy1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/clippy/clippy1/frames_interp
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/clippy/clippy1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/clippy/clippy1/frames_4k -g 0
+python tools/make_video.py projects/clippy/clippy1/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/clippy/clippy1/clippy1.mp4
 
 CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2/frames \
@@ -33,6 +39,7 @@ CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
    --times_to_interpolate 1
 mv /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2/frames_interp
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2/frames_4k -g 1
+python tools/make_video.py projects/clippy/clippy2/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/clippy/clippy2/clippy2.mp4
 
 CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2b/frames \
@@ -40,6 +47,7 @@ CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
    --times_to_interpolate 1
 mv /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2b/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2b/frames_interp
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2b/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2b/frames_4k -g 2
+python tools/make_video.py projects/clippy/clippy2b/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/clippy/clippy2b/clippy2b.mp4
 
 CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2c/frames \
@@ -47,6 +55,7 @@ CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
    --times_to_interpolate 1
 mv /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2c/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2c/frames_interp
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2c/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/clippy/clippy2c/frames_4k -g 3
+python tools/make_video.py projects/clippy/clippy2c/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/clippy/clippy2c/clippy2c.mp4
 
 CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy2/frames \
@@ -54,3 +63,4 @@ CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
    --times_to_interpolate 1
 mv /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy2/frames_interp
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/clippy/zivvy2/frames_4k -g 4
+python tools/make_video.py projects/clippy/zivvy2/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/clippy/zivvy2/zivvy2.mp4
