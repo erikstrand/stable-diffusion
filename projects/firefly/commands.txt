@@ -1,0 +1,35 @@
+CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames/interpolated_frames/* /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames_interp
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/firefly/firefly1/frames_4k -g 4
+python tools/make_video.py projects/firefly/firefly1/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/firefly/firefly1/firefly1.mp4
+
+CUDA_VISIBLE_DEVICES=5 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames/interpolated_frames/* /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames_interp
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/firefly/firefly2/frames_4k -g 5
+python tools/make_video.py projects/firefly/firefly2/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/firefly/firefly2/firefly2.mp4
+
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames/interpolated_frames/* /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames_interp
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/firefly/firefly3/frames_4k -g 6
+python tools/make_video.py projects/firefly/firefly3/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/firefly/firefly3/firefly3.mp4
+
+CUDA_VISIBLE_DEVICES=7 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames/interpolated_frames/* /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames_interp
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 4 -i /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/firefly/firefly4/frames_4k -g 7
+python tools/make_video.py projects/firefly/firefly4/frames_4k -r 20 --input_pattern frame_#_out.png -o projects/firefly/firefly4/firefly4.mp4
