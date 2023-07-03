@@ -1,0 +1,60 @@
+in_dir = "projects/waveforms/treetop1"
+out_dir = "projects/waveforms/outputs/treetop1/"
+mask_in_dir = "projects/waveforms/not_used"
+width = 960
+height = 576
+
+[prompts]
+treetop = "high resolution photo of a verdant rainforest canopy, sprawling tree branches, cinematic lighting, by andreas rocha, by james jean, by hannah yata"
+
+[[keyframes]]
+frame = 0
+seed = 4099294540
+prompt = "treetop"
+scale = 8.0
+strength = 0.0
+set_color_reference = true
+input_image = "tree1.png"
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.4
+transform.zoom = 1.01
+transform.translate = [0.0, 0.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 20
+
+[[keyframes]]
+duration = 1
+strength = 0.7
+
+[[keyframes]]
+duration = 1
+strength = 0.4
+
+[[keyframes]]
+duration = 20
+
+[[keyframes]]
+duration = 1
+strength = 0.7
+
+[[keyframes]]
+duration = 1
+strength = 0.4
+
+[[keyframes]]
+duration = 20
+
+[[keyframes]]
+duration = 1
+strength = 0.7
+
+[[keyframes]]
+duration = 1
+strength = 0.4

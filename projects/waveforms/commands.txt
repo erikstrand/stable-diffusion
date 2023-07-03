@@ -1,0 +1,20 @@
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/science_museum/treetop1 \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 6
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/science_museum/treetop1 \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 8
+
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/science_museum/treetop1_zoomout \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 6
+
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/science_museum/treetop1_zoomout \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 8
