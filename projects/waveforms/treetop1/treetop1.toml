@@ -14,47 +14,149 @@ prompt = "treetop"
 scale = 8.0
 strength = 0.0
 set_color_reference = true
-input_image = "tree1.png"
+input_image = "tree2_small.png"
 
 [[keyframes]]
 duration = 1
 seed = "random"
 input_image = "previous"
 correct_colors = true
-strength = 0.4
-transform.zoom = 1.01
+strength = 0.45
+transform.zoom = 1.005
 transform.translate = [0.0, 0.0]
 transform.rotate = 0.0
 
 [[keyframes]]
-duration = 20
+duration = 30
 
 [[keyframes]]
-duration = 1
-strength = 0.7
+duration = 2
+strength = 0.6
 
 [[keyframes]]
-duration = 1
-strength = 0.4
+duration = 3
+strength = 0.45
 
 [[keyframes]]
-duration = 20
+duration = 30
 
 [[keyframes]]
-duration = 1
-strength = 0.7
+duration = 2
+strength = 0.6
 
 [[keyframes]]
-duration = 1
-strength = 0.4
+duration = 3
+strength = 0.45
 
 [[keyframes]]
-duration = 20
+duration = 30
 
 [[keyframes]]
-duration = 1
-strength = 0.7
+duration = 2
+strength = 0.6
 
 [[keyframes]]
-duration = 1
-strength = 0.4
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+transform.zoom = 1.005
+transform.translate = [0.0, 0.0]
+transform.rotate = 0.001
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45
+
+[[keyframes]]
+duration = 30
+
+[[keyframes]]
+duration = 2
+strength = 0.6
+
+[[keyframes]]
+duration = 3
+strength = 0.45

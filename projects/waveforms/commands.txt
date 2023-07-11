@@ -18,3 +18,15 @@ CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
    --pattern /media/data1/erik/code/stable-diffusion/projects/science_museum/treetop1_zoomout \
    --model_path /media/data1/erik/models/film_net/Style/saved_model \
    --times_to_interpolate 8
+
+python tools/make_video.py projects/waveforms/outputs/treetop1_0/frames/ --input_pattern frame_#.png -o projects/waveforms/outputs/treetop1_0/treetop1_0.mp4
+python tools/make_video.py projects/waveforms/outputs/treetop1_1/frames/ --input_pattern frame_#.png -o projects/waveforms/outputs/treetop1_1/treetop1_1.mp4
+python tools/make_video.py projects/waveforms/outputs/treetop1_2/frames/ --input_pattern frame_#.png -o projects/waveforms/outputs/treetop1_2/treetop1_2.mp4
+python tools/make_video.py projects/waveforms/outputs/treetop1_3/frames/ --input_pattern frame_#.png -o projects/waveforms/outputs/treetop1_3/treetop1_3.mp4
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/waveforms/reef_interpolation \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 6
+
+python tools/make_video.py projects/waveforms/reef_interpolation/interpolated_frames/ --input_pattern frame_#.png -o projects/waveforms/python tools/make_video.py projects/waveforms/reef_interpolation/interpolated_frames/ --input_pattern frame_#.png -o projects/waveforms/reef_interpolation/reef_interpolation_test.mp4reef_interpolation/reef_interpolation_terst.mp4
