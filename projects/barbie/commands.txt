@@ -26,3 +26,70 @@ post-apocalyptic soldier barbie, holding a weapon, green clothes, digital art, i
 !from_file projects/barbie/outputs/polaroid_3/polaroid_3.txt
 !from_file projects/barbie/outputs/nyc_1/nyc_1.txt
 !from_file projects/barbie/outputs/nyc_2/nyc_2.txt
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=5 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=7 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames_interp
+
+python tools/make_video.py projects/barbie/outputs/movie_1/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_1/movie_1_small.mp4
+python tools/make_video.py projects/barbie/outputs/movie_2/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_2/movie_2_small.mp4
+python tools/make_video.py projects/barbie/outputs/movie_3/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_3/movie_3_small.mp4
+python tools/make_video.py projects/barbie/outputs/nyc_1/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/nyc_1/nyc_1_small.mp4
+python tools/make_video.py projects/barbie/outputs/nyc_2/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/nyc_2/nyc_2_small.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_1/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_1/polaroid_1_small.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_2/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_2/polaroid_2_small.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_3/frames_interp/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_3/polaroid_3_small.mp4
+
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/frames_big -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/frames_big -g 1
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/frames_big -g 2
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/frames_big -g 3
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/frames_big -g 4
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames_big -g 5
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames_big -g 6
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames_big -g 7
