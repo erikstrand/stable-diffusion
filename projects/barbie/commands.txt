@@ -93,3 +93,111 @@ python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/frames_big -g 5
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/frames_big -g 6
 python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/frames_big -g 7
+
+python tools/make_video.py projects/barbie/outputs/movie_1/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_1/movie_1.mp4
+python tools/make_video.py projects/barbie/outputs/movie_2/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_2/movie_2.mp4
+python tools/make_video.py projects/barbie/outputs/movie_3/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/movie_3/movie_3.mp4
+python tools/make_video.py projects/barbie/outputs/nyc_1/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/nyc_1/nyc_1.mp4
+python tools/make_video.py projects/barbie/outputs/nyc_2/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/nyc_2/nyc_2.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_1/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_1/polaroid_1.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_2/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_2/polaroid_2.mp4
+python tools/make_video.py projects/barbie/outputs/polaroid_3/frames_big/ --input_pattern frame_#.png -o projects/barbie/outputs/polaroid_3/polaroid_3.mp4
+
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_1/movie_1.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_2/movie_2.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/movie_3/movie_3.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_1/nyc_1.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/nyc_2/nyc_2.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_1/polaroid_1.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_2/polaroid_2.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/outputs/polaroid_3/polaroid_3.mp4 ~/Downloads
+
+rsync -avP ~/Downloads/1.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/2.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/3.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/4.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/6.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/8.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+rsync -avP ~/Downloads/10.zip erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna
+
+mkdir -p 1/frames
+mkdir -p 2/frames
+mkdir -p 3/frames
+mkdir -p 4/frames
+mkdir -p 6/frames
+mkdir -p 8/frames
+mkdir -p 10/frames
+unzip -j 1.zip -d 1/frames
+unzip -j 2.zip -d 2/frames
+unzip -j 3.zip -d 3/frames
+unzip -j 4.zip -d 4/frames
+unzip -j 6.zip -d 6/frames
+unzip -j 8.zip -d 8/frames
+unzip -j 10.zip -d 10/frames
+
+CUDA_VISIBLE_DEVICES=0 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=1 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=2 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=3 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=4 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=5 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+CUDA_VISIBLE_DEVICES=6 python3 -m eval.interpolator_cli \
+   --pattern /media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/frames \
+   --model_path /media/data1/erik/models/film_net/Style/saved_model \
+   --times_to_interpolate 1
+
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/frames_interp
+mv /media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/frames/interpolated_frames /media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/frames_interp
+
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/frames_big -g 0
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/frames_big -g 1
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/frames_big -g 2
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/frames_big -g 3
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/frames_big -g 4
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/frames_big -g 5
+python /media/data1/erik/code/Real-ESRGAN/inference_realesrgan.py -n RealESRGAN_x4plus -s 2 -i /media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/frames_interp -o /media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/frames_big -g 6
+
+python tools/make_video.py projects/barbie/anna/1/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/1/anna_1.mp4
+python tools/make_video.py projects/barbie/anna/2/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/2/anna_2.mp4
+python tools/make_video.py projects/barbie/anna/3/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/3/anna_3.mp4
+python tools/make_video.py projects/barbie/anna/4/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/4/anna_4.mp4
+python tools/make_video.py projects/barbie/anna/6/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/6/anna_6.mp4
+python tools/make_video.py projects/barbie/anna/8/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/8/anna_8.mp4
+python tools/make_video.py projects/barbie/anna/10/frames_big/ --input_pattern frame_#_out.png -o projects/barbie/anna/10/anna_10.mp4
+
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/1/anna_1.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/2/anna_2.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/3/anna_3.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/4/anna_4.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/6/anna_6.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/8/anna_8.mp4 ~/Downloads
+rsync -av erik@titan.cba.mit.edu:/media/data1/erik/code/stable-diffusion/projects/barbie/anna/10/anna_10.mp4 ~/Downloads
