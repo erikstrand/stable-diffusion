@@ -1,0 +1,19 @@
+# good prompts
+
+post-apocalyptic barbie with genetic mutations, hd screenshot inspired by H.R. Giger, octane render, ue5, raytracing, volumetric fog, detailed reflections, haze, unreal engine 5, IMAX quality, cinematic, epic lighting, dark, moody -W 640 -H 640
+- 3356715316
+- 960747205
+
+post-apocalyptic barbie with genetic mutations, in new york city, new york city skyline, cinematic focus, polaroid photo, bleached vintage, very soft lights, vintage, pastel colors, high key lighting, soft lights, foggy, by steve hanks -W 640 -H 640
+- 720006736
+- 911227346
+
+post-apocalyptic barbie with genetic mutations, exposed in mold, mold, in a mall, wide angle lens, 1980s photograph, 4k photography, cdx, award winning photograph, highly detailed, documentary lighting, film grain, vibrant colors, cinematic lighting -W 640 -H 640
+- 1413467570
+- 4171879459
+
+# bad prompts
+post-apocalyptic barbie with genetic mutations, in a desert, highly detailed, digital painting, artstation, concept art, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha and Hajime Sorayama and Artemisia Gentileschi and Tom Richmond and Edmund -W 640 -H 640
+post-apocalyptic barbie with genetic mutations, in the style of doom eternal, by piotr jablonski, h.r. giger, norman rockwell and alphonso mucha highly detailed, oil painting, 4k, trending on artstation, very coherent symmetrical artwork, cinematic -W 640 -H 640
+post-apocalyptic barbie with genetic mutations, exoskeleton armor, destroyed city, nuclear waste, dusting up, a detailed neo-noir illustration, detailed painting, volumetric lighting, atmospheric, moody -W 640 -H 640
+post-apocalyptic soldier barbie, holding a weapon, green clothes, digital art, in the style of masamune shirow, cinematic, artstation, greg rutkowski, and akira toriyama resolution.  4k. dark atmosphere. by caravaggio, extremely detailed -W 640 -H 640
