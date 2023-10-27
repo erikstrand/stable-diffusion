@@ -9,7 +9,7 @@ polaroid = "post-apocalyptic barbie with genetic mutations, exposed in mold, mol
 
 [[keyframes]]
 frame = 0
-seed = 1413467570
+seed = 4171879459
 prompt = "polaroid"
 scale = 7.5
 set_color_reference = true
