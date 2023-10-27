@@ -1,4 +1,4 @@
-!set_prompts "brightly colored hummingbirds in flight, paper quilling, flowers, golden hour lighting, by james jean, trending on artstation"
+!set_prompts "post-apocalyptic barbie with genetic mutations, in new york city, new york city skyline, cinematic focus, polaroid photo, bleached vintage, very soft lights, vintage, pastel colors, high key lighting, soft lights, foggy, by steve hanks"
 --prompt_idx 0 -S 911227346 -C 8.00 -f 0.001 -s 50 -W 640 -H 640 -o projects/barbie/outputs/nyc_2/frames -N frame_000000.png
 -I -1 --prompt_idx 0 -S 4031915467 -C 8.00 -f 0.600 -s 50 -tf '0.000:1.020:0.000:0.000' --init_color projects/barbie/outputs/nyc_2/frames/frame_000000.png -W 640 -H 640 -o projects/barbie/outputs/nyc_2/frames -N frame_000001.png
 -I -1 --prompt_idx 0 -S 2025670349 -C 8.00 -f 0.600 -s 50 -tf '0.000:1.020:0.000:0.000' --init_color projects/barbie/outputs/nyc_2/frames/frame_000000.png -W 640 -H 640 -o projects/barbie/outputs/nyc_2/frames -N frame_000002.png
