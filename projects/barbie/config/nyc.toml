@@ -5,11 +5,11 @@ width = 640
 height = 640
 
 [prompts]
-nyc = "brightly colored hummingbirds in flight, paper quilling, flowers, golden hour lighting, by james jean, trending on artstation"
+nyc = "post-apocalyptic barbie with genetic mutations, in new york city, new york city skyline, cinematic focus, polaroid photo, bleached vintage, very soft lights, vintage, pastel colors, high key lighting, soft lights, foggy, by steve hanks"
 
 [[keyframes]]
 frame = 0
-seed = 911227346
+seed = 720006736
 prompt = "nyc"
 scale = 8.0
 set_color_reference = true
