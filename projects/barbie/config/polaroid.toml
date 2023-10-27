@@ -1,0 +1,85 @@
+in_dir = "projects/barbie/not_used"
+out_dir = "projects/barbie/outputs/polaroid/"
+mask_in_dir = "projects/barbie/not_used"
+width = 640
+height = 640
+
+[prompts]
+polaroid = "post-apocalyptic barbie with genetic mutations, exposed in mold, mold, in a mall, wide angle lens, 1980s photograph, 4k photography, cdx, award winning photograph, highly detailed, documentary lighting, film grain, vibrant colors, cinematic lighting"
+
+[[keyframes]]
+frame = 0
+seed = 1413467570
+prompt = "polaroid"
+scale = 7.5
+set_color_reference = true
+
+[[keyframes]]
+duration = 1
+seed = "random"
+input_image = "previous"
+correct_colors = true
+strength = 0.6
+transform.zoom = 1.02             # multiplicative factor per frame
+transform.translate = [0.0, 0.0]  # pixels per frame for X and Y
+transform.rotate = 0.0            # revolutions per frame (positive is CCW)
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [2.0, 0.0]
+transform.rotate = 0.000
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [2.0, 0.0]
+transform.rotate = -0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 0.98
+transform.translate = [3.0, 1.0]
+transform.rotate = 0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 0.98
+transform.translate = [-3.0, 2.0]
+transform.rotate = 0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [0.0, -2.0]
+transform.rotate = 0.0
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [2.0, 0.0]
+transform.rotate = 0.000
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [2.0, 0.0]
+transform.rotate = -0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 0.98
+transform.translate = [3.0, 1.0]
+transform.rotate = 0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 0.98
+transform.translate = [-3.0, 2.0]
+transform.rotate = 0.005
+
+[[keyframes]]
+duration = 120
+transform.zoom = 1.02
+transform.translate = [0.0, -2.0]
+transform.rotate = 0.0

@@ -17,3 +17,6 @@ post-apocalyptic barbie with genetic mutations, in a desert, highly detailed, di
 post-apocalyptic barbie with genetic mutations, in the style of doom eternal, by piotr jablonski, h.r. giger, norman rockwell and alphonso mucha highly detailed, oil painting, 4k, trending on artstation, very coherent symmetrical artwork, cinematic -W 640 -H 640
 post-apocalyptic barbie with genetic mutations, exoskeleton armor, destroyed city, nuclear waste, dusting up, a detailed neo-noir illustration, detailed painting, volumetric lighting, atmospheric, moody -W 640 -H 640
 post-apocalyptic soldier barbie, holding a weapon, green clothes, digital art, in the style of masamune shirow, cinematic, artstation, greg rutkowski, and akira toriyama resolution.  4k. dark atmosphere. by caravaggio, extremely detailed -W 640 -H 640
+
+!from_file projects/barbie/outputs/movie_1/movie_1.txt
+!from_file projects/barbie/outputs/polaroid_1/polaroid_1.txt
