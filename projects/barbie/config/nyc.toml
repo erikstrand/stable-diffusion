@@ -9,7 +9,7 @@ nyc = "brightly colored hummingbirds in flight, paper quilling, flowers, golden 
 
 [[keyframes]]
 frame = 0
-seed = 720006736
+seed = 911227346
 prompt = "nyc"
 scale = 8.0
 set_color_reference = true
